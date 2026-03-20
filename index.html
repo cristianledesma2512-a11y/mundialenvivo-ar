@@ -8,61 +8,51 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <style>
         body { background: #000; color: #fff; font-family: sans-serif; text-align: center; margin: 0; padding: 10px; }
-        .box { width: 100%; max-width: 800px; aspect-ratio: 16/9; background: #111; margin: 10px auto; border: 1px solid #74ACDF; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 20px; }
-        .card { background: #222; padding: 10px; border-radius: 8px; cursor: pointer; width: 110px; border: 1px solid #333; transition: 0.3s; }
-        .card:hover { border-color: #74ACDF; background: #333; }
-        .card img { width: 100%; height: 50px; object-fit: contain; }
-        .card div { font-size: 11px; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
+        .box { width: 100%; max-width: 800px; aspect-ratio: 16/9; background: #111; margin: 10px auto; border: 2px solid #74ACDF; display: flex; align-items: center; justify-content: center; }
+        .grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px; }
+        .card { background: #222; padding: 10px; border-radius: 12px; cursor: pointer; width: 120px; border: 2px solid #333; }
+        .card:hover { border-color: #74ACDF; transform: scale(1.05); }
+        .card img { width: 100%; height: 60px; object-fit: contain; }
+        .card div { font-size: 12px; margin-top: 8px; font-weight: bold; }
         iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
-    <h2 style="color: #74ACDF;">MUNDIAL EN VIVO AR</h2>
+    <h2 style="color: #74ACDF; letter-spacing: 2px;">MUNDIAL EN VIVO AR</h2>
     
     <div class="box" id="player">
-        <div id="status">Cargando canales desde Firebase...</div>
+        <div id="status">Seleccioná un canal para ver</div>
     </div>
 
     <div class="grid" id="lista"></div>
 
     <script>
-        // Configuración de tu proyecto
         const config = { databaseURL: "https://mundialenvivo-default-rtdb.firebaseio.com" };
         firebase.initializeApp(config);
 
-        // Referencia exacta a 'canales' según tu imagen
-        const ref = firebase.database().ref('canales');
-
-        ref.on('value', (snap) => {
+        firebase.database().ref('canales').on('value', (snap) => {
             const data = snap.val();
             const listaDiv = document.getElementById('lista');
-            const playerDiv = document.getElementById('player');
-            const statusDiv = document.getElementById('status');
-            
-            listaDiv.innerHTML = ''; // Limpiar lista
+            listaDiv.innerHTML = '';
 
             if (data) {
-                statusDiv.innerText = "Seleccioná un canal para empezar";
-                
                 Object.keys(data).forEach(id => {
                     const canal = data[id];
                     const card = document.createElement('div');
                     card.className = 'card';
                     card.onclick = () => {
-                        playerDiv.innerHTML = `<iframe src="${canal.url}" allowfullscreen></iframe>`;
+                        // Cambiamos el reproductor para que sea más compatible
+                        document.getElementById('player').innerHTML = `
+                            <iframe src="${canal.url}" 
+                                    allow="autoplay; encrypted-media" 
+                                    allowfullscreen 
+                                    referrerpolicy="no-referrer">
+                            </iframe>`;
                     };
-                    card.innerHTML = `
-                        <img src="${canal.logo}">
-                        <div>${canal.nombre}</div>
-                    `;
+                    card.innerHTML = `<img src="${canal.logo}"><div>${canal.nombre}</div>`;
                     listaDiv.appendChild(card);
                 });
-            } else {
-                statusDiv.innerText = "No se encontraron canales. Revisa las Reglas de Firebase.";
             }
-        }, (error) => {
-            statusDiv.innerText = "Error de conexión: " + error.message;
         });
     </script>
 </body>
