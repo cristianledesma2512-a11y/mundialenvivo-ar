@@ -6,13 +6,14 @@
     <title>MundialEnVivo AR 🏆</title>
     <meta name="theme-color" content="#001f3f">
     <meta name="description" content="Mirá el Mundial FIFA 2026 en vivo desde Argentina">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MundialAR">
     <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/888/888841.png">
 
-    <!-- Firebase Realtime Database (mismo que usabas) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-
-    <!-- HLS.js para streams m3u8 -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
     <style>
@@ -104,7 +105,6 @@
         #video-el { width: 100%; aspect-ratio: 16/9; display: block; background: #000; }
         #iframe-el { width: 100%; aspect-ratio: 16/9; border: none; display: none; }
 
-        /* Info bar */
         #player-info {
             display: flex; align-items: center;
             justify-content: space-between;
@@ -120,7 +120,6 @@
             border-radius: 10px; font-size: 11px;
         }
 
-        /* Selector calidad */
         #quality-sel {
             display: none; gap: 6px;
             padding: 7px 12px;
@@ -140,7 +139,6 @@
             color: var(--azul); font-weight: bold;
         }
 
-        /* Spinner */
         #spinner {
             display: none; position: absolute; inset: 0;
             background: rgba(0,0,0,0.6);
@@ -156,7 +154,6 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Error */
         #player-err {
             display: none; position: absolute; inset: 0;
             background: rgba(0,0,0,0.85);
@@ -238,7 +235,7 @@
 
         /* ── Chat ── */
         #chat-wrap {
-            max-width: 860px; margin: 0 auto 30px;
+            max-width: 860px; margin: 0 auto 100px;
             padding: 0 14px;
         }
         #chat-head {
@@ -282,16 +279,60 @@
 
         /* ── Toast ── */
         #toast {
-            position: fixed; bottom: 24px; left: 50%;
+            position: fixed; bottom: 80px; left: 50%;
             transform: translateX(-50%) translateY(80px);
             background: rgba(20,40,70,0.95);
             border: 1px solid var(--celeste);
             color: white; padding: 10px 20px;
             border-radius: 20px; font-size: 13px;
-            transition: transform 0.3s; z-index: 9999;
+            transition: transform 0.3s; z-index: 9998;
             backdrop-filter: blur(8px); white-space: nowrap;
         }
         #toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ── Botón instalar PWA ── */
+        #btn-instalar {
+            display: none;
+            position: fixed;
+            bottom: 20px; right: 16px;
+            background: var(--dorado);
+            color: var(--azul);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            align-items: center;
+            gap: 8px;
+            animation: pulsebtn 2s infinite;
+        }
+        @keyframes pulsebtn {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(197,160,89,0.4); }
+            50%       { transform: scale(1.05); box-shadow: 0 6px 28px rgba(197,160,89,0.7); }
+        }
+
+        /* ── Banner iOS ── */
+        #ios-banner {
+            display: none;
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: var(--azul2);
+            border-top: 2px solid var(--dorado);
+            padding: 16px 40px 16px 16px;
+            z-index: 999;
+            font-size: 13px;
+        }
+        #ios-banner p { color: rgba(255,255,255,0.85); line-height: 1.6; }
+        #ios-banner strong { color: var(--dorado); }
+        #ios-close {
+            position: absolute; top: 10px; right: 14px;
+            background: none; border: none;
+            color: rgba(255,255,255,0.5);
+            font-size: 20px; cursor: pointer;
+        }
 
         /* ── Responsive ── */
         @media (max-width: 480px) {
@@ -384,8 +425,20 @@
 <!-- Toast -->
 <div id="toast"></div>
 
+<!-- Botón instalar PWA -->
+<button id="btn-instalar">📲 Instalar App</button>
+
+<!-- Banner iOS -->
+<div id="ios-banner">
+    <button id="ios-close">✕</button>
+    <p>
+        Para instalar en iPhone/iPad:<br>
+        Tocá <strong>Compartir</strong> (□↑) → <strong>Agregar a pantalla de inicio</strong>
+    </p>
+</div>
+
 <script>
-// ── Firebase Realtime Database ────────────────────────────────────────────
+// ── Firebase ──────────────────────────────────────────────────────────────
 const firebaseConfig = {
     databaseURL: "https://mundialenvivo-default-rtdb.firebaseio.com"
 };
@@ -435,8 +488,8 @@ const spinner   = document.getElementById("spinner");
 const playerErr = document.getElementById("player-err");
 const qualityEl = document.getElementById("quality-sel");
 
-function mostrarSpinner(v) { spinner.style.display    = v ? "flex" : "none"; }
-function mostrarError(v)   { playerErr.style.display  = v ? "flex" : "none"; }
+function mostrarSpinner(v) { spinner.style.display   = v ? "flex" : "none"; }
+function mostrarError(v)   { playerErr.style.display = v ? "flex" : "none"; }
 
 function reproducir(url, nombre, fallbacks) {
     if (!url) { toast("⚠️ Sin señal disponible"); return; }
@@ -464,8 +517,8 @@ function intentarPlay(urls, idx, nombre) {
 
     if (idx > 0) toast("🔄 Probando fuente " + (idx + 1) + "...");
 
-    // YouTube / embed
-    if (url.includes("youtube.com") || url.includes("youtu.be") || url.includes("embed") || url.includes(".php")) {
+    // YouTube / embed / php
+    if (url.includes("youtube") || url.includes("nocookie") || url.includes("embed") || url.includes(".php")) {
         videoEl.style.display  = "none";
         iframeEl.style.display = "block";
         iframeEl.src = url;
@@ -491,7 +544,6 @@ function intentarPlay(urls, idx, nombre) {
             mostrarSpinner(false);
             videoEl.play().catch(() => {});
 
-            // Selector de calidad
             if (data.levels && data.levels.length > 1) {
                 qualityEl.style.display = "flex";
                 qualityEl.innerHTML = '<span style="font-size:11px;color:rgba(255,255,255,0.4);padding:4px 8px;">Calidad:</span>';
@@ -560,14 +612,12 @@ document.getElementById("btn-fs").onclick = () => {
     else document.exitFullscreen();
 };
 
-// ── Canales desde Firebase Realtime DB ───────────────────────────────────
+// ── Canales desde Firebase ────────────────────────────────────────────────
 const LOGO_DEFAULT = "https://cdn-icons-png.flaticon.com/512/716/716429.png";
 
 db.ref("canales").on("value", snap => {
     const data = snap.val();
     if (!data) return;
-
-    // Soporta tanto {canales: {...}} como {...} directo
     const lista = data.canales ? data.canales : data;
     todosCanales = Object.keys(lista).map(id => ({ id, ...lista[id] }));
     renderCanales(todosCanales);
@@ -576,31 +626,26 @@ db.ref("canales").on("value", snap => {
 function renderCanales(lista) {
     const el = document.getElementById("channel-list");
     el.innerHTML = "";
-
     if (!lista || lista.length === 0) {
         el.innerHTML = '<p style="color:rgba(255,255,255,0.3);grid-column:1/-1;text-align:center;padding:20px;">No hay canales disponibles</p>';
         return;
     }
-
     lista.forEach(c => {
         const card = document.createElement("div");
         card.className = "ch-card";
         card.setAttribute("data-cat", (c.categoria || "GENERAL").toUpperCase());
-
         const logo = c.logo || LOGO_DEFAULT;
         card.innerHTML = `
             <div class="live-dot"></div>
             <img src="${logo}" alt="${c.nombre}" onerror="this.src='${LOGO_DEFAULT}'">
             <div class="ch-name">${c.nombre}</div>
         `;
-
         card.onclick = () => {
             document.querySelectorAll(".ch-card").forEach(x => x.classList.remove("active"));
             card.classList.add("active");
             reproducir(c.url, c.nombre, c.fallbacks || []);
             document.getElementById("player-box").scrollIntoView({ behavior: "smooth", block: "start" });
         };
-
         el.appendChild(card);
     });
 }
@@ -615,16 +660,14 @@ function filtrar(cat, btn) {
     renderCanales(filtrados);
 }
 
-// ── Fixture desde Firebase ────────────────────────────────────────────────
+// ── Fixture ───────────────────────────────────────────────────────────────
 db.ref("partidos").on("value", snap => {
     const wrap = document.getElementById("fixture-wrap");
     const data = snap.val();
-
     if (!data) {
         wrap.innerHTML = '<span style="color:rgba(255,255,255,0.3);font-size:12px;padding:4px 0;">⏳ Los partidos del Mundial aparecen aquí</span>';
         return;
     }
-
     wrap.innerHTML = "";
     Object.values(data).forEach(p => {
         const estClass = p.estado === "LIVE" ? "est-live" : p.estado === "FIN" ? "est-fin" : "est-pronto";
@@ -640,17 +683,15 @@ db.ref("partidos").on("value", snap => {
     });
 });
 
-// ── Chat desde Firebase ───────────────────────────────────────────────────
+// ── Chat ──────────────────────────────────────────────────────────────────
 db.ref("chat").orderByChild("fecha").limitToLast(50).on("child_added", snap => {
     const m = snap.val();
     if (!m || !m.usuario || !m.texto) return;
-
     const div  = document.createElement("div");
     div.className = "msg";
     const nick = m.usuario.replace(/</g,"&lt;").replace(/>/g,"&gt;");
     const text = m.texto.replace(/</g,"&lt;").replace(/>/g,"&gt;");
     div.innerHTML = `<span class="msg-nick">${nick}:</span><span class="msg-text">${text}</span>`;
-
     const msgs = document.getElementById("chat-msgs");
     msgs.appendChild(div);
     msgs.scrollTop = msgs.scrollHeight;
@@ -684,7 +725,45 @@ document.getElementById("btn-rep").onclick = () => {
     toast("✅ Reporte enviado. ¡Gracias!");
 };
 
-// ── Service Worker (PWA) ──────────────────────────────────────────────────
+// ── PWA Install ───────────────────────────────────────────────────────────
+let deferredPrompt = null;
+const btnInstalar  = document.getElementById("btn-instalar");
+
+window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    btnInstalar.style.display = "flex";
+});
+
+btnInstalar.onclick = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === "accepted") {
+        btnInstalar.style.display = "none";
+        toast("✅ ¡App instalada! Buscala en tu pantalla de inicio");
+    }
+    deferredPrompt = null;
+};
+
+window.addEventListener("appinstalled", () => {
+    btnInstalar.style.display = "none";
+});
+
+// iOS — instrucciones manuales
+const esIOS      = /iphone|ipad|ipod/i.test(navigator.userAgent);
+const enSafari   = /safari/i.test(navigator.userAgent) && !/chrome/i.test(navigator.userAgent);
+const instalada  = window.matchMedia("(display-mode: standalone)").matches;
+
+if (esIOS && enSafari && !instalada && !localStorage.getItem("ios_cerrado")) {
+    setTimeout(() => { document.getElementById("ios-banner").style.display = "block"; }, 4000);
+}
+document.getElementById("ios-close").onclick = () => {
+    document.getElementById("ios-banner").style.display = "none";
+    localStorage.setItem("ios_cerrado", "1");
+};
+
+// ── Service Worker ────────────────────────────────────────────────────────
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js").catch(() => {});
 }

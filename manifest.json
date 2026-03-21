@@ -3,12 +3,49 @@
   "short_name": "MundialAR",
   "description": "Mirá el Mundial FIFA 2026 en vivo desde Argentina",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
   "orientation": "any",
   "background_color": "#001f3f",
   "theme_color": "#001f3f",
+  "lang": "es-AR",
   "categories": ["sports", "entertainment"],
+  "screenshots": [
+    {
+      "src": "https://i.imgur.com/placeholder.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "MundialEnVivo AR en TV"
+    },
+    {
+      "src": "https://i.imgur.com/placeholder.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "MundialEnVivo AR en celular"
+    }
+  ],
   "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/888/888841.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/888/888841.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/888/888841.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "https://cdn-icons-png.flaticon.com/512/888/888841.png",
       "sizes": "192x192",
@@ -21,5 +58,15 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "TV en Vivo",
+      "short_name": "En Vivo",
+      "description": "Ver canales en vivo",
+      "url": "./index.html",
+      "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/888/888841.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
 }
