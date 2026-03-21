@@ -1,410 +1,429 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>MundialEnVivo AR 🏆</title>
-    <meta name="theme-color" content="#001f3f">
-    <meta name="description" content="Mirá el Mundial FIFA 2026 y la Libertadores en vivo desde Argentina">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="MundialAR">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/888/888841.png">
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <style>
-        :root {
-            --celeste:#74ACDF; --azul:#001f3f; --azul2:#003366;
-            --dorado:#C5A059;  --rojo:#e74c3c; --verde:#2ecc71;
-            --naranja:#e67e22; --borde:rgba(116,172,223,0.2);
-        }
-        *{box-sizing:border-box;margin:0;padding:0;}
-        body{background:var(--azul);color:white;font-family:'Segoe UI',sans-serif;overflow-x:hidden;}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>MundialEnVivo AR</title>
+<meta name="theme-color" content="#001f3f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MundialAR">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/888/888841.png">
+<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/888/888841.png">
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<style>
+:root{
+  --az:#001f3f;--az2:#003366;--cel:#74ACDF;--dor:#C5A059;
+  --roj:#e74c3c;--bg:#0a1628;--card:#0f2040;--card2:#152a50;
+  --txt:#e8edf5;--muted:#6b7fa0;--rad:10px;
+  --dep:#2ecc71;--not:#74ACDF;--aire:#c39bd3;
+  --mus:#e67e22;--inf:#3498db;--int:#e74c3c;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;}
 
-        /* Header */
-        header{background:linear-gradient(to bottom,var(--azul2),var(--azul));padding:12px 16px;border-bottom:2px solid var(--dorado);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
-        .logo{font-size:18px;font-weight:bold;letter-spacing:1px;}
-        .logo span{color:var(--celeste);}
-        #user-badge{font-size:12px;background:rgba(197,160,89,0.2);border:1px solid var(--dorado);padding:4px 10px;border-radius:20px;color:var(--dorado);cursor:pointer;}
+/* ── HEADER ── */
+#hdr{background:var(--az2);padding:11px 14px;display:flex;align-items:center;gap:10px;border-bottom:1.5px solid var(--dor);flex-shrink:0;z-index:50;}
+.logo{font-size:15px;font-weight:700;letter-spacing:.5px;flex:1;}
+.logo span{color:var(--cel);}
+.icon-btn{width:32px;height:32px;border-radius:50%;background:rgba(116,172,223,0.12);border:1px solid rgba(116,172,223,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.avatar{width:32px;height:32px;border-radius:50%;background:rgba(197,160,89,0.2);border:1px solid var(--dor);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--dor);cursor:pointer;flex-shrink:0;}
 
-        /* Tabs */
-        #tabs{display:flex;background:rgba(0,0,0,0.3);border-bottom:1px solid var(--borde);overflow-x:auto;scrollbar-width:none;position:sticky;top:49px;z-index:99;}
-        #tabs::-webkit-scrollbar{display:none;}
-        .tab-btn{flex-shrink:0;padding:12px 18px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:12px;font-weight:600;cursor:pointer;border-bottom:3px solid transparent;transition:0.2s;white-space:nowrap;}
-        .tab-btn.active{color:var(--dorado);border-bottom-color:var(--dorado);}
+/* ── SEARCH ── */
+#srch-bar{background:var(--az);padding:8px 14px;border-bottom:1px solid rgba(116,172,223,0.1);flex-shrink:0;}
+#srch-input{width:100%;background:var(--card);border:1px solid rgba(116,172,223,0.2);border-radius:20px;padding:8px 14px 8px 36px;color:var(--txt);font-size:13px;outline:none;position:relative;}
+.srch-wrap{position:relative;}
+.srch-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;}
+#srch-input::placeholder{color:var(--muted);}
 
-        /* Sections */
-        .section{display:none;}
-        .section.active{display:block;}
+/* ── NAV TABS ── */
+#nav-tabs{display:flex;background:rgba(0,0,0,0.3);border-bottom:1px solid rgba(116,172,223,0.1);overflow-x:auto;scrollbar-width:none;flex-shrink:0;}
+#nav-tabs::-webkit-scrollbar{display:none;}
+.ntab{flex-shrink:0;padding:10px 15px;font-size:11px;font-weight:700;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;letter-spacing:.3px;}
+.ntab.a{color:var(--dor);border-bottom-color:var(--dor);}
 
-        /* Modal apodo */
-        #modal-nick{position:fixed;inset:0;background:var(--azul);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;}
-        #modal-nick h1{font-size:26px;color:var(--celeste);text-align:center;}
-        #modal-nick p{color:rgba(255,255,255,0.6);font-size:13px;}
-        #nick-in{padding:12px 16px;border-radius:8px;border:2px solid var(--celeste);background:var(--azul2);color:white;font-size:16px;width:100%;max-width:280px;outline:none;text-align:center;}
-        #nick-btn{background:var(--dorado);border:none;padding:12px 48px;border-radius:8px;font-weight:bold;font-size:16px;cursor:pointer;color:var(--azul);}
+/* ── MAIN SCROLL AREA ── */
+#main{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:rgba(116,172,223,0.2) transparent;}
+#main::-webkit-scrollbar{width:3px;}
+#main::-webkit-scrollbar-thumb{background:rgba(116,172,223,0.2);border-radius:2px;}
 
-        /* Fixture strip */
-        #fixture-wrap{background:rgba(0,0,0,0.3);padding:8px 12px;overflow-x:auto;white-space:nowrap;display:flex;gap:8px;border-bottom:1px solid var(--borde);scrollbar-width:none;}
-        #fixture-wrap::-webkit-scrollbar{display:none;}
-        .partido-mini{display:inline-flex;flex-direction:column;align-items:center;background:var(--azul2);padding:7px 12px;border-radius:8px;border:1px solid var(--borde);min-width:140px;font-size:11px;gap:3px;white-space:normal;text-align:center;cursor:pointer;transition:border-color 0.2s;}
-        .partido-mini:hover{border-color:var(--dorado);}
-        .est-live{background:rgba(231,76,60,0.3);color:var(--rojo);font-size:9px;font-weight:bold;padding:2px 7px;border-radius:8px;letter-spacing:1px;animation:blink 1.5s infinite;}
-        .est-pronto{background:rgba(116,172,223,0.2);color:var(--celeste);font-size:9px;font-weight:bold;padding:2px 7px;border-radius:8px;}
-        .est-fin{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);font-size:9px;padding:2px 7px;border-radius:8px;}
+/* ── SECTIONS ── */
+.section{display:none;}
+.section.a{display:block;}
 
-        /* Player */
-        #player-box{width:100%;max-width:860px;margin:12px auto;background:#000;border-radius:10px;overflow:hidden;position:relative;box-shadow:0 8px 32px rgba(0,0,0,0.6);}
-        #video-el{width:100%;aspect-ratio:16/9;display:block;background:#000;}
-        #iframe-el{width:100%;aspect-ratio:16/9;border:none;display:none;}
-        #player-info{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:rgba(0,0,0,0.5);font-size:12px;}
-        #canal-activo{color:var(--dorado);font-weight:bold;}
-        #calidad-badge{background:rgba(197,160,89,0.2);border:1px solid var(--dorado);color:var(--dorado);padding:2px 8px;border-radius:10px;font-size:11px;}
-        #quality-sel{display:none;gap:6px;padding:7px 12px;background:rgba(0,0,0,0.4);flex-wrap:wrap;justify-content:center;}
-        #quality-sel button{background:rgba(255,255,255,0.08);border:1px solid var(--borde);color:white;padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;}
-        #quality-sel button.active,#quality-sel button:hover{background:var(--dorado);border-color:var(--dorado);color:var(--azul);font-weight:bold;}
-        #spinner{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;flex-direction:column;gap:12px;}
-        .spin{width:44px;height:44px;border:4px solid rgba(255,255,255,0.2);border-top-color:var(--celeste);border-radius:50%;animation:spin 0.8s linear infinite;}
-        @keyframes spin{to{transform:rotate(360deg);}}
-        #player-err{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;flex-direction:column;gap:12px;text-align:center;padding:20px;}
-        #player-err p{color:rgba(255,255,255,0.6);font-size:13px;}
-        #player-err button{background:var(--rojo);border:none;color:white;padding:8px 24px;border-radius:6px;cursor:pointer;font-weight:bold;}
+/* ── CATEGORY STRIP ── */
+#cat-strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:10px 14px 8px;background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(116,172,223,0.08);flex-shrink:0;}
+#cat-strip::-webkit-scrollbar{display:none;}
+.cat-pill{flex-shrink:0;display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid transparent;white-space:nowrap;}
+.cat-pill.all{background:var(--dor);color:#001f3f;border-color:var(--dor);}
+.cat-pill.dep{background:rgba(46,204,113,0.15);color:var(--dep);border-color:rgba(46,204,113,0.3);}
+.cat-pill.not{background:rgba(116,172,223,0.15);color:var(--cel);border-color:rgba(116,172,223,0.3);}
+.cat-pill.aire{background:rgba(155,89,182,0.15);color:var(--aire);border-color:rgba(155,89,182,0.3);}
+.cat-pill.mus{background:rgba(230,126,34,0.15);color:var(--mus);border-color:rgba(230,126,34,0.3);}
+.cat-pill.inf{background:rgba(52,152,219,0.15);color:var(--inf);border-color:rgba(52,152,219,0.3);}
+.cat-pill.int{background:rgba(231,76,60,0.15);color:var(--int);border-color:rgba(231,76,60,0.3);}
 
-        /* Controles */
-        #controles{max-width:860px;margin:0 auto 10px;display:flex;justify-content:center;gap:8px;padding:0 12px;flex-wrap:wrap;}
-        .btn-c{background:rgba(255,255,255,0.07);border:1px solid var(--borde);color:white;padding:6px 14px;border-radius:20px;font-size:11px;cursor:pointer;display:flex;align-items:center;gap:5px;}
-        .btn-c:hover{background:rgba(255,255,255,0.14);}
-        .btn-c.danger{border-color:rgba(231,76,60,0.4);color:var(--rojo);}
+/* ── PLAYER HERO ── */
+#player-hero{position:relative;background:#000;width:100%;aspect-ratio:16/9;max-height:210px;flex-shrink:0;}
+#video-el{width:100%;height:100%;display:block;background:#000;}
+#iframe-el{width:100%;height:100%;border:none;display:none;}
+#hero-overlay{position:absolute;inset:0;pointer-events:none;}
+#hero-badge{position:absolute;top:8px;left:10px;background:var(--roj);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:1px;}
+#hero-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.85));padding:18px 12px 8px;}
+#hero-canal{font-size:15px;font-weight:700;color:var(--dor);}
+#hero-sub{font-size:11px;color:rgba(255,255,255,0.55);margin-top:2px;}
+#hero-btns{position:absolute;top:8px;right:8px;display:flex;gap:6px;}
+.hero-btn{width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:all;}
+#hero-quality{display:none;position:absolute;bottom:40px;right:8px;background:rgba(0,20,40,0.95);border:1px solid var(--borde, rgba(116,172,223,0.3));border-radius:8px;padding:6px;pointer-events:all;flex-direction:column;gap:4px;}
+.q-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(116,172,223,0.2);color:var(--txt);padding:4px 12px;border-radius:10px;font-size:11px;cursor:pointer;text-align:center;}
+.q-btn.a{background:var(--dor);border-color:var(--dor);color:var(--az);}
+#hero-spinner{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;pointer-events:none;}
+.spin{width:36px;height:36px;border:3px solid rgba(255,255,255,0.15);border-top-color:var(--cel);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+#hero-err{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;flex-direction:column;gap:10px;text-align:center;padding:20px;pointer-events:all;}
+#hero-err p{color:rgba(255,255,255,0.6);font-size:13px;}
+#hero-err button{background:var(--roj);border:none;color:#fff;padding:8px 20px;border-radius:6px;cursor:pointer;font-weight:700;}
+#hero-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:linear-gradient(135deg,var(--az2),#1a0a2e);}
+#hero-placeholder p{color:var(--muted);font-size:13px;}
 
-        /* Filtros */
-        #filtros{display:flex;justify-content:center;gap:6px;padding:10px 12px;flex-wrap:wrap;}
-        .btn-f{background:rgba(255,255,255,0.07);border:1px solid var(--borde);color:rgba(255,255,255,0.8);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;}
-        .btn-f.active,.btn-f:hover{background:var(--dorado);border-color:var(--dorado);color:var(--azul);}
+/* ── TV SECTION BODY ── */
+#tv-body{overflow-y:auto;}
 
-        /* Canales */
-        #channel-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px;padding:10px 14px 20px;max-width:900px;margin:0 auto;}
-        .ch-card{background:rgba(255,255,255,0.05);padding:12px 8px;border-radius:10px;text-align:center;cursor:pointer;border:2px solid transparent;transition:0.2s;display:flex;flex-direction:column;align-items:center;gap:6px;}
-        .ch-card:hover{background:rgba(255,255,255,0.1);border-color:var(--borde);}
-        .ch-card.active{border-color:var(--dorado);background:rgba(197,160,89,0.15);}
-        .ch-card img{width:48px;height:48px;object-fit:contain;border-radius:6px;background:rgba(255,255,255,0.05);}
-        .ch-name{font-size:11px;font-weight:600;line-height:1.3;}
-        .live-dot{width:7px;height:7px;border-radius:50%;background:var(--rojo);animation:blink 1.5s infinite;}
-        @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-        .skeleton{background:linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.08) 50%,rgba(255,255,255,0.04) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:10px;height:90px;}
-        @keyframes shimmer{to{background-position:-200% 0;}}
+/* ── ROW SECTION ── */
+.row-sec{padding:12px 0 6px;}
+.row-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 14px 8px;}
+.row-title{font-size:13px;font-weight:700;}
+.row-ver{font-size:11px;color:var(--cel);cursor:pointer;}
 
-        /* Sub-tabs */
-        .sub-tabs{display:flex;gap:6px;padding:12px 14px;overflow-x:auto;scrollbar-width:none;}
-        .sub-tabs::-webkit-scrollbar{display:none;}
-        .stab{flex-shrink:0;padding:8px 16px;background:rgba(255,255,255,0.07);border:1px solid var(--borde);color:rgba(255,255,255,0.7);border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;transition:0.2s;}
-        .stab.active,.stab:hover{background:var(--dorado);border-color:var(--dorado);color:var(--azul);}
-        .sub-tabs.verde .stab.active,.sub-tabs.verde .stab:hover{background:var(--verde);border-color:var(--verde);color:#000;}
-        .sub-tabs.naranja .stab.active,.sub-tabs.naranja .stab:hover{background:var(--naranja);border-color:var(--naranja);color:white;}
+/* Favoritos chips */
+.fav-strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:0 14px 4px;}
+.fav-strip::-webkit-scrollbar{display:none;}
+.fav-pill{flex-shrink:0;background:var(--card2);border-radius:20px;padding:6px 12px;display:flex;align-items:center;gap:6px;border:1px solid rgba(116,172,223,0.15);cursor:pointer;}
+.fav-pill.a{border-color:var(--dor);background:rgba(197,160,89,0.1);}
+.fav-pill.add{border-style:dashed;color:var(--muted);font-size:11px;font-weight:600;}
+.fdot{width:6px;height:6px;border-radius:50%;background:var(--roj);}
+.fname{font-size:11px;font-weight:600;}
 
-        .msec{display:none;padding:0 14px 80px;}
-        .msec.active{display:block;}
+/* Carrusel pequeño (iconos) */
+.car-sm{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:0 14px 4px;}
+.car-sm::-webkit-scrollbar{display:none;}
+.ch-sm{flex-shrink:0;width:72px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;}
+.ch-sm-logo{width:60px;height:60px;background:var(--card);border-radius:var(--rad);border:1.5px solid rgba(116,172,223,0.15);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:.15s;}
+.ch-sm-logo.a{border-color:var(--dor);background:rgba(197,160,89,0.12);}
+.ch-sm-logo img{width:100%;height:100%;object-fit:contain;padding:6px;}
+.ch-sm-name{font-size:10px;font-weight:600;text-align:center;line-height:1.2;color:var(--txt);}
+.ldot{position:absolute;top:4px;right:4px;width:6px;height:6px;border-radius:50%;background:var(--roj);animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
-        /* Grupos */
-        .grupos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;max-width:1000px;margin:0 auto;padding-bottom:20px;}
-        .grupo-card{background:rgba(0,0,0,0.3);border:1px solid var(--borde);border-radius:10px;overflow:hidden;}
-        .grupo-header{background:linear-gradient(to right,var(--azul2),rgba(0,51,102,0.5));padding:10px 14px;display:flex;align-items:center;justify-content:space-between;}
-        .grupo-header h3{font-size:14px;font-weight:bold;letter-spacing:1px;}
-        .grupo-header h3.lib{color:var(--dorado);}
-        .grupo-header h3.sud{color:var(--naranja);}
-        .grupo-tabla{width:100%;border-collapse:collapse;font-size:12px;}
-        .grupo-tabla th{padding:6px 10px;text-align:left;color:rgba(255,255,255,0.4);font-size:10px;letter-spacing:0.5px;border-bottom:1px solid var(--borde);}
-        .grupo-tabla th:not(:first-child){text-align:center;}
-        .grupo-tabla td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,0.04);}
-        .grupo-tabla td:not(:first-child){text-align:center;color:rgba(255,255,255,0.7);}
-        .grupo-tabla tr:last-child td{border-bottom:none;}
-        .grupo-tabla tr:hover td{background:rgba(255,255,255,0.04);}
-        .eq-nombre{display:flex;align-items:center;gap:8px;font-weight:600;}
-        .clasificado td{background:rgba(46,204,113,0.08);}
-        .clasificado .eq-nombre::after{content:"→";color:var(--verde);font-size:10px;margin-left:4px;}
+/* Carrusel grande (cards) */
+.car-lg{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:0 14px 4px;}
+.car-lg::-webkit-scrollbar{display:none;}
+.ch-lg{flex-shrink:0;width:136px;background:var(--card);border-radius:var(--rad);border:1px solid rgba(116,172,223,0.15);overflow:hidden;cursor:pointer;transition:.15s;}
+.ch-lg.a{border-color:var(--dor);}
+.ch-lg-img{height:74px;background:linear-gradient(135deg,var(--az2),#1a0a2e);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.ch-lg-img img{width:100%;height:100%;object-fit:contain;padding:8px;}
+.ch-lg-live{position:absolute;bottom:5px;left:5px;background:var(--roj);color:#fff;font-size:8px;font-weight:700;padding:2px 5px;border-radius:3px;}
+.ch-lg-info{padding:7px 8px;}
+.ch-lg-name{font-size:12px;font-weight:600;}
+.ch-lg-cat{font-size:10px;color:var(--muted);margin-top:1px;}
 
-        /* Fixture */
-        .ffiltros{display:flex;gap:6px;padding:0 0 12px;flex-wrap:wrap;}
-        .ffiltro{padding:6px 14px;background:rgba(255,255,255,0.07);border:1px solid var(--borde);color:rgba(255,255,255,0.7);border-radius:15px;font-size:11px;font-weight:600;cursor:pointer;transition:0.2s;}
-        .ffiltro.active,.ffiltro:hover{background:var(--dorado);border-color:var(--dorado);color:var(--azul);}
-        .fecha-grupo{margin-bottom:20px;}
-        .fecha-titulo{font-size:11px;font-weight:bold;letter-spacing:1px;color:rgba(255,255,255,0.4);padding:8px 0 6px;text-transform:uppercase;border-bottom:1px solid var(--borde);margin-bottom:8px;}
-        .partido-row{display:flex;align-items:center;background:rgba(0,0,0,0.25);border:1px solid var(--borde);border-radius:8px;padding:10px 14px;margin-bottom:6px;gap:12px;transition:border-color 0.2s;}
-        .partido-row:hover{border-color:rgba(116,172,223,0.4);}
-        .partido-row.live{border-color:var(--rojo);background:rgba(231,76,60,0.08);}
-        .partido-row.fin{opacity:0.7;}
-        .p-hora{font-size:11px;color:var(--celeste);min-width:42px;text-align:center;font-weight:600;}
-        .p-badge{font-size:9px;font-weight:bold;letter-spacing:1px;padding:2px 6px;border-radius:4px;}
-        .p-badge.live{background:var(--rojo);color:white;}
-        .p-badge.pronto{background:rgba(116,172,223,0.2);color:var(--celeste);}
-        .p-badge.fin{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.5);}
-        .p-teams{flex:1;display:flex;align-items:center;gap:8px;justify-content:center;}
-        .p-team{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;}
-        .p-team.right{flex-direction:row-reverse;}
-        .p-score{font-size:20px;font-weight:bold;min-width:60px;text-align:center;color:var(--dorado);}
-        .p-score.pending{font-size:13px;color:rgba(255,255,255,0.3);}
-        .p-grupo{font-size:10px;color:rgba(255,255,255,0.3);min-width:40px;text-align:right;}
-        .p-torneo-badge{font-size:9px;padding:2px 6px;border-radius:4px;font-weight:bold;margin-left:4px;}
-        .p-torneo-badge.lib{background:rgba(197,160,89,0.3);color:var(--dorado);}
-        .p-torneo-badge.sud{background:rgba(230,126,34,0.3);color:var(--naranja);}
+/* Grid 2 columnas Infantil+Música */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(116,172,223,0.08);}
+.grid2-col{padding:10px 14px;}
+.grid2-col:first-child{border-right:1px solid rgba(116,172,223,0.08);}
+.grid2-title{font-size:12px;font-weight:700;margin-bottom:8px;}
+.grid2-row{display:flex;align-items:center;gap:6px;padding:3px 0;cursor:pointer;}
+.grid2-thumb{width:28px;height:28px;background:var(--card);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--muted);overflow:hidden;flex-shrink:0;}
+.grid2-thumb img{width:100%;height:100%;object-fit:contain;padding:3px;}
+.grid2-name{font-size:11px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 
-        /* Tabla */
-        .tabla-wrap{overflow-x:auto;}
-        .tabla-pos{width:100%;border-collapse:collapse;font-size:12px;background:rgba(0,0,0,0.2);border-radius:8px;overflow:hidden;}
-        .tabla-pos th{padding:10px 12px;text-align:left;background:rgba(0,51,102,0.6);color:rgba(255,255,255,0.6);font-size:10px;letter-spacing:0.5px;}
-        .tabla-pos th:not(:nth-child(2)){text-align:center;}
-        .tabla-pos td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,0.04);}
-        .tabla-pos td:not(:nth-child(2)){text-align:center;}
-        .tabla-pos tr:hover td{background:rgba(255,255,255,0.04);}
-        .pos-num{color:rgba(255,255,255,0.4);font-size:11px;}
-        .pos-pts{font-weight:bold;color:var(--dorado);font-size:14px;}
-        .pos-verde td{border-left:3px solid var(--verde);}
-        .pos-naranja td{border-left:3px solid var(--naranja);}
-        .pos-rojo td{border-left:3px solid var(--rojo);}
+/* Historial */
+.hist-row{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid rgba(116,172,223,0.06);cursor:pointer;}
+.h-thumb{width:50px;height:32px;background:var(--card);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--muted);flex-shrink:0;overflow:hidden;}
+.h-thumb img{width:100%;height:100%;object-fit:contain;padding:4px;}
+.h-info{flex:1;}
+.h-name{font-size:12px;font-weight:600;}
+.h-time{font-size:10px;color:var(--muted);margin-top:1px;}
+.h-play{width:28px;height:28px;border-radius:50%;background:rgba(197,160,89,0.15);border:1px solid var(--dor);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ptri{width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:8px solid var(--dor);margin-left:2px;}
 
-        /* Fase eliminatoria */
-        .bracket{display:flex;flex-direction:column;gap:16px;padding-bottom:20px;}
-        .fase-titulo{font-size:13px;font-weight:bold;color:var(--dorado);padding:10px 0 8px;border-bottom:1px solid var(--borde);margin-bottom:8px;letter-spacing:1px;}
-        .fase-titulo.sud{color:var(--naranja);}
-        .bracket-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;}
-        .bracket-match{background:rgba(0,0,0,0.3);border:1px solid var(--borde);border-radius:8px;overflow:hidden;}
-        .bracket-match-header{padding:6px 12px;background:rgba(0,51,102,0.4);font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:0.5px;}
-        .bracket-team{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.05);}
-        .bracket-team:last-child{border-bottom:none;}
-        .bracket-team-name{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;}
-        .bracket-score{font-size:16px;font-weight:bold;color:var(--dorado);}
-        .bracket-tbd{color:rgba(255,255,255,0.3);font-style:italic;font-size:12px;}
+/* Búsqueda resultados */
+#srch-results{padding:8px 14px;}
+.srch-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(116,172,223,0.06);cursor:pointer;}
+.srch-thumb{width:40px;height:40px;background:var(--card);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--muted);flex-shrink:0;overflow:hidden;}
+.srch-thumb img{width:100%;height:100%;object-fit:contain;padding:4px;}
+.srch-info{flex:1;}
+.srch-name{font-size:13px;font-weight:600;}
+.srch-cat{font-size:11px;color:var(--muted);}
+.srch-play{width:32px;height:32px;border-radius:50%;background:rgba(197,160,89,0.15);border:1px solid var(--dor);display:flex;align-items:center;justify-content:center;}
 
-        /* Info box */
-        .info-box{background:rgba(0,0,0,0.3);border:1px solid var(--borde);border-radius:10px;padding:20px;margin-bottom:14px;text-align:center;}
-        .info-box h3{color:var(--dorado);margin-bottom:8px;font-size:16px;}
-        .info-box p{color:rgba(255,255,255,0.6);font-size:13px;line-height:1.6;}
+/* Skeleton */
+.skel{background:linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.08) 50%,rgba(255,255,255,0.04) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--rad);}
+@keyframes shimmer{to{background-position:-200% 0;}}
 
-        /* Chat */
-        #chat-wrap{max-width:860px;margin:0 auto;padding:14px 14px 80px;}
-        #chat-head{display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px;border-bottom:1px solid var(--borde);margin-bottom:8px;}
-        #chat-head h3{font-size:14px;color:var(--celeste);}
-        #chat-box{background:rgba(0,0,0,0.25);border:1px solid var(--borde);border-radius:10px;height:60vh;display:flex;flex-direction:column;overflow:hidden;}
-        #chat-msgs{flex:1;overflow-y:auto;padding:12px;font-size:13px;display:flex;flex-direction:column;gap:6px;scrollbar-width:thin;}
-        .msg{display:flex;gap:6px;align-items:flex-start;animation:fadeIn 0.2s;}
-        @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
-        .msg-nick{color:var(--dorado);font-weight:bold;font-size:12px;white-space:nowrap;flex-shrink:0;}
-        .msg-text{color:rgba(255,255,255,0.85);line-height:1.4;word-break:break-word;}
-        #chat-form{display:flex;padding:8px;border-top:1px solid var(--borde);gap:6px;}
-        #chat-in{flex:1;background:rgba(0,43,85,0.8);border:1px solid var(--borde);color:white;padding:9px 12px;border-radius:20px;font-size:13px;outline:none;}
-        #chat-in:focus{border-color:var(--celeste);}
-        #chat-btn{background:var(--celeste);border:none;font-weight:bold;font-size:13px;padding:0 16px;border-radius:20px;cursor:pointer;color:var(--azul);}
+/* Mundial / CONMEBOL sections */
+.msec-wrap{padding:0 0 80px;}
+.sub-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:12px 14px 8px;}
+.sub-tabs::-webkit-scrollbar{display:none;}
+.stab{flex-shrink:0;padding:7px 14px;background:rgba(255,255,255,0.07);border:1px solid rgba(116,172,223,0.2);color:rgba(255,255,255,0.6);border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;}
+.stab.a{background:var(--dor);border-color:var(--dor);color:var(--az);}
+.msec{display:none;padding:0 14px 20px;}
+.msec.a{display:block;}
+.grupos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding-top:4px;}
+.grupo-card{background:var(--card);border:1px solid rgba(116,172,223,0.15);border-radius:var(--rad);overflow:hidden;}
+.grupo-hdr{background:rgba(0,51,102,0.6);padding:8px 10px;display:flex;justify-content:space-between;align-items:center;}
+.grupo-title{font-size:12px;font-weight:700;color:var(--dor);}
+.grupo-body{padding:4px 0;}
+.grupo-eq{display:flex;align-items:center;gap:6px;padding:5px 10px;font-size:11px;border-bottom:1px solid rgba(255,255,255,0.03);}
+.grupo-eq:last-child{border-bottom:none;}
+.grupo-eq.top{background:rgba(46,204,113,0.07);}
+.partido-row{display:flex;align-items:center;background:rgba(0,0,0,0.25);border:1px solid rgba(116,172,223,0.12);border-radius:8px;padding:9px 12px;margin-bottom:6px;gap:10px;}
+.partido-row.live{border-color:var(--roj);background:rgba(231,76,60,0.07);}
+.p-hora{font-size:10px;color:var(--cel);min-width:38px;text-align:center;font-weight:600;}
+.p-badge{font-size:8px;font-weight:700;padding:2px 5px;border-radius:3px;}
+.p-badge.live{background:var(--roj);color:#fff;}
+.p-badge.pronto{background:rgba(116,172,223,0.2);color:var(--cel);}
+.p-badge.fin{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);}
+.p-teams{flex:1;display:flex;align-items:center;gap:6px;justify-content:center;}
+.p-team{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;}
+.p-team.r{flex-direction:row-reverse;}
+.p-score{font-size:18px;font-weight:700;min-width:52px;text-align:center;color:var(--dor);}
+.p-score.pend{font-size:12px;color:rgba(255,255,255,0.25);}
+.p-grp{font-size:9px;color:rgba(255,255,255,0.25);min-width:32px;text-align:right;}
+.fecha-sep{font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);padding:10px 0 6px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid rgba(116,172,223,0.08);margin-bottom:6px;}
 
-        /* Toast */
-        #toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(80px);background:rgba(20,40,70,0.95);border:1px solid var(--celeste);color:white;padding:10px 20px;border-radius:20px;font-size:13px;transition:transform 0.3s;z-index:9998;backdrop-filter:blur(8px);white-space:nowrap;}
-        #toast.show{transform:translateX(-50%) translateY(0);}
+/* Chat */
+#chat-msgs{flex:1;overflow-y:auto;padding:10px 14px;display:flex;flex-direction:column;gap:6px;scrollbar-width:thin;}
+.msg{display:flex;gap:6px;animation:fadeIn .2s;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(3px)}to{opacity:1}}
+.msg-nick{color:var(--dor);font-weight:700;font-size:12px;white-space:nowrap;flex-shrink:0;}
+.msg-txt{color:rgba(255,255,255,.85);font-size:13px;line-height:1.4;word-break:break-word;}
+#chat-form{display:flex;padding:8px 14px;gap:8px;background:var(--az2);border-top:1px solid rgba(116,172,223,0.1);}
+#chat-in{flex:1;background:var(--card);border:1px solid rgba(116,172,223,0.2);color:var(--txt);padding:9px 14px;border-radius:20px;font-size:13px;outline:none;}
+#chat-btn{background:var(--cel);border:none;color:var(--az);font-weight:700;font-size:13px;padding:0 16px;border-radius:20px;cursor:pointer;}
 
-        /* Instalar */
-        #btn-instalar{display:none;position:fixed;bottom:20px;right:16px;background:var(--dorado);color:var(--azul);border:none;padding:12px 20px;border-radius:25px;font-weight:bold;font-size:13px;cursor:pointer;z-index:999;box-shadow:0 4px 20px rgba(0,0,0,0.5);align-items:center;gap:8px;animation:pulsebtn 2s infinite;}
-        @keyframes pulsebtn{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-        #ios-banner{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--azul2);border-top:2px solid var(--dorado);padding:16px 40px 16px 16px;z-index:999;font-size:13px;}
-        #ios-banner p{color:rgba(255,255,255,0.85);line-height:1.6;}
-        #ios-banner strong{color:var(--dorado);}
-        #ios-close{position:absolute;top:10px;right:14px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:20px;cursor:pointer;}
+/* Toast */
+#toast{position:fixed;bottom:74px;left:50%;transform:translateX(-50%) translateY(60px);background:rgba(10,22,40,0.95);border:1px solid var(--cel);color:#fff;padding:9px 18px;border-radius:20px;font-size:13px;transition:transform .3s;z-index:999;backdrop-filter:blur(8px);white-space:nowrap;pointer-events:none;}
+#toast.show{transform:translateX(-50%) translateY(0);}
 
-        @media(max-width:480px){
-            .logo{font-size:14px;}
-            .tab-btn{padding:10px 12px;font-size:11px;}
-            #channel-list{grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:8px;}
-            .ch-card img{width:38px;height:38px;}
-            .p-team span:not(:first-child){display:none;}
-            .grupos-grid{grid-template-columns:1fr;}
-        }
-    </style>
+/* Bottom nav */
+#bnav{display:flex;background:var(--az2);border-top:1px solid rgba(116,172,223,0.12);padding:8px 0 10px;flex-shrink:0;}
+.bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
+.bi svg{width:20px;height:20px;}
+.bl{font-size:9px;font-weight:700;color:var(--muted);}
+.bl.a{color:var(--dor);}
+
+/* Modal apodo */
+#modal-nick{position:fixed;inset:0;background:var(--az);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;}
+#modal-nick h1{font-size:24px;color:var(--cel);text-align:center;}
+#nick-in{padding:11px 16px;border-radius:8px;border:2px solid var(--cel);background:var(--card);color:#fff;font-size:16px;width:100%;max-width:280px;outline:none;text-align:center;}
+#nick-btn{background:var(--dor);border:none;padding:12px 44px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;color:var(--az);}
+
+/* PWA install */
+#btn-instalar{display:none;position:fixed;bottom:72px;right:14px;background:var(--dor);color:var(--az);border:none;padding:11px 18px;border-radius:22px;font-weight:700;font-size:12px;cursor:pointer;z-index:99;box-shadow:0 4px 16px rgba(0,0,0,0.4);align-items:center;gap:7px;}
+#ios-banner{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--az2);border-top:2px solid var(--dor);padding:14px 40px 14px 14px;z-index:99;font-size:13px;}
+#ios-banner strong{color:var(--dor);}
+#ios-close{position:absolute;top:10px;right:12px;background:none;border:none;color:rgba(255,255,255,.4);font-size:18px;cursor:pointer;}
+
+@media(min-width:600px){
+  body{max-width:420px;margin:0 auto;border-left:1px solid rgba(116,172,223,0.1);border-right:1px solid rgba(116,172,223,0.1);}
+  #player-hero{max-height:236px;}
+}
+</style>
 </head>
 <body>
 
 <!-- Modal apodo -->
 <div id="modal-nick">
-    <h1>🏆 MundialEnVivo AR</h1>
-    <p>Ingresá tu apodo para la tribuna</p>
-    <input type="text" id="nick-in" placeholder="Ej: ElDiez_94" maxlength="20" autocomplete="off">
-    <button id="nick-btn">⚽ ENTRAR</button>
-    <p style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:6px;">Mundial 2026 · Libertadores · Sudamericana 🇦🇷</p>
+  <h1>🏆 MundialEnVivo AR</h1>
+  <p style="color:rgba(255,255,255,.5);font-size:13px;">Ingresá tu apodo para la tribuna</p>
+  <input type="text" id="nick-in" placeholder="Ej: ElDiez_94" maxlength="20" autocomplete="off">
+  <button id="nick-btn">⚽ ENTRAR</button>
+  <p style="font-size:11px;color:rgba(255,255,255,.2);margin-top:4px;">Mundial 2026 · Libertadores · Sudamericana</p>
 </div>
 
 <!-- Header -->
-<header>
-    <div class="logo">MUNDIAL<span>ENVIVO</span> AR 🏆</div>
-    <div id="user-badge">👤 <span id="user-name">—</span></div>
-</header>
-
-<!-- Tabs -->
-<div id="tabs">
-    <button class="tab-btn active"   onclick="cambiarTab('tv',this)">📺 TV EN VIVO</button>
-    <button class="tab-btn"          onclick="cambiarTab('mundial',this)">🌍 MUNDIAL 2026</button>
-    <button class="tab-btn"          onclick="cambiarTab('conmebol',this)">🏆 CONMEBOL</button>
-    <button class="tab-btn"          onclick="cambiarTab('chat',this)">💬 TRIBUNA</button>
+<div id="hdr">
+  <div class="logo">MUNDIAL<span>ENVIVO</span> AR</div>
+  <div class="icon-btn" id="btn-srch-toggle">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#74ACDF" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </div>
+  <div class="avatar" id="user-badge">?</div>
 </div>
 
-<!-- ═══════ TAB: TV EN VIVO ═══════ -->
-<div id="sec-tv" class="section active">
-    <div id="fixture-wrap">
-        <span style="color:rgba(255,255,255,0.3);font-size:12px;padding:4px 0;">⏳ Partidos de hoy aparecen aquí</span>
-    </div>
-    <div id="player-box">
-        <video id="video-el" controls autoplay playsinline></video>
-        <iframe id="iframe-el" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-        <div id="quality-sel"></div>
-        <div id="player-info">
-            <span id="canal-activo">Seleccioná un canal ↓</span>
-            <span id="calidad-badge">—</span>
-        </div>
-        <div id="spinner"><div class="spin"></div><span style="font-size:13px;color:rgba(255,255,255,0.6)">Cargando señal...</span></div>
-        <div id="player-err">
-            <span style="font-size:36px">📡</span>
-            <p>No se pudo cargar la señal.<br>Intentá otro canal o reportá la caída.</p>
-            <button id="btn-retry">🔄 Reintentar</button>
-        </div>
-    </div>
-    <div id="controles">
-        <button class="btn-c" id="btn-fs">⛶ Pantalla completa</button>
-        <button class="btn-c danger" id="btn-rep">⚠️ Reportar</button>
-    </div>
-    <div id="filtros">
-        <button class="btn-f active" onclick="filtrar('TODO',this)">🔴 TODOS</button>
-        <button class="btn-f" onclick="filtrar('DEPORTES',this)">⚽ DEPORTES</button>
-        <button class="btn-f" onclick="filtrar('NOTICIAS',this)">📰 NOTICIAS</button>
-        <button class="btn-f" onclick="filtrar('AIRE',this)">📺 AIRE</button>
-        <button class="btn-f" onclick="filtrar('MUSICA',this)">🎵 MÚSICA</button>
-        <button class="btn-f" onclick="filtrar('INFANTIL',this)">👦 INFANTIL</button>
-    </div>
-    <div id="channel-list">
-        <div class="skeleton"></div><div class="skeleton"></div>
-        <div class="skeleton"></div><div class="skeleton"></div>
-        <div class="skeleton"></div><div class="skeleton"></div>
-    </div>
+<!-- Search bar -->
+<div id="srch-bar" style="display:none;">
+  <div class="srch-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="srch-input" placeholder="Buscar canales, países...">
+  </div>
 </div>
 
-<!-- ═══════ TAB: MUNDIAL ═══════ -->
-<div id="sec-mundial" class="section">
-    <div class="sub-tabs" id="mundial-tabs">
-        <button class="stab active" onclick="cambiarSub('mundial','grupos',this)">🏆 Grupos</button>
-        <button class="stab" onclick="cambiarSub('mundial','fixture',this)">📅 Fixture</button>
-        <button class="stab" onclick="cambiarSub('mundial','posiciones',this)">📊 Posiciones</button>
-    </div>
-    <div id="mundial-grupos" class="msec active">
-        <div class="grupos-grid" id="mundial-grupos-grid">
-            <div style="color:rgba(255,255,255,0.3);text-align:center;padding:40px;grid-column:1/-1;">⏳ Cargando grupos...</div>
-        </div>
-    </div>
-    <div id="mundial-fixture" class="msec">
-        <div class="ffiltros">
-            <button class="ffiltro active" onclick="filtrarFixture('mundial','todos',this)">Todos</button>
-            <button class="ffiltro" onclick="filtrarFixture('mundial','ARG',this)">🇦🇷 Argentina</button>
-            <button class="ffiltro" onclick="filtrarFixture('mundial','live',this)">🔴 En Vivo</button>
-            <button class="ffiltro" onclick="filtrarFixture('mundial','hoy',this)">📅 Hoy</button>
-        </div>
-        <div id="mundial-fixture-list"></div>
-    </div>
-    <div id="mundial-posiciones" class="msec">
-        <div id="mundial-pos-wrap"></div>
-    </div>
+<!-- Nav tabs -->
+<div id="nav-tabs">
+  <div class="ntab a" onclick="cambiarTab('tv',this)">📺 TV EN VIVO</div>
+  <div class="ntab" onclick="cambiarTab('mundial',this)">🌍 MUNDIAL</div>
+  <div class="ntab" onclick="cambiarTab('conmebol',this)">🏆 CONMEBOL</div>
+  <div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>
 </div>
 
-<!-- ═══════ TAB: CONMEBOL ═══════ -->
-<div id="sec-conmebol" class="section">
-    <!-- Sub-tabs torneos -->
-    <div class="sub-tabs" id="conmebol-tabs">
-        <button class="stab active" onclick="cambiarConmebol('libertadores',this)">🏆 Libertadores</button>
-        <button class="stab" onclick="cambiarConmebol('sudamericana',this)">🟠 Sudamericana</button>
-        <button class="stab" onclick="cambiarConmebol('recopa',this)">⭐ Recopa</button>
+<!-- Main scrollable area -->
+<div id="main">
+
+  <!-- ══ TV EN VIVO ══ -->
+  <div id="sec-tv" class="section a">
+
+    <!-- Player hero -->
+    <div id="player-hero">
+      <video id="video-el" controls autoplay playsinline></video>
+      <iframe id="iframe-el" allowfullscreen allow="autoplay;encrypted-media"></iframe>
+      <div id="hero-overlay">
+        <div id="hero-badge" style="display:none;">EN VIVO</div>
+        <div id="hero-info" style="display:none;">
+          <div id="hero-canal">—</div>
+          <div id="hero-sub">Seleccioná un canal</div>
+        </div>
+        <div id="hero-btns">
+          <div class="hero-btn" id="btn-fs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#74ACDF" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+          <div class="hero-btn" id="btn-rep-c"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#74ACDF" stroke-width="2"><path d="m10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div>
+        </div>
+        <div id="hero-quality"></div>
+        <div id="hero-spinner"><div class="spin"></div></div>
+        <div id="hero-err">
+          <span style="font-size:32px;">📡</span>
+          <p>No se pudo cargar la señal.</p>
+          <button id="btn-retry">🔄 Reintentar</button>
+        </div>
+        <div id="hero-placeholder">
+          <span style="font-size:40px;">📺</span>
+          <p>Seleccioná un canal para comenzar</p>
+        </div>
+      </div>
     </div>
 
-    <!-- LIBERTADORES -->
-    <div id="conmebol-libertadores" class="msec active">
-        <div class="sub-tabs verde">
-            <button class="stab active" onclick="cambiarSub('lib','grupos',this)">🏆 Grupos</button>
-            <button class="stab" onclick="cambiarSub('lib','fixture',this)">📅 Fixture</button>
-            <button class="stab" onclick="cambiarSub('lib','posiciones',this)">📊 Posiciones</button>
-            <button class="stab" onclick="cambiarSub('lib','bracket',this)">🥊 Eliminatorias</button>
-        </div>
-        <div id="lib-grupos" class="msec active" style="padding:0;">
-            <div class="grupos-grid" id="lib-grupos-grid" style="padding:0 0 20px;"></div>
-        </div>
-        <div id="lib-fixture" class="msec" style="padding:0;">
-            <div class="ffiltros">
-                <button class="ffiltro active" onclick="filtrarFixture('lib','todos',this)">Todos</button>
-                <button class="ffiltro" onclick="filtrarFixture('lib','ARG',this)">🇦🇷 Argentinos</button>
-                <button class="ffiltro" onclick="filtrarFixture('lib','live',this)">🔴 En Vivo</button>
-            </div>
-            <div id="lib-fixture-list"></div>
-        </div>
-        <div id="lib-posiciones" class="msec" style="padding:0;">
-            <div id="lib-pos-wrap"></div>
-        </div>
-        <div id="lib-bracket" class="msec" style="padding:0;">
-            <div id="lib-bracket-wrap"></div>
-        </div>
+    <!-- Category strip -->
+    <div id="cat-strip">
+      <div class="cat-pill all" onclick="filtrarCat('TODO',this)">▶ TODOS</div>
+      <div class="cat-pill dep" onclick="filtrarCat('DEPORTES',this)">⚽ DEPORTES</div>
+      <div class="cat-pill not" onclick="filtrarCat('NOTICIAS',this)">📰 NOTICIAS</div>
+      <div class="cat-pill aire" onclick="filtrarCat('AIRE',this)">📺 AIRE</div>
+      <div class="cat-pill mus" onclick="filtrarCat('MUSICA',this)">🎵 MÚSICA</div>
+      <div class="cat-pill inf" onclick="filtrarCat('INFANTIL',this)">👦 INFANTIL</div>
+      <div class="cat-pill int" onclick="filtrarCat('INTERNACIONAL',this)">🌐 INTL</div>
     </div>
 
-    <!-- SUDAMERICANA -->
-    <div id="conmebol-sudamericana" class="msec">
-        <div class="sub-tabs naranja">
-            <button class="stab active" onclick="cambiarSub('sud','grupos',this)">🏆 Grupos</button>
-            <button class="stab" onclick="cambiarSub('sud','fixture',this)">📅 Fixture</button>
-            <button class="stab" onclick="cambiarSub('sud','posiciones',this)">📊 Posiciones</button>
-            <button class="stab" onclick="cambiarSub('sud','bracket',this)">🥊 Eliminatorias</button>
-        </div>
-        <div id="sud-grupos" class="msec active" style="padding:0;">
-            <div class="grupos-grid" id="sud-grupos-grid" style="padding:0 0 20px;"></div>
-        </div>
-        <div id="sud-fixture" class="msec" style="padding:0;">
-            <div class="ffiltros">
-                <button class="ffiltro active" onclick="filtrarFixture('sud','todos',this)">Todos</button>
-                <button class="ffiltro" onclick="filtrarFixture('sud','ARG',this)">🇦🇷 Argentinos</button>
-                <button class="ffiltro" onclick="filtrarFixture('sud','live',this)">🔴 En Vivo</button>
-            </div>
-            <div id="sud-fixture-list"></div>
-        </div>
-        <div id="sud-posiciones" class="msec" style="padding:0;">
-            <div id="sud-pos-wrap"></div>
-        </div>
-        <div id="sud-bracket" class="msec" style="padding:0;">
-            <div id="sud-bracket-wrap"></div>
-        </div>
-    </div>
+    <!-- TV body (carruseles) -->
+    <div id="tv-body"></div>
 
-    <!-- RECOPA -->
-    <div id="conmebol-recopa" class="msec">
-        <div class="info-box" style="margin-top:14px">
-            <h3>⭐ Recopa Sudamericana 2027</h3>
-            <p>Se disputará entre el campeón de la Copa Libertadores 2026 y el campeón de la Copa Sudamericana 2026.<br><br>
-            🏆 Final Libertadores: <strong>28 de Noviembre 2026</strong> — Estadio Centenario, Montevideo<br>
-            🟠 Final Sudamericana: <strong>21 de Noviembre 2026</strong> — Por confirmar<br><br>
-            La Recopa se jugará en <strong>2027</strong>.</p>
-        </div>
-    </div>
-</div>
+  </div>
 
-<!-- ═══════ TAB: CHAT ═══════ -->
-<div id="sec-chat" class="section">
-    <div id="chat-wrap">
-        <div id="chat-head">
-            <h3>💬 Tribuna Virtual</h3>
-            <span style="font-size:11px;color:rgba(255,255,255,0.4)">🟢 en vivo</span>
+  <!-- ══ MUNDIAL ══ -->
+  <div id="sec-mundial" class="section">
+    <div class="msec-wrap">
+      <div class="sub-tabs">
+        <div class="stab a" onclick="cambiarSub('mun','grupos',this)">🏆 Grupos</div>
+        <div class="stab" onclick="cambiarSub('mun','fixture',this)">📅 Fixture</div>
+        <div class="stab" onclick="cambiarSub('mun','posiciones',this)">📊 Posiciones</div>
+      </div>
+      <div id="mun-grupos" class="msec a"></div>
+      <div id="mun-fixture" class="msec">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;padding:10px 0 8px;">
+          <button class="stab a" onclick="filtrarFixture('mun','todos',this)">Todos</button>
+          <button class="stab" onclick="filtrarFixture('mun','ARG',this)">🇦🇷 Argentina</button>
+          <button class="stab" onclick="filtrarFixture('mun','live',this)">🔴 En Vivo</button>
+          <button class="stab" onclick="filtrarFixture('mun','hoy',this)">📅 Hoy</button>
         </div>
-        <div id="chat-box">
-            <div id="chat-msgs"></div>
-            <div id="chat-form">
-                <input type="text" id="chat-in" placeholder="Escribí tu mensaje..." maxlength="200" autocomplete="off">
-                <button id="chat-btn">ENVIAR</button>
-            </div>
-        </div>
+        <div id="mun-fixture-list"></div>
+      </div>
+      <div id="mun-posiciones" class="msec"></div>
     </div>
+  </div>
+
+  <!-- ══ CONMEBOL ══ -->
+  <div id="sec-conmebol" class="section">
+    <div class="msec-wrap">
+      <div class="sub-tabs">
+        <div class="stab a" onclick="cambiarConmebol('lib',this)">🏆 Libertadores</div>
+        <div class="stab" onclick="cambiarConmebol('sud',this)">🟠 Sudamericana</div>
+        <div class="stab" onclick="cambiarConmebol('recopa',this)">⭐ Recopa</div>
+      </div>
+      <div id="con-lib" class="msec a">
+        <div class="sub-tabs" style="padding:8px 0;">
+          <div class="stab a" onclick="cambiarSub('lib','grupos',this)">Grupos</div>
+          <div class="stab" onclick="cambiarSub('lib','fixture',this)">Fixture</div>
+          <div class="stab" onclick="cambiarSub('lib','pos',this)">Posiciones</div>
+        </div>
+        <div id="lib-grupos" class="msec a"></div>
+        <div id="lib-fixture" class="msec"><div id="lib-fixture-list"></div></div>
+        <div id="lib-pos" class="msec"></div>
+      </div>
+      <div id="con-sud" class="msec">
+        <div class="sub-tabs" style="padding:8px 0;">
+          <div class="stab a" onclick="cambiarSub('sud','grupos',this)">Grupos</div>
+          <div class="stab" onclick="cambiarSub('sud','fixture',this)">Fixture</div>
+          <div class="stab" onclick="cambiarSub('sud','pos',this)">Posiciones</div>
+        </div>
+        <div id="sud-grupos" class="msec a"></div>
+        <div id="sud-fixture" class="msec"><div id="sud-fixture-list"></div></div>
+        <div id="sud-pos" class="msec"></div>
+      </div>
+      <div id="con-recopa" class="msec">
+        <div style="background:var(--card);border:1px solid rgba(116,172,223,0.15);border-radius:var(--rad);padding:20px;margin-top:12px;text-align:center;">
+          <div style="font-size:32px;margin-bottom:10px;">⭐</div>
+          <div style="font-size:15px;font-weight:700;color:var(--dor);margin-bottom:8px;">Recopa Sudamericana 2027</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;">Se disputará entre el campeón de la Libertadores 2026 y el campeón de la Sudamericana 2026.<br><br>
+          🏆 Final Libertadores: <strong style="color:var(--txt);">28 Nov 2026</strong><br>
+          🟠 Final Sudamericana: <strong style="color:var(--txt);">21 Nov 2026</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ CHAT ══ -->
+  <div id="sec-chat" class="section" style="display:flex;flex-direction:column;height:calc(100vh - 170px);">
+    <div id="chat-msgs"></div>
+    <div id="chat-form">
+      <input type="text" id="chat-in" placeholder="Escribí tu mensaje..." maxlength="200" autocomplete="off">
+      <button id="chat-btn">ENVIAR</button>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- Bottom nav -->
+<div id="bnav">
+  <div class="bi" onclick="cambiarTab('tv',null);setNavActive(0)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" id="bnav-icon-0"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <div class="bl a" id="bnav-lbl-0">Inicio</div>
+  </div>
+  <div class="bi" onclick="abrirBusqueda()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-1"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <div class="bl" id="bnav-lbl-1">Buscar</div>
+  </div>
+  <div class="bi" onclick="cambiarTab('tv',null);filtrarCat('FAV',null);setNavActive(2)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <div class="bl" id="bnav-lbl-2">Favoritos</div>
+  </div>
+  <div class="bi" onclick="abrirFiltrosPais()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-3"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <div class="bl" id="bnav-lbl-3">País</div>
+  </div>
+  <div class="bi" onclick="cambiarTab('chat',null);setNavActive(4)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-4"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <div class="bl" id="bnav-lbl-4">Tribuna</div>
+  </div>
 </div>
 
 <div id="toast"></div>
 <button id="btn-instalar">📲 Instalar App</button>
 <div id="ios-banner">
-    <button id="ios-close">✕</button>
-    <p>Para instalar en iPhone/iPad:<br>Tocá <strong>Compartir</strong> (□↑) → <strong>Agregar a pantalla de inicio</strong></p>
+  <button id="ios-close">✕</button>
+  <p>Para instalar: tocá <strong>Compartir</strong> → <strong>Agregar a pantalla de inicio</strong></p>
 </div>
 
 <script>
@@ -413,396 +432,615 @@ firebase.initializeApp({ databaseURL: "https://mundialenvivo-default-rtdb.fireba
 const db = firebase.database();
 
 // ── Estado ────────────────────────────────────────────────────────────────
-let miNick = localStorage.getItem("mnv_nick") || "";
-let hlsInstance = null, canalActivo = null, urlActual = "";
-let todosCanales = [], mundialPartidos = [], libPartidos = [], sudPartidos = [];
-let libGrupos = {}, sudGrupos = {};
-let filtros = { mundial:"todos", lib:"todos", sud:"todos" };
+let miNick       = localStorage.getItem("mnv_nick") || "";
+let todosCanales = [];
+let favoritos    = JSON.parse(localStorage.getItem("mnv_favs") || "[]");
+let historial    = JSON.parse(localStorage.getItem("mnv_hist") || "[]");
+let hlsInstance  = null;
+let canalActivo  = null;
+let urlActual    = "";
+let fbActual     = [];
+let catActual    = "TODO";
+let mundialData  = [];
+let filtMundial  = "todos";
+const LOGO_DEF   = "https://cdn-icons-png.flaticon.com/512/716/716429.png";
 
 // ── Toast ─────────────────────────────────────────────────────────────────
-function toast(msg, t=3000) {
-    const el = document.getElementById("toast");
-    el.textContent = msg; el.classList.add("show");
-    setTimeout(()=>el.classList.remove("show"), t);
-}
-
-// ── Tabs ──────────────────────────────────────────────────────────────────
-function cambiarTab(tab, btn) {
-    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
-    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-    document.getElementById("sec-"+tab).classList.add("active");
-    btn.classList.add("active");
-}
-
-function cambiarSub(prefix, sec, btn) {
-    const contenedor = prefix === "mundial" ? document.getElementById("sec-mundial") :
-                       prefix === "lib"     ? document.getElementById("conmebol-libertadores") :
-                                              document.getElementById("conmebol-sudamericana");
-    contenedor.querySelectorAll(".msec").forEach(s=>s.classList.remove("active"));
-    contenedor.querySelectorAll(".stab").forEach(b=>b.classList.remove("active"));
-    document.getElementById(prefix+"-"+sec).classList.add("active");
-    btn.classList.add("active");
-}
-
-function cambiarConmebol(torneo, btn) {
-    document.querySelectorAll("#sec-conmebol > .msec").forEach(s=>s.classList.remove("active"));
-    document.querySelectorAll("#conmebol-tabs .stab").forEach(b=>b.classList.remove("active"));
-    document.getElementById("conmebol-"+torneo).classList.add("active");
-    btn.classList.add("active");
+function toast(msg, t=2800) {
+  const el = document.getElementById("toast");
+  el.textContent = msg; el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), t);
 }
 
 // ── Modal apodo ───────────────────────────────────────────────────────────
-if (miNick) { document.getElementById("modal-nick").style.display="none"; document.getElementById("user-name").textContent=miNick; }
+if (miNick) {
+  document.getElementById("modal-nick").style.display = "none";
+  document.getElementById("user-badge").textContent = miNick.slice(0,2).toUpperCase();
+}
 document.getElementById("nick-btn").onclick = () => {
-    const n = document.getElementById("nick-in").value.trim(); if (!n) return;
-    localStorage.setItem("mnv_nick",n); miNick=n;
-    document.getElementById("modal-nick").style.display="none";
-    document.getElementById("user-name").textContent=n;
-    toast("¡Bienvenido "+n+"! ⚽");
+  const n = document.getElementById("nick-in").value.trim();
+  if (!n) return;
+  localStorage.setItem("mnv_nick", n); miNick = n;
+  document.getElementById("modal-nick").style.display = "none";
+  document.getElementById("user-badge").textContent = n.slice(0,2).toUpperCase();
+  toast("¡Bienvenido " + n + "! ⚽");
 };
-document.getElementById("nick-in").addEventListener("keydown",e=>{ if(e.key==="Enter") document.getElementById("nick-btn").click(); });
-document.getElementById("user-badge").onclick = () => { if(confirm("¿Cambiar apodo?")){ localStorage.removeItem("mnv_nick"); location.reload(); } };
+document.getElementById("nick-in").addEventListener("keydown", e => { if(e.key==="Enter") document.getElementById("nick-btn").click(); });
+document.getElementById("user-badge").onclick = () => { if(confirm("¿Cambiar apodo?")) { localStorage.removeItem("mnv_nick"); location.reload(); } };
+
+// ── Tabs ──────────────────────────────────────────────────────────────────
+function cambiarTab(tab, btn) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("a"));
+  document.querySelectorAll(".ntab").forEach(b => b.classList.remove("a"));
+  document.getElementById("sec-" + tab).classList.add("a");
+  if (btn) btn.classList.add("a");
+  else {
+    const idx = {tv:0,mundial:1,conmebol:2,chat:3}[tab];
+    if (idx !== undefined) document.querySelectorAll(".ntab")[idx]?.classList.add("a");
+  }
+  if (tab === "chat") {
+    document.getElementById("main").style.overflow = "hidden";
+    document.getElementById("sec-chat").style.height = "calc(100vh - 170px)";
+  } else {
+    document.getElementById("main").style.overflow = "auto";
+  }
+}
+
+function cambiarSub(prefix, sec, btn) {
+  const parent = btn?.closest(".msec-wrap") || document.getElementById("sec-" + (prefix==="mun"?"mundial":"conmebol"));
+  if (!parent) return;
+  const zone = prefix === "mun" ? parent : btn?.closest(".msec")?.parentElement || parent;
+  zone.querySelectorAll(":scope > .msec").forEach(s => s.classList.remove("a"));
+  zone.querySelectorAll(":scope > .sub-tabs .stab, :scope > div > .sub-tabs .stab").forEach(b => b.classList.remove("a"));
+  const el = document.getElementById(prefix + "-" + sec);
+  if (el) el.classList.add("a");
+  if (btn) btn.classList.add("a");
+}
+
+function cambiarConmebol(torneo, btn) {
+  document.querySelectorAll("#sec-conmebol .msec-wrap > .msec").forEach(s => s.classList.remove("a"));
+  document.querySelectorAll("#sec-conmebol .msec-wrap > .sub-tabs .stab").forEach(b => b.classList.remove("a"));
+  document.getElementById("con-" + torneo)?.classList.add("a");
+  if (btn) btn.classList.add("a");
+}
+
+function setNavActive(idx) {
+  for (let i=0; i<5; i++) {
+    const lbl = document.getElementById("bnav-lbl-" + i);
+    const ico = document.getElementById("bnav-icon-" + i);
+    if (lbl) lbl.classList.toggle("a", i === idx);
+    if (ico) ico.setAttribute("stroke", i === idx ? "#C5A059" : "#6b7fa0");
+  }
+}
+
+// ── Search ────────────────────────────────────────────────────────────────
+document.getElementById("btn-srch-toggle").onclick = abrirBusqueda;
+function abrirBusqueda() {
+  const bar = document.getElementById("srch-bar");
+  bar.style.display = bar.style.display === "none" ? "block" : "none";
+  if (bar.style.display === "block") {
+    document.getElementById("srch-input").focus();
+    setNavActive(1);
+  }
+}
+document.getElementById("srch-input").addEventListener("input", function() {
+  const q = this.value.trim().toLowerCase();
+  if (!q) { renderTV(); return; }
+  const res = todosCanales.filter(c => c.nombre.toLowerCase().includes(q));
+  renderSearchResults(res);
+});
+
+function renderSearchResults(lista) {
+  const body = document.getElementById("tv-body");
+  body.innerHTML = "";
+  if (!lista.length) { body.innerHTML = '<p style="color:var(--muted);text-align:center;padding:30px;">Sin resultados</p>'; return; }
+  const wrap = document.createElement("div");
+  wrap.id = "srch-results";
+  lista.forEach(c => {
+    const item = document.createElement("div");
+    item.className = "srch-item";
+    item.innerHTML = `<div class="srch-thumb"><img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}"></div><div class="srch-info"><div class="srch-name">${c.nombre}</div><div class="srch-cat">${c.categoria||""}</div></div><div class="srch-play"><div class="ptri"></div></div>`;
+    item.onclick = () => reproducir(c.url, c.nombre, c.fallbacks||[]);
+    wrap.appendChild(item);
+  });
+  body.appendChild(wrap);
+}
 
 // ── Player ────────────────────────────────────────────────────────────────
-const videoEl=document.getElementById("video-el"), iframeEl=document.getElementById("iframe-el");
-const spinner=document.getElementById("spinner"), playerErr=document.getElementById("player-err");
-const qualityEl=document.getElementById("quality-sel");
-function mostrarSpinner(v){spinner.style.display=v?"flex":"none";}
-function mostrarError(v){playerErr.style.display=v?"flex":"none";}
+const videoEl   = document.getElementById("video-el");
+const iframeEl  = document.getElementById("iframe-el");
+const spinner   = document.getElementById("hero-spinner");
+const playerErr = document.getElementById("hero-err");
+const placeholder = document.getElementById("hero-placeholder");
+const heroBadge = document.getElementById("hero-badge");
+const heroInfo  = document.getElementById("hero-info");
+const heroCanal = document.getElementById("hero-canal");
+const heroSub   = document.getElementById("hero-sub");
+const qualityEl = document.getElementById("hero-quality");
 
-function reproducir(url, nombre, fallbacks) {
-    if (!url){toast("⚠️ Sin señal disponible");return;}
-    canalActivo=nombre; urlActual=url;
-    intentarPlay([url,...(fallbacks||[]).filter(u=>u!==url)],0,nombre);
-    cambiarTab("tv", document.querySelector(".tab-btn"));
+function mostrarSpinner(v) { spinner.style.display = v ? "flex" : "none"; }
+function mostrarError(v)   { playerErr.style.display = v ? "flex" : "none"; }
+
+function reproducir(url, nombre, fallbacks=[]) {
+  if (!url) { toast("⚠️ Sin señal disponible"); return; }
+  canalActivo = nombre; urlActual = url; fbActual = fallbacks;
+  placeholder.style.display = "none";
+  heroBadge.style.display = "block";
+  heroInfo.style.display = "block";
+  heroCanal.textContent = nombre;
+  heroSub.textContent = "Cargando...";
+  agregarHistorial(nombre, url, fallbacks);
+  document.getElementById("player-hero").scrollIntoView({ behavior: "smooth", block: "start" });
+  intentarPlay([url, ...fallbacks.filter(u => u !== url)], 0, nombre);
 }
 
 function intentarPlay(urls, idx, nombre) {
-    if (idx>=urls.length){mostrarSpinner(false);mostrarError(true);toast("❌ Sin señal para "+nombre);return;}
-    const url=urls[idx];
-    mostrarError(false); mostrarSpinner(true);
-    qualityEl.innerHTML=""; qualityEl.style.display="none";
-    document.getElementById("canal-activo").textContent=nombre;
-    document.getElementById("calidad-badge").textContent="...";
-    if(idx>0) toast("🔄 Probando fuente "+(idx+1)+"...");
+  if (idx >= urls.length) { mostrarSpinner(false); mostrarError(true); toast("❌ Sin señal para " + nombre); return; }
+  const url = urls[idx];
+  mostrarError(false); mostrarSpinner(true);
+  qualityEl.innerHTML = ""; qualityEl.style.display = "none";
+  heroSub.textContent = idx > 0 ? "Probando fuente " + (idx+1) + "..." : "En vivo";
+  if (idx > 0) toast("🔄 Probando fuente " + (idx+1) + "...");
 
-    if(url.includes("youtube")||url.includes("nocookie")||url.includes("embed")||url.includes(".php")){
-        videoEl.style.display="none"; iframeEl.style.display="block"; iframeEl.src=url;
-        mostrarSpinner(false); document.getElementById("calidad-badge").textContent="LIVE"; return;
-    }
-    videoEl.style.display="block"; iframeEl.style.display="none"; iframeEl.src="";
-    if(hlsInstance){hlsInstance.destroy();hlsInstance=null;}
+  if (url.includes("youtube") || url.includes("nocookie") || url.includes("embed") || url.includes(".php") || url.includes("bolaloca")) {
+    videoEl.style.display = "none"; iframeEl.style.display = "block"; iframeEl.src = url;
+    mostrarSpinner(false); heroSub.textContent = "En vivo"; return;
+  }
 
-    if(Hls.isSupported()){
-        const hls=new Hls({enableWorker:true,lowLatencyMode:true,maxBufferLength:20});
-        hlsInstance=hls; hls.loadSource(url); hls.attachMedia(videoEl);
-        hls.on(Hls.Events.MANIFEST_PARSED,(e,data)=>{
-            mostrarSpinner(false); videoEl.play().catch(()=>{});
-            if(data.levels&&data.levels.length>1){
-                qualityEl.style.display="flex";
-                qualityEl.innerHTML='<span style="font-size:11px;color:rgba(255,255,255,0.4);padding:4px 8px;">Calidad:</span>';
-                const btnA=document.createElement("button"); btnA.textContent="Auto"; btnA.classList.add("active");
-                btnA.onclick=()=>{hls.currentLevel=-1;document.querySelectorAll("#quality-sel button").forEach(b=>b.classList.remove("active"));btnA.classList.add("active");document.getElementById("calidad-badge").textContent="Auto";};
-                qualityEl.appendChild(btnA);
-                data.levels.forEach((lv,i)=>{
-                    const label=lv.height?lv.height+"p":"Nivel "+i;
-                    const btn=document.createElement("button"); btn.textContent=label;
-                    btn.onclick=()=>{hls.currentLevel=i;document.querySelectorAll("#quality-sel button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.getElementById("calidad-badge").textContent=label;};
-                    qualityEl.appendChild(btn);
-                });
-                document.getElementById("calidad-badge").textContent="Auto";
-            } else { document.getElementById("calidad-badge").textContent=data.levels[0]?.height?data.levels[0].height+"p":"HD"; }
+  videoEl.style.display = "block"; iframeEl.style.display = "none"; iframeEl.src = "";
+  if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
+
+  if (Hls.isSupported()) {
+    const hls = new Hls({ enableWorker: true, lowLatencyMode: true, maxBufferLength: 20 });
+    hlsInstance = hls; hls.loadSource(url); hls.attachMedia(videoEl);
+    hls.on(Hls.Events.MANIFEST_PARSED, (e, data) => {
+      mostrarSpinner(false); heroSub.textContent = "En vivo"; videoEl.play().catch(()=>{});
+      if (data.levels && data.levels.length > 1) {
+        qualityEl.style.display = "flex";
+        const btnA = document.createElement("div"); btnA.className = "q-btn a"; btnA.textContent = "Auto";
+        btnA.onclick = () => { hls.currentLevel = -1; qualityEl.querySelectorAll(".q-btn").forEach(b=>b.classList.remove("a")); btnA.classList.add("a"); };
+        qualityEl.appendChild(btnA);
+        data.levels.forEach((lv, i) => {
+          const btn = document.createElement("div"); btn.className = "q-btn";
+          btn.textContent = lv.height ? lv.height + "p" : "Nivel " + i;
+          btn.onclick = () => { hls.currentLevel = i; qualityEl.querySelectorAll(".q-btn").forEach(b=>b.classList.remove("a")); btn.classList.add("a"); };
+          qualityEl.appendChild(btn);
         });
-        hls.on(Hls.Events.ERROR,(e,data)=>{if(data.fatal){hls.destroy();hlsInstance=null;setTimeout(()=>intentarPlay(urls,idx+1,nombre),800);}});
-        videoEl.addEventListener("waiting",()=>mostrarSpinner(true),{once:false});
-        videoEl.addEventListener("playing",()=>mostrarSpinner(false),{once:false});
-    } else if(videoEl.canPlayType("application/vnd.apple.mpegurl")){
-        videoEl.src=url;
-        videoEl.addEventListener("loadedmetadata",()=>{mostrarSpinner(false);videoEl.play().catch(()=>{});},{once:true});
-        videoEl.addEventListener("error",()=>{setTimeout(()=>intentarPlay(urls,idx+1,nombre),800);},{once:true});
-    } else { mostrarSpinner(false); mostrarError(true); }
-}
-
-document.getElementById("btn-retry").onclick=()=>{if(urlActual&&canalActivo)reproducir(urlActual,canalActivo);};
-document.getElementById("btn-fs").onclick=()=>{const box=document.getElementById("player-box");if(!document.fullscreenElement)box.requestFullscreen().catch(()=>{});else document.exitFullscreen();};
-
-// ── Canales ───────────────────────────────────────────────────────────────
-const LOGO_DEFAULT="https://cdn-icons-png.flaticon.com/512/716/716429.png";
-db.ref("canales").on("value",snap=>{
-    const data=snap.val(); if(!data) return;
-    const lista=data.canales?data.canales:data;
-    todosCanales=Object.keys(lista).map(id=>({id,...lista[id]}));
-    renderCanales(todosCanales);
-});
-function renderCanales(lista){
-    const el=document.getElementById("channel-list"); el.innerHTML="";
-    if(!lista||lista.length===0){el.innerHTML='<p style="color:rgba(255,255,255,0.3);grid-column:1/-1;text-align:center;padding:20px;">No hay canales</p>';return;}
-    lista.forEach(c=>{
-        const card=document.createElement("div"); card.className="ch-card";
-        card.setAttribute("data-cat",(c.categoria||"GENERAL").toUpperCase());
-        card.innerHTML=`<div class="live-dot"></div><img src="${c.logo||LOGO_DEFAULT}" alt="${c.nombre}" onerror="this.src='${LOGO_DEFAULT}'"><div class="ch-name">${c.nombre}</div>`;
-        card.onclick=()=>{document.querySelectorAll(".ch-card").forEach(x=>x.classList.remove("active"));card.classList.add("active");reproducir(c.url,c.nombre,c.fallbacks||[]);document.getElementById("player-box").scrollIntoView({behavior:"smooth",block:"start"});};
-        el.appendChild(card);
+      }
     });
+    hls.on(Hls.Events.ERROR, (e, data) => { if(data.fatal) { hls.destroy(); hlsInstance = null; setTimeout(()=>intentarPlay(urls,idx+1,nombre),800); } });
+    videoEl.addEventListener("waiting", () => mostrarSpinner(true), { once: false });
+    videoEl.addEventListener("playing", () => mostrarSpinner(false), { once: false });
+  } else if (videoEl.canPlayType("application/vnd.apple.mpegurl")) {
+    videoEl.src = url;
+    videoEl.addEventListener("loadedmetadata", () => { mostrarSpinner(false); videoEl.play().catch(()=>{}); }, { once: true });
+    videoEl.addEventListener("error", () => { setTimeout(()=>intentarPlay(urls,idx+1,nombre),800); }, { once: true });
+  } else { mostrarSpinner(false); mostrarError(true); }
 }
-function filtrar(cat,btn){
-    document.querySelectorAll(".btn-f").forEach(b=>b.classList.remove("active")); if(btn)btn.classList.add("active");
-    renderCanales(cat==="TODO"?todosCanales:todosCanales.filter(c=>(c.categoria||"GENERAL").toUpperCase()===cat));
+
+document.getElementById("btn-retry").onclick = () => { if(urlActual && canalActivo) reproducir(urlActual, canalActivo, fbActual); };
+document.getElementById("btn-fs").onclick = () => {
+  const box = document.getElementById("player-hero");
+  if (!document.fullscreenElement) box.requestFullscreen?.().catch(()=>{});
+  else document.exitFullscreen?.();
+};
+document.getElementById("btn-rep-c").onclick = () => {
+  if (!canalActivo) { toast("⚠️ Primero seleccioná un canal"); return; }
+  db.ref("reportes").push({ canal: canalActivo, usuario: miNick || "anónimo", fecha: firebase.database.ServerValue.TIMESTAMP });
+  toast("✅ Reporte enviado");
+};
+
+// ── Favoritos ────────────────────────────────────────────────────────────
+function esFavorito(nombre) { return favoritos.includes(nombre); }
+function toggleFav(nombre) {
+  if (esFavorito(nombre)) { favoritos = favoritos.filter(f => f !== nombre); toast("⭐ Quitado de favoritos"); }
+  else { favoritos.unshift(nombre); if(favoritos.length > 20) favoritos.pop(); toast("⭐ Agregado a favoritos"); }
+  localStorage.setItem("mnv_favs", JSON.stringify(favoritos));
+  renderTV();
 }
 
-// ── Mundial partidos ──────────────────────────────────────────────────────
-db.ref("partidos").on("value",snap=>{
-    const data=snap.val(); if(!data) return;
-    mundialPartidos=Object.entries(data).map(([id,p])=>({id,...p}));
-    renderFixtureStrip(mundialPartidos);
-    renderMundialGrupos(mundialPartidos);
-    renderFixtureList("mundial-fixture-list", mundialPartidos, filtros.mundial, "mundial");
-    renderPosiciones("mundial-pos-wrap", mundialPartidos, "mundial");
+// ── Historial ─────────────────────────────────────────────────────────────
+function agregarHistorial(nombre, url, fallbacks) {
+  historial = historial.filter(h => h.nombre !== nombre);
+  historial.unshift({ nombre, url, fallbacks, ts: Date.now() });
+  if (historial.length > 10) historial.pop();
+  localStorage.setItem("mnv_hist", JSON.stringify(historial));
+}
+
+function tiempoRelativo(ts) {
+  const m = Math.floor((Date.now() - ts) / 60000);
+  if (m < 1) return "Hace un momento";
+  if (m < 60) return "Hace " + m + " min";
+  const h = Math.floor(m / 60);
+  if (h < 24) return "Hace " + h + "h";
+  return "Ayer";
+}
+
+// ── Canales desde Firebase ────────────────────────────────────────────────
+db.ref("canales").on("value", snap => {
+  const data = snap.val(); if (!data) return;
+  const raw = data.canales ? data.canales : data;
+  todosCanales = Object.keys(raw).map(id => ({ id, ...raw[id] }));
+  renderTV();
 });
 
-// ── Libertadores ──────────────────────────────────────────────────────────
-db.ref("libertadores").on("value",snap=>{
-    const data=snap.val(); if(!data) return;
-    libGrupos=data.grupos||{};
-    libPartidos=data.partidos?Object.entries(data.partidos).map(([id,p])=>({id,...p})):[];
-    renderGruposConmebol("lib-grupos-grid",libGrupos,"lib");
-    renderFixtureList("lib-fixture-list",libPartidos,filtros.lib,"lib");
-    renderPosiciones("lib-pos-wrap",libPartidos,"lib");
-    renderBracket("lib-bracket-wrap",data.bracket||{},"lib");
-});
+// ── Filtrar por categoría ─────────────────────────────────────────────────
+function filtrarCat(cat, btn) {
+  catActual = cat;
+  document.querySelectorAll(".cat-pill").forEach(p => {
+    const cls = p.classList[1];
+    const map = { all:"TODO", dep:"DEPORTES", not:"NOTICIAS", aire:"AIRE", mus:"MUSICA", inf:"INFANTIL", int:"INTERNACIONAL" };
+    p.classList.toggle("active-pill", map[cls] === cat);
+  });
+  renderTV();
+}
 
-// ── Sudamericana ──────────────────────────────────────────────────────────
-db.ref("sudamericana").on("value",snap=>{
-    const data=snap.val(); if(!data) return;
-    sudGrupos=data.grupos||{};
-    sudPartidos=data.partidos?Object.entries(data.partidos).map(([id,p])=>({id,...p})):[];
-    renderGruposConmebol("sud-grupos-grid",sudGrupos,"sud");
-    renderFixtureList("sud-fixture-list",sudPartidos,filtros.sud,"sud");
-    renderPosiciones("sud-pos-wrap",sudPartidos,"sud");
-    renderBracket("sud-bracket-wrap",data.bracket||{},"sud");
-});
+// ── Render TV ─────────────────────────────────────────────────────────────
+function renderTV() {
+  const body = document.getElementById("tv-body");
+  body.innerHTML = "";
 
-// ── Fixture strip ─────────────────────────────────────────────────────────
-function renderFixtureStrip(partidos) {
-    const wrap=document.getElementById("fixture-wrap");
-    const hoy=new Date().toISOString().slice(0,10);
-    const lista=partidos.filter(p=>p.estado==="LIVE"||(p.fecha&&p.fecha.startsWith(hoy)));
-    const mostrar=lista.length>0?lista:partidos.slice(0,5);
-    if(!mostrar.length){wrap.innerHTML='<span style="color:rgba(255,255,255,0.3);font-size:12px;padding:4px 0;">⏳ Partidos de hoy aparecen aquí</span>';return;}
-    wrap.innerHTML="";
-    mostrar.forEach(p=>{
-        const estClass=p.estado==="LIVE"?"est-live":p.estado==="FIN"?"est-fin":"est-pronto";
-        const card=document.createElement("div"); card.className="partido-mini";
-        card.innerHTML=`<span class="${estClass}">${p.estado==="LIVE"?"🔴 EN VIVO":p.estado||"PRÓXIMO"}</span><div style="font-size:14px;font-weight:bold">${p.bandera_local||""} ${p.goles_local??""} - ${p.goles_visitante??""} ${p.bandera_visitante||""}</div><div style="font-size:10px;color:rgba(255,255,255,0.6)">${p.local} vs ${p.visitante}</div><div style="font-size:10px;color:rgba(255,255,255,0.4)">${p.hora||""}</div>`;
-        card.onclick=()=>cambiarTab("mundial",document.querySelectorAll(".tab-btn")[1]);
-        wrap.appendChild(card);
+  let lista = todosCanales;
+  if (catActual !== "TODO") {
+    if (catActual === "FAV") lista = todosCanales.filter(c => esFavorito(c.nombre));
+    else lista = todosCanales.filter(c => (c.categoria||"").toUpperCase() === catActual);
+  }
+
+  if (catActual !== "TODO") {
+    // Vista de grilla al filtrar por categoría
+    renderGrillaCanales(body, lista, catActual);
+    return;
+  }
+
+  // Vista principal — carruseles por sección
+
+  // Favoritos
+  const favsList = todosCanales.filter(c => esFavorito(c.nombre));
+  if (favsList.length > 0) {
+    const sec = crearSeccion("⭐ Mis favoritos", null, favsList.length, "FAV");
+    const strip = document.createElement("div"); strip.className = "fav-strip";
+    favsList.forEach(c => {
+      const pill = document.createElement("div"); pill.className = "fav-pill" + (canalActivo===c.nombre?" a":"");
+      pill.innerHTML = `<div class="fdot"></div><div class="fname">${c.nombre}</div>`;
+      pill.onclick = () => reproducir(c.url, c.nombre, c.fallbacks||[]);
+      strip.appendChild(pill);
     });
+    const addPill = document.createElement("div"); addPill.className = "fav-pill add"; addPill.textContent = "+ Agregar";
+    addPill.onclick = () => { filtrarCat("TODO", null); toast("Tocá ❤️ en cualquier canal para agregar"); };
+    strip.appendChild(addPill);
+    sec.appendChild(strip); body.appendChild(sec);
+  }
+
+  // Deportes — carrusel pequeño
+  const deps = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "DEPORTES");
+  if (deps.length) {
+    const sec = crearSeccion("⚽ Deportes", "var(--dep)", deps.length, "DEPORTES");
+    sec.appendChild(crearCarruselSm(deps));
+    body.appendChild(sec);
+  }
+
+  // Noticias — carrusel grande
+  const nots = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "NOTICIAS");
+  if (nots.length) {
+    const sec = crearSeccion("📰 Noticias", "var(--cel)", nots.length, "NOTICIAS");
+    sec.appendChild(crearCarruselLg(nots));
+    body.appendChild(sec);
+  }
+
+  // Aire — carrusel pequeño
+  const aire = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "AIRE");
+  if (aire.length) {
+    const sec = crearSeccion("📺 Canales de Aire", "var(--aire)", aire.length, "AIRE");
+    sec.appendChild(crearCarruselSm(aire));
+    body.appendChild(sec);
+  }
+
+  // Internacional — carrusel grande
+  const intl = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "INTERNACIONAL");
+  if (intl.length) {
+    const sec = crearSeccion("🌐 Internacional", "var(--int)", intl.length, "INTERNACIONAL");
+    sec.appendChild(crearCarruselLg(intl));
+    body.appendChild(sec);
+  }
+
+  // Infantil + Música — grid 2 col
+  const inf = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "INFANTIL");
+  const mus = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
+  if (inf.length || mus.length) {
+    const grid = document.createElement("div"); grid.className = "grid2";
+    if (inf.length) { const col = crearGrid2Col("👦 Infantil", "var(--inf)", inf.slice(0,5)); grid.appendChild(col); }
+    if (mus.length) { const col = crearGrid2Col("🎵 Música", "var(--mus)", mus.slice(0,5)); grid.appendChild(col); }
+    body.appendChild(grid);
+  }
+
+  // Historial
+  if (historial.length > 0) {
+    const sec = crearSeccion("🕐 Visto recientemente", null, null, null);
+    historial.slice(0, 5).forEach(h => {
+      const row = document.createElement("div"); row.className = "hist-row";
+      const canal = todosCanales.find(c => c.nombre === h.nombre);
+      const logo = canal?.logo || LOGO_DEF;
+      row.innerHTML = `<div class="h-thumb"><img src="${logo}" onerror="this.src='${LOGO_DEF}'" alt="${h.nombre}"></div><div class="h-info"><div class="h-name">${h.nombre}</div><div class="h-time">${tiempoRelativo(h.ts)}</div></div><div class="h-play"><div class="ptri"></div></div>`;
+      row.onclick = () => reproducir(h.url, h.nombre, h.fallbacks||[]);
+      sec.appendChild(row);
+    });
+    body.appendChild(sec);
+  }
+
+  // Padding bottom
+  const pad = document.createElement("div"); pad.style.height = "20px";
+  body.appendChild(pad);
 }
 
-// ── Render fixture list ───────────────────────────────────────────────────
+function crearSeccion(titulo, color, count, cat) {
+  const sec = document.createElement("div"); sec.className = "row-sec";
+  const hdr = document.createElement("div"); hdr.className = "row-hdr";
+  const t = document.createElement("div"); t.className = "row-title";
+  if (color) t.style.color = color;
+  t.textContent = titulo + (count ? "" : "");
+  hdr.appendChild(t);
+  if (cat && count) {
+    const ver = document.createElement("div"); ver.className = "row-ver";
+    ver.textContent = "Ver todos (" + count + ")";
+    ver.onclick = () => filtrarCat(cat, null);
+    hdr.appendChild(ver);
+  }
+  sec.appendChild(hdr);
+  return sec;
+}
+
+function crearCarruselSm(lista) {
+  const car = document.createElement("div"); car.className = "car-sm";
+  lista.slice(0, 20).forEach(c => {
+    const item = document.createElement("div"); item.className = "ch-sm";
+    const logo = document.createElement("div"); logo.className = "ch-sm-logo" + (canalActivo===c.nombre?" a":"");
+    logo.innerHTML = `<img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}"><div class="ldot"></div>`;
+    const name = document.createElement("div"); name.className = "ch-sm-name"; name.textContent = c.nombre;
+    item.appendChild(logo); item.appendChild(name);
+    item.onclick = () => { reproducir(c.url, c.nombre, c.fallbacks||[]); renderTV(); };
+    car.appendChild(item);
+  });
+  return car;
+}
+
+function crearCarruselLg(lista) {
+  const car = document.createElement("div"); car.className = "car-lg";
+  lista.slice(0, 15).forEach(c => {
+    const item = document.createElement("div"); item.className = "ch-lg" + (canalActivo===c.nombre?" a":"");
+    item.innerHTML = `
+      <div class="ch-lg-img">
+        <img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}">
+        <div class="ch-lg-live">EN VIVO</div>
+      </div>
+      <div class="ch-lg-info">
+        <div class="ch-lg-name">${c.nombre}</div>
+        <div class="ch-lg-cat">${c.categoria||""}</div>
+      </div>`;
+    item.onclick = () => { reproducir(c.url, c.nombre, c.fallbacks||[]); renderTV(); };
+    car.appendChild(item);
+  });
+  return car;
+}
+
+function crearGrid2Col(titulo, color, lista) {
+  const col = document.createElement("div"); col.className = "grid2-col";
+  const t = document.createElement("div"); t.className = "grid2-title"; t.style.color = color; t.textContent = titulo;
+  col.appendChild(t);
+  lista.forEach(c => {
+    const row = document.createElement("div"); row.className = "grid2-row";
+    row.innerHTML = `<div class="grid2-thumb"><img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}"></div><div class="grid2-name">${c.nombre}</div>`;
+    row.onclick = () => reproducir(c.url, c.nombre, c.fallbacks||[]);
+    col.appendChild(row);
+  });
+  return col;
+}
+
+function renderGrillaCanales(container, lista, cat) {
+  if (!lista.length) { container.innerHTML = '<p style="color:var(--muted);text-align:center;padding:30px;">No hay canales en esta categoría</p>'; return; }
+  const wrap = document.createElement("div"); wrap.style.cssText = "display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px;padding:10px 14px 80px;";
+  lista.forEach(c => {
+    const card = document.createElement("div");
+    card.style.cssText = "background:var(--card);border-radius:var(--rad);padding:10px 6px;text-align:center;cursor:pointer;border:1.5px solid " + (canalActivo===c.nombre?"var(--dor)":"rgba(116,172,223,0.15)") + ";display:flex;flex-direction:column;align-items:center;gap:5px;";
+    card.innerHTML = `<div class="ldot" style="position:static;"></div><img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}" style="width:44px;height:44px;object-fit:contain;border-radius:6px;"><div style="font-size:10px;font-weight:600;line-height:1.2;">${c.nombre}</div>`;
+    card.onclick = () => { reproducir(c.url, c.nombre, c.fallbacks||[]); renderGrillaCanales(container, lista, cat); };
+    wrap.appendChild(card);
+  });
+  container.appendChild(wrap);
+}
+
+// ── Filtro país ───────────────────────────────────────────────────────────
+function abrirFiltrosPais() {
+  const paises = [...new Set(todosCanales.map(c => c.pais).filter(Boolean))].sort();
+  if (!paises.length) { toast("ℹ️ Próximamente filtro por país"); return; }
+  // Simple toast por ahora
+  toast("🌐 " + paises.slice(0,5).join(", ") + "...");
+}
+
+// ── Mundial ───────────────────────────────────────────────────────────────
+db.ref("partidos").on("value", snap => {
+  const data = snap.val(); if (!data) return;
+  mundialData = Object.entries(data).map(([id,p]) => ({id,...p}));
+  renderMundialGrupos();
+  renderFixture("mun", mundialData, filtMundial);
+  renderPosicionesTabla("mun-posiciones", mundialData);
+});
+
+function renderMundialGrupos() {
+  const el = document.getElementById("mun-grupos"); el.innerHTML = "";
+  const equipos = {};
+  mundialData.forEach(p => {
+    if (!p.grupo) return;
+    [p.local, p.visitante].forEach((eq,i) => {
+      if (!eq) return;
+      if (!equipos[eq]) equipos[eq] = {nombre:eq,grupo:p.grupo,pj:0,pg:0,pe:0,pp:0,gf:0,gc:0,pts:0,bandera:i===0?p.bandera_local||"🏳":p.bandera_visitante||"🏳"};
+    });
+    if (p.estado==="FIN" && p.goles_local!=null && p.goles_visitante!=null) {
+      const loc=equipos[p.local], vis=equipos[p.visitante]; if(!loc||!vis) return;
+      loc.pj++;vis.pj++;loc.gf+=p.goles_local;loc.gc+=p.goles_visitante;vis.gf+=p.goles_visitante;vis.gc+=p.goles_local;
+      if(p.goles_local>p.goles_visitante){loc.pg++;loc.pts+=3;vis.pp++;}
+      else if(p.goles_local<p.goles_visitante){vis.pg++;vis.pts+=3;loc.pp++;}
+      else{loc.pe++;vis.pe++;loc.pts++;vis.pts++;}
+    }
+  });
+  const grupos = {};
+  Object.values(equipos).forEach(eq => { if(!grupos[eq.grupo])grupos[eq.grupo]=[]; grupos[eq.grupo].push(eq); });
+  Object.values(grupos).forEach(g => g.sort((a,b) => b.pts-a.pts||(b.gf-b.gc)-(a.gf-a.gc)));
+  if (!Object.keys(grupos).length) { el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">⏳ Cargando grupos...</p>'; return; }
+  el.style.padding = "8px 0";
+  const grid = document.createElement("div"); grid.className = "grupos-grid";
+  Object.entries(grupos).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([grupo,eqs]) => {
+    const card = document.createElement("div"); card.className = "grupo-card";
+    card.innerHTML = `<div class="grupo-hdr"><div class="grupo-title">GRUPO ${grupo}</div><span style="font-size:10px;color:var(--muted)">🌍</span></div>`;
+    const body = document.createElement("div"); body.className = "grupo-body";
+    eqs.forEach((eq,i) => {
+      const row = document.createElement("div"); row.className = "grupo-eq" + (i<2?" top":"");
+      row.innerHTML = `<span>${eq.bandera}</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${eq.nombre}</span><span style="color:var(--dor);font-weight:700">${eq.pts}</span>`;
+      body.appendChild(row);
+    });
+    card.appendChild(body); grid.appendChild(card);
+  });
+  el.appendChild(grid);
+}
+
 function filtrarFixture(prefix, f, btn) {
-    const contenedor = prefix==="mundial" ? document.querySelector("#mundial-fixture .ffiltros") :
-                       prefix==="lib"     ? document.querySelector("#lib-fixture .ffiltros") :
-                                            document.querySelector("#sud-fixture .ffiltros");
-    contenedor.querySelectorAll(".ffiltro").forEach(b=>b.classList.remove("active"));
-    if(btn) btn.classList.add("active");
-    filtros[prefix]=f;
-    const partidos = prefix==="mundial"?mundialPartidos:prefix==="lib"?libPartidos:sudPartidos;
-    renderFixtureList(prefix+"-fixture-list", partidos, f, prefix);
+  if (prefix === "mun") filtMundial = f;
+  const zone = btn?.closest(".msec");
+  zone?.querySelectorAll(".stab").forEach(b=>b.classList.remove("a"));
+  if(btn) btn.classList.add("a");
+  renderFixture(prefix, prefix==="mun"?mundialData:[], f);
 }
 
-function renderFixtureList(elId, partidos, filtro, prefix) {
-    const el=document.getElementById(elId);
-    if(!partidos||partidos.length===0){el.innerHTML='<div style="color:rgba(255,255,255,0.3);text-align:center;padding:40px;">📅 Los partidos se cargan aquí cuando estén disponibles</div>';return;}
-    let lista=[...partidos];
-    const hoy=new Date().toISOString().slice(0,10);
-    if(filtro==="ARG") lista=lista.filter(p=>p.local==="Argentina"||p.visitante==="Argentina"||p.pais_local==="Argentina"||p.pais_visitante==="Argentina");
-    else if(filtro==="live") lista=lista.filter(p=>p.estado==="LIVE");
-    else if(filtro==="hoy") lista=lista.filter(p=>p.fecha&&p.fecha.startsWith(hoy));
-    lista.sort((a,b)=>(a.fecha||"").localeCompare(b.fecha||""));
-    const porFecha={};
-    lista.forEach(p=>{
-        const f=p.fecha?new Date(p.fecha).toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"long"}):"Sin fecha";
-        if(!porFecha[f])porFecha[f]=[];
-        porFecha[f].push(p);
+function renderFixture(prefix, partidos, filtro) {
+  const el = document.getElementById(prefix + "-fixture-list"); if(!el) return;
+  let lista = [...partidos];
+  const hoy = new Date().toISOString().slice(0,10);
+  if (filtro==="ARG") lista = lista.filter(p=>p.local==="Argentina"||p.visitante==="Argentina");
+  else if (filtro==="live") lista = lista.filter(p=>p.estado==="LIVE");
+  else if (filtro==="hoy") lista = lista.filter(p=>p.fecha?.startsWith(hoy));
+  lista.sort((a,b)=>(a.fecha||"").localeCompare(b.fecha||""));
+  if (!lista.length) { el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">No hay partidos para mostrar</p>'; return; }
+  const porFecha = {};
+  lista.forEach(p => {
+    const f = p.fecha ? new Date(p.fecha).toLocaleDateString("es-AR",{weekday:"short",day:"numeric",month:"short"}) : "Sin fecha";
+    if(!porFecha[f])porFecha[f]=[];
+    porFecha[f].push(p);
+  });
+  el.innerHTML = Object.entries(porFecha).map(([fecha,ps]) => `
+    <div class="fecha-sep">📅 ${fecha}</div>
+    ${ps.map(p => {
+      const live=p.estado==="LIVE",fin=p.estado==="FIN",nScore=p.goles_local==null||p.goles_visitante==null;
+      return `<div class="partido-row ${live?"live":""}">
+        <div><div class="p-hora">${p.hora||"--:--"}</div><div class="p-badge ${live?"live":fin?"fin":"pronto"}">${live?"LIVE":fin?"FIN":"PRÓX"}</div></div>
+        <div class="p-teams">
+          <div class="p-team"><span>${p.bandera_local||"🏳"}</span><span>${p.local||"?"}</span></div>
+          <div class="p-score${nScore?" pend":""}">${nScore?"vs":`${p.goles_local}-${p.goles_visitante}`}</div>
+          <div class="p-team r"><span>${p.visitante||"?"}</span><span>${p.bandera_visitante||"🏳"}</span></div>
+        </div>
+        <div class="p-grp">${p.grupo||""}</div>
+      </div>`;
+    }).join("")}`).join("");
+}
+
+function renderPosicionesTabla(elId, partidos) {
+  const el = document.getElementById(elId); if(!el) return;
+  const equipos={};
+  partidos.forEach(p=>{
+    [p.local,p.visitante].forEach((eq,i)=>{
+      if(!eq) return;
+      if(!equipos[eq])equipos[eq]={nombre:eq,pj:0,pg:0,pe:0,pp:0,gf:0,gc:0,pts:0,bandera:i===0?p.bandera_local||"🏳":p.bandera_visitante||"🏳",grupo:p.grupo||""};
     });
-    if(!Object.keys(porFecha).length){el.innerHTML='<div style="color:rgba(255,255,255,0.3);text-align:center;padding:40px;">No hay partidos para mostrar</div>';return;}
-    el.innerHTML=Object.entries(porFecha).map(([fecha,ps])=>`
-        <div class="fecha-grupo">
-            <div class="fecha-titulo">📅 ${fecha}</div>
-            ${ps.map(p=>{
-                const isLive=p.estado==="LIVE", isFin=p.estado==="FIN";
-                const noScore=p.goles_local==null||p.goles_visitante==null;
-                return `<div class="partido-row ${isLive?"live":""} ${isFin?"fin":""}">
-                    <div><div class="p-hora">${p.hora||"--:--"}</div><div class="p-badge ${isLive?"live":isFin?"fin":"pronto"}">${isLive?"LIVE":isFin?"FIN":"PRÓX"}</div></div>
-                    <div class="p-teams">
-                        <div class="p-team"><span>${p.bandera_local||"🏳"}</span><span>${p.local||"?"}</span></div>
-                        <div class="p-score${noScore?" pending":""}">${noScore?"vs":`${p.goles_local} - ${p.goles_visitante}`}</div>
-                        <div class="p-team right"><span>${p.visitante||"?"}</span><span>${p.bandera_visitante||"🏳"}</span></div>
-                    </div>
-                    <div class="p-grupo">${p.grupo||""}</div>
-                </div>`;
-            }).join("")}
-        </div>`).join("");
-}
-
-// ── Grupos Mundial ────────────────────────────────────────────────────────
-function renderMundialGrupos(partidos) {
-    const el=document.getElementById("mundial-grupos-grid");
-    const equipos={};
-    partidos.forEach(p=>{
-        if(!p.grupo) return;
-        [p.local,p.visitante].forEach((eq,i)=>{
-            if(!eq) return;
-            if(!equipos[eq])equipos[eq]={nombre:eq,grupo:p.grupo,pj:0,pg:0,pe:0,pp:0,gf:0,gc:0,pts:0,bandera:i===0?p.bandera_local||"🏳":p.bandera_visitante||"🏳"};
-        });
-        if(p.estado==="FIN"&&p.goles_local!=null&&p.goles_visitante!=null){
-            const loc=equipos[p.local],vis=equipos[p.visitante];
-            if(!loc||!vis) return;
-            loc.pj++;vis.pj++;loc.gf+=p.goles_local;loc.gc+=p.goles_visitante;vis.gf+=p.goles_visitante;vis.gc+=p.goles_local;
-            if(p.goles_local>p.goles_visitante){loc.pg++;loc.pts+=3;vis.pp++;}
-            else if(p.goles_local<p.goles_visitante){vis.pg++;vis.pts+=3;loc.pp++;}
-            else{loc.pe++;vis.pe++;loc.pts++;vis.pts++;}
-        }
-    });
-    const grupos={};
-    Object.values(equipos).forEach(eq=>{if(!grupos[eq.grupo])grupos[eq.grupo]=[];grupos[eq.grupo].push(eq);});
-    Object.values(grupos).forEach(g=>g.sort((a,b)=>b.pts-a.pts||(b.gf-b.gc)-(a.gf-a.gc)||b.gf-a.gf));
-    if(!Object.keys(grupos).length){el.innerHTML='<div style="color:rgba(255,255,255,0.3);text-align:center;padding:40px;grid-column:1/-1;">⏳ Importá el fixture del Mundial para ver los grupos</div>';return;}
-    el.innerHTML=Object.entries(grupos).sort((a,b)=>a[0].localeCompare(b[0])).map(([grupo,eqs])=>`
-        <div class="grupo-card">
-            <div class="grupo-header"><h3 class="lib">GRUPO ${grupo}</h3><span style="font-size:10px;color:rgba(255,255,255,0.4)">🌍 FIFA</span></div>
-            <table class="grupo-tabla">
-                <thead><tr><th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>DG</th><th>PTS</th></tr></thead>
-                <tbody>${eqs.map((eq,i)=>`<tr class="${i<2?"clasificado":""}"><td><div class="eq-nombre"><span>${eq.bandera}</span>${eq.nombre}</div></td><td>${eq.pj}</td><td>${eq.pg}</td><td>${eq.pe}</td><td>${eq.pp}</td><td>${eq.gf-eq.gc>0?"+":""}${eq.gf-eq.gc}</td><td><strong style="color:var(--dorado)">${eq.pts}</strong></td></tr>`).join("")}</tbody>
-            </table>
-        </div>`).join("");
-}
-
-// ── Grupos CONMEBOL desde Firebase ────────────────────────────────────────
-function renderGruposConmebol(elId, grupos, prefix) {
-    const el=document.getElementById(elId);
-    if(!grupos||!Object.keys(grupos).length){
-        el.innerHTML='<div style="color:rgba(255,255,255,0.3);text-align:center;padding:40px;grid-column:1/-1;">⏳ Cargando grupos...</div>';return;
+    if(p.estado==="FIN"&&p.goles_local!=null&&p.goles_visitante!=null){
+      const loc=equipos[p.local],vis=equipos[p.visitante];if(!loc||!vis)return;
+      loc.pj++;vis.pj++;loc.gf+=p.goles_local;loc.gc+=p.goles_visitante;vis.gf+=p.goles_visitante;vis.gc+=p.goles_local;
+      if(p.goles_local>p.goles_visitante){loc.pg++;loc.pts+=3;vis.pp++;}
+      else if(p.goles_local<p.goles_visitante){vis.pg++;vis.pts+=3;loc.pp++;}
+      else{loc.pe++;vis.pe++;loc.pts++;vis.pts++;}
     }
-    const color=prefix==="lib"?"lib":"sud";
-    el.innerHTML=Object.entries(grupos).sort((a,b)=>a[0].localeCompare(b[0])).map(([grupo,data])=>{
-        const equipos=data.equipos||[];
-        return `<div class="grupo-card">
-            <div class="grupo-header">
-                <h3 class="${color}">GRUPO ${grupo}</h3>
-                <span style="font-size:10px;color:rgba(255,255,255,0.4)">${prefix==="lib"?"🏆 Libertadores":"🟠 Sudamericana"}</span>
-            </div>
-            <table class="grupo-tabla">
-                <thead><tr><th>Equipo</th><th>País</th><th>PJ</th><th>PTS</th></tr></thead>
-                <tbody>${equipos.map((eq,i)=>`
-                    <tr class="${i<2?"clasificado":""}">
-                        <td><div class="eq-nombre"><span>${eq.bandera||"🏳"}</span>${eq.nombre}</div></td>
-                        <td style="font-size:11px;color:rgba(255,255,255,0.5)">${eq.pais||""}</td>
-                        <td>0</td><td><strong style="color:var(--dorado)">0</strong></td>
-                    </tr>`).join("")}
-                </tbody>
-            </table>
-        </div>`;
-    }).join("");
+  });
+  const lista=Object.values(equipos).sort((a,b)=>b.pts-a.pts||(b.gf-b.gc)-(a.gf-a.gc));
+  if(!lista.length){el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">⏳ Sin resultados aún</p>';return;}
+  el.style.overflowX="auto";
+  el.innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:11px;margin-top:8px;">
+    <thead><tr style="background:rgba(0,51,102,0.6);">
+      <th style="padding:7px 8px;text-align:left;color:var(--muted);font-size:10px;">#</th>
+      <th style="padding:7px 4px;text-align:left;color:var(--muted);font-size:10px;">Equipo</th>
+      <th style="padding:7px 4px;text-align:center;color:var(--muted);font-size:10px;">PJ</th>
+      <th style="padding:7px 4px;text-align:center;color:var(--muted);font-size:10px;">PG</th>
+      <th style="padding:7px 4px;text-align:center;color:var(--muted);font-size:10px;">DG</th>
+      <th style="padding:7px 8px;text-align:center;color:var(--muted);font-size:10px;">PTS</th>
+    </tr></thead>
+    <tbody>${lista.map((eq,i)=>`<tr style="border-bottom:1px solid rgba(255,255,255,.04);${i<16?"border-left:3px solid rgba(46,204,113,.4)":i>=lista.length-8?"border-left:3px solid rgba(231,76,60,.4)":""}">
+      <td style="padding:7px 8px;color:var(--muted)">${i+1}</td>
+      <td style="padding:7px 4px"><div style="display:flex;align-items:center;gap:5px;"><span>${eq.bandera}</span><span style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:90px">${eq.nombre}</span></div></td>
+      <td style="padding:7px 4px;text-align:center">${eq.pj}</td>
+      <td style="padding:7px 4px;text-align:center">${eq.pg}</td>
+      <td style="padding:7px 4px;text-align:center">${eq.gf-eq.gc>0?"+":""}${eq.gf-eq.gc}</td>
+      <td style="padding:7px 8px;text-align:center;font-weight:700;color:var(--dor)">${eq.pts}</td>
+    </tr>`).join("")}</tbody>
+  </table>`;
 }
 
-// ── Posiciones ────────────────────────────────────────────────────────────
-function renderPosiciones(elId, partidos, prefix) {
-    const el=document.getElementById(elId);
-    if(!partidos||!partidos.length){
-        el.innerHTML='<div style="color:rgba(255,255,255,0.3);text-align:center;padding:40px;">⏳ La tabla se actualiza con los resultados</div>';return;
-    }
-    const equipos={};
-    partidos.forEach(p=>{
-        [p.local,p.visitante].forEach((eq,i)=>{
-            if(!eq) return;
-            if(!equipos[eq])equipos[eq]={nombre:eq,pj:0,pg:0,pe:0,pp:0,gf:0,gc:0,pts:0,bandera:i===0?p.bandera_local||"🏳":p.bandera_visitante||"🏳",grupo:p.grupo||""};
-        });
-        if(p.estado==="FIN"&&p.goles_local!=null&&p.goles_visitante!=null){
-            const loc=equipos[p.local],vis=equipos[p.visitante];
-            if(!loc||!vis) return;
-            loc.pj++;vis.pj++;loc.gf+=p.goles_local;loc.gc+=p.goles_visitante;vis.gf+=p.goles_visitante;vis.gc+=p.goles_local;
-            if(p.goles_local>p.goles_visitante){loc.pg++;loc.pts+=3;vis.pp++;}
-            else if(p.goles_local<p.goles_visitante){vis.pg++;vis.pts+=3;loc.pp++;}
-            else{loc.pe++;vis.pe++;loc.pts++;vis.pts++;}
-        }
+// ── Libertadores / Sudamericana ───────────────────────────────────────────
+db.ref("libertadores").on("value", snap => {
+  const data = snap.val(); if(!data) return;
+  renderGruposConmebol("lib-grupos", data.grupos||{}, "🏆");
+  renderPartidosConmebol("lib-fixture-list", data.partidos||{});
+  renderPosicionesConmebol("lib-pos", data.partidos||{});
+});
+db.ref("sudamericana").on("value", snap => {
+  const data = snap.val(); if(!data) return;
+  renderGruposConmebol("sud-grupos", data.grupos||{}, "🟠");
+  renderPartidosConmebol("sud-fixture-list", data.partidos||{});
+  renderPosicionesConmebol("sud-pos", data.partidos||{});
+});
+
+function renderGruposConmebol(elId, grupos, icon) {
+  const el = document.getElementById(elId); if(!el) return;
+  el.style.padding="8px 0";
+  if(!Object.keys(grupos).length){el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">⏳ Cargando grupos...</p>';return;}
+  const grid=document.createElement("div");grid.className="grupos-grid";
+  Object.entries(grupos).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([grupo,data])=>{
+    const eqs=data.equipos||[];
+    const card=document.createElement("div");card.className="grupo-card";
+    card.innerHTML=`<div class="grupo-hdr"><div class="grupo-title">GRUPO ${grupo}</div><span>${icon}</span></div>`;
+    const body=document.createElement("div");body.className="grupo-body";
+    eqs.forEach((eq,i)=>{
+      const row=document.createElement("div");row.className="grupo-eq"+(i<2?" top":"");
+      row.innerHTML=`<span>${eq.bandera||"🏳"}</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px">${eq.nombre}</span><span style="font-size:10px;color:var(--muted)">${eq.pais||""}</span>`;
+      body.appendChild(row);
     });
-    const lista=Object.values(equipos).sort((a,b)=>b.pts-a.pts||(b.gf-b.gc)-(a.gf-a.gc)||b.gf-a.gf);
-    if(!lista.length){el.innerHTML='<div style="color:rgba(255,255,255,0.3);text-align:center;padding:40px;">⏳ Sin resultados aún</div>';return;}
-    const total=lista.length;
-    el.innerHTML=`<div class="tabla-wrap"><table class="tabla-pos">
-        <thead><tr><th>#</th><th>Equipo</th><th>GR</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>DG</th><th>PTS</th></tr></thead>
-        <tbody>${lista.map((eq,i)=>`<tr class="${i<total/4?"pos-verde":i>=total*3/4?"pos-rojo":""}">
-            <td class="pos-num">${i+1}</td>
-            <td><div class="eq-nombre"><span>${eq.bandera}</span>${eq.nombre}</div></td>
-            <td style="font-size:10px;color:rgba(255,255,255,0.4)">${eq.grupo}</td>
-            <td>${eq.pj}</td><td>${eq.pg}</td><td>${eq.pe}</td><td>${eq.pp}</td>
-            <td>${eq.gf-eq.gc>0?"+":""}${eq.gf-eq.gc}</td>
-            <td class="pos-pts">${eq.pts}</td></tr>`).join("")}
-        </tbody></table>
-        <div style="display:flex;gap:16px;padding:12px;font-size:11px;color:rgba(255,255,255,0.4)">
-            <span style="border-left:3px solid var(--verde);padding-left:6px">Clasificados</span>
-            <span style="border-left:3px solid var(--rojo);padding-left:6px">Eliminados</span>
-        </div></div>`;
+    card.appendChild(body);grid.appendChild(card);
+  });
+  el.appendChild(grid);
 }
 
-// ── Bracket eliminatorio ──────────────────────────────────────────────────
-function renderBracket(elId, bracket, prefix) {
-    const el=document.getElementById(elId);
-    const color=prefix==="lib"?"lib":"sud";
-    const fases=[
-        {key:"octavos",  label:"Octavos de Final",  n:8},
-        {key:"cuartos",  label:"Cuartos de Final",  n:4},
-        {key:"semis",    label:"Semifinales",        n:2},
-        {key:"final",    label:"Gran Final 🏆",      n:1},
-    ];
-    el.innerHTML=fases.map(fase=>{
-        const partidos=bracket[fase.key]||[];
-        const slots=Array.from({length:fase.n},(_,i)=>partidos[i]||null);
-        return `<div class="bracket">
-            <div class="fase-titulo ${color}">${fase.label}</div>
-            <div class="bracket-grid">
-                ${slots.map((p,i)=>`<div class="bracket-match">
-                    <div class="bracket-match-header">${fase.label} · Partido ${i+1}</div>
-                    <div class="bracket-team">
-                        <div class="bracket-team-name">${p?`<span>${p.bandera_local||"🏳"}</span>${p.local}`:'<span class="bracket-tbd">Por definir</span>'}</div>
-                        <div class="bracket-score">${p&&p.goles_local!=null?p.goles_local:"-"}</div>
-                    </div>
-                    <div class="bracket-team">
-                        <div class="bracket-team-name">${p?`<span>${p.bandera_visitante||"🏳"}</span>${p.visitante}`:'<span class="bracket-tbd">Por definir</span>'}</div>
-                        <div class="bracket-score">${p&&p.goles_visitante!=null?p.goles_visitante:"-"}</div>
-                    </div>
-                </div>`).join("")}
-            </div>
-        </div>`;
-    }).join("");
+function renderPartidosConmebol(elId, partidos) {
+  const el=document.getElementById(elId);if(!el)return;
+  const lista=Object.values(partidos||{}).sort((a,b)=>(a.fecha||"").localeCompare(b.fecha||""));
+  if(!lista.length){el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">📅 Partidos próximamente</p>';return;}
+  renderFixture("_tmp", lista, "todos");
 }
 
-// ── Posiciones Mundial ────────────────────────────────────────────────────
-function renderMundialPos(partidos){renderPosiciones("mundial-pos-wrap",partidos,"mundial");}
-db.ref("partidos").on("value",snap=>{if(snap.val())renderMundialPos(Object.entries(snap.val()).map(([id,p])=>({id,...p})));});
+function renderPosicionesConmebol(elId, partidos) {
+  renderPosicionesTabla(elId, Object.values(partidos||{}));
+}
 
 // ── Chat ──────────────────────────────────────────────────────────────────
-db.ref("chat").orderByChild("fecha").limitToLast(50).on("child_added",snap=>{
-    const m=snap.val(); if(!m||!m.usuario||!m.texto) return;
-    const div=document.createElement("div"); div.className="msg";
-    div.innerHTML=`<span class="msg-nick">${m.usuario.replace(/</g,"&lt;")}:</span><span class="msg-text">${m.texto.replace(/</g,"&lt;")}</span>`;
-    const msgs=document.getElementById("chat-msgs"); msgs.appendChild(div); msgs.scrollTop=msgs.scrollHeight;
+db.ref("chat").orderByChild("fecha").limitToLast(60).on("child_added", snap => {
+  const m=snap.val();if(!m||!m.usuario||!m.texto)return;
+  const div=document.createElement("div");div.className="msg";
+  div.innerHTML=`<span class="msg-nick">${m.usuario.replace(/</g,"&lt;")}:</span><span class="msg-txt">${m.texto.replace(/</g,"&lt;")}</span>`;
+  const msgs=document.getElementById("chat-msgs");msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
 });
+
 function enviarMensaje(){
-    const input=document.getElementById("chat-in"),t=input.value.trim();
-    if(!miNick){toast("⚠️ Primero ingresá tu apodo");return;} if(!t) return;
-    db.ref("chat").push({usuario:miNick,texto:t,fecha:firebase.database.ServerValue.TIMESTAMP});
-    input.value="";
+  const input=document.getElementById("chat-in"),t=input.value.trim();
+  if(!miNick){toast("⚠️ Primero ingresá tu apodo");return;}if(!t)return;
+  db.ref("chat").push({usuario:miNick,texto:t,fecha:firebase.database.ServerValue.TIMESTAMP});
+  input.value="";
 }
 document.getElementById("chat-btn").onclick=enviarMensaje;
 document.getElementById("chat-in").addEventListener("keydown",e=>{if(e.key==="Enter")enviarMensaje();});
-document.getElementById("btn-rep").onclick=()=>{
-    if(!canalActivo){toast("⚠️ Primero seleccioná un canal");return;}
-    db.ref("reportes").push({canal:canalActivo,usuario:miNick||"anónimo",fecha:firebase.database.ServerValue.TIMESTAMP});
-    toast("✅ Reporte enviado. ¡Gracias!");
-};
 
 // ── PWA ───────────────────────────────────────────────────────────────────
 let deferredPrompt=null;
@@ -813,7 +1051,7 @@ window.addEventListener("appinstalled",()=>btnI.style.display="none");
 const esIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
 const enSafari=/safari/i.test(navigator.userAgent)&&!/chrome/i.test(navigator.userAgent);
 if(esIOS&&enSafari&&!window.matchMedia("(display-mode:standalone)").matches&&!localStorage.getItem("ios_cerrado")){
-    setTimeout(()=>document.getElementById("ios-banner").style.display="block",4000);
+  setTimeout(()=>document.getElementById("ios-banner").style.display="block",5000);
 }
 document.getElementById("ios-close").onclick=()=>{document.getElementById("ios-banner").style.display="none";localStorage.setItem("ios_cerrado","1");};
 if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
