@@ -779,6 +779,26 @@ TDT_CANALES = [
     {"id":"tdt548","nombre":"3ABN USA","categoria":"INTERNACIONAL","url":"https://3abn.bozztv.com/3abn2/Lat_live/smil:Lat_live.smil/playlist.m3u8","logo":"https://graph.facebook.com/3abn.org/picture?width=200&height=200","fallbacks":[]},
 ]
 
+FUENTES_M3U = [
+    "https://iptv-org.github.io/iptv/countries/ar.m3u",
+    "https://iptv-org.github.io/iptv/countries/mx.m3u",
+    "https://iptv-org.github.io/iptv/countries/co.m3u",
+    "https://iptv-org.github.io/iptv/countries/cl.m3u",
+    "https://iptv-org.github.io/iptv/countries/pe.m3u",
+    "https://iptv-org.github.io/iptv/countries/ve.m3u",
+    "https://iptv-org.github.io/iptv/countries/br.m3u",
+    "https://iptv-org.github.io/iptv/countries/uy.m3u",
+    "https://iptv-org.github.io/iptv/countries/es.m3u",
+    "https://iptv-org.github.io/iptv/languages/spa.m3u",
+    "https://iptv-org.github.io/iptv/categories/sports.m3u",
+    "https://iptv-org.github.io/iptv/categories/news.m3u",
+    "https://iptv-org.github.io/iptv/categories/kids.m3u",
+    "https://iptv-org.github.io/iptv/categories/music.m3u",
+]
+
+FUENTES_SIN_FILTRO = ["tdtchannels.com"]
+
+
 def buscar_canales_m3u(max_por_fuente=200, max_total=800):
     print("\n\U0001F50D Escaneando fuentes M3U...")
     nombres_existentes = {c["nombre"].upper() for c in CANALES_FIJOS + TDT_CANALES}
