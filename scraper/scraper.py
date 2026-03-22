@@ -191,7 +191,7 @@ CANALES_FIJOS = [
     {"id":"bol98","nombre":"Canal 98","categoria":"DEPORTES","url":"https://web-production-b498b.up.railway.app/canal?n=98","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"bol99","nombre":"Canal 99","categoria":"DEPORTES","url":"https://web-production-b498b.up.railway.app/canal?n=99","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"c13","nombre":"TN","categoria":"NOTICIAS",
-     "url":"https://www.youtube-nocookie.com/embed/live_stream?channel=UCEKv_4X5ER-3cLMhA5eN8tA&autoplay=1",
+     "url":"https://www.youtube-nocookie.com/embed/cb12KmMMDJA?autoplay=1",
      "logo":"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/TN_-_Todo_Noticias_logo_%282020%29.svg/200px-TN_-_Todo_Noticias_logo_%282020%29.svg.png",
      "fallbacks":["https://mdstrm.com/live-stream-playlist/60b578b060947317de7b57ac.m3u8"]},
     {"id":"c14","nombre":"C5N","categoria":"NOTICIAS",
