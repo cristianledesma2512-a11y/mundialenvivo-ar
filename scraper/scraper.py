@@ -112,12 +112,12 @@ FUENTES_M3U = [
    
 ]
 
-FUENTES_SIN_FILTRO = ["tdtchannels.com"]
+FUENTES_SIN_FILTRO = []
 
 
 def buscar_canales_m3u(max_por_fuente=200, max_total=800):
     print("\n\U0001F50D Escaneando fuentes M3U...")
-    nombres_existentes = {c["nombre"].upper() for c in CANALES_FIJOS + TDT_CANALES}
+    nombres_existentes = {c["nombre"].upper() for c in CANALES_FIJOS}
     encontrados = []
     ids_vistos  = set()
     headers = {"User-Agent": "Mozilla/5.0 (compatible; IPTV-scraper/1.0)"}
