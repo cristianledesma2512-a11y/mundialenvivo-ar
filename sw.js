@@ -51,13 +51,13 @@ self.addEventListener("fetch", e => {
       if (cached) return cached;
       return fetch(e.request)
         .then(response => {
-          // Cachear respuestas exitosas de assets propios
+          // Cachear respuestas exitosas de assets propiosjjjj
           if (response.ok && url.includes(self.location.origin)) {
             const clone = response.clone();
             caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
           }
           return response;
-        })
+        })        
         .catch(() => caches.match("./index.html"));
     })
   );
