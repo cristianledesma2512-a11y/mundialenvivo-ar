@@ -95,14 +95,35 @@ CANALES_FIJOS = [
     {"id":"bol05","nombre":"DSPORT2 BOL","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/95","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"bol06","nombre":"DSPORT+ BOL","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/96","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     
-
-    # ── Bolaloca via proxy Railway (sin alerta Chrome) ──────────────────
+  # ── Bolaloca via proxy Railway (sin alerta Chrome) ──────────────────
 
     
 ]
+TDT_CANALES = [
+    {"id":"tdt001","nombre":"La 1","categoria":"AIRE","url":"https://dghxc56urunop.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zabn6k211oedh/La1ES.m3u8","logo":"https://pbs.twimg.com/profile_images/2008842210414915584/zIp_go25_200x200.jpg","fallbacks":[]},
+    {"id":"tdt002","nombre":"La 2","categoria":"AIRE","url":"https://d1yebix5w29z3v.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-haqfba85d1gvv/La2ES.m3u8","logo":"https://yt3.googleusercontent.com/ytc/AIdro_kqgHWySi5xprs1VFCNCX0IKNT8yXBLZC43JMoB8j0JUto=s200","fallbacks":[]},
+    {"id":"tdt003","nombre":"TRECE","categoria":"AIRE","url":"https://play.cdn.enetres.net/091DB7AFBD77442B9BA2F141DCC182F5021/021/playlist.m3u8","logo":"https://graph.facebook.com/TRECEtves/picture?width=200&height=200","fallbacks":[]},
+    {"id":"tdt004","nombre":"El Toro TV","categoria":"AIRE","url":"https://streaming-1.eltorotv.com/lb0/eltorotv-streaming-web/index.m3u8","logo":"https://graph.facebook.com/eltorotv.es/picture?width=200&height=200","fallbacks":[]},
+    {"id":"tdt005","nombre":"RNE para todos","categoria":"AIRE","url":"https://rtvelivestream.rtve.es/rtvesec/rne/rne_para_todos_main.m3u8","logo":"https://graph.facebook.com/radionacionalrne/picture?width=200&height=200","fallbacks":[]},
+    ]
 
 
-
+FUENTES_M3U = [
+    "https://iptv-org.github.io/iptv/countries/ar.m3u",
+    "https://iptv-org.github.io/iptv/countries/mx.m3u",
+    "https://iptv-org.github.io/iptv/countries/co.m3u",
+    "https://iptv-org.github.io/iptv/countries/cl.m3u",
+    "https://iptv-org.github.io/iptv/countries/pe.m3u",
+    "https://iptv-org.github.io/iptv/countries/ve.m3u",
+    "https://iptv-org.github.io/iptv/countries/br.m3u",
+    "https://iptv-org.github.io/iptv/countries/uy.m3u",
+    "https://iptv-org.github.io/iptv/countries/es.m3u",
+    "https://iptv-org.github.io/iptv/languages/spa.m3u",
+    "https://iptv-org.github.io/iptv/categories/sports.m3u",
+    "https://iptv-org.github.io/iptv/categories/news.m3u",
+    "https://iptv-org.github.io/iptv/categories/kids.m3u",
+    "https://iptv-org.github.io/iptv/categories/music.m3u",
+]
 
 FUENTES_SIN_FILTRO = ["tdtchannels.com"]
 
