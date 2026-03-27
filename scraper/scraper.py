@@ -28,7 +28,7 @@ def conectar_firebase():
             raise Exception("No se encontró FIREBASE_SERVICE_ACCOUNT")
         cred = credentials.Certificate(json.loads(sa))
         firebase_admin.initialize_app(cred, {
-            "databaseURL": "https://mundialenvivo-default-rtdb.firebaseio.com"
+            "databaseURL": "https://mundialenvivo-ar-default-rtdb.firebaseio.com/"
         })
         return rtdb.reference("/")
     except Exception as e:
