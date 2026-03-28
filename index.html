@@ -465,6 +465,7 @@ document.getElementById("nick-btn").onclick = () => {
   document.getElementById("modal-nick").style.display = "none";
   document.getElementById("user-badge").textContent = n.slice(0,2).toUpperCase();
   toast("¡Bienvenido " + n + "! ⚽");
+  registrarPresencia(n);
 };
 document.getElementById("nick-in").addEventListener("keydown", e => { if(e.key==="Enter") document.getElementById("nick-btn").click(); });
 document.getElementById("user-badge").onclick = () => { if(confirm("¿Cambiar apodo?")) { localStorage.removeItem("mnv_nick"); location.reload(); } };
@@ -1056,6 +1057,52 @@ if(esIOS&&enSafari&&!window.matchMedia("(display-mode:standalone)").matches&&!lo
 }
 document.getElementById("ios-close").onclick=()=>{document.getElementById("ios-banner").style.display="none";localStorage.setItem("ios_cerrado","1");};
 if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+
+// ── Presencia y blacklist ─────────────────────────────────────────────────
+function registrarPresencia(nick) {
+  // Verificar blacklist primero
+  db.ref("blacklist/" + nick).once("value", snap => {
+    if (snap.exists() && snap.val() === true) {
+      // Usuario baneado
+      document.body.innerHTML = `
+        <div style="position:fixed;inset:0;background:#0a1628;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#e8edf5;">
+          <div style="font-size:60px;">🚫</div>
+          <h1 style="color:#e74c3c;font-size:24px;">Acceso bloqueado</h1>
+          <p style="color:#6b7fa0;font-size:14px;">Tu usuario ha sido baneado de MundialEnVivo AR.</p>
+          <p style="color:#6b7fa0;font-size:12px;">Si creés que es un error, contactá al administrador.</p>
+        </div>`;
+      return;
+    }
+    // Registrar presencia online
+    const statusRef = db.ref("status/" + nick);
+    statusRef.set({ online: true, ts: firebase.database.ServerValue.TIMESTAMP });
+    statusRef.onDisconnect().remove();
+    // Incrementar visitas
+    db.ref("stats/visitas_totales").transaction(v => (v || 0) + 1);
+  });
+}
+
+// Si ya tiene nick registrado, verificar blacklist al cargar
+if (miNick) {
+  db.ref("blacklist/" + miNick).once("value", snap => {
+    if (snap.exists() && snap.val() === true) {
+      document.body.innerHTML = `
+        <div style="position:fixed;inset:0;background:#0a1628;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#e8edf5;">
+          <div style="font-size:60px;">🚫</div>
+          <h1 style="color:#e74c3c;font-size:24px;">Acceso bloqueado</h1>
+          <p style="color:#6b7fa0;font-size:14px;">Tu usuario ha sido baneado de MundialEnVivo AR.</p>
+        </div>`;
+      return;
+    }
+    // Registrar presencia
+    const statusRef = db.ref("status/" + miNick);
+    statusRef.set({ online: true, ts: firebase.database.ServerValue.TIMESTAMP });
+    statusRef.onDisconnect().remove();
+    // Incrementar visitas
+    db.ref("stats/visitas_totales").transaction(v => (v || 0) + 1);
+  });
+}
+
 </script>
 </body>
 </html>

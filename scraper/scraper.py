@@ -216,7 +216,7 @@ def actualizar_canales(ref):
             "actualizado": ahora,
         }
 
-    # 3. Canales extra de fuentes M3U
+     # 3. Canales extra de fuentes M3U
     extra = buscar_canales_m3u(max_por_fuente=150, max_total=800)
     for i, c in enumerate(extra):
         data[f"ext{i+1:04d}"] = {
@@ -228,6 +228,23 @@ def actualizar_canales(ref):
             "fijo":      False,
             "actualizado": ahora,
         }
+
+    # Preservar el campo "activo" si fue modificado manualmente en el panel
+    try:
+        existentes = ref.child("canales").get()
+        if existentes:
+            for cid, canal in data.items():
+                if cid in existentes and "activo" in existentes[cid]:
+                    canal["activo"] = existentes[cid]["activo"]
+                else:
+                    canal["activo"] = True  # nuevo canal = activo por defecto
+        else:
+            for canal in data.values():
+                canal["activo"] = True
+    except Exception as e:
+        print(f"  ⚠️  No se pudo verificar campo activo: {e}")
+        for canal in data.values():
+            canal["activo"] = True
 
     ref.child("canales").set(data)
     total = len(data)
