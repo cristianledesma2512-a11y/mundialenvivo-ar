@@ -41,23 +41,23 @@ def conectar_firebase():
 CANALES_FIJOS = [
     
     # ── StreamTP (canales premium sin proxy) ────────────────────────────
-    {"id":"stp01","nombre":"ESPN Premium","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=espnpremium","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp02","nombre":"ESPN","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=espn","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"stp01","nombre":"ESPN Premium","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=espnpremium","logo":"hhttps://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp02","nombre":"ESPN","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=espn","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
     {"id":"stp03","nombre":"ESPN 2","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=espn2","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp04","nombre":"ESPN 3","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=espn3","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp05","nombre":"ESPN 4","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=espn4","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp06","nombre":"ESPN 5","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=espn5","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp07","nombre":"ESPN 6","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=espn6","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp08","nombre":"ESPN 7","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=espn7","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp09","nombre":"TyC Sports","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=tycsports","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp10","nombre":"Fox Sports 1","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=fox1ar","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"stp09","nombre":"TyC Sports","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=tycsports","logo":"https://images.seeklogo.com/logo-png/34/1/tyc-sports-logo-png_seeklogo-340604.png","fallbacks":[]},
+    {"id":"stp10","nombre":"Fox Sports 1","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=fox1ar","logo":"https://images.seeklogo.com/logo-png/31/1/fox-sports-logo-png_seeklogo-315883.png","fallbacks":[]},
     {"id":"stp11","nombre":"Fox Sports 2","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=fox2ar","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp12","nombre":"Fox Sports 3","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=fox3ar","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp13","nombre":"DSports","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=dsports","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"stp13","nombre":"DSports","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=dsports","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
     {"id":"stp14","nombre":"DSports 2","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=dsports2","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp15","nombre":"DSports Plus","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=dsportsplus","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp16","nombre":"Win Sports+","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=winplus","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp17","nombre":"TNT Sports","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=tntsports","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"stp17","nombre":"TNT Sports","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=tntsports","logo":"https://images.seeklogo.com/logo-png/51/1/tnt-sports-logo-png_seeklogo-519540.png","fallbacks":[]},
     {"id":"stp18","nombre":"Max 1","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=max1","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp19","nombre":"TyC Internacional","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=tycinternacional","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp20","nombre":"FuTV","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=futv","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
@@ -83,29 +83,47 @@ CANALES_FIJOS = [
     {"id":"stp40","nombre":"Liga 1 Max","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=liga1max","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp41","nombre":"La Liga Hypermotion","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=laligahypermotion","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     {"id":"stp42","nombre":"Tigo Sports Paraguay","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=tigosportsparaguay","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp43","nombre":"Telefe","categoria":"AIRE","url":"https://streamtpnew.com/global1.php?stream=telefe","logo":"https://cdn-icons-png.flaticon.com/512/716/716429.png","fallbacks":[]},
-    {"id":"stp44","nombre":"TV Pública","categoria":"AIRE","url":"https://streamtpnew.com/global1.php?stream=tv_publica","logo":"https://cdn-icons-png.flaticon.com/512/716/716429.png","fallbacks":[]},
-    {"id":"stp45","nombre":"Disney 1","categoria":"INFANTIL","url":"https://streamtpnew.com/global1.php?stream=disney1","logo":"https://cdn-icons-png.flaticon.com/512/716/716429.png","fallbacks":[]},
-    {"id":"stp46","nombre":"Disney 2","categoria":"INFANTIL","url":"https://streamtpnew.com/global1.php?stream=disney2","logo":"https://cdn-icons-png.flaticon.com/512/716/716429.png","fallbacks":[]},
+    {"id":"stp43","nombre":"Telefe","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=telefe","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
+    {"id":"stp44","nombre":"TV Pública","categoria":"AIRE","url":"https://streamtpnew.com/global1.php?stream=tv_publica","logo":"https://images.seeklogo.com/logo-png/18/1/tv-publica-logo-png_seeklogo-180741.png","fallbacks":[]},
+    {"id":"stp45","nombre":"Disney 1","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=disney1","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp46","nombre":"Disney 2","categoria":"DEPORTES","url":"https://streamtpnew.com/global1.php?stream=disney2","logo":"https://cdn-icons-png.flaticon.com/512/716/716429.png","fallbacks":[]},
     # ── Bolaloca via proxy Railway ────────────────────────────────────
-    {"id":"bol01","nombre":"TYC SPORT BOL","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/77","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"bol02","nombre":"ESPN PREMIUM BOL","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/76","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"bol03","nombre":"FOXsport1 BOL","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/75","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"bol04","nombre":"DIRECTV BOL","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/94","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"bol05","nombre":"DSPORT2 BOL","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/95","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"bol06","nombre":"DSPORT+ BOL","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/96","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol01","nombre":"TYC SPORT B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/77","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol02","nombre":"ESPN PREMIUM B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/76","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol03","nombre":"TNT SPORT B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/75","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol04","nombre":"DSPORT B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/94","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol05","nombre":"DSPORT2 B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/95","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol06","nombre":"DSPORT+ B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/96","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol07","nombre":"+FOOT B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/12","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol08","nombre":"+SPORT B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/13","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol09","nombre":"+SPORT360 B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/14","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol10","nombre":"EUROSPORT1 B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/15","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol11","nombre":"EUROSPORT B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/16","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol12","nombre":"RMC SPORT1 B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/17","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol13","nombre":"CM B","categoria":"NOTICIAS","url":"https://bolaloca.my/player/1/18","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol14","nombre":"TUDN B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/68","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol15","nombre":"FOX DEPORTES B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/70","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol16","nombre":"LAS B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/74","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol17","nombre":"FOXSPORT B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/78","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol18","nombre":"FOXSPORT2 B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/79","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol19","nombre":"FOXSPORT3 B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/80","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol20","nombre":"WINSPORT B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/81","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol21","nombre":"TNTSPORT PREMIUM B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/83","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol22","nombre":"ESPN B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/87","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol23","nombre":"ESPN2 B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/88","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol24","nombre":"ESPN3 B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/89","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol25","nombre":"ESPN4 B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/90","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol26","nombre":"ESPN5 B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/91","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"bol27","nombre":"ESPN6 B","categoria":"DEPORTES","url":"https://bolaloca.my/player/1/92","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     
+
   # ── Bolaloca via proxy Railway (sin alerta Chrome) ──────────────────
 
     
 ]
 TDT_CANALES = [
-    {"id":"tdt001","nombre":"La 1","categoria":"AIRE","url":"https://dghxc56urunop.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-zabn6k211oedh/La1ES.m3u8","logo":"https://pbs.twimg.com/profile_images/2008842210414915584/zIp_go25_200x200.jpg","fallbacks":[]},
-    {"id":"tdt002","nombre":"La 2","categoria":"AIRE","url":"https://d1yebix5w29z3v.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a62b09d1/cc-haqfba85d1gvv/La2ES.m3u8","logo":"https://yt3.googleusercontent.com/ytc/AIdro_kqgHWySi5xprs1VFCNCX0IKNT8yXBLZC43JMoB8j0JUto=s200","fallbacks":[]},
     {"id":"tdt003","nombre":"TRECE","categoria":"AIRE","url":"https://play.cdn.enetres.net/091DB7AFBD77442B9BA2F141DCC182F5021/021/playlist.m3u8","logo":"https://graph.facebook.com/TRECEtves/picture?width=200&height=200","fallbacks":[]},
-    {"id":"tdt004","nombre":"El Toro TV","categoria":"AIRE","url":"https://streaming-1.eltorotv.com/lb0/eltorotv-streaming-web/index.m3u8","logo":"https://graph.facebook.com/eltorotv.es/picture?width=200&height=200","fallbacks":[]},
-    {"id":"tdt005","nombre":"RNE para todos","categoria":"AIRE","url":"https://rtvelivestream.rtve.es/rtvesec/rne/rne_para_todos_main.m3u8","logo":"https://graph.facebook.com/radionacionalrne/picture?width=200&height=200","fallbacks":[]},
-    ]
+     ]
 
 
 FUENTES_M3U = [
