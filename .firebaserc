@@ -1,7 +1,8 @@
 {
   "projects": {
     "default": "mundialenvivo-ar",
-    "mundial": "mundialenvivo-ar"
+    "mundial": "mundialenvivo-ar",
+    "mun": "mundialenvivo-ar"
   },
   "targets": {},
   "etags": {}
