@@ -245,6 +245,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   <p style="color:rgba(255,255,255,.5);font-size:13px;">Ingresá tu apodo para la tribuna</p>
   <input type="text" id="nick-in" placeholder="Ej: ElDiez_94" maxlength="20" autocomplete="off">
   <button id="nick-btn">⚽ ENTRAR</button>
+  <button onclick="saltearModal()" style="background:none;border:none;color:rgba(255,255,255,.3);font-size:12px;cursor:pointer;text-decoration:underline;">Entrar sin apodo</button>
   <p style="font-size:11px;color:rgba(255,255,255,.2);margin-top:4px;">Mundial 2026 · Libertadores · Sudamericana</p>
 </div>
 
@@ -453,11 +454,82 @@ function toast(msg, t=2800) {
   setTimeout(() => el.classList.remove("show"), t);
 }
 
-if(miNick) {
+// ── Modal apodo ───────────────────────────────────────────────────────────
+if (miNick) {
+  document.getElementById("modal-nick").style.display = "none";
+  document.getElementById("user-badge").textContent = miNick.slice(0,2).toUpperCase();
+}
+// Detectar TV Box / Android TV
+const esTVBox = /Android/i.test(navigator.userAgent) && window.innerWidth >= 900 && !('ontouchstart' in window);
+
+if (esTVBox && !miNick) {
+  // En TV Box asignar nick automático y saltear modal
+  const autoNick = "Viewer" + Math.floor(Math.random()*9000+1000);
+  localStorage.setItem("mnv_nick", autoNick); miNick = autoNick;
+  document.getElementById("modal-nick").style.display = "none";
+  document.getElementById("user-badge").textContent = "TV";
+  registrarPresencia(autoNick);
+} else {
+  // Auto-skip si no escribe en 30 segundos
+  let autoSkipTimer = setTimeout(() => {
+    const input = document.getElementById("nick-in");
+    if (input && !miNick) {
+      const autoNick = "Invitado" + Math.floor(Math.random()*9000+1000);
+      localStorage.setItem("mnv_nick", autoNick); miNick = autoNick;
+      document.getElementById("modal-nick").style.display = "none";
+      document.getElementById("user-badge").textContent = "IV";
+      registrarPresencia(autoNick);
+    }
+  }, 30000);
+
+  document.getElementById("nick-btn").onclick = () => {
+    clearTimeout(autoSkipTimer);
+    let n = document.getElementById("nick-in").value.trim();
+    if (!n) n = "Invitado" + Math.floor(Math.random()*9000+1000);
+    localStorage.setItem("mnv_nick", n); miNick = n;
     document.getElementById("modal-nick").style.display = "none";
-    document.getElementById("user-badge").textContent = miNick.slice(0,2).toUpperCase();
-    if(miNick.toLowerCase() === "blackwitcher") esAdmin = true;
-    if(esAdmin) document.getElementById("btn-admin").style.display = "flex";
+    document.getElementById("user-badge").textContent = n.slice(0,2).toUpperCase();
+    toast("¡Bienvenido " + n + "! ⚽");
+    registrarPresencia(n);
+  };
+  document.getElementById("nick-in").addEventListener("keydown", e => { if(e.key==="Enter") document.getElementById("nick-btn").click(); });
+}
+document.getElementById("user-badge").onclick = () => { if(confirm("¿Cambiar apodo?")) { localStorage.removeItem("mnv_nick"); location.reload(); } };
+
+// ── Tabs ──────────────────────────────────────────────────────────────────
+function cambiarTab(tab, btn) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("a"));
+  document.querySelectorAll(".ntab").forEach(b => b.classList.remove("a"));
+  document.getElementById("sec-" + tab).classList.add("a");
+  if (btn) btn.classList.add("a");
+  else {
+    const idx = {tv:0,mundial:1,conmebol:2,chat:3}[tab];
+    if (idx !== undefined) document.querySelectorAll(".ntab")[idx]?.classList.add("a");
+  }
+  if (tab === "chat") {
+    document.getElementById("main").style.overflow = "hidden";
+    document.getElementById("sec-chat").style.height = "calc(100vh - 170px)";
+  } else {
+    document.getElementById("main").style.overflow = "auto";
+  }
+}
+
+function cambiarSub(prefix, sec, btn) {
+  const parent = btn?.closest(".msec-wrap") || document.getElementById("sec-" + (prefix==="mun"?"mundial":"conmebol"));
+  if (!parent) return;
+  const zone = prefix === "mun" ? parent : btn?.closest(".msec")?.parentElement || parent;
+  zone.querySelectorAll(":scope > .msec").forEach(s => s.classList.remove("a"));
+  zone.querySelectorAll(":scope > .sub-tabs .stab, :scope > div > .sub-tabs .stab").forEach(b => b.classList.remove("a"));
+  const el = document.getElementById(prefix + "-" + sec);
+  if (el) el.classList.add("a");
+  if (btn) btn.classList.add("a");
+}
+
+function cambiarConmebol(torneo, btn) {
+  document.querySelectorAll("#sec-conmebol .msec-wrap > .msec").forEach(s => s.classList.remove("a"));
+  document.querySelectorAll("#sec-conmebol .msec-wrap > .sub-tabs .stab").forEach(b => b.classList.remove("a"));
+  document.getElementById("con-" + torneo)?.classList.add("a");
+  if (btn) btn.classList.add("a");
 }
 
 function setNavActive(idx) {
@@ -620,47 +692,451 @@ db.ref("canales").on("value", snap => {
   renderTV();
 });
 
-// --- LOGO RESET ---
-document.getElementById("logo-main").onclick = () => location.reload();
-
-// --- TABS Y PLAYER ---
-function tab(t, b) {
-    document.querySelectorAll(".section").forEach(s => s.style.display = "none");
-    document.querySelectorAll(".ntab").forEach(n => n.classList.remove("a"));
-    document.getElementById("sec-"+t).style.display = (t==='chat'?'flex':'block');
-    b.classList.add("a");
+// ── Filtrar por categoría ─────────────────────────────────────────────────
+function filtrarCat(cat, btn) {
+  catActual = cat;
+  document.querySelectorAll(".cat-pill").forEach(p => {
+    const cls = p.classList[1];
+    const map = { all:"TODO", dep:"DEPORTES", not:"NOTICIAS", aire:"AIRE", mus:"MUSICA", inf:"INFANTIL", int:"INTERNACIONAL" };
+    p.classList.toggle("active-pill", map[cls] === cat);
+  });
+  renderTV();
 }
 
-db.ref('canales').on('value', snap => {
-    const grid = document.getElementById("grid-canales");
-    grid.innerHTML = "";
-    snap.forEach(ch => {
-        const c = ch.val();
-        const d = document.createElement("div");
-        d.style = "background:var(--card2); padding:15px; border-radius:8px; margin-bottom:10px; cursor:pointer; border-left:4px solid var(--cel);";
-        d.innerHTML = `<strong>${c.nombre || ch.key}</strong>`;
-        d.onclick = () => {
-            document.getElementById("hero-placeholder").style.display = "none";
-            const v = document.getElementById("video-el"), f = document.getElementById("iframe-el");
-            if(c.url.includes(".m3u8")) {
-                f.style.display="none"; v.style.display="block";
-                if(Hls.isSupported()){ const h=new Hls(); h.loadSource(c.url); h.attachMedia(v); }
-            } else { v.style.display="none"; f.style.display="block"; f.src=c.url; }
-        };
-        grid.appendChild(d);
+// ── Render TV ─────────────────────────────────────────────────────────────
+function renderTV() {
+  const body = document.getElementById("tv-body");
+  body.innerHTML = "";
+
+  let lista = todosCanales;
+  if (catActual !== "TODO") {
+    if (catActual === "FAV") lista = todosCanales.filter(c => esFavorito(c.nombre));
+    else lista = todosCanales.filter(c => (c.categoria||"").toUpperCase() === catActual);
+  }
+
+  if (catActual !== "TODO") {
+    // Vista de grilla al filtrar por categoría
+    renderGrillaCanales(body, lista, catActual);
+    return;
+  }
+
+  // Vista principal — carruseles por sección
+
+  // Favoritos
+  const favsList = todosCanales.filter(c => esFavorito(c.nombre));
+  if (favsList.length > 0) {
+    const sec = crearSeccion("⭐ Mis favoritos", null, favsList.length, "FAV");
+    const strip = document.createElement("div"); strip.className = "fav-strip";
+    favsList.forEach(c => {
+      const pill = document.createElement("div"); pill.className = "fav-pill" + (canalActivo===c.nombre?" a":"");
+      pill.innerHTML = `<div class="fdot"></div><div class="fname">${c.nombre}</div>`;
+      pill.onclick = () => reproducir(c.url, c.nombre, c.fallbacks||[]);
+      strip.appendChild(pill);
     });
+    const addPill = document.createElement("div"); addPill.className = "fav-pill add"; addPill.textContent = "+ Agregar";
+    addPill.onclick = () => { filtrarCat("TODO", null); toast("Tocá ❤️ en cualquier canal para agregar"); };
+    strip.appendChild(addPill);
+    sec.appendChild(strip); body.appendChild(sec);
+  }
+
+  // Deportes — carrusel pequeño
+  const deps = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "DEPORTES");
+  if (deps.length) {
+    const sec = crearSeccion("⚽ Deportes", "var(--dep)", deps.length, "DEPORTES");
+    sec.appendChild(crearCarruselSm(deps));
+    body.appendChild(sec);
+  }
+
+  // Noticias — carrusel grande
+  const nots = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "NOTICIAS");
+  if (nots.length) {
+    const sec = crearSeccion("📰 Noticias", "var(--cel)", nots.length, "NOTICIAS");
+    sec.appendChild(crearCarruselLg(nots));
+    body.appendChild(sec);
+  }
+
+  // Aire — carrusel pequeño
+  const aire = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "AIRE");
+  if (aire.length) {
+    const sec = crearSeccion("📺 Canales de Aire", "var(--aire)", aire.length, "AIRE");
+    sec.appendChild(crearCarruselSm(aire));
+    body.appendChild(sec);
+  }
+
+  // Internacional — carrusel grande
+  const intl = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "INTERNACIONAL");
+  if (intl.length) {
+    const sec = crearSeccion("🌐 Internacional", "var(--int)", intl.length, "INTERNACIONAL");
+    sec.appendChild(crearCarruselLg(intl));
+    body.appendChild(sec);
+  }
+
+  // Infantil + Música — grid 2 col
+  const inf = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "INFANTIL");
+  const mus = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
+  if (inf.length || mus.length) {
+    const grid = document.createElement("div"); grid.className = "grid2";
+    if (inf.length) { const col = crearGrid2Col("👦 Infantil", "var(--inf)", inf.slice(0,5)); grid.appendChild(col); }
+    if (mus.length) { const col = crearGrid2Col("🎵 Música", "var(--mus)", mus.slice(0,5)); grid.appendChild(col); }
+    body.appendChild(grid);
+  }
+
+  // Historial
+  if (historial.length > 0) {
+    const sec = crearSeccion("🕐 Visto recientemente", null, null, null);
+    historial.slice(0, 5).forEach(h => {
+      const row = document.createElement("div"); row.className = "hist-row";
+      const canal = todosCanales.find(c => c.nombre === h.nombre);
+      const logo = canal?.logo || LOGO_DEF;
+      row.innerHTML = `<div class="h-thumb"><img src="${logo}" onerror="this.src='${LOGO_DEF}'" alt="${h.nombre}"></div><div class="h-info"><div class="h-name">${h.nombre}</div><div class="h-time">${tiempoRelativo(h.ts)}</div></div><div class="h-play"><div class="ptri"></div></div>`;
+      row.onclick = () => reproducir(h.url, h.nombre, h.fallbacks||[]);
+      sec.appendChild(row);
+    });
+    body.appendChild(sec);
+  }
+
+  // Padding bottom
+  const pad = document.createElement("div"); pad.style.height = "20px";
+  body.appendChild(pad);
+}
+
+function crearSeccion(titulo, color, count, cat) {
+  const sec = document.createElement("div"); sec.className = "row-sec";
+  const hdr = document.createElement("div"); hdr.className = "row-hdr";
+  const t = document.createElement("div"); t.className = "row-title";
+  if (color) t.style.color = color;
+  t.textContent = titulo + (count ? "" : "");
+  hdr.appendChild(t);
+  if (cat && count) {
+    const ver = document.createElement("div"); ver.className = "row-ver";
+    ver.textContent = "Ver todos (" + count + ")";
+    ver.onclick = () => filtrarCat(cat, null);
+    hdr.appendChild(ver);
+  }
+  sec.appendChild(hdr);
+  return sec;
+}
+
+function crearCarruselSm(lista) {
+  const car = document.createElement("div"); car.className = "car-sm";
+  lista.slice(0, 20).forEach(c => {
+    const item = document.createElement("div"); item.className = "ch-sm";
+    const logo = document.createElement("div"); logo.className = "ch-sm-logo" + (canalActivo===c.nombre?" a":"");
+    logo.innerHTML = `<img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}"><div class="ldot"></div>`;
+    const name = document.createElement("div"); name.className = "ch-sm-name"; name.textContent = c.nombre;
+    item.appendChild(logo); item.appendChild(name);
+    item.onclick = () => { reproducir(c.url, c.nombre, c.fallbacks||[]); renderTV(); };
+    car.appendChild(item);
+  });
+  return car;
+}
+
+function crearCarruselLg(lista) {
+  const car = document.createElement("div"); car.className = "car-lg";
+  lista.slice(0, 15).forEach(c => {
+    const item = document.createElement("div"); item.className = "ch-lg" + (canalActivo===c.nombre?" a":"");
+    item.innerHTML = `
+      <div class="ch-lg-img">
+        <img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}">
+        <div class="ch-lg-live">EN VIVO</div>
+      </div>
+      <div class="ch-lg-info">
+        <div class="ch-lg-name">${c.nombre}</div>
+        <div class="ch-lg-cat">${c.categoria||""}</div>
+      </div>`;
+    item.onclick = () => { reproducir(c.url, c.nombre, c.fallbacks||[]); renderTV(); };
+    car.appendChild(item);
+  });
+  return car;
+}
+
+function crearGrid2Col(titulo, color, lista) {
+  const col = document.createElement("div"); col.className = "grid2-col";
+  const t = document.createElement("div"); t.className = "grid2-title"; t.style.color = color; t.textContent = titulo;
+  col.appendChild(t);
+  lista.forEach(c => {
+    const row = document.createElement("div"); row.className = "grid2-row";
+    row.innerHTML = `<div class="grid2-thumb"><img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}"></div><div class="grid2-name">${c.nombre}</div>`;
+    row.onclick = () => reproducir(c.url, c.nombre, c.fallbacks||[]);
+    col.appendChild(row);
+  });
+  return col;
+}
+
+function renderGrillaCanales(container, lista, cat) {
+  if (!lista.length) { container.innerHTML = '<p style="color:var(--muted);text-align:center;padding:30px;">No hay canales en esta categoría</p>'; return; }
+  const wrap = document.createElement("div"); wrap.style.cssText = "display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px;padding:10px 14px 80px;";
+  lista.forEach(c => {
+    const card = document.createElement("div");
+    card.style.cssText = "background:var(--card);border-radius:var(--rad);padding:10px 6px;text-align:center;cursor:pointer;border:1.5px solid " + (canalActivo===c.nombre?"var(--dor)":"rgba(116,172,223,0.15)") + ";display:flex;flex-direction:column;align-items:center;gap:5px;";
+    card.innerHTML = `<div class="ldot" style="position:static;"></div><img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}" style="width:44px;height:44px;object-fit:contain;border-radius:6px;"><div style="font-size:10px;font-weight:600;line-height:1.2;">${c.nombre}</div>`;
+    card.onclick = () => { reproducir(c.url, c.nombre, c.fallbacks||[]); renderGrillaCanales(container, lista, cat); };
+    wrap.appendChild(card);
+  });
+  container.appendChild(wrap);
+}
+
+// ── Filtro país ───────────────────────────────────────────────────────────
+function abrirFiltrosPais() {
+  const paises = [...new Set(todosCanales.map(c => c.pais).filter(Boolean))].sort();
+  if (!paises.length) { toast("ℹ️ Próximamente filtro por país"); return; }
+  // Simple toast por ahora
+  toast("🌐 " + paises.slice(0,5).join(", ") + "...");
+}
+
+// ── Mundial ───────────────────────────────────────────────────────────────
+db.ref("partidos").on("value", snap => {
+  const data = snap.val(); if (!data) return;
+  mundialData = Object.entries(data).map(([id,p]) => ({id,...p}));
+  renderMundialGrupos();
+  renderFixture("mun", mundialData, filtMundial);
+  renderPosicionesTabla("mun-posiciones", mundialData);
 });
 
-// --- ADMIN STATS ---
-function verStats() {
-    db.ref('stats/visitas_totales').once('value', s => {
-        alert("📊 TECNOCOM STATS\n\nTotal Visitas: " + (s.val() || 0));
+function renderMundialGrupos() {
+  const el = document.getElementById("mun-grupos"); el.innerHTML = "";
+  const equipos = {};
+  mundialData.forEach(p => {
+    if (!p.grupo) return;
+    [p.local, p.visitante].forEach((eq,i) => {
+      if (!eq) return;
+      if (!equipos[eq]) equipos[eq] = {nombre:eq,grupo:p.grupo,pj:0,pg:0,pe:0,pp:0,gf:0,gc:0,pts:0,bandera:i===0?p.bandera_local||"🏳":p.bandera_visitante||"🏳"};
     });
+    if (p.estado==="FIN" && p.goles_local!=null && p.goles_visitante!=null) {
+      const loc=equipos[p.local], vis=equipos[p.visitante]; if(!loc||!vis) return;
+      loc.pj++;vis.pj++;loc.gf+=p.goles_local;loc.gc+=p.goles_visitante;vis.gf+=p.goles_visitante;vis.gc+=p.goles_local;
+      if(p.goles_local>p.goles_visitante){loc.pg++;loc.pts+=3;vis.pp++;}
+      else if(p.goles_local<p.goles_visitante){vis.pg++;vis.pts+=3;loc.pp++;}
+      else{loc.pe++;vis.pe++;loc.pts++;vis.pts++;}
+    }
+  });
+  const grupos = {};
+  Object.values(equipos).forEach(eq => { if(!grupos[eq.grupo])grupos[eq.grupo]=[]; grupos[eq.grupo].push(eq); });
+  Object.values(grupos).forEach(g => g.sort((a,b) => b.pts-a.pts||(b.gf-b.gc)-(a.gf-a.gc)));
+  if (!Object.keys(grupos).length) { el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">⏳ Cargando grupos...</p>'; return; }
+  el.style.padding = "8px 0";
+  const grid = document.createElement("div"); grid.className = "grupos-grid";
+  Object.entries(grupos).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([grupo,eqs]) => {
+    const card = document.createElement("div"); card.className = "grupo-card";
+    card.innerHTML = `<div class="grupo-hdr"><div class="grupo-title">GRUPO ${grupo}</div><span style="font-size:10px;color:var(--muted)">🌍</span></div>`;
+    const body = document.createElement("div"); body.className = "grupo-body";
+    eqs.forEach((eq,i) => {
+      const row = document.createElement("div"); row.className = "grupo-eq" + (i<2?" top":"");
+      row.innerHTML = `<span>${eq.bandera}</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${eq.nombre}</span><span style="color:var(--dor);font-weight:700">${eq.pts}</span>`;
+      body.appendChild(row);
+    });
+    card.appendChild(body); grid.appendChild(card);
+  });
+  el.appendChild(grid);
 }
 
-// Contador silencioso
-if(miNick) db.ref('stats/visitas_totales').transaction(c => (c || 0) + 1);
+function filtrarFixture(prefix, f, btn) {
+  if (prefix === "mun") filtMundial = f;
+  const zone = btn?.closest(".msec");
+  zone?.querySelectorAll(".stab").forEach(b=>b.classList.remove("a"));
+  if(btn) btn.classList.add("a");
+  renderFixture(prefix, prefix==="mun"?mundialData:[], f);
+}
 
+function renderFixture(prefix, partidos, filtro) {
+  const el = document.getElementById(prefix + "-fixture-list"); if(!el) return;
+  let lista = [...partidos];
+  const hoy = new Date().toISOString().slice(0,10);
+  if (filtro==="ARG") lista = lista.filter(p=>p.local==="Argentina"||p.visitante==="Argentina");
+  else if (filtro==="live") lista = lista.filter(p=>p.estado==="LIVE");
+  else if (filtro==="hoy") lista = lista.filter(p=>p.fecha?.startsWith(hoy));
+  lista.sort((a,b)=>(a.fecha||"").localeCompare(b.fecha||""));
+  if (!lista.length) { el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">No hay partidos para mostrar</p>'; return; }
+  const porFecha = {};
+  lista.forEach(p => {
+    const f = p.fecha ? new Date(p.fecha).toLocaleDateString("es-AR",{weekday:"short",day:"numeric",month:"short"}) : "Sin fecha";
+    if(!porFecha[f])porFecha[f]=[];
+    porFecha[f].push(p);
+  });
+  el.innerHTML = Object.entries(porFecha).map(([fecha,ps]) => `
+    <div class="fecha-sep">📅 ${fecha}</div>
+    ${ps.map(p => {
+      const live=p.estado==="LIVE",fin=p.estado==="FIN",nScore=p.goles_local==null||p.goles_visitante==null;
+      return `<div class="partido-row ${live?"live":""}">
+        <div><div class="p-hora">${p.hora||"--:--"}</div><div class="p-badge ${live?"live":fin?"fin":"pronto"}">${live?"LIVE":fin?"FIN":"PRÓX"}</div></div>
+        <div class="p-teams">
+          <div class="p-team"><span>${p.bandera_local||"🏳"}</span><span>${p.local||"?"}</span></div>
+          <div class="p-score${nScore?" pend":""}">${nScore?"vs":`${p.goles_local}-${p.goles_visitante}`}</div>
+          <div class="p-team r"><span>${p.visitante||"?"}</span><span>${p.bandera_visitante||"🏳"}</span></div>
+        </div>
+        <div class="p-grp">${p.grupo||""}</div>
+      </div>`;
+    }).join("")}`).join("");
+}
+
+function renderPosicionesTabla(elId, partidos) {
+  const el = document.getElementById(elId); if(!el) return;
+  const equipos={};
+  partidos.forEach(p=>{
+    [p.local,p.visitante].forEach((eq,i)=>{
+      if(!eq) return;
+      if(!equipos[eq])equipos[eq]={nombre:eq,pj:0,pg:0,pe:0,pp:0,gf:0,gc:0,pts:0,bandera:i===0?p.bandera_local||"🏳":p.bandera_visitante||"🏳",grupo:p.grupo||""};
+    });
+    if(p.estado==="FIN"&&p.goles_local!=null&&p.goles_visitante!=null){
+      const loc=equipos[p.local],vis=equipos[p.visitante];if(!loc||!vis)return;
+      loc.pj++;vis.pj++;loc.gf+=p.goles_local;loc.gc+=p.goles_visitante;vis.gf+=p.goles_visitante;vis.gc+=p.goles_local;
+      if(p.goles_local>p.goles_visitante){loc.pg++;loc.pts+=3;vis.pp++;}
+      else if(p.goles_local<p.goles_visitante){vis.pg++;vis.pts+=3;loc.pp++;}
+      else{loc.pe++;vis.pe++;loc.pts++;vis.pts++;}
+    }
+  });
+  const lista=Object.values(equipos).sort((a,b)=>b.pts-a.pts||(b.gf-b.gc)-(a.gf-a.gc));
+  if(!lista.length){el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">⏳ Sin resultados aún</p>';return;}
+  el.style.overflowX="auto";
+  el.innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:11px;margin-top:8px;">
+    <thead><tr style="background:rgba(0,51,102,0.6);">
+      <th style="padding:7px 8px;text-align:left;color:var(--muted);font-size:10px;">#</th>
+      <th style="padding:7px 4px;text-align:left;color:var(--muted);font-size:10px;">Equipo</th>
+      <th style="padding:7px 4px;text-align:center;color:var(--muted);font-size:10px;">PJ</th>
+      <th style="padding:7px 4px;text-align:center;color:var(--muted);font-size:10px;">PG</th>
+      <th style="padding:7px 4px;text-align:center;color:var(--muted);font-size:10px;">DG</th>
+      <th style="padding:7px 8px;text-align:center;color:var(--muted);font-size:10px;">PTS</th>
+    </tr></thead>
+    <tbody>${lista.map((eq,i)=>`<tr style="border-bottom:1px solid rgba(255,255,255,.04);${i<16?"border-left:3px solid rgba(46,204,113,.4)":i>=lista.length-8?"border-left:3px solid rgba(231,76,60,.4)":""}">
+      <td style="padding:7px 8px;color:var(--muted)">${i+1}</td>
+      <td style="padding:7px 4px"><div style="display:flex;align-items:center;gap:5px;"><span>${eq.bandera}</span><span style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:90px">${eq.nombre}</span></div></td>
+      <td style="padding:7px 4px;text-align:center">${eq.pj}</td>
+      <td style="padding:7px 4px;text-align:center">${eq.pg}</td>
+      <td style="padding:7px 4px;text-align:center">${eq.gf-eq.gc>0?"+":""}${eq.gf-eq.gc}</td>
+      <td style="padding:7px 8px;text-align:center;font-weight:700;color:var(--dor)">${eq.pts}</td>
+    </tr>`).join("")}</tbody>
+  </table>`;
+}
+
+// ── Libertadores / Sudamericana ───────────────────────────────────────────
+db.ref("libertadores").on("value", snap => {
+  const data = snap.val(); if(!data) return;
+  renderGruposConmebol("lib-grupos", data.grupos||{}, "🏆");
+  renderPartidosConmebol("lib-fixture-list", data.partidos||{});
+  renderPosicionesConmebol("lib-pos", data.partidos||{});
+});
+db.ref("sudamericana").on("value", snap => {
+  const data = snap.val(); if(!data) return;
+  renderGruposConmebol("sud-grupos", data.grupos||{}, "🟠");
+  renderPartidosConmebol("sud-fixture-list", data.partidos||{});
+  renderPosicionesConmebol("sud-pos", data.partidos||{});
+});
+
+function renderGruposConmebol(elId, grupos, icon) {
+  const el = document.getElementById(elId); if(!el) return;
+  el.style.padding="8px 0";
+  if(!Object.keys(grupos).length){el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">⏳ Cargando grupos...</p>';return;}
+  const grid=document.createElement("div");grid.className="grupos-grid";
+  Object.entries(grupos).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([grupo,data])=>{
+    const eqs=data.equipos||[];
+    const card=document.createElement("div");card.className="grupo-card";
+    card.innerHTML=`<div class="grupo-hdr"><div class="grupo-title">GRUPO ${grupo}</div><span>${icon}</span></div>`;
+    const body=document.createElement("div");body.className="grupo-body";
+    eqs.forEach((eq,i)=>{
+      const row=document.createElement("div");row.className="grupo-eq"+(i<2?" top":"");
+      row.innerHTML=`<span>${eq.bandera||"🏳"}</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px">${eq.nombre}</span><span style="font-size:10px;color:var(--muted)">${eq.pais||""}</span>`;
+      body.appendChild(row);
+    });
+    card.appendChild(body);grid.appendChild(card);
+  });
+  el.appendChild(grid);
+}
+
+function renderPartidosConmebol(elId, partidos) {
+  const el=document.getElementById(elId);if(!el)return;
+  const lista=Object.values(partidos||{}).sort((a,b)=>(a.fecha||"").localeCompare(b.fecha||""));
+  if(!lista.length){el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">📅 Partidos próximamente</p>';return;}
+  renderFixture("_tmp", lista, "todos");
+}
+
+function renderPosicionesConmebol(elId, partidos) {
+  renderPosicionesTabla(elId, Object.values(partidos||{}));
+}
+
+// ── Chat ──────────────────────────────────────────────────────────────────
+db.ref("chat").orderByChild("fecha").limitToLast(60).on("child_added", snap => {
+  const m=snap.val();if(!m||!m.usuario||!m.texto)return;
+  const div=document.createElement("div");div.className="msg";
+  div.innerHTML=`<span class="msg-nick">${m.usuario.replace(/</g,"&lt;")}:</span><span class="msg-txt">${m.texto.replace(/</g,"&lt;")}</span>`;
+  const msgs=document.getElementById("chat-msgs");msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
+});
+
+function enviarMensaje(){
+  const input=document.getElementById("chat-in"),t=input.value.trim();
+  if(!miNick){toast("⚠️ Primero ingresá tu apodo");return;}if(!t)return;
+  db.ref("chat").push({usuario:miNick,texto:t,fecha:firebase.database.ServerValue.TIMESTAMP});
+  input.value="";
+}
+document.getElementById("chat-btn").onclick=enviarMensaje;
+document.getElementById("chat-in").addEventListener("keydown",e=>{if(e.key==="Enter")enviarMensaje();});
+
+// ── PWA ───────────────────────────────────────────────────────────────────
+let deferredPrompt=null;
+const btnI=document.getElementById("btn-instalar");
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;btnI.style.display="flex";});
+btnI.onclick=async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();const{outcome}=await deferredPrompt.userChoice;if(outcome==="accepted"){btnI.style.display="none";toast("✅ ¡App instalada!");}deferredPrompt=null;};
+window.addEventListener("appinstalled",()=>btnI.style.display="none");
+const esIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const enSafari=/safari/i.test(navigator.userAgent)&&!/chrome/i.test(navigator.userAgent);
+if(esIOS&&enSafari&&!window.matchMedia("(display-mode:standalone)").matches&&!localStorage.getItem("ios_cerrado")){
+  setTimeout(()=>document.getElementById("ios-banner").style.display="block",5000);
+}
+document.getElementById("ios-close").onclick=()=>{document.getElementById("ios-banner").style.display="none";localStorage.setItem("ios_cerrado","1");};
+if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+
+// ── Presencia y blacklist ─────────────────────────────────────────────────
+function registrarPresencia(nick) {
+  // Verificar blacklist primero
+  db.ref("blacklist/" + nick).once("value", snap => {
+    if (snap.exists() && snap.val() === true) {
+      // Usuario baneado
+      document.body.innerHTML = `
+        <div style="position:fixed;inset:0;background:#0a1628;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#e8edf5;">
+          <div style="font-size:60px;">🚫</div>
+          <h1 style="color:#e74c3c;font-size:24px;">Acceso bloqueado</h1>
+          <p style="color:#6b7fa0;font-size:14px;">Tu usuario ha sido baneado de MundialEnVivo AR.</p>
+          <p style="color:#6b7fa0;font-size:12px;">Si creés que es un error, contactá al administrador.</p>
+        </div>`;
+      return;
+    }
+    // Registrar presencia online
+    const statusRef = db.ref("status/" + nick);
+    statusRef.set({ online: true, ts: firebase.database.ServerValue.TIMESTAMP });
+    statusRef.onDisconnect().remove();
+    // Incrementar visitas
+    db.ref("stats/visitas_totales").transaction(v => (v || 0) + 1);
+  });
+}
+
+// Si ya tiene nick registrado, verificar blacklist al cargar
+if (miNick) {
+  db.ref("blacklist/" + miNick).once("value", snap => {
+    if (snap.exists() && snap.val() === true) {
+      document.body.innerHTML = `
+        <div style="position:fixed;inset:0;background:#0a1628;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#e8edf5;">
+          <div style="font-size:60px;">🚫</div>
+          <h1 style="color:#e74c3c;font-size:24px;">Acceso bloqueado</h1>
+          <p style="color:#6b7fa0;font-size:14px;">Tu usuario ha sido baneado de MundialEnVivo AR.</p>
+        </div>`;
+      return;
+    }
+    // Registrar presencia
+    const statusRef = db.ref("status/" + miNick);
+    statusRef.set({ online: true, ts: firebase.database.ServerValue.TIMESTAMP });
+    statusRef.onDisconnect().remove();
+    // Incrementar visitas
+    db.ref("stats/visitas_totales").transaction(v => (v || 0) + 1);
+  });
+}
+
+
+function saltearModal() {
+  const autoNick = "Invitado" + Math.floor(Math.random()*9000+1000);
+  localStorage.setItem("mnv_nick", autoNick); miNick = autoNick;
+  document.getElementById("modal-nick").style.display = "none";
+  document.getElementById("user-badge").textContent = "IV";
+  registrarPresencia(autoNick);
+}
 </script>
 </body>
 </html>
