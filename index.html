@@ -129,17 +129,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 .ch-sm-name{font-size:10px;font-weight:600;text-align:center;line-height:1.2;color:var(--txt);}
 .ldot{position:absolute;top:4px;right:4px;width:6px;height:6px;border-radius:50%;background:var(--roj);animation:blink 1.5s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-@media (min-width: 900px) {
-    /* Si se detecta pantalla grande (TV/PC), agrandamos un poco los textos */
-    body { font-size: 18px; }
-    .ch-sm-logo { width: 80px; height: 80px; }
-}
 
-/* Mejora la visibilidad del foco para controles remotos */
-:focus {
-    outline: 2px solid var(--dor) !important;
-    outline-offset: 2px;
-}
 /* Carrusel grande (cards) */
 .car-lg{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:0 14px 4px;}
 .car-lg::-webkit-scrollbar{display:none;}
