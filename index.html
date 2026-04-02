@@ -2,13 +2,19 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>MundialEnVivo AR</title>
-<meta name="theme-color" content="#001f3f">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MundialAR">
+<meta name="application-name" content="MundialAR">
+<meta name="theme-color" content="#001f3f">
+<meta name="HandheldFriendly" content="true">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MundialEnVivo AR">
+<meta property="og:description" content="TV en vivo, Mundial 2026 y Tribuna en tiempo real.">
+<meta property="og:image" content="/img/logo-share.png">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -17,6 +23,18 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <style>
+@media (min-width: 900px) {
+    /* Si se detecta pantalla grande (TV/PC), agrandamos un poco los textos */
+    body { font-size: 18px; }
+    .ch-sm-logo { width: 80px; height: 80px; }
+}
+
+/* Mejora la visibilidad del foco para controles remotos */
+:focus {
+    outline: 2px solid var(--dor) !important;
+    outline-offset: 2px;
+}
+
 :root{
   --az:#001f3f;--az2:#003366;--cel:#74ACDF;--dor:#C5A059;
   --roj:#e74c3c;--bg:#0a1628;--card:#0f2040;--card2:#152a50;
