@@ -2,20 +2,33 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+
 <title>MundialEnVivo AR</title>
-<meta name="theme-color" content="#001f3f">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MundialAR">
+<meta name="application-name" content="MundialAR">
+<meta name="theme-color" content="#001f3f">
+<meta name="HandheldFriendly" content="true">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MundialEnVivo AR">
+<meta property="og:description" content="TV en vivo, Mundial 2026 y Tribuna en tiempo real.">
+<meta property="og:image" content="/img/logo-share.png">
+
+
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
 <style>
 :root{
   --az:#001f3f;--az2:#003366;--cel:#74ACDF;--dor:#C5A059;
@@ -24,6 +37,19 @@
   --dep:#2ecc71;--not:#74ACDF;--aire:#c39bd3;
   --mus:#e67e22;--inf:#3498db;--int:#e74c3c;
 }
+@media (min-width: 900px) {
+    /* Si se detecta pantalla grande (TV/PC), agrandamos un poco los textos */
+    body { font-size: 18px; }
+    .ch-sm-logo { width: 80px; height: 80px; }
+}
+
+/* Mejora la visibilidad del foco para controles remotos */
+:focus {
+    outline: 2px solid var(--dor) !important;
+    outline-offset: 2px;
+}
+
+
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;}
@@ -68,6 +94,16 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 .cat-pill.mus{background:rgba(230,126,34,0.15);color:var(--mus);border-color:rgba(230,126,34,0.3);}
 .cat-pill.inf{background:rgba(52,152,219,0.15);color:var(--inf);border-color:rgba(52,152,219,0.3);}
 .cat-pill.int{background:rgba(231,76,60,0.15);color:var(--int);border-color:rgba(231,76,60,0.3);}
+
+
+/* ── Capa publicidad ── */
+#capa-pub{position:absolute;inset:0;background:rgba(0,0,0,0.92);z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+#capa-pub h5{color:var(--dor);font-size:14px;font-weight:700;text-align:center;}
+#capa-pub p{color:rgba(255,255,255,.4);font-size:11px;text-align:center;}
+#btn-continuar{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);padding:7px 20px;border-radius:6px;cursor:pointer;font-size:12px;display:none;}
+#btn-continuar:hover{background:rgba(255,255,255,.1);}
+#btn-continuar.show{display:block;}
+#contador-ad{color:var(--dor);font-size:11px;font-weight:700;}
 
 /* ── PLAYER HERO ── */
 #player-hero{position:relative;background:#000;width:100%;aspect-ratio:16/9;max-height:210px;flex-shrink:0;}
@@ -277,7 +313,22 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 <!-- Main scrollable area -->
 <div id="main">
 
-  <!-- ══ TV EN VIVO ══ -->
+  
+<!-- Adsterra Banner 728x90 -->
+<div id="ad-banner-top" style="display:flex;justify-content:center;background:#000;padding:4px 0;flex-shrink:0;overflow:hidden;max-height:100px;">
+  <script>
+    atOptions = {
+      'key' : 'b99a39ce7b14971e0caa9dc494ae20c7',
+      'format' : 'iframe',
+      'height' : 90,
+      'width' : 728,
+      'params' : {}
+    };
+  </script>
+  <script src="https://www.highperformanceformat.com/b99a39ce7b14971e0caa9dc494ae20c7/invoke.js"></script>
+</div>
+
+    <!-- ══ TV EN VIVO ══ -->
   <div id="sec-tv" class="section a">
 
     <!-- Player hero -->
@@ -301,7 +352,28 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
           <p>No se pudo cargar la señal.</p>
           <button id="btn-retry">🔄 Reintentar</button>
         </div>
-        <div id="hero-placeholder">
+        
+      <!-- Capa publicidad -->
+      <div id="capa-pub">
+        <h5>📺 Cargando transmisión...</h5>
+        <p>Apoyá el proyecto mirando el anuncio</p>
+        <div id="ad-box-300">
+          <script>
+            atOptions = {
+              'key' : 'd9da60396f0623535420e8479310b380',
+              'format' : 'iframe',
+              'height' : 250,
+              'width' : 300,
+              'params' : {}
+            };
+          </script>
+          <script src="https://www.highperformanceformat.com/d9da60396f0623535420e8479310b380/invoke.js"></script>
+        </div>
+        <span id="contador-ad">Esperá <span id="seg-ad">5</span>s...</span>
+        <button id="btn-continuar" onclick="cerrarPublicidad()">Continuar al video ✕</button>
+      </div>
+
+      <div id="hero-placeholder">
           <span style="font-size:40px;">📺</span>
           <p>Seleccioná un canal para comenzar</p>
         </div>
@@ -1137,6 +1209,53 @@ function saltearModal() {
   document.getElementById("user-badge").textContent = "IV";
   registrarPresencia(autoNick);
 }
+</script>
+
+<!-- Adsterra Social Bar -->
+<script src="https://pl29026838.profitablecpmratenetwork.com/91/ee/53/91ee5345c4bd4084c43d4dcd1178b274.js"></script>
+<!-- Adsterra Popunder -->
+<script src="https://pl29026837.profitablecpmratenetwork.com/0a/ec/43/0aec43506c13bbcb27d428093b733a58.js">
+// ── Publicidad player ─────────────────────────────────────────────────────
+let adTimerStarted = false;
+
+function mostrarCapaPublicidad() {
+  const capa = document.getElementById("capa-pub");
+  if (!capa || adTimerStarted) return;
+  capa.style.display = "flex";
+  adTimerStarted = true;
+  let segs = 5;
+  const segEl = document.getElementById("seg-ad");
+  const contEl = document.getElementById("contador-ad");
+  const btnEl = document.getElementById("btn-continuar");
+  const timer = setInterval(() => {
+    segs--;
+    if (segEl) segEl.textContent = segs;
+    if (segs <= 0) {
+      clearInterval(timer);
+      if (contEl) contEl.style.display = "none";
+      if (btnEl) btnEl.classList.add("show");
+    }
+  }, 1000);
+}
+
+function cerrarPublicidad() {
+  const capa = document.getElementById("capa-pub");
+  if (capa) capa.style.display = "none";
+}
+
+// Mostrar publicidad la primera vez que el usuario toca un canal
+const _reproducirOriginal = reproducir;
+let primerCanal = true;
+reproducir = function(url, nombre, fallbacks) {
+  if (primerCanal) {
+    primerCanal = false;
+    mostrarCapaPublicidad();
+    setTimeout(() => _reproducirOriginal(url, nombre, fallbacks), 100);
+  } else {
+    _reproducirOriginal(url, nombre, fallbacks);
+  }
+};
+
 </script>
 </body>
 </html>
