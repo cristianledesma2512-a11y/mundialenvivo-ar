@@ -1244,35 +1244,46 @@ function saltearModal() {
 <script src="https://pl29026837.profitablecpmratenetwork.com/0a/ec/43/0aec43506c13bbcb27d428093b733a58.js"></script>
 
 <script>
-let adTimerStarted = false;
+  // ── Publicidad player ─────────────────────────────────────────────────────
+  let adTimerStarted = false;
 
-function mostrarCapaPublicidad() {
+  function mostrarCapaPublicidad() {
     const capa = document.getElementById("capa-pub");
-    const btn = document.getElementById("btn-continuar");
-    const segEl = document.getElementById("seg-ad");
-    const contEl = document.getElementById("contador-ad");
-
     if (!capa || adTimerStarted) return;
-    
     capa.style.display = "flex";
     adTimerStarted = true;
     let segs = 5;
-
-    let timer = setInterval(() => {
-        segs--;
-        if (segEl) segEl.innerText = segs;
-        
-        if (segs <= 0) {
-            clearInterval(timer);
-            if (contEl) contEl.style.display = "none";
-            if (btn) btn.classList.add("visible"); // Mostramos el botón
-        }
+    const segEl  = document.getElementById("seg-ad");
+    const contEl = document.getElementById("contador-ad");
+    const btnEl  = document.getElementById("btn-continuar");
+    const timer  = setInterval(() => {
+      segs--;
+      if (segEl) segEl.textContent = segs;
+      if (segs <= 0) {
+        clearInterval(timer);
+        if (contEl) contEl.style.display = "none";
+        if (btnEl)  btnEl.classList.add("show");
+      }
     }, 1000);
-}
+  }
 
-function cerrarPublicidad() {
-    document.getElementById("capa-pub").style.display = "none";
-}
+  function cerrarPublicidad() {
+    const capa = document.getElementById("capa-pub");
+    if (capa) capa.style.display = "none";
+  }
+
+  // Mostrar publicidad la primera vez que el usuario toca un canal
+  const _reproducirOriginal = reproducir;
+  let primerCanal = true;
+  reproducir = function(url, nombre, fallbacks) {
+    if (primerCanal) {
+      primerCanal = false;
+      mostrarCapaPublicidad();
+      setTimeout(() => _reproducirOriginal(url, nombre, fallbacks), 100);
+    } else {
+      _reproducirOriginal(url, nombre, fallbacks);
+    }
+  };
 </script>
 </body>
 </html>
