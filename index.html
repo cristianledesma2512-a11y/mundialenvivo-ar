@@ -79,18 +79,78 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 .cat-pill.int{background:rgba(231,76,60,0.15);color:var(--int);border-color:rgba(231,76,60,0.3);}
 
 /* ── Capa publicidad ── */
-#capa-pub{position:absolute;inset:0;background:rgba(0,0,0,0.92);z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;}
-#capa-pub h5{color:var(--dor);font-size:14px;font-weight:700;text-align:center;}
-#capa-pub p{color:rgba(255,255,255,.4);font-size:11px;text-align:center;}
-#ad-box-300{width:300px;min-height:250px;display:flex;align-items:center;justify-content:center;}
-#contador-ad{color:rgba(255,255,255,.5);font-size:11px;margin-top:4px;}
-#btn-continuar{display:none;background:var(--dor);border:none;color:#001f3f;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;margin-top:6px;}
-#btn-continuar.show{display:block;}
-#btn-continuar{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);padding:7px 20px;border-radius:6px;cursor:pointer;font-size:12px;display:none;}
-#btn-continuar:hover{background:rgba(255,255,255,.1);}
-#btn-continuar.show{display:block;}
-#contador-ad{color:var(--dor);font-size:11px;font-weight:700;}
 
+/* ── Capa publicidad ── */
+#capa-pub {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95); /* Un poco más oscuro para que resalte lo de arriba */
+    z-index: 99999; /* Z-index altísimo para que no lo tape nada */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+#capa-pub h5 {
+    color: var(--dor);
+    font-size: 16px; /* Un poco más grande */
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+}
+
+#capa-pub p {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    text-align: center;
+}
+
+#ad-box-300 {
+    width: 300px;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05); /* Espacio visual para el anuncio */
+    border-radius: 8px;
+}
+
+#contador-ad {
+    color: var(--dor);
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+/* BOTÓN CORREGIDO */
+#btn-continuar {
+    display: none; /* Se activa con la clase .show */
+    background: var(--dor) !important; /* Usamos el color dorado de tu variable */
+    color: #000 !important; /* Texto negro para que contraste bien */
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Sombra para que parezca apretable */
+    position: relative;
+    z-index: 100000;
+    pointer-events: auto !important; /* FUERZA que acepte el clic */
+}
+
+#btn-continuar.show {
+    display: block !important;
+}
+
+#btn-continuar:hover {
+    transform: scale(1.05); /* Efecto de agrandado al pasar el mouse */
+    filter: brightness(1.2);
+}
 
 /* ── PLAYER HERO ── */
 #player-hero{position:relative;background:#000;width:100%;aspect-ratio:16/9;max-height:210px;flex-shrink:0;}
@@ -331,6 +391,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
           <button id="btn-retry">🔄 Reintentar</button>
         </div>
 <!-- Capa publicidad -->
+      <!-- Capa publicidad -->
       <div id="capa-pub">
         <h5>📺 Cargando transmisión...</h5>
         <p>Apoyá el proyecto mirando el anuncio</p>
@@ -1190,59 +1251,43 @@ function saltearModal() {
 <script>(function(s){s.dataset.zone='10842456',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
 <script>
-  // ── Publicidad player ─────────────────────────────────────────────────────
-  let adTimerStarted = false;
+  // PUBLI
+let adTimerStarted = false;
 
-  function mostrarCapaPublicidad() {
-    const capa = document.getElementById("capa-pub");
-    const btnEl = document.getElementById("btn-continuar");
-    const segEl = document.getElementById("seg-ad");
-    const contEl = document.getElementById("contador-ad");
+function mostrarCapaPublicidad() {
+  const capa = document.getElementById("capa-pub");
+  const btn = document.getElementById("btn-continuar");
+  const contador = document.getElementById("contador-ad");
+  const segEl = document.getElementById("seg-ad");
 
-    if (!capa || adTimerStarted) return;
-    
-    capa.style.display = "flex"; // Asegura que se vea la capa
-    if (btnEl) btnEl.style.display = "none"; // Oculta el botón al inicio
-    
-    adTimerStarted = true;
-    let segs = 5;
-
-    const timer = setInterval(() => {
-      segs--;
-      if (segEl) segEl.textContent = segs;
-      
-      if (segs <= 0) {
-        clearInterval(timer);
-        if (contEl) contEl.style.display = "none"; // Esconde el texto "Esperá..."
-        if (btnEl) {
-            btnEl.style.display = "block"; // ¡ESTO es lo que lo hace aparecer!
-            btnEl.style.margin = "0 auto"; // Lo centra
-        }
-      }
-    }, 1000); // Cambiado a 1000 para que sean segundos reales
-  }
-
-  function cerrarPublicidad() {
-    const capa = document.getElementById("capa-pub");
-    if (capa) {
-        capa.style.display = "none";
-    }
-  }
-
-  // Interceptar la función reproducir
-  const _reproducirOriginal = reproducir;
-  let primerCanal = true;
+  if (!capa || adTimerStarted) return;
   
-  reproducir = function(url, nombre, fallbacks) {
-    if (primerCanal) {
-      primerCanal = false;
-      mostrarCapaPublicidad();
-      // Solo ejecutamos la reproducción original, la capa de publicidad está encima
-      _reproducirOriginal(url, nombre, fallbacks);
-    } else {
-      _reproducirOriginal(url, nombre, fallbacks);
+  capa.style.display = "flex";
+  adTimerStarted = true;
+  let segs = 5;
+
+  const timer = setInterval(() => {
+    segs--;
+    if (segEl) segEl.textContent = segs;
+    
+    if (segs <= 0) {
+      clearInterval(timer);
+      if (contador) contador.style.display = "none";
+      if (btn) {
+        btn.style.setProperty('display', 'block', 'important'); // Forzamos que aparezca
+      }
     }
-  };
+  }, 1000); // 1000ms = 1 segundo real
+}
+
+function cerrarPublicidad() {
+  const capa = document.getElementById("capa-pub");
+  if (capa) {
+    capa.style.display = "none";
+    // Opcional: pausamos cualquier script de anuncio si fuera necesario
+    console.log("Publicidad cerrada, cargando streaming...");
+  }
+}
 </script>
 </body>
 </html>
