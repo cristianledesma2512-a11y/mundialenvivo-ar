@@ -80,10 +80,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 
 /* ── Capa publicidad ── */
 #capa-pub {
-    position: absolute;
+    position: fixed; /* mejor que absolute */
     inset: 0;
-    background: #000 !important; /* Negro total para que no se filtre nada */
-    z-index: 999999 !important;
+    background: #000;
+    z-index: 999999;
     display: none;
     flex-direction: column;
     align-items: center;
@@ -101,33 +101,31 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
     justify-content: center;
 }
 
-/* El contador TIENE que verse */
+/* Contador visible */
 #contador-ad {
-    color: #74ACDF !important; /* Celeste StreamX */
-    font-size: 18px !important;
-    font-weight: bold !important;
-    margin: 10px 0 !important;
-    display: block !important;
+    color: #74ACDF;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+    display: block;
 }
 
 #btn-continuar {
-    display: none; /* Empieza oculto */
-    background: #74ACDF !important;
-    color: #000 !important;
-    border: none !important;
-    padding: 15px 30px !important;
-    border-radius: 5px !important;
-    font-weight: bold !important;
-    cursor: pointer !important;
-    font-size: 16px !important;
-    z-index: 1000000 !important;
+    display: none;
+    background: #74ACDF;
+    color: #000;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
 }
 
-/* Clase que lo muestra */
+/* Mostrar botón */
 #btn-continuar.show {
-    display: block !important;
+    display: block;
 }
-
 /* ── PLAYER HERO ── */
 #player-hero{position:relative;background:#000;width:100%;aspect-ratio:16/9;max-height:210px;flex-shrink:0;}
 #video-el{width:100%;height:100%;display:block;background:#000;}
@@ -399,12 +397,15 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
             <script type="text/javascript" src="https://www.highperformanceformat.com/d9da60396f0623535420e8479310b380/invoke.js"></script>
           </div>
 
-          <div id="contador-ad">Esperá <span id="seg-ad">5</span>s...</div>
+          <div id="contador-ad">
+             Esperá <span id="seg-ad">5</span>s...
+          </div>
           
-          <button id="btn-continuar" onclick="cerrarPublicidad()">
-            Continuar al video ✕
-          </button>
-      </div>
+           <button id="btn-continuar" onclick="cerrarPublicidad()">
+             Continuar al video ✕
+           </button>
+          </div>
+
 
         <div id="hero-placeholder">
           <span style="font-size:40px;">📺</span>
@@ -1254,47 +1255,85 @@ function saltearModal() {
 <!--Adsterra Popunder -->
 <script src="https://pl29026837.profitablecpmratenetwork.com/0a/ec/43/0aec43506c13bbcb27d428093b733a58.js"></script>
 
+
+<!--scrip publi -->
 <script>
-  // ── Publicidad player ─────────────────────────────────────────────────────
-  let adTimerStarted = false;
+let adTimerStarted = false;
 
-  function mostrarCapaPublicidad() {
-    const capa = document.getElementById("capa-pub");
-    if (!capa || adTimerStarted) return;
-    capa.style.display = "flex";
-    adTimerStarted = true;
-    let segs = 5;
-    const segEl  = document.getElementById("seg-ad");
-    const contEl = document.getElementById("contador-ad");
-    const btnEl  = document.getElementById("btn-continuar");
-    const timer  = setInterval(() => {
-      segs--;
-      if (segEl) segEl.textContent = segs;
-      if (segs <= 0) {
-        clearInterval(timer);
-        if (contEl) contEl.style.display = "none";
-        if (btnEl)  btnEl.classList.add("show");
-      }
-    }, 1000);
-  }
+function cargarPublicidad() {
+  const adBox = document.getElementById("ad-box-300");
 
-  function cerrarPublicidad() {
-    const capa = document.getElementById("capa-pub");
-    if (capa) capa.style.display = "none";
-  }
+  if (!adBox || adBox.dataset.loaded) return;
 
-  // Mostrar publicidad la primera vez que el usuario toca un canal
+  adBox.dataset.loaded = true;
+
+  const script1 = document.createElement("script");
+  script1.innerHTML = `
+    atOptions = {
+      key: 'd9da60396f0623535420e8479310b380',
+      format: 'iframe',
+      height: 250,
+      width: 300,
+      params: {}
+    };
+  `;
+
+  const script2 = document.createElement("script");
+  script2.src = "https://www.highperformanceformat.com/d9da60396f0623535420e8479310b380/invoke.js";
+
+  adBox.appendChild(script1);
+  adBox.appendChild(script2);
+}
+
+function mostrarCapaPublicidad() {
+  const capa = document.getElementById("capa-pub");
+  if (!capa || adTimerStarted) return;
+
+  capa.style.display = "flex";
+  adTimerStarted = true;
+
+  cargarPublicidad();
+
+  let segs = 5;
+  const segEl  = document.getElementById("seg-ad");
+  const contEl = document.getElementById("contador-ad");
+  const btnEl  = document.getElementById("btn-continuar");
+
+  const timer = setInterval(() => {
+    segs--;
+
+    if (segs >= 0 && segEl) {
+      segEl.textContent = segs;
+    }
+
+    if (segs <= 0) {
+      clearInterval(timer);
+      if (contEl) contEl.style.display = "none";
+      if (btnEl) btnEl.classList.add("show");
+    }
+  }, 1000);
+}
+
+function cerrarPublicidad() {
+  const capa = document.getElementById("capa-pub");
+  if (capa) capa.style.display = "none";
+}
+
+/* Hook seguro */
+if (typeof reproducir === "function") {
   const _reproducirOriginal = reproducir;
   let primerCanal = true;
+
   reproducir = function(url, nombre, fallbacks) {
     if (primerCanal) {
       primerCanal = false;
       mostrarCapaPublicidad();
-      setTimeout(() => _reproducirOriginal(url, nombre, fallbacks), 100);
+      setTimeout(() => _reproducirOriginal(url, nombre, fallbacks), 300);
     } else {
       _reproducirOriginal(url, nombre, fallbacks);
     }
   };
+}
 </script>
 </body>
 </html>
