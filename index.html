@@ -79,78 +79,18 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 .cat-pill.int{background:rgba(231,76,60,0.15);color:var(--int);border-color:rgba(231,76,60,0.3);}
 
 /* ── Capa publicidad ── */
+#capa-pub{position:absolute;inset:0;background:rgba(0,0,0,0.92);z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;}
+#capa-pub h5{color:var(--dor);font-size:14px;font-weight:700;text-align:center;}
+#capa-pub p{color:rgba(255,255,255,.4);font-size:11px;text-align:center;}
+#ad-box-300{width:300px;min-height:250px;display:flex;align-items:center;justify-content:center;}
+#contador-ad{color:rgba(255,255,255,.5);font-size:11px;margin-top:4px;}
+#btn-continuar{display:none;background:var(--dor);border:none;color:#001f3f;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;margin-top:6px;}
+#btn-continuar.show{display:block;}
+#btn-continuar{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);padding:7px 20px;border-radius:6px;cursor:pointer;font-size:12px;display:none;}
+#btn-continuar:hover{background:rgba(255,255,255,.1);}
+#btn-continuar.show{display:block;}
+#contador-ad{color:var(--dor);font-size:11px;font-weight:700;}
 
-/* ── Capa publicidad ── */
-#capa-pub {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.95); /* Un poco más oscuro para que resalte lo de arriba */
-    z-index: 99999; /* Z-index altísimo para que no lo tape nada */
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 20px;
-}
-
-#capa-pub h5 {
-    color: var(--dor);
-    font-size: 16px; /* Un poco más grande */
-    font-weight: 700;
-    text-align: center;
-    margin: 0;
-}
-
-#capa-pub p {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 12px;
-    text-align: center;
-}
-
-#ad-box-300 {
-    width: 300px;
-    min-height: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.05); /* Espacio visual para el anuncio */
-    border-radius: 8px;
-}
-
-#contador-ad {
-    color: var(--dor);
-    font-size: 13px;
-    font-weight: 700;
-    margin-top: 10px;
-}
-
-/* BOTÓN CORREGIDO */
-#btn-continuar {
-    display: none; /* Se activa con la clase .show */
-    background: var(--dor) !important; /* Usamos el color dorado de tu variable */
-    color: #000 !important; /* Texto negro para que contraste bien */
-    border: none;
-    padding: 12px 30px;
-    border-radius: 8px;
-    font-weight: 800;
-    font-size: 14px;
-    cursor: pointer;
-    margin-top: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Sombra para que parezca apretable */
-    position: relative;
-    z-index: 100000;
-    pointer-events: auto !important; /* FUERZA que acepte el clic */
-}
-
-#btn-continuar.show {
-    display: block !important;
-}
-
-#btn-continuar:hover {
-    transform: scale(1.05); /* Efecto de agrandado al pasar el mouse */
-    filter: brightness(1.2);
-}
 
 /* ── PLAYER HERO ── */
 #player-hero{position:relative;background:#000;width:100%;aspect-ratio:16/9;max-height:210px;flex-shrink:0;}
@@ -356,9 +296,18 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   <div class="ntab" onclick="cambiarTab('conmebol',this)">🏆 CONMEBOL</div>
   <div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>
 </div>
-<!-- Monetag Banner -->
+<!-- Adsterra Banner 728x90 -->
 <div id="ad-banner-top" style="display:flex;justify-content:center;background:#000;padding:4px 0;flex-shrink:0;overflow:hidden;max-height:100px;">
-  <script src="https://quge5.com/88/tag.min.js" data-zone="227196" async data-cfasync="false"></script>
+  <script>
+    atOptions = {
+      'key' : 'b99a39ce7b14971e0caa9dc494ae20c7',
+      'format' : 'iframe',
+      'height' : 90,
+      'width' : 728,
+      'params' : {}
+    };
+  </script>
+  <script src="https://www.highperformanceformat.com/b99a39ce7b14971e0caa9dc494ae20c7/invoke.js"></script>
 </div>
 
 <!-- Main scrollable area -->
@@ -391,22 +340,24 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
           <button id="btn-retry">🔄 Reintentar</button>
         </div>
 <!-- Capa publicidad -->
-      <!-- Capa publicidad -->
-            <div id="capa-pub">
-              <h5>📺 Cargando transmisión...</h5>
-              <p>Apoyá el proyecto mirando el anuncio</p>
-              
-              <div id="ad-box-300">
-                  </div>
-
-              <div id="contador-ad">
-                  Esperá <span id="seg-ad">5</span> segundos...
-              </div>
-              
-              <button id="btn-continuar" onclick="cerrarPublicidad()">
-                  Continuar al video ✕
-              </button>
-           </div>
+      <div id="capa-pub">
+        <h5>📺 Cargando transmisión...</h5>
+        <p>Apoyá el proyecto mirando el anuncio</p>
+        <div id="ad-box-300">
+          <script>
+            atOptions = {
+              'key' : 'd9da60396f0623535420e8479310b380',
+              'format' : 'iframe',
+              'height' : 250,
+              'width' : 300,
+              'params' : {}
+            };
+          </script>
+          <script src="https://www.highperformanceformat.com/d9da60396f0623535420e8479310b380/invoke.js"></script>
+        </div>
+        <span id="contador-ad">Esperá <span id="seg-ad">5</span>s...</span>
+        <button id="btn-continuar" onclick="cerrarPublicidad()">Continuar al video ✕</button>
+      </div>
 
         <div id="hero-placeholder">
           <span style="font-size:40px;">📺</span>
@@ -1250,55 +1201,53 @@ function saltearModal() {
 
 </script>
 
-<!-- Monetag Scripts -->
-<script>(function(s){s.dataset.zone='10842484',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<script>(function(s){s.dataset.zone='10842483',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<script src="https://quge5.com/88/tag.min.js" data-zone="227196" async data-cfasync="false"></script>
-<script>(function(s){s.dataset.zone='10842456',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<!-- Adsterra Social Bar -->
+<script src="https://pl29026838.profitablecpmratenetwork.com/91/ee/53/91ee5345c4bd4084c43d4dcd1178b274.js"></script>
 
+<!--Adsterra Popunder -->
+<script src="https://pl29026837.profitablecpmratenetwork.com/0a/ec/43/0aec43506c13bbcb27d428093b733a58.js"></script>
 
-  // PUBLI
 <script>
-let adTimerStarted = false;
+  // ── Publicidad player ─────────────────────────────────────────────────────
+  let adTimerStarted = false;
 
-function mostrarCapaPublicidad() {
+  function mostrarCapaPublicidad() {
     const capa = document.getElementById("capa-pub");
-    const btn = document.getElementById("btn-continuar");
-    const contador = document.getElementById("contador-ad");
-    const segEl = document.getElementById("seg-ad");
-
     if (!capa || adTimerStarted) return;
-    
-    // Forzamos que la capa y el contador se vean
     capa.style.display = "flex";
-    if (contador) contador.style.display = "block";
-    if (btn) btn.style.display = "none"; // El botón nace oculto
-    
     adTimerStarted = true;
     let segs = 5;
-
-    const timer = setInterval(() => {
-        segs--;
-        if (segEl) segEl.textContent = segs;
-        
-        if (segs <= 0) {
-            clearInterval(timer);
-            // Al terminar: ocultamos contador y mostramos botón
-            if (contador) contador.style.display = "none";
-            if (btn) {
-                btn.classList.add("show"); // Usa la clase de tu CSS
-                btn.style.display = "block"; // Refuerzo por JS
-            }
-        }
+    const segEl  = document.getElementById("seg-ad");
+    const contEl = document.getElementById("contador-ad");
+    const btnEl  = document.getElementById("btn-continuar");
+    const timer  = setInterval(() => {
+      segs--;
+      if (segEl) segEl.textContent = segs;
+      if (segs <= 0) {
+        clearInterval(timer);
+        if (contEl) contEl.style.display = "none";
+        if (btnEl)  btnEl.classList.add("show");
+      }
     }, 1000);
-}
+  }
 
-function cerrarPublicidad() {
+  function cerrarPublicidad() {
     const capa = document.getElementById("capa-pub");
-    if (capa) {
-        capa.style.display = "none";
+    if (capa) capa.style.display = "none";
+  }
+
+  // Mostrar publicidad la primera vez que el usuario toca un canal
+  const _reproducirOriginal = reproducir;
+  let primerCanal = true;
+  reproducir = function(url, nombre, fallbacks) {
+    if (primerCanal) {
+      primerCanal = false;
+      mostrarCapaPublicidad();
+      setTimeout(() => _reproducirOriginal(url, nombre, fallbacks), 100);
+    } else {
+      _reproducirOriginal(url, nombre, fallbacks);
     }
-}
+  };
 </script>
 </body>
 </html>
