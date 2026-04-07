@@ -383,17 +383,28 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 
 <!-- Capa publicidad -->
       <div id="capa-pub">
-  <div id="ad-box-300">
+          <h5>📺 Cargando transmisión...</h5>
+          <p>Apoyá el proyecto mirando el anuncio</p>
+          
+          <div id="ad-box-300">
+            <script type="text/javascript">
+              atOptions = {
+                'key' : 'd9da60396f0623535420e8479310b380',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+              };
+            </script>
+            <script type="text/javascript" src="https://www.highperformanceformat.com/d9da60396f0623535420e8479310b380/invoke.js"></script>
+          </div>
+
+          <div id="contador-ad">Esperá <span id="seg-ad">5</span>s...</div>
+          
+          <button id="btn-continuar" onclick="cerrarPublicidad()">
+            Continuar al video ✕
+          </button>
       </div>
-
-  <div id="contador-ad">Cargando video en <span id="seg-ad">5</span>...</div>
-
-  <button id="btn-continuar" onclick="cerrarPublicidad()">
-      CONTINUAR AL VIDEO ✕
-  </button>
-</div>
-
-
 
         <div id="hero-placeholder">
           <span style="font-size:40px;">📺</span>
