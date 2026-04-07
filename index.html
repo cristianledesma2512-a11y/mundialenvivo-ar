@@ -2,13 +2,19 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>MundialEnVivo AR</title>
-<meta name="theme-color" content="#001f3f">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MundialAR">
+<meta name="application-name" content="MundialAR">
+<meta name="theme-color" content="#001f3f">
+<meta name="HandheldFriendly" content="true">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MundialEnVivo AR">
+<meta property="og:description" content="TV en vivo, Mundial 2026 y Tribuna en tiempo real.">
+<meta property="og:image" content="/img/logo-share.png">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -17,6 +23,8 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <style>
+
+
 :root{
   --az:#001f3f;--az2:#003366;--cel:#74ACDF;--dor:#C5A059;
   --roj:#e74c3c;--bg:#0a1628;--card:#0f2040;--card2:#152a50;
@@ -24,6 +32,7 @@
   --dep:#2ecc71;--not:#74ACDF;--aire:#c39bd3;
   --mus:#e67e22;--inf:#3498db;--int:#e74c3c;
 }
+
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;}
@@ -69,16 +78,22 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 .cat-pill.inf{background:rgba(52,152,219,0.15);color:var(--inf);border-color:rgba(52,152,219,0.3);}
 .cat-pill.int{background:rgba(231,76,60,0.15);color:var(--int);border-color:rgba(231,76,60,0.3);}
 
-
 /* ── Capa publicidad ── */
-#capa-pub{position:absolute;inset:0;background:rgba(0,0,0,0.92);z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+#capa-pub{position:absolute;inset:0;background:rgba(0,0,0,0.92);z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;}
 #capa-pub h5{color:var(--dor);font-size:14px;font-weight:700;text-align:center;}
 #capa-pub p{color:rgba(255,255,255,.4);font-size:11px;text-align:center;}
+#ad-box-300{width:300px;min-height:250px;display:flex;align-items:center;justify-content:center;}
+#contador-ad{color:rgba(255,255,255,.5);font-size:11px;margin-top:4px;}
+#btn-continuar{display:none;background:var(--dor);border:none;color:#001f3f;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;margin-top:6px;}
+#btn-continuar.show{display:block;}
 #btn-continuar{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);padding:7px 20px;border-radius:6px;cursor:pointer;font-size:12px;display:none;}
 #btn-continuar:hover{background:rgba(255,255,255,.1);}
-#btn-continuar.show{display:block;}
 #contador-ad{color:var(--dor);font-size:11px;font-weight:700;}
-
+#ad-box-300 iframe{pointer-events: none;}
+#btn-continuar{position: relative;z-index: 999999;}
+#capa-pub{pointer-events: auto;}
+#ad-box-300{pointer-events: auto;}
+#btn-continuar{pointer-events: auto;}
 /* ── PLAYER HERO ── */
 #player-hero{position:relative;background:#000;width:100%;aspect-ratio:16/9;max-height:210px;flex-shrink:0;}
 #video-el{width:100%;height:100%;display:block;background:#000;}
@@ -223,7 +238,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 #toast.show{transform:translateX(-50%) translateY(0);}
 
 /* Bottom nav */
-#bnav{display:flex;background:var(--az2);border-top:1px solid rgba(116,172,223,0.12);padding:8px 0 10px;flex-shrink:0;}
+#bnav{display:flex;background:var(--az2);border-top:1px solid rgba(116,172,223,0.12);padding:20px 0 20px;flex-shrink:0;}
 .bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
 .bi svg{width:20px;height:20px;}
 .bl{font-size:9px;font-weight:700;color:var(--muted);}
@@ -284,25 +299,28 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   <div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>
 </div>
 
+
+
+<!-- Adsterra Banner -->
+<div id="ad-banner-top" style="display:flex;justify-content:center;background:#000;padding:4px 0;flex-shrink:0;overflow:hidden;max-height:100px;">
+      <script>
+      atOptions = {
+        'key' : '1b9ede23a72ef77c29b64b9c84600253',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script src="https://balancedsuppercreed.com/1b9ede23a72ef77c29b64b9c84600253/invoke.js"></script>
+</div>
+
 <!-- Main scrollable area -->
 <div id="main">
 
-  
-<!-- Adsterra Banner 728x90 -->
-<div id="ad-banner-top" style="display:flex;justify-content:center;background:#000;padding:4px 0;flex-shrink:0;overflow:hidden;max-height:100px;">
-  <script>
-    atOptions = {
-      'key' : 'b99a39ce7b14971e0caa9dc494ae20c7',
-      'format' : 'iframe',
-      'height' : 90,
-      'width' : 728,
-      'params' : {}
-    };
-  </script>
-  <script src="https://www.highperformanceformat.com/b99a39ce7b14971e0caa9dc494ae20c7/invoke.js"></script>
-</div>
 
-    <!-- ══ TV EN VIVO ══ -->
+
+  <!-- ══ TV EN VIVO ══ -->
   <div id="sec-tv" class="section a">
 
     <!-- Player hero -->
@@ -326,33 +344,36 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
           <p>No se pudo cargar la señal.</p>
           <button id="btn-retry">🔄 Reintentar</button>
         </div>
-        
-      <!-- Capa publicidad -->
+<!-- Capa publicidad -->
       <div id="capa-pub">
         <h5>📺 Cargando transmisión...</h5>
         <p>Apoyá el proyecto mirando el anuncio</p>
         <div id="ad-box-300">
-          <script>
-            atOptions = {
-              'key' : 'd9da60396f0623535420e8479310b380',
-              'format' : 'iframe',
-              'height' : 250,
-              'width' : 300,
-              'params' : {}
-            };
-          </script>
-          <script src="https://www.highperformanceformat.com/d9da60396f0623535420e8479310b380/invoke.js"></script>
+              <script>
+                atOptions = {
+                  'key' : '7c7744fc99ba2a6feafeb112edbb5dc4',
+                  'format' : 'iframe',
+                  'height' : 250,
+                  'width' : 300,
+                  'params' : {}
+                };
+              </script>
+              <script src="https://balancedsuppercreed.com/7c7744fc99ba2a6feafeb112edbb5dc4/invoke.js"></script>
+              
         </div>
         <span id="contador-ad">Esperá <span id="seg-ad">5</span>s...</span>
         <button id="btn-continuar" onclick="cerrarPublicidad()">Continuar al video ✕</button>
       </div>
 
-      <div id="hero-placeholder">
+        <div id="hero-placeholder">
           <span style="font-size:40px;">📺</span>
           <p>Seleccioná un canal para comenzar</p>
         </div>
       </div>
     </div>
+
+
+
 
     <!-- Category strip -->
     <div id="cat-strip">
@@ -433,7 +454,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   </div>
 
   <!-- ══ CHAT ══ -->
-  <div id="sec-chat" class="section" style="display:flex;flex-direction:column;height:calc(100vh - 170px);">
+  <div id="sec-chat" class="section" style="display:flex;flex-direction:column;height:calc(50vh -195px);">
     <div id="chat-msgs"></div>
     <div id="chat-form">
       <input type="text" id="chat-in" placeholder="Escribí tu mensaje..." maxlength="200" autocomplete="off">
@@ -1183,11 +1204,17 @@ function saltearModal() {
   document.getElementById("user-badge").textContent = "IV";
   registrarPresencia(autoNick);
 }
+
 </script>
 
 
-
-
+<!-- Monetag Scripts 
+<script>(function(s){s.dataset.zone='10842484',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<script>(function(s){s.dataset.zone='10842483',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<script src="https://quge5.com/88/tag.min.js" data-zone="227196" async data-cfasync="false"></script>
+<script>(function(s){s.dataset.zone='10842456',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+-->
+<!-- Monetag Popunder incluido arriba -->
 
 <script>
   // ── Publicidad player ─────────────────────────────────────────────────────
@@ -1234,6 +1261,6 @@ function saltearModal() {
       _reproducirOriginal(url, nombre, fallbacks);
     }
   };
-</script>  
+</script>
 </body>
 </html>
