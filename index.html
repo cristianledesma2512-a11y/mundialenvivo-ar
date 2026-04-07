@@ -356,7 +356,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   <div class="ntab" onclick="cambiarTab('conmebol',this)">🏆 CONMEBOL</div>
   <div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>
 </div>
-
+<!-- Monetag Banner -->
+<div id="ad-banner-top" style="display:flex;justify-content:center;background:#000;padding:4px 0;flex-shrink:0;overflow:hidden;max-height:100px;">
+  <script src="https://quge5.com/88/tag.min.js" data-zone="227196" async data-cfasync="false"></script>
+</div>
 
 <!-- Main scrollable area -->
 <div id="main">
@@ -365,10 +368,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 
   <!-- ══ TV EN VIVO ══ -->
   <div id="sec-tv" class="section a">
-<!-- Monetag Banner -->
-<div id="ad-banner-top" style="display:flex;justify-content:center;background:#000;padding:4px 0;flex-shrink:0;overflow:hidden;max-height:100px;">
-  <script src="https://quge5.com/88/tag.min.js" data-zone="227196" async data-cfasync="false"></script>
-</div>
+
     <!-- Player hero -->
     <div id="player-hero">
       <video id="video-el" controls autoplay playsinline></video>
@@ -392,15 +392,21 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
         </div>
 <!-- Capa publicidad -->
       <!-- Capa publicidad -->
-      <div id="capa-pub">
-        <h5>📺 Cargando transmisión...</h5>
-        <p>Apoyá el proyecto mirando el anuncio</p>
-        <div id="ad-box-300">
-          <script>(function(s){s.dataset.zone='10842483',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-        </div>
-        <span id="contador-ad">Esperá <span id="seg-ad">5</span>s...</span>
-        <button id="btn-continuar" onclick="cerrarPublicidad()">Continuar al video ✕</button>
-      </div>
+            <div id="capa-pub">
+              <h5>📺 Cargando transmisión...</h5>
+              <p>Apoyá el proyecto mirando el anuncio</p>
+              
+              <div id="ad-box-300">
+                  </div>
+
+              <div id="contador-ad">
+                  Esperá <span id="seg-ad">5</span> segundos...
+              </div>
+              
+              <button id="btn-continuar" onclick="cerrarPublicidad()">
+                  Continuar al video ✕
+              </button>
+           </div>
 
         <div id="hero-placeholder">
           <span style="font-size:40px;">📺</span>
@@ -1250,43 +1256,48 @@ function saltearModal() {
 <script src="https://quge5.com/88/tag.min.js" data-zone="227196" async data-cfasync="false"></script>
 <script>(function(s){s.dataset.zone='10842456',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
-<script>
+
   // PUBLI
+<script>
 let adTimerStarted = false;
 
 function mostrarCapaPublicidad() {
-  const capa = document.getElementById("capa-pub");
-  const btn = document.getElementById("btn-continuar");
-  const contador = document.getElementById("contador-ad");
-  const segEl = document.getElementById("seg-ad");
+    const capa = document.getElementById("capa-pub");
+    const btn = document.getElementById("btn-continuar");
+    const contador = document.getElementById("contador-ad");
+    const segEl = document.getElementById("seg-ad");
 
-  if (!capa || adTimerStarted) return;
-  
-  capa.style.display = "flex";
-  adTimerStarted = true;
-  let segs = 5;
-
-  const timer = setInterval(() => {
-    segs--;
-    if (segEl) segEl.textContent = segs;
+    if (!capa || adTimerStarted) return;
     
-    if (segs <= 0) {
-      clearInterval(timer);
-      if (contador) contador.style.display = "none";
-      if (btn) {
-        btn.style.setProperty('display', 'block', 'important'); // Forzamos que aparezca
-      }
-    }
-  }, 1000); // 1000ms = 1 segundo real
+    // Forzamos que la capa y el contador se vean
+    capa.style.display = "flex";
+    if (contador) contador.style.display = "block";
+    if (btn) btn.style.display = "none"; // El botón nace oculto
+    
+    adTimerStarted = true;
+    let segs = 5;
+
+    const timer = setInterval(() => {
+        segs--;
+        if (segEl) segEl.textContent = segs;
+        
+        if (segs <= 0) {
+            clearInterval(timer);
+            // Al terminar: ocultamos contador y mostramos botón
+            if (contador) contador.style.display = "none";
+            if (btn) {
+                btn.classList.add("show"); // Usa la clase de tu CSS
+                btn.style.display = "block"; // Refuerzo por JS
+            }
+        }
+    }, 1000);
 }
 
 function cerrarPublicidad() {
-  const capa = document.getElementById("capa-pub");
-  if (capa) {
-    capa.style.display = "none";
-    // Opcional: pausamos cualquier script de anuncio si fuera necesario
-    console.log("Publicidad cerrada, cargando streaming...");
-  }
+    const capa = document.getElementById("capa-pub");
+    if (capa) {
+        capa.style.display = "none";
+    }
 }
 </script>
 </body>
