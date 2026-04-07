@@ -71,21 +71,13 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 
 
 /* ── Capa publicidad ── */
-#capa-pub{position:absolute;inset:0;background:rgba(0,0,0,0.92);z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;}
+#capa-pub{position:absolute;inset:0;background:rgba(0,0,0,0.92);z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
 #capa-pub h5{color:var(--dor);font-size:14px;font-weight:700;text-align:center;}
 #capa-pub p{color:rgba(255,255,255,.4);font-size:11px;text-align:center;}
-#ad-box-300{width:300px;min-height:250px;display:flex;align-items:center;justify-content:center;}
-#contador-ad{color:rgba(255,255,255,.5);font-size:11px;margin-top:4px;}
-#btn-continuar{display:none;background:var(--dor);border:none;color:#001f3f;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;margin-top:6px;}
-#btn-continuar.show{display:block;}
 #btn-continuar{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);padding:7px 20px;border-radius:6px;cursor:pointer;font-size:12px;display:none;}
 #btn-continuar:hover{background:rgba(255,255,255,.1);}
+#btn-continuar.show{display:block;}
 #contador-ad{color:var(--dor);font-size:11px;font-weight:700;}
-#ad-box-300 iframe{pointer-events: none;}
-#btn-continuar{position: relative;z-index: 999999;}
-#capa-pub{pointer-events: auto;}
-#ad-box-300{pointer-events: auto;}
-#btn-continuar{pointer-events: auto;}
 
 /* ── PLAYER HERO ── */
 #player-hero{position:relative;background:#000;width:100%;aspect-ratio:16/9;max-height:210px;flex-shrink:0;}
@@ -1193,14 +1185,15 @@ function saltearModal() {
 }
 </script>
 
+
+
+
 <!-- Adsterra Social Bar -->
 <script src="https://pl29026838.profitablecpmratenetwork.com/91/ee/53/91ee5345c4bd4084c43d4dcd1178b274.js"></script>
 <!-- Adsterra Popunder -->
 <script src="https://pl29026837.profitablecpmratenetwork.com/0a/ec/43/0aec43506c13bbcb27d428093b733a58.js">
 // ── Publicidad player ─────────────────────────────────────────────────────
-let adTimerStarted = false;
-
-  function mostrarCapaPublicidad() {
+function mostrarCapaPublicidad() {
     const capa = document.getElementById("capa-pub");
     if (!capa || adTimerStarted) return;
     capa.style.display = "flex";
@@ -1241,6 +1234,7 @@ let adTimerStarted = false;
       _reproducirOriginal(url, nombre, fallbacks);
     }
   };
+
 </script>
 </body>
 </html>
