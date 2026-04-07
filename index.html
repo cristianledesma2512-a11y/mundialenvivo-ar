@@ -2,19 +2,13 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>MundialEnVivo AR</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#001f3f">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="MundialAR">
-<meta name="application-name" content="MundialAR">
-<meta name="theme-color" content="#001f3f">
-<meta name="HandheldFriendly" content="true">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MundialEnVivo AR">
-<meta property="og:description" content="TV en vivo, Mundial 2026 y Tribuna en tiempo real.">
-<meta property="og:image" content="/img/logo-share.png">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
@@ -23,8 +17,6 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <style>
-
-
 :root{
   --az:#001f3f;--az2:#003366;--cel:#74ACDF;--dor:#C5A059;
   --roj:#e74c3c;--bg:#0a1628;--card:#0f2040;--card2:#152a50;
@@ -32,7 +24,6 @@
   --dep:#2ecc71;--not:#74ACDF;--aire:#c39bd3;
   --mus:#e67e22;--inf:#3498db;--int:#e74c3c;
 }
-
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;}
@@ -77,6 +68,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 .cat-pill.mus{background:rgba(230,126,34,0.15);color:var(--mus);border-color:rgba(230,126,34,0.3);}
 .cat-pill.inf{background:rgba(52,152,219,0.15);color:var(--inf);border-color:rgba(52,152,219,0.3);}
 .cat-pill.int{background:rgba(231,76,60,0.15);color:var(--int);border-color:rgba(231,76,60,0.3);}
+
 
 /* ── Capa publicidad ── */
 #capa-pub{position:absolute;inset:0;background:rgba(0,0,0,0.92);z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;}
@@ -239,7 +231,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 #toast.show{transform:translateX(-50%) translateY(0);}
 
 /* Bottom nav */
-#bnav{display:flex;background:var(--az2);border-top:1px solid rgba(116,172,223,0.12);padding:20px 0 20px;flex-shrink:0;}
+#bnav{display:flex;background:var(--az2);border-top:1px solid rgba(116,172,223,0.12);padding:8px 0 10px;flex-shrink:0;}
 .bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
 .bi svg{width:20px;height:20px;}
 .bl{font-size:9px;font-weight:700;color:var(--muted);}
@@ -300,29 +292,25 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   <div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>
 </div>
 
-<!-- Adsterra Banner -->
-<div id="ad-banner-top" style="display:flex;justify-content:center;background:#000;padding:4px 0;flex-shrink:0;overflow:hidden;max-height:100px;">
-      <script>
-  atOptions = {
-    'key' : 'b99a39ce7b14971e0caa9dc494ae20c7',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://balancedsuppercreed.com/b99a39ce7b14971e0caa9dc494ae20c7/invoke.js"></script>
-
-</div>
-
-
-
 <!-- Main scrollable area -->
 <div id="main">
 
+  
+<!-- Adsterra Banner 728x90 -->
+<div id="ad-banner-top" style="display:flex;justify-content:center;background:#000;padding:4px 0;flex-shrink:0;overflow:hidden;max-height:100px;">
+  <script>
+    atOptions = {
+      'key' : 'b99a39ce7b14971e0caa9dc494ae20c7',
+      'format' : 'iframe',
+      'height' : 90,
+      'width' : 728,
+      'params' : {}
+    };
+  </script>
+  <script src="https://www.highperformanceformat.com/b99a39ce7b14971e0caa9dc494ae20c7/invoke.js"></script>
+</div>
 
-
-  <!-- ══ TV EN VIVO ══ -->
+    <!-- ══ TV EN VIVO ══ -->
   <div id="sec-tv" class="section a">
 
     <!-- Player hero -->
@@ -346,7 +334,8 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
           <p>No se pudo cargar la señal.</p>
           <button id="btn-retry">🔄 Reintentar</button>
         </div>
-<!-- Capa publicidad -->
+        
+      <!-- Capa publicidad -->
       <div id="capa-pub">
         <h5>📺 Cargando transmisión...</h5>
         <p>Apoyá el proyecto mirando el anuncio</p>
@@ -366,15 +355,12 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
         <button id="btn-continuar" onclick="cerrarPublicidad()">Continuar al video ✕</button>
       </div>
 
-        <div id="hero-placeholder">
+      <div id="hero-placeholder">
           <span style="font-size:40px;">📺</span>
           <p>Seleccioná un canal para comenzar</p>
         </div>
       </div>
     </div>
-
-
-
 
     <!-- Category strip -->
     <div id="cat-strip">
@@ -455,7 +441,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   </div>
 
   <!-- ══ CHAT ══ -->
-  <div id="sec-chat" class="section" style="display:flex;flex-direction:column;height:calc(50vh -195px);">
+  <div id="sec-chat" class="section" style="display:flex;flex-direction:column;height:calc(100vh - 170px);">
     <div id="chat-msgs"></div>
     <div id="chat-form">
       <input type="text" id="chat-in" placeholder="Escribí tu mensaje..." maxlength="200" autocomplete="off">
@@ -464,9 +450,6 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   </div>
 
 </div><!-- /main -->
-
-
-
 
 <!-- Bottom nav -->
 <div id="bnav">
@@ -1208,18 +1191,14 @@ function saltearModal() {
   document.getElementById("user-badge").textContent = "IV";
   registrarPresencia(autoNick);
 }
-
 </script>
 
-<!-- Adsterra Social Bar 
+<!-- Adsterra Social Bar -->
 <script src="https://pl29026838.profitablecpmratenetwork.com/91/ee/53/91ee5345c4bd4084c43d4dcd1178b274.js"></script>
-
-<!Adsterra Popunder 
-<script src="https://pl29026837.profitablecpmratenetwork.com/0a/ec/43/0aec43506c13bbcb27d428093b733a58.js"></script>
--->
-<script>
-  // ── Publicidad player ─────────────────────────────────────────────────────
-  let adTimerStarted = false;
+<!-- Adsterra Popunder -->
+<script src="https://pl29026837.profitablecpmratenetwork.com/0a/ec/43/0aec43506c13bbcb27d428093b733a58.js">
+// ── Publicidad player ─────────────────────────────────────────────────────
+let adTimerStarted = false;
 
   function mostrarCapaPublicidad() {
     const capa = document.getElementById("capa-pub");
