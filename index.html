@@ -79,9 +79,13 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 .cat-pill.int{background:rgba(231,76,60,0.15);color:var(--int);border-color:rgba(231,76,60,0.3);}
 
 /* ── Capa publicidad ── */
-#capa-pub{position:absolute;inset:0;background:rgba(0,0,0,0.92);z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+#capa-pub{position:absolute;inset:0;background:rgba(0,0,0,0.92);z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;}
 #capa-pub h5{color:var(--dor);font-size:14px;font-weight:700;text-align:center;}
 #capa-pub p{color:rgba(255,255,255,.4);font-size:11px;text-align:center;}
+#ad-box-300{width:300px;min-height:250px;display:flex;align-items:center;justify-content:center;}
+#contador-ad{color:rgba(255,255,255,.5);font-size:11px;margin-top:4px;}
+#btn-continuar{display:none;background:var(--dor);border:none;color:#001f3f;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;margin-top:6px;}
+#btn-continuar.show{display:block;}
 #btn-continuar{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);padding:7px 20px;border-radius:6px;cursor:pointer;font-size:12px;display:none;}
 #btn-continuar:hover{background:rgba(255,255,255,.1);}
 #btn-continuar.show{display:block;}
@@ -335,7 +339,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
           <p>No se pudo cargar la señal.</p>
           <button id="btn-retry">🔄 Reintentar</button>
         </div>
-        <!-- Capa publicidad
+<!-- Capa publicidad -->
       <div id="capa-pub">
         <h5>📺 Cargando transmisión...</h5>
         <p>Apoyá el proyecto mirando el anuncio</p>
@@ -354,7 +358,6 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
         <span id="contador-ad">Esperá <span id="seg-ad">5</span>s...</span>
         <button id="btn-continuar" onclick="cerrarPublicidad()">Continuar al video ✕</button>
       </div>
-      -->
 
         <div id="hero-placeholder">
           <span style="font-size:40px;">📺</span>
@@ -1202,49 +1205,49 @@ function saltearModal() {
 <script src="https://pl29026838.profitablecpmratenetwork.com/91/ee/53/91ee5345c4bd4084c43d4dcd1178b274.js"></script>
 
 <!--Adsterra Popunder -->
-<script src="https://pl29026837.profitablecpmratenetwork.com/0a/ec/43/0aec43506c13bbcb27d428093b733a58.js">
+<script src="https://pl29026837.profitablecpmratenetwork.com/0a/ec/43/0aec43506c13bbcb27d428093b733a58.js"></script>
 
+<script>
   // ── Publicidad player ─────────────────────────────────────────────────────
-let adTimerStarted = false;
+  let adTimerStarted = false;
 
-function mostrarCapaPublicidad() {
-  const capa = document.getElementById("capa-pub");
-  if (!capa || adTimerStarted) return;
-  capa.style.display = "flex";
-  adTimerStarted = true;
-  let segs = 5;
-  const segEl = document.getElementById("seg-ad");
-  const contEl = document.getElementById("contador-ad");
-  const btnEl = document.getElementById("btn-continuar");
-  const timer = setInterval(() => {
-    segs--;
-    if (segEl) segEl.textContent = segs;
-    if (segs <= 0) {
-      clearInterval(timer);
-      if (contEl) contEl.style.display = "none";
-      if (btnEl) btnEl.classList.add("show");
-    }
-  }, 1000);
-}
-
-function cerrarPublicidad() {
-  const capa = document.getElementById("capa-pub");
-  if (capa) capa.style.display = "none";
-}
-
-// Mostrar publicidad la primera vez que el usuario toca un canal
-const _reproducirOriginal = reproducir;
-let primerCanal = true;
-reproducir = function(url, nombre, fallbacks) {
-  if (primerCanal) {
-    primerCanal = false;
-    mostrarCapaPublicidad();
-    setTimeout(() => _reproducirOriginal(url, nombre, fallbacks), 100);
-  } else {
-    _reproducirOriginal(url, nombre, fallbacks);
+  function mostrarCapaPublicidad() {
+    const capa = document.getElementById("capa-pub");
+    if (!capa || adTimerStarted) return;
+    capa.style.display = "flex";
+    adTimerStarted = true;
+    let segs = 5;
+    const segEl  = document.getElementById("seg-ad");
+    const contEl = document.getElementById("contador-ad");
+    const btnEl  = document.getElementById("btn-continuar");
+    const timer  = setInterval(() => {
+      segs--;
+      if (segEl) segEl.textContent = segs;
+      if (segs <= 0) {
+        clearInterval(timer);
+        if (contEl) contEl.style.display = "none";
+        if (btnEl)  btnEl.classList.add("show");
+      }
+    }, 1000);
   }
-};
 
+  function cerrarPublicidad() {
+    const capa = document.getElementById("capa-pub");
+    if (capa) capa.style.display = "none";
+  }
+
+  // Mostrar publicidad la primera vez que el usuario toca un canal
+  const _reproducirOriginal = reproducir;
+  let primerCanal = true;
+  reproducir = function(url, nombre, fallbacks) {
+    if (primerCanal) {
+      primerCanal = false;
+      mostrarCapaPublicidad();
+      setTimeout(() => _reproducirOriginal(url, nombre, fallbacks), 100);
+    } else {
+      _reproducirOriginal(url, nombre, fallbacks);
+    }
+  };
 </script>
 </body>
 </html>
