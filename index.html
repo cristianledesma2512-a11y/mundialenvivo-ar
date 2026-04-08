@@ -296,7 +296,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   <div class="ntab a" onclick="cambiarTab('tv',this)">📺 TV EN VIVO</div>
   <div class="ntab" onclick="cambiarTab('mundial',this)">🌍 MUNDIAL</div>
   <div class="ntab" onclick="cambiarTab('conmebol',this)">🏆 CONMEBOL</div>
-<!-- Nav tabs   <div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>
+  <div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>
 </div>
 
 
@@ -379,9 +379,11 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
     <div id="cat-strip">
       <div class="cat-pill all" onclick="filtrarCat('TODO',this)">▶ TODOS</div>
       <div class="cat-pill dep" onclick="filtrarCat('DEPORTES',this)">⚽ DEPORTES</div>
-      <div class="cat-pill not" onclick="filtrarCat('NOTICIAS',this)">⚽ OPCION 1</div>
-      <div class="cat-pill aire" onclick="filtrarCat('AIRE',this)">⚽ OPCION 2</div>
-      
+      <div class="cat-pill not" onclick="filtrarCat('NOTICIAS',this)">📰 NOTICIAS</div>
+      <div class="cat-pill aire" onclick="filtrarCat('AIRE',this)">📺 AIRE</div>
+      <div class="cat-pill mus" onclick="filtrarCat('MUSICA',this)">🎵 MÚSICA</div>
+      <div class="cat-pill inf" onclick="filtrarCat('INFANTIL',this)">👦 INFANTIL</div>
+      <div class="cat-pill int" onclick="filtrarCat('INTERNACIONAL',this)">🌐 INTL</div>
     </div>
 
     <!-- TV body (carruseles) -->
@@ -812,18 +814,18 @@ function renderTV() {
     body.appendChild(sec);
   }
 
-  // OPCION 1 — carrusel grande
+  // Noticias — carrusel grande
   const nots = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "NOTICIAS");
   if (nots.length) {
-    const sec = crearSeccion("📰 OPCION 1", "var(--cel)", nots.length, "NOTICIAS");
+    const sec = crearSeccion("📰 Noticias", "var(--cel)", nots.length, "NOTICIAS");
     sec.appendChild(crearCarruselLg(nots));
     body.appendChild(sec);
   }
 
-  // OPCION 2 — carrusel pequeño
+  // Aire — carrusel pequeño
   const aire = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "AIRE");
   if (aire.length) {
-    const sec = crearSeccion("📺 OPCION 2", "var(--aire)", aire.length, "AIRE");
+    const sec = crearSeccion("📺 Canales de Aire", "var(--aire)", aire.length, "AIRE");
     sec.appendChild(crearCarruselSm(aire));
     body.appendChild(sec);
   }
