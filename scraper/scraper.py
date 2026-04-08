@@ -43,7 +43,7 @@ CANALES_FIJOS = [
     # ── StreamTP (canales premium sin proxy) ────────────────────────────
     {"id":"stp01",
         "nombre":"ESPN Premium",
-        "categoria":"OPCION1",
+        "categoria":"NOTICIAS",
         "url":"https://streamtpnew.com/global1.php?stream=espnpremium",
         "logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png",
         "fallbacks":[]},
@@ -287,7 +287,7 @@ CANALES_FIJOS = [
 
     {"id":"bol01",
         "nombre":"TYC SPORT",
-        "categoria":"OPCION2",
+        "categoria":"AIRE",
         "url":"https://bolaloca.my/player/1/77",
         "logo":"https://images.seeklogo.com/logo-png/34/1/tyc-sports-logo-png_seeklogo-340604.png",
         "fallbacks":[]},
@@ -446,11 +446,12 @@ CANALES_FIJOS = [
         "url":"https://bolaloca.my/player/1/92",
         "logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png",
         "fallbacks":[]},
-      # fin Bolaloca  ──────────────────
+      # fin Bolaloca via proxy Railway (sin alerta Chrome) ──────────────────
     
 ]
 TDT_CANALES = [
-    ]
+    {"id":"tdt003","nombre":"TRECE","categoria":"AIRE","url":"https://play.cdn.enetres.net/091DB7AFBD77442B9BA2F141DCC182F5021/021/playlist.m3u8","logo":"https://graph.facebook.com/TRECEtves/picture?width=200&height=200","fallbacks":[]},
+     ]
 
 
 FUENTES_M3U = [
@@ -509,11 +510,10 @@ def buscar_canales_m3u(max_por_fuente=200, max_total=800):
                     cat = "DEPORTES"
                 elif any(x in grp+n for x in ["NEWS","NOTICIAS","INFO","24H"]):
                     cat = "NOTICIAS"
-                elif any(x in grp+n for x in ["SPORT","DEPORT","FUTBOL","FOOTBALL"]):
-                    cat = "OPCION1"
-                    elif any(x in grp+n for x in ["SPORT","DEPORT","FUTBOL","FOOTBALL"]):
-                    cat = "OPCION2"
-                
+                elif any(x in grp+n for x in ["MUSIC","MUSICA","HITS"]):
+                    cat = "MUSICA"
+                elif any(x in grp+n for x in ["KIDS","INFANTIL","CHILDREN","CARTOON","DISNEY","NICK"]):
+                    cat = "INFANTIL"
                 else:
                     cat = "INTERNACIONAL"
                 ids_vistos.add(key)
