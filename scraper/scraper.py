@@ -287,7 +287,7 @@ CANALES_FIJOS = [
 
     {"id":"bol01",
         "nombre":"TYC SPORT",
-        "categoria":"AIRE",
+        "categoria":"INTERNACIONAL",
         "url":"https://bolaloca.my/player/1/77",
         "logo":"https://images.seeklogo.com/logo-png/34/1/tyc-sports-logo-png_seeklogo-340604.png",
         "fallbacks":[]},
