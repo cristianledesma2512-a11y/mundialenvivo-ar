@@ -296,7 +296,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   <div class="ntab a" onclick="cambiarTab('tv',this)">📺 TV EN VIVO</div>
   <div class="ntab" onclick="cambiarTab('mundial',this)">🌍 MUNDIAL</div>
   <div class="ntab" onclick="cambiarTab('conmebol',this)">🏆 CONMEBOL</div>
-  <div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>
+<!-- Nav tabs   <div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>-->
 </div>
 
 
@@ -380,10 +380,9 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
       <div class="cat-pill all" onclick="filtrarCat('TODO',this)">▶ TODOS</div>
       <div class="cat-pill dep" onclick="filtrarCat('DEPORTES',this)">⚽ DEPORTES</div>
       <div class="cat-pill not" onclick="filtrarCat('NOTICIAS',this)">📰 NOTICIAS</div>
-      <div class="cat-pill aire" onclick="filtrarCat('AIRE',this)">📺 AIRE</div>
-      <div class="cat-pill mus" onclick="filtrarCat('MUSICA',this)">🎵 MÚSICA</div>
-      <div class="cat-pill inf" onclick="filtrarCat('INFANTIL',this)">👦 INFANTIL</div>
-      <div class="cat-pill int" onclick="filtrarCat('INTERNACIONAL',this)">🌐 INTL</div>
+      <div class="cat-pill dep" onclick="filtrarCat('OPCION1',this)">⚽ OPCION1</div>
+      <div class="cat-pill dep" onclick="filtrarCat('OPCION2,this)">⚽ OPCION2</div>
+     
     </div>
 
     <!-- TV body (carruseles) -->
@@ -482,6 +481,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
     <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-3"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
     <div class="bl" id="bnav-lbl-3">País</div>
   </div>
+  
   <div class="bi" onclick="cambiarTab('chat',null);setNavActive(4)">
     <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-4"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     <div class="bl" id="bnav-lbl-4">Tribuna</div>
@@ -807,25 +807,25 @@ function renderTV() {
   }
 
   // Deportes — carrusel pequeño
-  const deps = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "DEPORTES");
+  const deps = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "OPCION1");
   if (deps.length) {
-    const sec = crearSeccion("⚽ Deportes", "var(--dep)", deps.length, "DEPORTES");
+    const sec = crearSeccion("⚽ Deportes", "var(--dep)", deps.length, "OPCION1");
     sec.appendChild(crearCarruselSm(deps));
     body.appendChild(sec);
   }
 
-  // Noticias — carrusel grande
-  const nots = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "NOTICIAS");
+  // OPCION1 — carrusel grande
+  const nots = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "OPCION1");
   if (nots.length) {
-    const sec = crearSeccion("📰 Noticias", "var(--cel)", nots.length, "NOTICIAS");
+    const sec = crearSeccion("📰 OPCION1", "var(--cel)", nots.length, "OPCION1");
     sec.appendChild(crearCarruselLg(nots));
     body.appendChild(sec);
   }
 
-  // Aire — carrusel pequeño
-  const aire = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "AIRE");
+  // OPCION2 — carrusel pequeño
+  const aire = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "OPCION2");
   if (aire.length) {
-    const sec = crearSeccion("📺 Canales de Aire", "var(--aire)", aire.length, "AIRE");
+    const sec = crearSeccion("📺 OPCION2", "var(--aire)", aire.length, "OPCION2");
     sec.appendChild(crearCarruselSm(aire));
     body.appendChild(sec);
   }
