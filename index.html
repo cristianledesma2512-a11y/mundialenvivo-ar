@@ -302,15 +302,18 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
     <nav style="flex:1;padding:16px 12px;overflow-y:auto;">
       <a href="#" onclick="cambiarTab('tv',document.querySelector('.ntab'));closeSXSidebar();return false;"
         style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none;color:#74ACDF;background:rgba(116,172,223,0.1);border:1px solid rgba(116,172,223,0.15);font-size:13px;font-weight:600;margin-bottom:4px;">
-        <svg style="width:18px;height:18px;flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-        📺 TV en Vivo
+        <svg style="width:18px;height:18px;flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+        </svg>TV EN VIVO
       </a>
       <a href="#" onclick="cambiarTab('mundial',document.querySelectorAll('.ntab')[1]);closeSXSidebar();return false;"
         style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none;color:#a0aec0;font-size:13px;font-weight:500;margin-bottom:4px;transition:all .2s;"
         onmouseover="this.style.background='rgba(116,172,223,0.08)';this.style.color='#fff'"
         onmouseout="this.style.background='';this.style.color='#a0aec0'">
-        <svg style="width:18px;height:18px;flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
-        🌍 Mundial
+        <svg style="width:18px;height:18px;flex-shrink:0" 
+          fill="none" 
+          stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          <path d="M2 12h20"/></svg>MUNDIAL
       </a>
       <a href="#" onclick="cambiarTab('conmebol',document.querySelectorAll('.ntab')[2]);closeSXSidebar();return false;"
         style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none;color:#a0aec0;font-size:13px;font-weight:500;margin-bottom:4px;transition:all .2s;"
@@ -318,12 +321,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
         onmouseout="this.style.background='';this.style.color='#a0aec0'">
         🏆 CONMEBOL
       </a>
-      <a href="#" onclick="cambiarTab('chat',document.querySelectorAll('.ntab')[3]);closeSXSidebar();return false;"
-        style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none;color:#a0aec0;font-size:13px;font-weight:500;margin-bottom:4px;transition:all .2s;"
-        onmouseover="this.style.background='rgba(116,172,223,0.08)';this.style.color='#fff'"
-        onmouseout="this.style.background='';this.style.color='#a0aec0'">
-        💬 Tribuna
-      </a>
+      
     </nav>
 
     <!-- Footer nav -->
