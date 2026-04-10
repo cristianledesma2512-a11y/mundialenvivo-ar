@@ -919,9 +919,9 @@ function renderTV() {
   }
 
   // Deportes — carrusel pequeño
-  const deps = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "DEPORTES");
+  const deps = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
   if (deps.length) {
-    const sec = crearSeccion("⚽ Deportes", "var(--dep)", deps.length, "DEPORTES");
+    const sec = crearSeccion("⚽ OPCION 3", "var(--dep)", deps.length, "MUSICA");
     sec.appendChild(crearCarruselSm(deps));
     body.appendChild(sec);
   }
@@ -942,17 +942,11 @@ function renderTV() {
     sec.appendChild(crearCarruselLg(intl));
     body.appendChild(sec);
   }
-  // OPCION 3 — carrusel grande
-  const intl = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
-  if (intl.length) {
-    const sec = crearSeccion("🌐 OPCION 3", "var(--int)", intl.length, "MUSICA");
-    sec.appendChild(crearCarruselLg(intl));
-    body.appendChild(sec);
-  }
+  
 
   // Infantil + Música — grid 2 col
   const inf = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "INFANTIL");
-  const mus = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "");
+  const mus = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
   if (inf.length || mus.length) {
     const grid = document.createElement("div"); grid.className = "grid2";
     if (inf.length) { const col = crearGrid2Col("👦 Infantil", "var(--inf)", inf.slice(0,5)); grid.appendChild(col); }
