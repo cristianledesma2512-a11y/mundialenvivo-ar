@@ -918,13 +918,7 @@ function renderTV() {
     sec.appendChild(strip); body.appendChild(sec);
   }
 
-  // Deportes — carrusel pequeño
-  const deps = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
-  if (deps.length) {
-    const sec = crearSeccion("⚽ OPCION 3", "var(--dep)", deps.length, "MUSICA");
-    sec.appendChild(crearCarruselSm(deps));
-    body.appendChild(sec);
-  }
+  
 
   // OPCION 1 — carrusel grande
   const nots = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "NOTICIAS");
@@ -942,7 +936,13 @@ function renderTV() {
     sec.appendChild(crearCarruselLg(intl));
     body.appendChild(sec);
   }
-  
+  // DOPCION 3 — carrusel pequeño
+  const deps = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
+  if (deps.length) {
+    const sec = crearSeccion("⚽ OPCION 3", "var(--dep)", deps.length, "MUSICA");
+    sec.appendChild(crearCarruselSm(deps));
+    body.appendChild(sec);
+  }
 
   // Infantil + Música — grid 2 col
   const inf = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "INFANTIL");
