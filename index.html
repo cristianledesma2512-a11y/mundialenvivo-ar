@@ -945,12 +945,12 @@ function renderTV() {
   }
 
   // Infantil + Música — grid 2 col
-  const inf = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "NOTICIAS");
-  const mus = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "INTERNACIONAL);
+  const inf = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "INFANTIL");
+  const mus = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
   if (inf.length || mus.length) {
     const grid = document.createElement("div"); grid.className = "grid2";
-    if (inf.length) { const col = crearGrid2Col("OPCION1", "var(--inf)", inf.slice(0,5)); grid.appendChild(col); }
-    if (mus.length) { const col = crearGrid2Col("OPCION2", "var(--mus)", mus.slice(0,5)); grid.appendChild(col); }
+    if (inf.length) { const col = crearGrid2Col("👦 Infantil", "var(--inf)", inf.slice(0,5)); grid.appendChild(col); }
+    if (mus.length) { const col = crearGrid2Col("OPCION 3", "var(--mus)", mus.slice(0,5)); grid.appendChild(col); }
     body.appendChild(grid);
   }
 
