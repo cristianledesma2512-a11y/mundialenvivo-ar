@@ -447,7 +447,31 @@ CANALES_FIJOS = [
         "url":"https://bolaloca.my/player/1/92",
         "logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png",
         "fallbacks":[]},
-      # fin Bolaloca via proxy Railway (sin alerta Chrome) ──────────────────
+      # CANALES CAPO PLAY ──────────────────
+     {"id":"cap01",
+        "nombre":"canal1",
+        "categoria":"MUSICA",
+        "url":"https://www.capoplay.net/canal1.php",
+        "logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks":[]},
+    {"id":"cap02",
+        "nombre":"canal2",
+        "categoria":"MUSICA",
+        "url":"https://www.capoplay.net/canal2.php",
+        "logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks":[]},
+    {"id":"cap03",
+        "nombre":"canal3",
+        "categoria":"MUSICA",
+        "url":"https://www.capoplay.net/canal3.php",
+        "logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks":[]},
+    {"id":"cap04",
+        "nombre":"canal4",
+        "categoria":"MUSICA",
+        "url":"https://www.capoplay.net/canal1.php",
+        "logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks":[]},  
     
 ]
 TDT_CANALES = [

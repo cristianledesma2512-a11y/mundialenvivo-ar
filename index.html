@@ -480,6 +480,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
       <div class="cat-pill all" onclick="filtrarCat('TODO',this)">▶ TODOS</div>
       <div class="cat-pill not" onclick="filtrarCat('NOTICIAS',this)">⚽ OPCION1</div>
      <div class="cat-pill int" onclick="filtrarCat('INTERNACIONAL',this)">⚽ OPCION2</div>
+      <div class="cat-pill int" onclick="filtrarCat('MUSICA',this)">⚽ OPCION3</div>
     </div>
 
     <!-- TV body (carruseles) -->
@@ -941,10 +942,17 @@ function renderTV() {
     sec.appendChild(crearCarruselLg(intl));
     body.appendChild(sec);
   }
+  // OPCION 3 — carrusel grande
+  const intl = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
+  if (intl.length) {
+    const sec = crearSeccion("🌐 OPCION 3", "var(--int)", intl.length, "MUSICA");
+    sec.appendChild(crearCarruselLg(intl));
+    body.appendChild(sec);
+  }
 
   // Infantil + Música — grid 2 col
   const inf = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "INFANTIL");
-  const mus = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
+  const mus = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "");
   if (inf.length || mus.length) {
     const grid = document.createElement("div"); grid.className = "grid2";
     if (inf.length) { const col = crearGrid2Col("👦 Infantil", "var(--inf)", inf.slice(0,5)); grid.appendChild(col); }
