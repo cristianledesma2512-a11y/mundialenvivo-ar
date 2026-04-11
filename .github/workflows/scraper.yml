@@ -3,7 +3,7 @@ name: Actualizar Canales
 on:
   schedule:
     - cron: '0 */2 * * *'  # Se ejecuta cada 2 horas
-  workflow_dispatch:      # Permite ejecutarlo manualmente desde GitHub
+  workflow_dispatch:      # Permite ejecutarlo manualmente
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -20,15 +20,12 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar dependencias directamente
+      - name: Instalar dependencias
         run: |
           python -m pip install --upgrade pip
           pip install requests firebase-admin beautifulsoup4 lxml
 
       - name: Correr scraper
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: python scraper/scraper.pyrrer scraper
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: python scraper/scraper.py
