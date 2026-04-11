@@ -240,6 +240,22 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 #toast{position:fixed;bottom:74px;left:50%;transform:translateX(-50%) translateY(60px);background:rgba(10,22,40,0.95);border:1px solid var(--cel);color:#fff;padding:9px 18px;border-radius:20px;font-size:13px;transition:transform .3s;z-index:999;backdrop-filter:blur(8px);white-space:nowrap;pointer-events:none;}
 #toast.show{transform:translateX(-50%) translateY(0);}
 
+/* ── Eventos ── */
+#sec-eventos{padding:10px 14px;overflow-y:auto;}
+.ev-group-title{font-size:11px;font-weight:700;color:var(--dor);text-transform:uppercase;letter-spacing:.8px;margin:14px 0 8px;padding-left:10px;border-left:3px solid var(--dor);}
+.ev-card{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid rgba(116,172,223,0.1);border-radius:8px;padding:10px 12px;margin-bottom:5px;transition:.15s;}
+.ev-card:hover{border-color:rgba(116,172,223,0.3);background:var(--card2);}
+.ev-hora{font-size:12px;font-weight:700;color:var(--dor);min-width:40px;flex-shrink:0;}
+.ev-titulo{flex:1;font-size:12px;font-weight:600;color:var(--txt);line-height:1.3;}
+.ev-cat{font-size:10px;color:var(--muted);margin-top:2px;}
+.ev-live{display:flex;align-items:center;gap:4px;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.3);border-radius:10px;padding:3px 8px;font-size:9px;font-weight:700;color:var(--roj);flex-shrink:0;}
+.ev-live-dot{width:5px;height:5px;border-radius:50%;background:var(--roj);animation:blink .9s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.ev-btn{background:rgba(116,172,223,0.15);border:1px solid rgba(116,172,223,0.3);color:var(--cel);padding:5px 10px;border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.ev-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px;line-height:1.8;}
+.ev-ts{font-size:10px;color:var(--muted);text-align:right;padding:0 4px 8px;}
+.ev-search{width:100%;padding:8px 12px;background:var(--card);border:1px solid rgba(116,172,223,0.2);border-radius:8px;color:var(--txt);font-size:13px;outline:none;margin-bottom:10px;}
+
 /* Bottom nav */
 #bnav{display:flex;background:var(--az2);border-top:1px solid rgba(116,172,223,0.12);padding:20px 0 20px;flex-shrink:0;}
 .bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
@@ -372,20 +388,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   <div class="avatar" id="user-badge">?</div>
 </div>
 
-<!--inicio Adsterra Banner 728x90 -->
-<div id="ad-banner-top" style="display:flex;justify-content:center;background:#000;padding:4px 0;flex-shrink:0;overflow:hidden;max-height:100px;">
-  <script>
-  atOptions = {
-    'key' : '1f1717fb4441fdec06e5890a6575af01',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://balancedsuppercreed.com/1f1717fb4441fdec06e5890a6575af01/invoke.js"></script>
-</div>
-<!--fin Adsterra Banner 728x90 -->
+
 
 <!-- Search bar -->
 <div id="srch-bar" style="display:none;">
@@ -400,7 +403,8 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   <div class="ntab a" onclick="cambiarTab('tv',this)">📺 TV EN VIVO</div>
   <div class="ntab" onclick="cambiarTab('mundial',this)">🌍 MUNDIAL</div>
   <div class="ntab" onclick="cambiarTab('conmebol',this)">🏆 CONMEBOL</div>
- <!-- <div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>-->
+  <div class="ntab" onclick="cambiarTab('eventos',this)">⚽ EVENTOS</div>
+  <!--<div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>-->
 </div>
 
 
@@ -442,22 +446,9 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
         <p>Apoyá el proyecto mirando el anuncio</p>
         <div id="ad-box-300">
 <!-- inicio SCRIPT -->
-          <script>
-                atOptions = {
-                  'key' : '7c7744fc99ba2a6feafeb112edbb5dc4',
-                  'format' : 'iframe',
-                  'height' : 250,
-                  'width' : 300,
-                  'params' : {}
-                };
-          </script>
-          <script src="https://balancedsuppercreed.com/7c7744fc99ba2a6feafeb112edbb5dc4/invoke.js"></script>
-          <script>(function(s){
-            s.dataset.zone='10842483',
-            s.src='https://al5sm.com/tag.min.js'})
-            ([document.documentElement, 
-            document.body].filter(Boolean).pop().appendChild(document.createElement('script')))
-          </script>
+          
+
+
 <!-- fin SCRIPT -->
 
         </div>
@@ -550,7 +541,14 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
     </div>
   </div>
 
-  <!-- ══ CHAT ══ -->
+  <!-- ══ EVENTOS ══ -->
+<div id="sec-eventos" class="section">
+  <div id="ev-ts" class="ev-ts"></div>
+  <input type="text" class="ev-search" id="ev-search" placeholder="🔍 Buscar evento o deporte..." oninput="renderEventos()">
+  <div id="ev-body"><div class="ev-empty">⏳ Cargando eventos...</div></div>
+</div>
+
+<!-- ══ CHAT ══ -->
   <div id="sec-chat" class="section" style="display:flex;flex-direction:column;height:calc(50vh -195px);">
     <div id="chat-msgs"></div>
     <div id="chat-form">
@@ -563,16 +561,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
 
 <!-- inicio Adsterra Banner 728x90 -->
 <div id="ad-banner-top" style="display:flex;justify-content:center;background:#000;padding:4px 0;flex-shrink:0;overflow:hidden;max-height:100px;">
-  <script>
-  atOptions = {
-    'key' : '1f1717fb4441fdec06e5890a6575af01',
-    'format' : 'iframe',
-    'height' : 90,
-    'width' : 728,
-    'params' : {}
-  };
-</script>
-<script src="https://balancedsuppercreed.com/1f1717fb4441fdec06e5890a6575af01/invoke.js"></script>
+  
 </div>
 <!--fin Adsterra Banner 728x90 -->
 
@@ -592,7 +581,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans
   </div>
   <div class="bi" onclick="abrirFiltrosPais()">
     <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-3"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-    <div class="bl" id="bnav-lbl-3">País</div>
+    <div class="bl" id="bnav-lbl-3">Eventos</div>
   </div>
   <div class="bi" onclick="cambiarTab('chat',null);setNavActive(4)">
     <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-4"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -680,6 +669,7 @@ function cambiarTab(tab, btn) {
   document.querySelectorAll(".section").forEach(s => s.classList.remove("a"));
   document.querySelectorAll(".ntab").forEach(b => b.classList.remove("a"));
   document.getElementById("sec-" + tab).classList.add("a");
+  if (tab === "eventos") cargarEventos();
   if (btn) btn.classList.add("a");
   else {
     const idx = {tv:0,mundial:1,conmebol:2,chat:3}[tab];
@@ -1300,6 +1290,73 @@ if (miNick) {
 }
 
 
+// ── EVENTOS DEPORTIVOS ────────────────────────────────────────────────────
+let eventosData = [];
+
+function cargarEventos() {
+  db.ref("eventos_dia").once("value", snap => {
+    const data = snap.val();
+    if (!data || !data.eventos || !data.eventos.length) {
+      document.getElementById("ev-body").innerHTML =
+        '<div class="ev-empty">📡 Sin eventos para hoy.<br><small>El scraper actualizará cada 2 horas.</small></div>';
+      return;
+    }
+    eventosData = data.eventos;
+    if (data.actualizadoEn) {
+      const d = new Date(data.actualizadoEn);
+      document.getElementById("ev-ts").textContent =
+        "Actualizado: " + d.toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"}) +
+        " · " + eventosData.length + " eventos";
+    }
+    renderEventos();
+  });
+}
+
+function renderEventos() {
+  const q = (document.getElementById("ev-search")?.value || "").toLowerCase().trim();
+  const body = document.getElementById("ev-body");
+  if (!body) return;
+  if (!eventosData.length) {
+    body.innerHTML = '<div class="ev-empty">Sin eventos para hoy.</div>';
+    return;
+  }
+  let lista = q
+    ? eventosData.filter(e =>
+        e.titulo.toLowerCase().includes(q) ||
+        (e.categoria||"").toLowerCase().includes(q))
+    : eventosData;
+
+  if (!lista.length) {
+    body.innerHTML = '<div class="ev-empty">Sin resultados para "' + q + '"</div>';
+    return;
+  }
+
+  // Agrupar por categoría
+  const grupos = {};
+  lista.forEach(e => {
+    const cat = e.categoria || "Otros";
+    if (!grupos[cat]) grupos[cat] = [];
+    grupos[cat].push(e);
+  });
+
+  body.innerHTML = Object.entries(grupos).map(([cat, evs]) => {
+    const items = evs.map(e => {
+      const linkSafe = (e.link||"").replace(/'/g, "\'");
+      const tituloSafe = (e.titulo||"").replace(/'/g, "\'");
+      return `<div class="ev-card">
+        <span class="ev-hora">${e.hora || "--:--"}</span>
+        <div style="flex:1;min-width:0;">
+          <div class="ev-titulo">${e.titulo}</div>
+          ${e.idioma ? `<div class="ev-cat">${e.idioma}</div>` : ""}
+        </div>
+        ${e.enVivo ? '<div class="ev-live"><div class="ev-live-dot"></div>EN VIVO</div>' : ""}
+        ${e.link ? `<button class="ev-btn" onclick="reproducir('${linkSafe}','${tituloSafe}',[]);cambiarTab('tv',document.querySelector('.ntab'))">▶ Ver</button>` : ""}
+      </div>`;
+    }).join("");
+    return `<div class="ev-group-title">${cat} (${evs.length})</div>${items}`;
+  }).join("");
+}
+
 function saltearModal() {
   const autoNick = "Invitado" + Math.floor(Math.random()*9000+1000);
   localStorage.setItem("mnv_nick", autoNick); miNick = autoNick;
@@ -1310,8 +1367,6 @@ function saltearModal() {
 
 </script>
 
-
-<script>(function(s){s.dataset.zone='10842484',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
 
 <!-- Monetag publicidad 
