@@ -17,12 +17,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Instalar Puppeteer y dependencias de sistema
+      - name: Instalar dependencias
         run: |
           npm install puppeteer
-          # Instalar dependencias necesarias para que Chrome corra en Linux
-          sudo apt-get update
+          # Librería necesaria para que Chrome corra en los servidores de GitHub
           sudo apt-get install -y libgbm-dev
 
-      - name: Ejecutar Scraper Puppeteer
-        run: node tu_archivo_puppeteer.js # Reemplazá con el nombre real de tu archivo
+      - name: Ejecutar Scraper
+        run: node run.js
