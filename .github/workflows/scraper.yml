@@ -2,11 +2,8 @@ name: Actualizar Canales
 
 on:
   schedule:
-    - cron: '0 */2 * * *'  # Se ejecuta cada 2 horas
-  workflow_dispatch:      # Permite ejecutarlo manualmente
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    - cron: '0 */2 * * *'
+  workflow_dispatch:
 
 jobs:
   scraper:
@@ -15,17 +12,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.11'
+          node-version: '20'
 
-      - name: Instalar dependencias
+      - name: Instalar Puppeteer y dependencias de sistema
         run: |
-          python -m pip install --upgrade pip
-          pip install requests firebase-admin beautifulsoup4 lxml
+          npm install puppeteer
+          # Instalar dependencias necesarias para que Chrome corra en Linux
+          sudo apt-get update
+          sudo apt-get install -y libgbm-dev
 
-      - name: Correr scraper
-        env:
-          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        run: python scraper/scraper.py
+      - name: Ejecutar Scraper Puppeteer
+        run: node tu_archivo_puppeteer.js # Reemplazá con el nombre real de tu archivo
