@@ -14,6 +14,7 @@ import json
 import os
 import time
 from datetime import datetime
+from bs4 import BeautifulSoup
 
 import firebase_admin
 from firebase_admin import credentials, db as rtdb
@@ -447,8 +448,8 @@ CANALES_FIJOS = [
         "url":"https://bolaloca.my/player/1/92",
         "logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png",
         "fallbacks":[]},
-      # CANALES CAPO PLAY ──────────────────
-     {"id":"cap01",
+      # canales capoplay──────────────────
+    {"id":"cap01",
         "nombre":"canal1",
         "categoria":"MUSICA",
         "url":"https://www.capoplay.net/canal1.php",
@@ -471,8 +472,7 @@ CANALES_FIJOS = [
         "categoria":"MUSICA",
         "url":"https://www.capoplay.net/canal1.php",
         "logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png",
-        "fallbacks":[]},  
-    
+        "fallbacks":[]},    
 ]
 TDT_CANALES = [
     
@@ -913,6 +913,113 @@ def actualizar_conmebol(ref):
     print("  💾 Recopa guardada")
 
 # ══════════════════════════════════════════════════════════════════════════
+#  EVENTOS DEPORTIVOS DEL DÍA
+# ══════════════════════════════════════════════════════════════════════════
+def scrapear_eventos(ref):
+    """
+    Scrapea https://streamtpnew.com/eventos.html
+    y guarda los eventos en Firebase bajo /eventos_dia
+    """
+    print("\n⚽ Scrapeando eventos deportivos...")
+    URL = "https://streamtpnew.com/eventos.html"
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+                      "AppleWebKit/537.36 (KHTML, like Gecko) "
+                      "Chrome/120.0.0.0 Safari/537.36",
+        "Accept-Language": "es-AR,es;q=0.9",
+        "Referer": "https://streamtpnew.com/",
+    }
+
+    try:
+        r = requests.get(URL, headers=headers, timeout=20)
+        r.raise_for_status()
+    except Exception as e:
+        print(f"  ❌ No se pudo conectar a eventos.html: {e}")
+        return
+
+    soup = BeautifulSoup(r.text, "html.parser")
+    eventos = []
+
+    # Buscar todos los .event divs
+    event_divs = soup.select(".event")
+
+    for div in event_divs:
+        # Hora + título en .event-name
+        name_el = div.select_one(".event-name")
+        if not name_el:
+            continue
+
+        # Solo el texto directo (sin hijos como el span de idioma)
+        full_text = name_el.get_text(separator=" ", strip=True)
+
+        # Separar hora del título: "HH:MM - Título del partido"
+        import re as _re
+        match = _re.match(r"^(\d{1,2}:\d{2})\s*[-–]\s*(.+)$", full_text)
+        hora   = match.group(1).strip() if match else ""
+        titulo = match.group(2).strip() if match else full_text
+
+        # Link del stream
+        link_el = div.select_one(".iframe-link")
+        link = link_el.get("value", "").strip() if link_el else ""
+
+        # Estado en vivo
+        status_el = div.select_one(".status-button")
+        en_vivo = "status-live" in (status_el.get("class", []) if status_el else [])
+
+        # Idioma (bandera img alt)
+        idioma_el = name_el.select_one("img")
+        idioma = idioma_el.get("alt", "").strip() if idioma_el else ""
+
+        # Categoría inferida del título
+        t = titulo.lower()
+        if any(x in t for x in ["libertadores"]):
+            categoria = "Libertadores"
+        elif any(x in t for x in ["sudamericana"]):
+            categoria = "Sudamericana"
+        elif any(x in t for x in ["mundial", "fifa", "selección", "seleccion"]):
+            categoria = "Mundial"
+        elif any(x in t for x in ["nba", "basquet", "basket"]):
+            categoria = "Basquet"
+        elif any(x in t for x in ["tenis", "atp", "wta"]):
+            categoria = "Tenis"
+        elif any(x in t for x in ["f1", "formula", "nascar", "moto"]):
+            categoria = "Motor"
+        elif any(x in t for x in ["boxeo", "ufc", "mma", "pelea"]):
+            categoria = "Boxeo"
+        elif any(x in t for x in ["rugby", "nfl"]):
+            categoria = "Rugby"
+        elif any(x in t for x in ["liga", "premier", "bundesliga", "serie a", "laliga"]):
+            categoria = "Fútbol"
+        else:
+            categoria = "Otros"
+
+        if titulo:
+            eventos.append({
+                "hora": hora,
+                "titulo": titulo,
+                "link": link,
+                "idioma": idioma,
+                "enVivo": en_vivo,
+                "categoria": categoria,
+            })
+
+    # Guardar en Firebase
+    ahora = datetime.utcnow().isoformat()
+    data = {
+        "actualizadoEn": ahora,
+        "total": len(eventos),
+        "eventos": eventos,
+    }
+
+    try:
+        ref.child("eventos_dia").set(data)
+        print(f"  💾 {len(eventos)} eventos guardados en Firebase")
+    except Exception as e:
+        print(f"  ❌ Error guardando eventos: {e}")
+
+
+# ══════════════════════════════════════════════════════════════════════════
 #  MAIN
 # ══════════════════════════════════════════════════════════════════════════
 def main():
@@ -928,6 +1035,7 @@ def main():
     actualizar_canales(ref)
     actualizar_mundial(ref)
     actualizar_conmebol(ref)
+    scrapear_eventos(ref)
 
     print("\n" + "=" * 55)
     print("  ✅ TODO ACTUALIZADO EN FIREBASE")
