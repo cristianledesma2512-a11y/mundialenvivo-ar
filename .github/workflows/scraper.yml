@@ -1,9 +1,12 @@
-name: Actualizar Canales Completo
+name: Actualizar Canales
 
 on:
   schedule:
-    - cron: '0 */2 * * *'
-  workflow_dispatch:
+    - cron: '0 */2 * * *'  # Cada 2 horas
+  workflow_dispatch:         # Correr manualmente también
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   scraper:
@@ -12,42 +15,15 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # --- PARTE 1: SCRAPER DE EVENTOS (NODE.JS) ---
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Instalar dependencias Node
-        run: |
-          npm install puppeteer
-          sudo apt-get update
-          sudo apt-get install -y libgbm-dev
-
-      - name: Ejecutar Scraper de Eventos (Puppeteer)
-        run: node run.js
-
-      # --- PARTE 2: CARGA DE CANALES Y DEMÁS (PYTHON) ---
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Instalar dependencias Python
-        run: |
-          python -m pip install --upgrade pip
-          pip install requests firebase-admin beautifulsoup4 lxml
+      - name: Instalar dependencias
+        run: pip install -r scraper/requirements.txt
 
-      - name: Ejecutar Scraper de Canales y Tablas
-        run: python scraper/scraper.py # Asegurate que este sea el nombre de tu archivo Python
+      - name: Correr scraper
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-
-      # --- PARTE 3: PUBLICACIÓN AUTOMÁTICA ---
-      - name: Deploy a Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: mundialenvivo-ar
-          channelId: live
+        run: python scraper/scraper.py
