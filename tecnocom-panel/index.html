@@ -6,24 +6,26 @@
 <title>TECNOCOM Panel — MundialEnVivo AR</title>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root{
   --bg:#060e1a;--sidebar:#0a1628;--card:#0f2040;--card2:#152a50;
   --dor:#C5A059;--cel:#74ACDF;--roj:#e74c3c;--ver:#2ecc71;
-  --txt:#e8edf5;--muted:#6b7fa0;--rad:8px;
+  --nar:#f39c12;--mor:#9b59b6;
+  --txt:#e8edf5;--muted:#6b7fa0;--rad:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',system-ui,sans-serif;}
 body{background:var(--bg);color:var(--txt);display:flex;height:100vh;overflow:hidden;}
 
 /* LOGIN */
-#login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;z-index:9999;}
+#login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;z-index:9999;}
 #login-screen h1{font-size:22px;color:var(--dor);}
 #login-screen input{padding:12px 16px;border-radius:8px;border:1px solid var(--cel);background:var(--card);color:var(--txt);font-size:15px;width:260px;text-align:center;outline:none;}
 #login-screen button{background:var(--dor);border:none;padding:12px 40px;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;color:var(--bg);}
 #login-err{color:var(--roj);font-size:13px;display:none;}
 
 /* SIDEBAR */
-#sidebar{width:220px;background:var(--sidebar);border-right:1px solid rgba(116,172,223,0.1);display:flex;flex-direction:column;padding:0;flex-shrink:0;}
+#sidebar{width:220px;background:var(--sidebar);border-right:1px solid rgba(116,172,223,0.1);display:flex;flex-direction:column;flex-shrink:0;}
 .sb-header{padding:18px 16px;border-bottom:1.5px solid var(--dor);}
 .sb-logo{font-size:13px;font-weight:700;color:var(--dor);}
 .sb-sub{font-size:10px;color:var(--muted);margin-top:2px;}
@@ -37,9 +39,9 @@ body{background:var(--bg);color:var(--txt);display:flex;height:100vh;overflow:hi
 
 /* MAIN */
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
-.topbar{background:var(--sidebar);padding:12px 20px;border-bottom:1px solid rgba(116,172,223,0.1);display:flex;align-items:center;justify-content:space-between;}
+.topbar{background:var(--sidebar);padding:12px 20px;border-bottom:1px solid rgba(116,172,223,0.1);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
 .topbar-title{font-size:15px;font-weight:700;}
-.topbar-right{display:flex;align-items:center;gap:12px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
 .stat-pill{background:var(--card);padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;border:1px solid rgba(116,172,223,0.2);}
 .stat-pill span{color:var(--dor);}
 
@@ -50,11 +52,25 @@ body{background:var(--bg);color:var(--txt);display:flex;height:100vh;overflow:hi
 .panel.a{display:block;}
 
 /* CARDS */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:20px;}
-.stat-card{background:var(--card);border:1px solid rgba(116,172,223,0.15);border-radius:var(--rad);padding:16px;}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:20px;}
+.stat-card{background:var(--card);border:1px solid rgba(116,172,223,0.15);border-radius:var(--rad);padding:16px;position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.stat-card.c-dor::before{background:var(--dor);}
+.stat-card.c-ver::before{background:var(--ver);}
+.stat-card.c-roj::before{background:var(--roj);}
+.stat-card.c-cel::before{background:var(--cel);}
+.stat-card.c-nar::before{background:var(--nar);}
+.stat-card.c-mor::before{background:var(--mor);}
 .stat-card-label{font-size:11px;color:var(--muted);margin-bottom:6px;}
 .stat-card-val{font-size:28px;font-weight:700;color:var(--dor);}
 .stat-card-sub{font-size:10px;color:var(--muted);margin-top:4px;}
+
+/* CHARTS */
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.chart-card{background:var(--card);border:1px solid rgba(116,172,223,0.15);border-radius:var(--rad);padding:16px;}
+.chart-title{font-size:12px;font-weight:700;color:var(--cel);margin-bottom:12px;}
+.chart-wrap{position:relative;height:180px;}
+@media(max-width:900px){.charts-grid{grid-template-columns:1fr;}}
 
 /* SECTION */
 .sec-title{font-size:14px;font-weight:700;margin-bottom:12px;color:var(--cel);}
@@ -70,11 +86,11 @@ body{background:var(--bg);color:var(--txt);display:flex;height:100vh;overflow:hi
 .btn-rojo{background:rgba(231,76,60,0.2);color:var(--roj);border:1px solid rgba(231,76,60,0.3);}
 .btn-rojo:hover{background:var(--roj);color:#fff;}
 .btn-ver{background:rgba(116,172,223,0.15);color:var(--cel);border:1px solid rgba(116,172,223,0.3);}
-.btn-ver:hover{background:var(--cel);color:#000;}
 .btn-dor{background:var(--dor);color:#000;border:none;}
 .btn-dor:hover{opacity:.85;}
 .btn-ban{background:rgba(231,76,60,0.15);color:var(--roj);border:1px solid rgba(231,76,60,0.3);font-size:10px;padding:4px 10px;}
 .btn-desban{background:rgba(46,204,113,0.15);color:var(--ver);border:1px solid rgba(46,204,113,0.3);font-size:10px;padding:4px 10px;}
+.btn-nar{background:rgba(243,156,18,0.2);color:var(--nar);border:1px solid rgba(243,156,18,0.3);}
 
 /* BADGE */
 .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;}
@@ -90,7 +106,7 @@ body{background:var(--bg);color:var(--txt);display:flex;height:100vh;overflow:hi
 input:checked+.slider{background:var(--ver);}
 input:checked+.slider:before{transform:translateX(16px);}
 
-/* CHAT MSG */
+/* CHAT */
 .chat-msg{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:6px;margin-bottom:6px;background:var(--card);border:1px solid rgba(116,172,223,0.08);}
 .chat-nick{font-weight:700;color:var(--dor);font-size:12px;white-space:nowrap;}
 .chat-txt{font-size:12px;color:var(--txt);flex:1;word-break:break-word;}
@@ -99,17 +115,23 @@ input:checked+.slider:before{transform:translateX(16px);}
 /* INPUT */
 .input-search{background:var(--card);border:1px solid rgba(116,172,223,0.2);color:var(--txt);padding:8px 14px;border-radius:6px;font-size:13px;outline:none;width:100%;margin-bottom:12px;}
 
-/* SIGNAL CONTROL */
+/* CANAL ROW */
 .canal-row{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--card);border:1px solid rgba(116,172,223,0.1);border-radius:6px;margin-bottom:6px;}
 .canal-logo{width:32px;height:32px;border-radius:6px;object-fit:contain;background:var(--card2);padding:3px;}
 .canal-nombre{flex:1;font-size:12px;font-weight:600;}
 .canal-cat{font-size:10px;color:var(--muted);}
 
-/* ACTIVITY LOG */
+/* LOG */
 .log-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(116,172,223,0.05);font-size:11px;}
 .log-time{color:var(--muted);white-space:nowrap;min-width:70px;}
-.log-msg{color:var(--txt);}
-.log-msg b{color:var(--dor);}
+
+/* EVENTOS */
+.evento-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--card);border:1px solid rgba(116,172,223,0.1);border-radius:6px;margin-bottom:6px;}
+.evento-hora{font-size:11px;font-weight:700;color:var(--dor);min-width:42px;}
+.evento-titulo{flex:1;font-size:12px;font-weight:600;}
+.evento-cat{font-size:10px;color:var(--muted);}
+.dot-live{width:8px;height:8px;border-radius:50%;background:var(--roj);animation:pulse 1.2s infinite;flex-shrink:0;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
 
 /* SCROLLBAR */
 ::-webkit-scrollbar{width:4px;}
@@ -120,7 +142,7 @@ input:checked+.slider:before{transform:translateX(16px);}
 
 <!-- LOGIN -->
 <div id="login-screen">
-  <div style="font-size:32px">⚽</div>
+  <div style="font-size:40px">⚽</div>
   <h1>TECNOCOM Panel</h1>
   <p style="color:var(--muted);font-size:13px">MundialEnVivo AR — Admin Dashboard</p>
   <input type="password" id="pass-in" placeholder="Contraseña de acceso" autocomplete="off">
@@ -132,12 +154,16 @@ input:checked+.slider:before{transform:translateX(16px);}
 <div id="sidebar" style="display:none;">
   <div class="sb-header">
     <div class="sb-logo">⚽ TECNOCOM</div>
-    <div class="sb-sub">MundialEnVivo AR v2.0</div>
+    <div class="sb-sub">MundialEnVivo AR v2.1</div>
   </div>
   <nav class="sb-nav">
     <div class="sb-item a" onclick="showPanel('dashboard',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
       Dashboard
+    </div>
+    <div class="sb-item" onclick="showPanel('graficas',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Estadísticas
     </div>
     <div class="sb-item" onclick="showPanel('usuarios',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -152,12 +178,16 @@ input:checked+.slider:before{transform:translateX(16px);}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>
       Control de Señales
     </div>
+    <div class="sb-item" onclick="showPanel('eventos',this)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Eventos del Día
+    </div>
     <div class="sb-item" onclick="showPanel('blacklist',this)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
       Blacklist
     </div>
     <div class="sb-item" onclick="showPanel('actividad',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       Actividad
     </div>
   </nav>
@@ -169,8 +199,8 @@ input:checked+.slider:before{transform:translateX(16px);}
   <div class="topbar">
     <div class="topbar-title" id="panel-title">Dashboard</div>
     <div class="topbar-right">
-      <div class="stat-pill">Online: <span id="top-online">0</span></div>
-      <div class="stat-pill">Visitas: <span id="top-visitas">0</span></div>
+      <div class="stat-pill">🟢 Online: <span id="top-online">0</span></div>
+      <div class="stat-pill">👁️ Visitas: <span id="top-visitas">0</span></div>
       <div class="stat-pill" style="cursor:pointer;" onclick="logout()">🚪 Salir</div>
     </div>
   </div>
@@ -179,45 +209,100 @@ input:checked+.slider:before{transform:translateX(16px);}
     <!-- DASHBOARD -->
     <div id="panel-dashboard" class="panel a">
       <div class="cards-grid">
-        <div class="stat-card">
-          <div class="stat-card-label">👥 Usuarios online ahora</div>
+        <div class="stat-card c-ver">
+          <div class="stat-card-label">👥 Online ahora</div>
           <div class="stat-card-val" id="stat-online">0</div>
-          <div class="stat-card-sub">en tiempo real</div>
+          <div class="stat-card-sub">usuarios en vivo</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card c-dor">
           <div class="stat-card-label">📊 Visitas totales</div>
           <div class="stat-card-val" id="stat-visitas">0</div>
           <div class="stat-card-sub">acumuladas</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-card-label">💬 Mensajes en chat</div>
+        <div class="stat-card c-cel">
+          <div class="stat-card-label">💬 Mensajes chat</div>
           <div class="stat-card-val" id="stat-msgs">0</div>
-          <div class="stat-card-sub">total histórico</div>
+          <div class="stat-card-sub">histórico</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card c-nar">
           <div class="stat-card-label">📺 Canales activos</div>
           <div class="stat-card-val" id="stat-canales">0</div>
-          <div class="stat-card-sub">de total disponibles</div>
+          <div class="stat-card-sub">de disponibles</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-card-label">🚫 Usuarios baneados</div>
+        <div class="stat-card c-roj">
+          <div class="stat-card-label">🚫 Baneados</div>
           <div class="stat-card-val" id="stat-bans">0</div>
           <div class="stat-card-sub">en blacklist</div>
         </div>
+        <div class="stat-card c-mor">
+          <div class="stat-card-label">⚽ Eventos hoy</div>
+          <div class="stat-card-val" id="stat-eventos">—</div>
+          <div class="stat-card-sub">scraper activo</div>
+        </div>
       </div>
 
-      <div class="sec-title">🕐 Usuarios online ahora</div>
+      <div class="sec-title">🟢 Usuarios conectados ahora</div>
       <div id="dash-online-list" style="margin-bottom:20px;"></div>
 
       <div class="sec-title">💬 Últimos mensajes</div>
       <div id="dash-chat-preview"></div>
     </div>
 
+    <!-- ESTADÍSTICAS -->
+    <div id="panel-graficas" class="panel">
+      <div class="sec-title">📈 Estadísticas en tiempo real</div>
+
+      <div class="charts-grid">
+        <!-- Gráfico visitas por hora -->
+        <div class="chart-card">
+          <div class="chart-title">👁️ Visitas acumuladas (últimas 12h)</div>
+          <div class="chart-wrap"><canvas id="chart-visitas"></canvas></div>
+        </div>
+
+        <!-- Gráfico usuarios online -->
+        <div class="chart-card">
+          <div class="chart-title">👥 Usuarios online (últimos 30 min)</div>
+          <div class="chart-wrap"><canvas id="chart-online"></canvas></div>
+        </div>
+
+        <!-- Gráfico categorías de canales -->
+        <div class="chart-card">
+          <div class="chart-title">📺 Canales por categoría</div>
+          <div class="chart-wrap"><canvas id="chart-cats"></canvas></div>
+        </div>
+
+        <!-- Gráfico mensajes por hora -->
+        <div class="chart-card">
+          <div class="chart-title">💬 Actividad del chat (última hora)</div>
+          <div class="chart-wrap"><canvas id="chart-chat"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Stats extras -->
+      <div class="cards-grid">
+        <div class="stat-card c-ver">
+          <div class="stat-card-label">📡 Canal más visto</div>
+          <div class="stat-card-val" style="font-size:16px;" id="stat-top-canal">—</div>
+          <div class="stat-card-sub">según historial</div>
+        </div>
+        <div class="stat-card c-cel">
+          <div class="stat-card-label">🏆 Usuario más activo</div>
+          <div class="stat-card-val" style="font-size:16px;" id="stat-top-user">—</div>
+          <div class="stat-card-sub">en el chat</div>
+        </div>
+        <div class="stat-card c-dor">
+          <div class="stat-card-label">⏱️ Último scraping</div>
+          <div class="stat-card-val" style="font-size:14px;" id="stat-last-scrape">—</div>
+          <div class="stat-card-sub">eventos deportivos</div>
+        </div>
+      </div>
+    </div>
+
     <!-- USUARIOS -->
     <div id="panel-usuarios" class="panel">
       <div class="sec-title">👥 Usuarios conectados ahora</div>
       <input class="input-search" type="text" placeholder="Buscar usuario..." id="search-usuarios" oninput="filtrarUsuarios()">
-      <table class="tbl" style="margin-bottom:20px;">
+      <table class="tbl">
         <thead><tr><th>Nick</th><th>Estado</th><th>Acciones</th></tr></thead>
         <tbody id="tbl-usuarios"></tbody>
       </table>
@@ -227,9 +312,7 @@ input:checked+.slider:before{transform:translateX(16px);}
     <div id="panel-chat" class="panel">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
         <div class="sec-title" style="margin:0;">💬 Mensajes del chat</div>
-        <div style="display:flex;gap:8px;">
-          <button class="btn btn-rojo" onclick="limpiarChat()">🗑️ Limpiar todo el chat</button>
-        </div>
+        <button class="btn btn-rojo" onclick="limpiarChat()">🗑️ Limpiar todo</button>
       </div>
       <div id="chat-list" style="max-height:calc(100vh - 220px);overflow-y:auto;"></div>
     </div>
@@ -247,12 +330,25 @@ input:checked+.slider:before{transform:translateX(16px);}
       <div id="canales-list"></div>
     </div>
 
+    <!-- EVENTOS DEL DÍA -->
+    <div id="panel-eventos" class="panel">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+        <div class="sec-title" style="margin:0;">⚽ Eventos deportivos del día</div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span id="eventos-ts" style="font-size:10px;color:var(--muted);"></span>
+          <button class="btn btn-ver" onclick="cargarEventos()">🔄 Actualizar</button>
+        </div>
+      </div>
+      <input class="input-search" type="text" placeholder="Buscar evento..." id="search-eventos" oninput="filtrarEventos()">
+      <div id="eventos-list" style="max-height:calc(100vh - 250px);overflow-y:auto;"></div>
+    </div>
+
     <!-- BLACKLIST -->
     <div id="panel-blacklist" class="panel">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-        <div class="sec-title" style="margin:0;">🚫 Blacklist de usuarios</div>
+        <div class="sec-title" style="margin:0;">🚫 Blacklist</div>
         <div style="display:flex;gap:8px;align-items:center;">
-          <input type="text" id="ban-manual-in" placeholder="Banear nick manualmente..." style="background:var(--card);border:1px solid rgba(116,172,223,0.2);color:var(--txt);padding:7px 12px;border-radius:6px;font-size:12px;outline:none;width:200px;">
+          <input type="text" id="ban-manual-in" placeholder="Banear nick..." style="background:var(--card);border:1px solid rgba(116,172,223,0.2);color:var(--txt);padding:7px 12px;border-radius:6px;font-size:12px;outline:none;width:180px;">
           <button class="btn btn-rojo" onclick="banearManual()">Banear</button>
         </div>
       </div>
@@ -266,7 +362,7 @@ input:checked+.slider:before{transform:translateX(16px);}
     <div id="panel-actividad" class="panel">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
         <div class="sec-title" style="margin:0;">📋 Log de actividad</div>
-        <button class="btn btn-rojo" onclick="limpiarLog()">Limpiar log</button>
+        <button class="btn btn-rojo" onclick="limpiarLog()">Limpiar</button>
       </div>
       <div id="actividad-list"></div>
     </div>
@@ -291,11 +387,11 @@ function checkPass() {
     document.getElementById("main").style.display = "flex";
     iniciarPanel();
   } else {
-    document.getElementById("login-err").style.display = "block";
-    setTimeout(() => document.getElementById("login-err").style.display = "none", 2000);
+    const err = document.getElementById("login-err");
+    err.style.display = "block";
+    setTimeout(() => err.style.display = "none", 2000);
   }
 }
-
 document.getElementById("pass-in").addEventListener("keydown", e => { if(e.key==="Enter") checkPass(); });
 
 function logout() {
@@ -307,12 +403,9 @@ function logout() {
 
 // ── Navigation ────────────────────────────────────────────────────────────
 const TITLES = {
-  dashboard: "Dashboard",
-  usuarios: "Usuarios Online",
-  chat: "Moderación de Chat",
-  canales: "Control de Señales",
-  blacklist: "Blacklist",
-  actividad: "Log de Actividad",
+  dashboard:"Dashboard", graficas:"Estadísticas", usuarios:"Usuarios Online",
+  chat:"Moderación de Chat", canales:"Control de Señales",
+  eventos:"Eventos del Día", blacklist:"Blacklist", actividad:"Log de Actividad"
 };
 
 function showPanel(id, el) {
@@ -321,53 +414,250 @@ function showPanel(id, el) {
   document.getElementById("panel-" + id).classList.add("a");
   el.classList.add("a");
   document.getElementById("panel-title").textContent = TITLES[id];
+  if (id === "graficas") setTimeout(initCharts, 100);
+  if (id === "eventos") cargarEventos();
 }
 
 // ── Data ──────────────────────────────────────────────────────────────────
-let todosCanales = {};
-let todosUsuarios = {};
-let blacklistData = {};
+let todosCanales = {}, todosUsuarios = {}, blacklistData = {};
+let chatData = {};
+let onlineHistory = []; // histórico de usuarios online
+let visitasHistory = []; // histórico de visitas
+let chatHistory = []; // mensajes por minuto
+let eventosData = [];
+let chartsInit = false;
+let chartVisitas, chartOnline, chartCats, chartChat;
 
 function iniciarPanel() {
-  // Stats
+  // Online
   db.ref("status").on("value", snap => {
-    const data = snap.val() || {};
-    todosUsuarios = data;
-    const count = Object.keys(data).length;
+    todosUsuarios = snap.val() || {};
+    const count = Object.keys(todosUsuarios).length;
     document.getElementById("stat-online").textContent = count;
     document.getElementById("top-online").textContent = count;
     document.getElementById("sb-online-count").textContent = count;
     renderUsuarios();
     renderDashOnline();
+    // Guardar histórico
+    const now = new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
+    onlineHistory.push({ t: now, v: count });
+    if (onlineHistory.length > 30) onlineHistory.shift();
+    if (chartsInit) updateChartOnline();
   });
 
+  // Visitas
   db.ref("stats/visitas_totales").on("value", snap => {
     const v = snap.val() || 0;
-    document.getElementById("stat-visitas").textContent = v.toLocaleString();
-    document.getElementById("top-visitas").textContent = v.toLocaleString();
+    document.getElementById("stat-visitas").textContent = v.toLocaleString("es-AR");
+    document.getElementById("top-visitas").textContent = v.toLocaleString("es-AR");
+    const now = new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
+    visitasHistory.push({ t: now, v });
+    if (visitasHistory.length > 12) visitasHistory.shift();
+    if (chartsInit) updateChartVisitas();
   });
 
+  // Chat
   db.ref("chat").on("value", snap => {
-    const data = snap.val() || {};
-    document.getElementById("stat-msgs").textContent = Object.keys(data).length;
-    renderChat(data);
-    renderDashChatPreview(data);
+    chatData = snap.val() || {};
+    const count = Object.keys(chatData).length;
+    document.getElementById("stat-msgs").textContent = count;
+    renderChat(chatData);
+    renderDashChatPreview(chatData);
+    calcTopUser(chatData);
+    // Mensajes por minuto
+    const now = new Date().toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
+    chatHistory.push({ t: now, v: count });
+    if (chatHistory.length > 12) chatHistory.shift();
+    if (chartsInit) updateChartChat();
   });
 
+  // Canales
   db.ref("canales").on("value", snap => {
-    const data = snap.val() || {};
-    todosCanales = data;
-    const activos = Object.values(data).filter(c => c.activo !== false).length;
-    document.getElementById("stat-canales").textContent = activos + "/" + Object.keys(data).length;
+    todosCanales = snap.val() || {};
+    const activos = Object.values(todosCanales).filter(c => c.activo !== false).length;
+    document.getElementById("stat-canales").textContent = activos + "/" + Object.keys(todosCanales).length;
     renderCanales();
+    if (chartsInit) updateChartCats();
   });
 
+  // Blacklist
   db.ref("blacklist").on("value", snap => {
     blacklistData = snap.val() || {};
     document.getElementById("stat-bans").textContent = Object.keys(blacklistData).length;
     renderBlacklist();
   });
+
+  // Eventos — cargar desde el JSON del scraper
+  cargarEventos();
 }
+
+// ── Gráficas ──────────────────────────────────────────────────────────────
+function initCharts() {
+  if (chartsInit) { updateAllCharts(); return; }
+
+  const commonOpts = {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { labels: { color: "#6b7fa0", font: { size: 10 } } } },
+    scales: {
+      x: { ticks: { color: "#6b7fa0", font: { size: 9 } }, grid: { color: "rgba(116,172,223,0.05)" } },
+      y: { ticks: { color: "#6b7fa0", font: { size: 9 } }, grid: { color: "rgba(116,172,223,0.05)" }, beginAtZero: true }
+    }
+  };
+
+  // Visitas
+  const ctxV = document.getElementById("chart-visitas").getContext("2d");
+  chartVisitas = new Chart(ctxV, {
+    type: "line",
+    data: {
+      labels: visitasHistory.map(h => h.t),
+      datasets: [{ label: "Visitas", data: visitasHistory.map(h => h.v),
+        borderColor: "#C5A059", backgroundColor: "rgba(197,160,89,0.1)",
+        tension: 0.4, fill: true, pointRadius: 3 }]
+    },
+    options: { ...commonOpts }
+  });
+
+  // Online
+  const ctxO = document.getElementById("chart-online").getContext("2d");
+  chartOnline = new Chart(ctxO, {
+    type: "bar",
+    data: {
+      labels: onlineHistory.map(h => h.t),
+      datasets: [{ label: "Usuarios", data: onlineHistory.map(h => h.v),
+        backgroundColor: "rgba(46,204,113,0.5)", borderColor: "#2ecc71", borderWidth: 1 }]
+    },
+    options: { ...commonOpts }
+  });
+
+  // Categorías de canales
+  const ctxC = document.getElementById("chart-cats").getContext("2d");
+  const catCounts = getCatCounts();
+  chartCats = new Chart(ctxC, {
+    type: "doughnut",
+    data: {
+      labels: Object.keys(catCounts),
+      datasets: [{ data: Object.values(catCounts),
+        backgroundColor: ["#74ACDF","#C5A059","#2ecc71","#e74c3c","#9b59b6","#f39c12","#1abc9c","#e67e22"],
+        borderWidth: 2, borderColor: "#0f2040" }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: "right", labels: { color: "#6b7fa0", font: { size: 9 }, boxWidth: 12 } } }
+    }
+  });
+
+  // Chat por minuto
+  const ctxCh = document.getElementById("chart-chat").getContext("2d");
+  chartChat = new Chart(ctxCh, {
+    type: "line",
+    data: {
+      labels: chatHistory.map(h => h.t),
+      datasets: [{ label: "Mensajes", data: chatHistory.map(h => h.v),
+        borderColor: "#74ACDF", backgroundColor: "rgba(116,172,223,0.1)",
+        tension: 0.4, fill: true, pointRadius: 3 }]
+    },
+    options: { ...commonOpts }
+  });
+
+  chartsInit = true;
+}
+
+function getCatCounts() {
+  const counts = {};
+  Object.values(todosCanales).forEach(c => {
+    const cat = c.categoria || "Otros";
+    counts[cat] = (counts[cat] || 0) + 1;
+  });
+  return counts;
+}
+
+function updateChartVisitas() {
+  if (!chartVisitas) return;
+  chartVisitas.data.labels = visitasHistory.map(h => h.t);
+  chartVisitas.data.datasets[0].data = visitasHistory.map(h => h.v);
+  chartVisitas.update();
+}
+function updateChartOnline() {
+  if (!chartOnline) return;
+  chartOnline.data.labels = onlineHistory.map(h => h.t);
+  chartOnline.data.datasets[0].data = onlineHistory.map(h => h.v);
+  chartOnline.update();
+}
+function updateChartCats() {
+  if (!chartCats) return;
+  const catCounts = getCatCounts();
+  chartCats.data.labels = Object.keys(catCounts);
+  chartCats.data.datasets[0].data = Object.values(catCounts);
+  chartCats.update();
+}
+function updateChartChat() {
+  if (!chartChat) return;
+  chartChat.data.labels = chatHistory.map(h => h.t);
+  chartChat.data.datasets[0].data = chatHistory.map(h => h.v);
+  chartChat.update();
+}
+function updateAllCharts() {
+  updateChartVisitas(); updateChartOnline(); updateChartCats(); updateChartChat();
+}
+
+// ── Eventos deportivos ────────────────────────────────────────────────────
+async function cargarEventos() {
+  try {
+    const r = await fetch("/eventos_dia.json?t=" + Date.now());
+    if (!r.ok) throw new Error("Sin respuesta");
+    const data = await r.json();
+    eventosData = data.eventos || [];
+    document.getElementById("stat-eventos").textContent = eventosData.length;
+    if (data.actualizadoEn) {
+      const d = new Date(data.actualizadoEn);
+      document.getElementById("eventos-ts").textContent = "Actualizado: " + d.toLocaleTimeString("es-AR");
+      document.getElementById("stat-last-scrape").textContent = d.toLocaleTimeString("es-AR");
+    }
+    renderEventos();
+  } catch (e) {
+    document.getElementById("eventos-list").innerHTML =
+      '<p style="color:var(--muted);font-size:13px;padding:20px;">⚠️ No hay datos de eventos. El scraper debe estar corriendo en Render.</p>';
+  }
+}
+
+function renderEventos() {
+  const q = (document.getElementById("search-eventos")?.value || "").toLowerCase();
+  const el = document.getElementById("eventos-list");
+  const lista = q ? eventosData.filter(e => e.titulo.toLowerCase().includes(q) || (e.categoria||"").toLowerCase().includes(q)) : eventosData;
+  if (!lista.length) {
+    el.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:20px;">Sin eventos para hoy.</p>';
+    return;
+  }
+  // Agrupar por categoría
+  const grupos = {};
+  lista.forEach(e => {
+    const cat = e.categoria || "Otros";
+    if (!grupos[cat]) grupos[cat] = [];
+    grupos[cat].push(e);
+  });
+  el.innerHTML = Object.entries(grupos).map(([cat, evs]) => `
+    <div style="margin-bottom:16px;">
+      <div style="font-size:11px;font-weight:700;color:var(--dor);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;padding-left:4px;border-left:3px solid var(--dor);padding-left:10px;">
+        ${cat} (${evs.length})
+      </div>
+      ${evs.map(e => `
+        <div class="evento-row">
+          <span class="evento-hora">${e.hora || "--:--"}</span>
+          ${e.enVivo ? '<div class="dot-live"></div>' : ''}
+          <div style="flex:1;">
+            <div class="evento-titulo">${escHtml(e.titulo)}</div>
+            ${e.idioma ? `<div class="evento-cat">${e.idioma}</div>` : ""}
+          </div>
+          ${e.link ? `
+            <a href="${e.link}" target="_blank" class="btn btn-ver" style="font-size:10px;padding:4px 10px;text-decoration:none;">▶ Ver</a>
+          ` : ""}
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+function filtrarEventos() { renderEventos(); }
 
 // ── Dashboard ─────────────────────────────────────────────────────────────
 function renderDashOnline() {
@@ -378,7 +668,7 @@ function renderDashOnline() {
     return;
   }
   el.innerHTML = users.map(nick => `
-    <div style="display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid rgba(46,204,113,0.2);border-radius:20px;padding:5px 12px;margin:4px;font-size:12px;">
+    <div style="display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1px solid rgba(46,204,113,0.2);border-radius:20px;padding:5px 12px;margin:3px;font-size:12px;">
       <div style="width:7px;height:7px;border-radius:50%;background:var(--ver);"></div>
       <span>${escHtml(nick)}</span>
       <button class="btn btn-ban" onclick="banear('${escHtml(nick)}')">Ban</button>
@@ -398,9 +688,20 @@ function renderDashChatPreview(data) {
     </div>`).join("");
 }
 
+function calcTopUser(data) {
+  const counts = {};
+  Object.values(data).forEach(m => {
+    const u = m.user || m.usuario || "?";
+    counts[u] = (counts[u] || 0) + 1;
+  });
+  const top = Object.entries(counts).sort((a,b) => b[1]-a[1])[0];
+  const el = document.getElementById("stat-top-user");
+  if (el) el.textContent = top ? `${top[0]} (${top[1]})` : "—";
+}
+
 // ── Usuarios ──────────────────────────────────────────────────────────────
 function renderUsuarios() {
-  const q = (document.getElementById("search-usuarios")?.value||"").toLowerCase();
+  const q = (document.getElementById("search-usuarios")?.value || "").toLowerCase();
   const tbody = document.getElementById("tbl-usuarios");
   const users = Object.keys(todosUsuarios).filter(u => u.toLowerCase().includes(q));
   if (!users.length) {
@@ -408,26 +709,24 @@ function renderUsuarios() {
     return;
   }
   tbody.innerHTML = users.map(nick => {
-    const baneado = blacklistData[nick];
+    const ban = blacklistData[nick];
     return `<tr>
       <td><strong>${escHtml(nick)}</strong></td>
-      <td><span class="badge ${baneado?"badge-ban":"badge-on"}">${baneado?"BANEADO":"ONLINE"}</span></td>
-      <td style="display:flex;gap:6px;">
-        ${baneado
-          ? `<button class="btn btn-desban" onclick="desbanear('${escHtml(nick)}')">✅ Desbanear</button>`
-          : `<button class="btn btn-ban" onclick="banear('${escHtml(nick)}')">🚫 Banear</button>`}
-      </td>
+      <td><span class="badge ${ban?"badge-ban":"badge-on"}">${ban?"BANEADO":"ONLINE"}</span></td>
+      <td>${ban
+        ? `<button class="btn btn-desban" onclick="desbanear('${escHtml(nick)}')">✅ Desbanear</button>`
+        : `<button class="btn btn-ban" onclick="banear('${escHtml(nick)}')">🚫 Banear</button>`
+      }</td>
     </tr>`;
   }).join("");
 }
-
 function filtrarUsuarios() { renderUsuarios(); }
 
 // ── Chat ──────────────────────────────────────────────────────────────────
 function renderChat(data) {
   const el = document.getElementById("chat-list");
   const msgs = Object.entries(data).sort((a,b) => (b[1].time||b[1].fecha||0)-(a[1].time||a[1].fecha||0));
-  if (!msgs.length) { el.innerHTML = '<p style="color:var(--muted);">Sin mensajes en el chat</p>'; return; }
+  if (!msgs.length) { el.innerHTML = '<p style="color:var(--muted);">Sin mensajes</p>'; return; }
   el.innerHTML = msgs.map(([id,m]) => `
     <div class="chat-msg">
       <span class="chat-nick">${escHtml(m.user||m.usuario||"?")}</span>
@@ -441,20 +740,19 @@ function renderChat(data) {
 function eliminarMsg(id) {
   if (!confirm("¿Eliminar este mensaje?")) return;
   db.ref("chat/" + id).remove();
-  addLog(`Mensaje eliminado (ID: ${id})`);
+  addLog("Mensaje eliminado");
 }
-
 function limpiarChat() {
-  if (!confirm("¿Limpiar TODO el chat? Esta acción no se puede deshacer.")) return;
+  if (!confirm("¿Limpiar TODO el chat?")) return;
   db.ref("chat").remove();
-  addLog("Chat limpiado completamente");
+  addLog("Chat limpiado");
 }
 
 // ── Canales ───────────────────────────────────────────────────────────────
 function renderCanales() {
-  const q = (document.getElementById("search-canales")?.value||"").toLowerCase();
+  const q = (document.getElementById("search-canales")?.value || "").toLowerCase();
   const el = document.getElementById("canales-list");
-  const lista = Object.entries(todosCanales).filter(([id,c]) => (c.nombre||"").toLowerCase().includes(q));
+  const lista = Object.entries(todosCanales).filter(([,c]) => (c.nombre||"").toLowerCase().includes(q));
   if (!lista.length) { el.innerHTML = '<p style="color:var(--muted);">Sin canales</p>'; return; }
   el.innerHTML = lista.map(([id,c]) => {
     const activo = c.activo !== false;
@@ -472,95 +770,67 @@ function renderCanales() {
     </div>`;
   }).join("");
 }
-
 function filtrarCanales() { renderCanales(); }
-
-function toggleCanal(id, activo) {
-  db.ref("canales/" + id + "/activo").set(activo);
-  addLog(`Canal ${id} ${activo?"activado":"desactivado"}`);
-}
-
+function toggleCanal(id, v) { db.ref("canales/"+id+"/activo").set(v); addLog(`Canal ${id} ${v?"ON":"OFF"}`); }
 function activarTodos() {
-  if (!confirm("¿Activar todos los canales?")) return;
-  const updates = {};
-  Object.keys(todosCanales).forEach(id => { updates[`canales/${id}/activo`] = true; });
-  db.ref().update(updates);
-  addLog("Todos los canales activados");
+  if (!confirm("¿Activar todos?")) return;
+  const u = {}; Object.keys(todosCanales).forEach(id => u[`canales/${id}/activo`]=true);
+  db.ref().update(u); addLog("Todos los canales activados");
 }
-
 function desactivarTodos() {
-  if (!confirm("¿Desactivar todos los canales?")) return;
-  const updates = {};
-  Object.keys(todosCanales).forEach(id => { updates[`canales/${id}/activo`] = false; });
-  db.ref().update(updates);
-  addLog("Todos los canales desactivados");
+  if (!confirm("¿Desactivar todos?")) return;
+  const u = {}; Object.keys(todosCanales).forEach(id => u[`canales/${id}/activo`]=false);
+  db.ref().update(u); addLog("Todos los canales desactivados");
 }
 
 // ── Blacklist ─────────────────────────────────────────────────────────────
 function renderBlacklist() {
   const tbody = document.getElementById("tbl-blacklist");
   const bans = Object.keys(blacklistData);
-  if (!bans.length) {
-    tbody.innerHTML = '<tr><td colspan="2" style="color:var(--muted);text-align:center;padding:20px;">Sin usuarios baneados</td></tr>';
-    return;
-  }
+  if (!bans.length) { tbody.innerHTML = '<tr><td colspan="2" style="color:var(--muted);text-align:center;padding:20px;">Sin baneados</td></tr>'; return; }
   tbody.innerHTML = bans.map(nick => `
     <tr>
       <td><strong style="color:var(--roj);">🚫 ${escHtml(nick)}</strong></td>
       <td><button class="btn btn-desban" onclick="desbanear('${escHtml(nick)}')">✅ Desbanear</button></td>
     </tr>`).join("");
 }
-
 function banear(nick) {
-  if (!nick) return;
-  if (!confirm(`¿Banear a "${nick}"?`)) return;
-  db.ref("blacklist/" + nick).set(true);
-  // Remover de status
-  db.ref("status/" + nick).remove();
-  addLog(`Usuario baneado: ${nick}`);
+  if (!nick || !confirm(`¿Banear a "${nick}"?`)) return;
+  db.ref("blacklist/"+nick).set(true);
+  db.ref("status/"+nick).remove();
+  addLog(`Baneado: ${nick}`);
 }
-
-function desbanear(nick) {
-  db.ref("blacklist/" + nick).remove();
-  addLog(`Usuario desbaneado: ${nick}`);
-}
-
+function desbanear(nick) { db.ref("blacklist/"+nick).remove(); addLog(`Desbaneado: ${nick}`); }
 function banearManual() {
   const nick = document.getElementById("ban-manual-in").value.trim();
-  if (!nick) return;
-  banear(nick);
-  document.getElementById("ban-manual-in").value = "";
+  if (!nick) return; banear(nick); document.getElementById("ban-manual-in").value = "";
 }
 
-// ── Actividad ─────────────────────────────────────────────────────────────
+// ── Log ───────────────────────────────────────────────────────────────────
 function addLog(msg) {
   const now = new Date().toLocaleTimeString("es-AR");
   logLocal.unshift({ time: now, msg });
   if (logLocal.length > 100) logLocal.pop();
   renderLog();
 }
-
 function renderLog() {
   const el = document.getElementById("actividad-list");
-  if (!logLocal.length) { el.innerHTML = '<p style="color:var(--muted);">Sin actividad registrada</p>'; return; }
+  if (!logLocal.length) { el.innerHTML = '<p style="color:var(--muted);">Sin actividad</p>'; return; }
   el.innerHTML = logLocal.map(l => `
     <div class="log-item">
       <span class="log-time">${l.time}</span>
-      <span class="log-msg">→ ${l.msg}</span>
+      <span style="color:var(--txt);">→ ${l.msg}</span>
     </div>`).join("");
 }
-
 function limpiarLog() { logLocal = []; renderLog(); }
 
 // ── Utils ─────────────────────────────────────────────────────────────────
 function escHtml(s) {
   return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
-
 function formatTime(ts) {
   if (!ts) return "";
-  const d = new Date(ts);
-  return d.toLocaleTimeString("es-AR", {hour:"2-digit",minute:"2-digit"});
+  return new Date(ts).toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"});
 }
 </script>
 </body>
