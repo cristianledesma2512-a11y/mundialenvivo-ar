@@ -1,0 +1,50 @@
+{
+  "name": "MundialEnVivo AR",
+  "short_name": "MundialAR",
+  "description": "Mirá el Mundial FIFA 2026 en vivo desde Argentina",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
+  "orientation": "any",
+  "background_color": "#001f3f",
+  "theme_color": "#001f3f",
+  "lang": "es-AR",
+  "categories": ["sports", "entertainment"],
+  "icons": [
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "TV en Vivo",
+      "short_name": "En Vivo",
+      "description": "Ver canales en vivo",
+      "url": "./index.html",
+      "icons": [{ "src": "/web-app-manifest-192x192.png", "sizes": "192x192" }]
+    }
+  ],
+  "prefer_related_applications": false
+}

@@ -1,0 +1,29 @@
+name: Actualizar Canales
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # Cada 2 horas
+  workflow_dispatch:         # Correr manualmente también
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  scraper:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Instalar dependencias
+        run: pip install -r scraper/requirements.txt
+
+      - name: Correr scraper
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: python scraper/scraper.py

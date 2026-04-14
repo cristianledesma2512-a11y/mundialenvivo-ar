@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>MundialEnVivo AR</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MundialAR">
+<meta name="application-name" content="MundialAR">
+<meta name="theme-color" content="#001f3f">
+<meta name="HandheldFriendly" content="true">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MundialEnVivo AR">
+<meta property="og:description" content="TV en vivo, Mundial 2026 y Tribuna en tiempo real.">
+<meta property="og:image" content="/img/logo-share.png">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<style>
+
+
+:root{
+  --az:#001f3f;--az2:#003366;--cel:#74ACDF;--dor:#C5A059;
+  --roj:#e74c3c;--bg:#0a1628;--card:#0f2040;--card2:#152a50;
+  --txt:#e8edf5;--muted:#6b7fa0;--rad:10px;
+  --dep:#2ecc71;--not:#74ACDF;--aire:#c39bd3;
+  --mus:#e67e22;--inf:#3498db;--int:#e74c3c;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;display:flex;flex-direction:column;}
+
+/* ── HEADER ── */
+#hdr{background:var(--az2);padding:11px 14px;display:flex;align-items:center;gap:10px;border-bottom:1.5px solid var(--dor);flex-shrink:0;}
+.logo{font-size:15px;font-weight:700;letter-spacing:.5px;flex:1;}
+.logo span{color:var(--cel);}
+.icon-btn{width:32px;height:32px;border-radius:50%;background:rgba(116,172,223,0.12);border:1px solid rgba(116,172,223,0.25);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+.avatar{width:32px;height:32px;border-radius:50%;background:rgba(197,160,89,0.2);border:1px solid var(--dor);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--dor);cursor:pointer;flex-shrink:0;}
+
+/* ── SEARCH ── */
+#srch-bar{background:var(--az);padding:8px 14px;border-bottom:1px solid rgba(116,172,223,0.1);flex-shrink:0;}
+#srch-input{width:100%;background:var(--card);border:1px solid rgba(116,172,223,0.2);border-radius:20px;padding:8px 14px 8px 36px;color:var(--txt);font-size:13px;outline:none;position:relative;}
+.srch-wrap{position:relative;}
+.srch-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;}
+#srch-input::placeholder{color:var(--muted);}
+
+/* ── NAV TABS ── */
+#nav-tabs{display:flex;background:rgba(0,0,0,0.3);border-bottom:1px solid rgba(116,172,223,0.1);overflow-x:auto;scrollbar-width:none;flex-shrink:0;}
+#nav-tabs::-webkit-scrollbar{display:none;}
+.ntab{flex-shrink:0;padding:10px 15px;font-size:11px;font-weight:700;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;letter-spacing:.3px;}
+.ntab.a{color:var(--dor);border-bottom-color:var(--dor);}
+
+/* ── MAIN SCROLL AREA ── */
+#main{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:rgba(116,172,223,0.2) transparent;}
+#main::-webkit-scrollbar{width:3px;}
+#main::-webkit-scrollbar-thumb{background:rgba(116,172,223,0.2);border-radius:2px;}
+
+/* ── SECTIONS ── */
+.section{display:none;}
+.section.a{display:block;}
+
+/* ── CATEGORY STRIP ── */
+#cat-strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:10px 14px 8px;background:rgba(0,0,0,0.2);border-bottom:1px solid rgba(116,172,223,0.08);flex-shrink:0;}
+#cat-strip::-webkit-scrollbar{display:none;}
+.cat-pill{flex-shrink:0;display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;border:1.5px solid transparent;white-space:nowrap;}
+.cat-pill.all{background:var(--dor);color:#001f3f;border-color:var(--dor);}
+.cat-pill.dep{background:rgba(46,204,113,0.15);color:var(--dep);border-color:rgba(46,204,113,0.3);}
+.cat-pill.not{background:rgba(116,172,223,0.15);color:var(--cel);border-color:rgba(116,172,223,0.3);}
+.cat-pill.aire{background:rgba(155,89,182,0.15);color:var(--aire);border-color:rgba(155,89,182,0.3);}
+.cat-pill.mus{background:rgba(230,126,34,0.15);color:var(--mus);border-color:rgba(230,126,34,0.3);}
+.cat-pill.inf{background:rgba(52,152,219,0.15);color:var(--inf);border-color:rgba(52,152,219,0.3);}
+.cat-pill.int{background:rgba(231,76,60,0.15);color:var(--int);border-color:rgba(231,76,60,0.3);}
+
+/* ── Capa publicidad ── */
+#capa-pub{position:absolute;inset:0;background:rgba(0,0,0,0.92);z-index:50;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;}
+#capa-pub h5{color:var(--dor);font-size:14px;font-weight:700;text-align:center;}
+#capa-pub p{color:rgba(255,255,255,.4);font-size:11px;text-align:center;}
+#ad-box-300{width:300px;min-height:250px;display:flex;align-items:center;justify-content:center;}
+#contador-ad{color:rgba(255,255,255,.5);font-size:11px;margin-top:4px;}
+#btn-continuar{display:none;background:var(--dor);border:none;color:#001f3f;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;margin-top:6px;}
+#btn-continuar.show{display:block;}
+#btn-continuar{background:none;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.6);padding:7px 20px;border-radius:6px;cursor:pointer;font-size:12px;display:none;}
+#btn-continuar:hover{background:rgba(255,255,255,.1);}
+#contador-ad{color:var(--dor);font-size:11px;font-weight:700;}
+#ad-box-300 iframe{pointer-events: none;}
+#btn-continuar{position: relative;z-index: 999999;}
+#capa-pub{pointer-events: auto;}
+#ad-box-300{pointer-events: auto;}
+#btn-continuar{pointer-events: auto;}
+
+
+
+/* ── PLAYER HERO ── */
+#player-hero{position:relative;background:#000;width:100%;aspect-ratio:16/9;max-height:210px;flex-shrink:0;}
+#video-el{width:100%;height:100%;display:block;background:#000;}
+#iframe-el{width:100%;height:100%;border:none;display:none;}
+#hero-overlay{position:absolute;inset:0;pointer-events:none;}
+#hero-badge{position:absolute;top:8px;left:10px;background:var(--roj);color:#fff;font-size:9px;font-weight:700;padding:3px 8px;border-radius:4px;letter-spacing:1px;}
+#hero-info{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.85));padding:18px 12px 8px;}
+#hero-canal{font-size:15px;font-weight:700;color:var(--dor);}
+#hero-sub{font-size:11px;color:rgba(255,255,255,0.55);margin-top:2px;}
+#hero-btns{position:absolute;top:8px;right:8px;display:flex;gap:6px;}
+.hero-btn{width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;cursor:pointer;pointer-events:all;}
+#hero-quality{display:none;position:absolute;bottom:40px;right:8px;background:rgba(0,20,40,0.95);border:1px solid var(--borde, rgba(116,172,223,0.3));border-radius:8px;padding:6px;pointer-events:all;flex-direction:column;gap:4px;}
+.q-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(116,172,223,0.2);color:var(--txt);padding:4px 12px;border-radius:10px;font-size:11px;cursor:pointer;text-align:center;}
+.q-btn.a{background:var(--dor);border-color:var(--dor);color:var(--az);}
+#hero-spinner{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;pointer-events:none;}
+.spin{width:36px;height:36px;border:3px solid rgba(255,255,255,0.15);border-top-color:var(--cel);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+#hero-err{display:none;position:absolute;inset:0;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;flex-direction:column;gap:10px;text-align:center;padding:20px;pointer-events:all;}
+#hero-err p{color:rgba(255,255,255,0.6);font-size:13px;}
+#hero-err button{background:var(--roj);border:none;color:#fff;padding:8px 20px;border-radius:6px;cursor:pointer;font-weight:700;}
+#hero-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;background:linear-gradient(135deg,var(--az2),#1a0a2e);}
+#hero-placeholder p{color:var(--muted);font-size:13px;}
+
+/* ── TV SECTION BODY ── */
+#tv-body{overflow-y:auto;}
+
+/* ── ROW SECTION ── */
+.row-sec{padding:12px 0 6px;}
+.row-hdr{display:flex;align-items:center;justify-content:space-between;padding:0 14px 8px;}
+.row-title{font-size:13px;font-weight:700;}
+.row-ver{font-size:11px;color:var(--cel);cursor:pointer;}
+
+/* Favoritos chips */
+.fav-strip{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:0 14px 4px;}
+.fav-strip::-webkit-scrollbar{display:none;}
+.fav-pill{flex-shrink:0;background:var(--card2);border-radius:20px;padding:6px 12px;display:flex;align-items:center;gap:6px;border:1px solid rgba(116,172,223,0.15);cursor:pointer;}
+.fav-pill.a{border-color:var(--dor);background:rgba(197,160,89,0.1);}
+.fav-pill.add{border-style:dashed;color:var(--muted);font-size:11px;font-weight:600;}
+.fdot{width:6px;height:6px;border-radius:50%;background:var(--roj);}
+.fname{font-size:11px;font-weight:600;}
+
+/* Carrusel pequeño (iconos) */
+.car-sm{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:0 14px 4px;}
+.car-sm::-webkit-scrollbar{display:none;}
+.ch-sm{flex-shrink:0;width:72px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;}
+.ch-sm-logo{width:60px;height:60px;background:var(--card);border-radius:var(--rad);border:1.5px solid rgba(116,172,223,0.15);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:.15s;}
+.ch-sm-logo.a{border-color:var(--dor);background:rgba(197,160,89,0.12);}
+.ch-sm-logo img{width:100%;height:100%;object-fit:contain;padding:6px;}
+.ch-sm-name{font-size:10px;font-weight:600;text-align:center;line-height:1.2;color:var(--txt);}
+.ldot{position:absolute;top:4px;right:4px;width:6px;height:6px;border-radius:50%;background:var(--roj);animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Carrusel grande (cards) */
+.car-lg{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:0 14px 4px;}
+.car-lg::-webkit-scrollbar{display:none;}
+.ch-lg{flex-shrink:0;width:136px;background:var(--card);border-radius:var(--rad);border:1px solid rgba(116,172,223,0.15);overflow:hidden;cursor:pointer;transition:.15s;}
+.ch-lg.a{border-color:var(--dor);}
+.ch-lg-img{height:74px;background:linear-gradient(135deg,var(--az2),#1a0a2e);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.ch-lg-img img{width:100%;height:100%;object-fit:contain;padding:8px;}
+.ch-lg-live{position:absolute;bottom:5px;left:5px;background:var(--roj);color:#fff;font-size:8px;font-weight:700;padding:2px 5px;border-radius:3px;}
+.ch-lg-info{padding:7px 8px;}
+.ch-lg-name{font-size:12px;font-weight:600;}
+.ch-lg-cat{font-size:10px;color:var(--muted);margin-top:1px;}
+
+/* Grid 2 columnas Infantil+Música */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(116,172,223,0.08);}
+.grid2-col{padding:10px 14px;}
+.grid2-col:first-child{border-right:1px solid rgba(116,172,223,0.08);}
+.grid2-title{font-size:12px;font-weight:700;margin-bottom:8px;}
+.grid2-row{display:flex;align-items:center;gap:6px;padding:3px 0;cursor:pointer;}
+.grid2-thumb{width:28px;height:28px;background:var(--card);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:8px;color:var(--muted);overflow:hidden;flex-shrink:0;}
+.grid2-thumb img{width:100%;height:100%;object-fit:contain;padding:3px;}
+.grid2-name{font-size:11px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+/* Historial */
+.hist-row{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid rgba(116,172,223,0.06);cursor:pointer;}
+.h-thumb{width:50px;height:32px;background:var(--card);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--muted);flex-shrink:0;overflow:hidden;}
+.h-thumb img{width:100%;height:100%;object-fit:contain;padding:4px;}
+.h-info{flex:1;}
+.h-name{font-size:12px;font-weight:600;}
+.h-time{font-size:10px;color:var(--muted);margin-top:1px;}
+.h-play{width:28px;height:28px;border-radius:50%;background:rgba(197,160,89,0.15);border:1px solid var(--dor);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ptri{width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:8px solid var(--dor);margin-left:2px;}
+
+/* Búsqueda resultados */
+#srch-results{padding:8px 14px;}
+.srch-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(116,172,223,0.06);cursor:pointer;}
+.srch-thumb{width:40px;height:40px;background:var(--card);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--muted);flex-shrink:0;overflow:hidden;}
+.srch-thumb img{width:100%;height:100%;object-fit:contain;padding:4px;}
+.srch-info{flex:1;}
+.srch-name{font-size:13px;font-weight:600;}
+.srch-cat{font-size:11px;color:var(--muted);}
+.srch-play{width:32px;height:32px;border-radius:50%;background:rgba(197,160,89,0.15);border:1px solid var(--dor);display:flex;align-items:center;justify-content:center;}
+
+/* Skeleton */
+.skel{background:linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.08) 50%,rgba(255,255,255,0.04) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--rad);}
+@keyframes shimmer{to{background-position:-200% 0;}}
+
+/* Mundial / CONMEBOL sections */
+.msec-wrap{padding:0 0 80px;}
+.sub-tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:12px 14px 8px;}
+.sub-tabs::-webkit-scrollbar{display:none;}
+.stab{flex-shrink:0;padding:7px 14px;background:rgba(255,255,255,0.07);border:1px solid rgba(116,172,223,0.2);color:rgba(255,255,255,0.6);border-radius:20px;font-size:11px;font-weight:700;cursor:pointer;}
+.stab.a{background:var(--dor);border-color:var(--dor);color:var(--az);}
+.msec{display:none;padding:0 14px 20px;}
+.msec.a{display:block;}
+.grupos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;padding-top:4px;}
+.grupo-card{background:var(--card);border:1px solid rgba(116,172,223,0.15);border-radius:var(--rad);overflow:hidden;}
+.grupo-hdr{background:rgba(0,51,102,0.6);padding:8px 10px;display:flex;justify-content:space-between;align-items:center;}
+.grupo-title{font-size:12px;font-weight:700;color:var(--dor);}
+.grupo-body{padding:4px 0;}
+.grupo-eq{display:flex;align-items:center;gap:6px;padding:5px 10px;font-size:11px;border-bottom:1px solid rgba(255,255,255,0.03);}
+.grupo-eq:last-child{border-bottom:none;}
+.grupo-eq.top{background:rgba(46,204,113,0.07);}
+.partido-row{display:flex;align-items:center;background:rgba(0,0,0,0.25);border:1px solid rgba(116,172,223,0.12);border-radius:8px;padding:9px 12px;margin-bottom:6px;gap:10px;}
+.partido-row.live{border-color:var(--roj);background:rgba(231,76,60,0.07);}
+.p-hora{font-size:10px;color:var(--cel);min-width:38px;text-align:center;font-weight:600;}
+.p-badge{font-size:8px;font-weight:700;padding:2px 5px;border-radius:3px;}
+.p-badge.live{background:var(--roj);color:#fff;}
+.p-badge.pronto{background:rgba(116,172,223,0.2);color:var(--cel);}
+.p-badge.fin{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);}
+.p-teams{flex:1;display:flex;align-items:center;gap:6px;justify-content:center;}
+.p-team{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;}
+.p-team.r{flex-direction:row-reverse;}
+.p-score{font-size:18px;font-weight:700;min-width:52px;text-align:center;color:var(--dor);}
+.p-score.pend{font-size:12px;color:rgba(255,255,255,0.25);}
+.p-grp{font-size:9px;color:rgba(255,255,255,0.25);min-width:32px;text-align:right;}
+.fecha-sep{font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);padding:10px 0 6px;text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid rgba(116,172,223,0.08);margin-bottom:6px;}
+
+/* Chat */
+#chat-msgs{flex:1;overflow-y:auto;padding:10px 14px;display:flex;flex-direction:column;gap:6px;scrollbar-width:thin;}
+.msg{display:flex;gap:6px;animation:fadeIn .2s;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(3px)}to{opacity:1}}
+.msg-nick{color:var(--dor);font-weight:700;font-size:12px;white-space:nowrap;flex-shrink:0;}
+.msg-txt{color:rgba(255,255,255,.85);font-size:13px;line-height:1.4;word-break:break-word;}
+#chat-form{display:flex;padding:8px 14px;gap:8px;background:var(--az2);border-top:1px solid rgba(116,172,223,0.1);}
+#chat-in{flex:1;background:var(--card);border:1px solid rgba(116,172,223,0.2);color:var(--txt);padding:9px 14px;border-radius:20px;font-size:13px;outline:none;}
+#chat-btn{background:var(--cel);border:none;color:var(--az);font-weight:700;font-size:13px;padding:0 16px;border-radius:20px;cursor:pointer;}
+
+/* Toast */
+#toast{position:fixed;bottom:74px;left:50%;transform:translateX(-50%) translateY(60px);background:rgba(10,22,40,0.95);border:1px solid var(--cel);color:#fff;padding:9px 18px;border-radius:20px;font-size:13px;transition:transform .3s;z-index:999;backdrop-filter:blur(8px);white-space:nowrap;pointer-events:none;}
+#toast.show{transform:translateX(-50%) translateY(0);}
+
+/* ── Eventos ── */
+#sec-eventos{padding:10px 14px;overflow-y:auto;}
+.ev-group-title{font-size:11px;font-weight:700;color:var(--dor);text-transform:uppercase;letter-spacing:.8px;margin:14px 0 8px;padding-left:10px;border-left:3px solid var(--dor);}
+.ev-card{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid rgba(116,172,223,0.1);border-radius:8px;padding:10px 12px;margin-bottom:5px;transition:.15s;}
+.ev-card:hover{border-color:rgba(116,172,223,0.3);background:var(--card2);}
+.ev-hora{font-size:12px;font-weight:700;color:var(--dor);min-width:40px;flex-shrink:0;}
+.ev-titulo{flex:1;font-size:12px;font-weight:600;color:var(--txt);line-height:1.3;}
+.ev-cat{font-size:10px;color:var(--muted);margin-top:2px;}
+.ev-live{display:flex;align-items:center;gap:4px;background:rgba(231,76,60,0.15);border:1px solid rgba(231,76,60,0.3);border-radius:10px;padding:3px 8px;font-size:9px;font-weight:700;color:var(--roj);flex-shrink:0;}
+.ev-live-dot{width:5px;height:5px;border-radius:50%;background:var(--roj);animation:blink .9s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.ev-btn{background:rgba(116,172,223,0.15);border:1px solid rgba(116,172,223,0.3);color:var(--cel);padding:5px 10px;border-radius:6px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+.ev-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px;line-height:1.8;}
+.ev-ts{font-size:10px;color:var(--muted);text-align:right;padding:0 4px 8px;}
+.ev-search{width:100%;padding:8px 12px;background:var(--card);border:1px solid rgba(116,172,223,0.2);border-radius:8px;color:var(--txt);font-size:13px;outline:none;margin-bottom:10px;}
+
+/* Bottom nav */
+#bnav{display:flex;background:var(--az2);border-top:1px solid rgba(116,172,223,0.12);padding:20px 0 20px;flex-shrink:0;}
+.bi{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;}
+.bi svg{width:20px;height:20px;}
+.bl{font-size:9px;font-weight:700;color:var(--muted);}
+.bl.a{color:var(--dor);}
+
+/* Modal apodo */
+#modal-nick{position:fixed;inset:0;background:var(--az);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;}
+#modal-nick h1{font-size:24px;color:var(--cel);text-align:center;}
+#nick-in{padding:11px 16px;border-radius:8px;border:2px solid var(--cel);background:var(--card);color:#fff;font-size:16px;width:100%;max-width:280px;outline:none;text-align:center;}
+#nick-btn{background:var(--dor);border:none;padding:12px 44px;border-radius:8px;font-weight:700;font-size:15px;cursor:pointer;color:var(--az);}
+
+/* Botón APK */
+#btn-instalar{display:flex;position:fixed;bottom:72px;right:14px;background:var(--dor);color:var(--az);border:none;padding:11px 18px;border-radius:22px;font-weight:700;font-size:12px;cursor:pointer;z-index:99;box-shadow:0 4px 16px rgba(0,0,0,0.4);align-items:center;gap:7px;text-decoration:none;}
+#ios-banner{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--az2);border-top:2px solid var(--dor);padding:14px 40px 14px 14px;z-index:99;font-size:13px;}
+#ios-banner strong{color:var(--dor);}
+#ios-close{position:absolute;top:10px;right:12px;background:none;border:none;color:rgba(255,255,255,.4);font-size:18px;cursor:pointer;}
+
+@media(min-width:600px){
+  #player-hero{max-height:280px;}
+}
+/* Desktop: sidebar visible, contenido desplazado */
+@media(min-width:1024px){
+  .lg-show { transform: translateX(0) !important; }
+  #sx-main { margin-left: 224px !important; }
+  #sx-topbar { display: none !important; }
+  #player-hero{max-height:340px;}
+  body{max-width:100% !important;}
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+</style>
+</head>
+<body>
+<div class="flex min-h-screen" style="background:#0a1628;">
+
+  <!-- ═══ NAV LATERAL ═══ -->
+  <aside id="sx-sidebar"
+    style="position:fixed;top:0;left:0;z-index:40;height:100%;width:224px;
+           background:rgba(0,19,47,0.97);border-right:1px solid rgba(116,172,223,0.15);
+           backdrop-filter:blur(12px);display:flex;flex-direction:column;
+           transform:translateX(-100%);transition:transform .3s;"
+    class="lg-show">
+
+    <!-- Logo -->
+    <div style="padding:24px 20px;border-bottom:1px solid rgba(116,172,223,0.15);">
+      <a href="https://mundialenvivo.com.ar" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+        <div style="width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,#C5A059,#a07030);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 12px rgba(197,160,89,0.3);">🏆</div>
+        <div>
+          <p style="font-weight:700;color:#fff;font-size:14px;line-height:1;margin:0;"><span style="color:#74ACDF;">MUNDIAL</span>ENVIVO</p>
+          <p style="font-size:10px;color:#6b7fa0;margin:2px 0 0;">AR · TECNOCOM</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Links -->
+    <nav style="flex:1;padding:16px 12px;overflow-y:auto;">
+      <a href="#" onclick="cambiarTab('tv',document.querySelector('.ntab'));closeSXSidebar();return false;"
+        style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none;color:#74ACDF;background:rgba(116,172,223,0.1);border:1px solid rgba(116,172,223,0.15);font-size:13px;font-weight:600;margin-bottom:4px;">
+        <svg style="width:18px;height:18px;flex-shrink:0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+        </svg>TV EN VIVO
+      </a>
+      <a href="#" onclick="cambiarTab('mundial',document.querySelectorAll('.ntab')[1]);closeSXSidebar();return false;"
+        style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none;color:#a0aec0;font-size:13px;font-weight:500;margin-bottom:4px;transition:all .2s;"
+        onmouseover="this.style.background='rgba(116,172,223,0.08)';this.style.color='#fff'"
+        onmouseout="this.style.background='';this.style.color='#a0aec0'">
+        <svg style="width:18px;height:18px;flex-shrink:0" 
+          fill="none" 
+          stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          <path d="M2 12h20"/></svg>MUNDIAL
+      </a>
+      <a href="#" onclick="cambiarTab('conmebol',document.querySelectorAll('.ntab')[2]);closeSXSidebar();return false;"
+        style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none;color:#a0aec0;font-size:13px;font-weight:500;margin-bottom:4px;transition:all .2s;"
+        onmouseover="this.style.background='rgba(116,172,223,0.08)';this.style.color='#fff'"
+        onmouseout="this.style.background='';this.style.color='#a0aec0'">
+        🏆 CONMEBOL
+      </a>
+      
+    </nav>
+
+    <!-- Footer nav -->
+    <div style="padding:12px;border-top:1px solid rgba(116,172,223,0.1);">
+      <a href="https://streamx.com.ar" style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:10px;text-decoration:none;color:#6b7fa0;font-size:11px;transition:all .2s;"
+        onmouseover="this.style.background='rgba(116,172,223,0.08)';this.style.color='#74ACDF'"
+        onmouseout="this.style.background='';this.style.color='#6b7fa0'">
+        <div style="width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,#7c3aed,#6d28d9);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:10px;flex-shrink:0;">S</div>
+        Ver StreamX
+      </a>
+    </div>
+  </aside>
+
+  <!-- Overlay mobile -->
+  <div id="sx-overlay" onclick="closeSXSidebar()"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:30;"></div>
+
+  <!-- ═══ CONTENIDO PRINCIPAL ═══ -->
+  <div style="flex:1;margin-left:0;min-width:0;display:flex;flex-direction:column;height:100vh;overflow:hidden;" id="sx-main">
+
+    <!-- Top bar mobile -->
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 16px;background:rgba(0,31,63,0.95);border-bottom:1px solid rgba(116,172,223,0.15);backdrop-filter:blur(8px);flex-shrink:0;" id="sx-topbar">
+      <button onclick="openSXSidebar()" style="background:none;border:none;color:#74ACDF;cursor:pointer;padding:4px;">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width:20px;height:20px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div style="font-size:14px;font-weight:700;color:#fff;"><span style="color:#74ACDF;">MUNDIAL</span>ENVIVO AR</div>
+    </div>
+
+    <!-- Todo el contenido original de MundialEnVivo -->
+    <div style="flex:1;overflow:hidden;display:flex;flex-direction:column;">
+
+<!-- Modal apodo -->
+<div id="modal-nick">
+  <h1>🏆 MundialEnVivo AR</h1>
+  <p style="color:rgba(255,255,255,.5);font-size:13px;">Ingresá tu apodo para la tribuna</p>
+  <input type="text" id="nick-in" placeholder="Ej: ElDiez_94" maxlength="20" autocomplete="off">
+  <button id="nick-btn">⚽ ENTRAR</button>
+  <button onclick="saltearModal()" style="background:none;border:none;color:rgba(255,255,255,.3);font-size:12px;cursor:pointer;text-decoration:underline;">Entrar sin apodo</button>
+  <p style="font-size:11px;color:rgba(255,255,255,.2);margin-top:4px;">Mundial 2026 · Libertadores · Sudamericana</p>
+</div>
+
+<!-- Header -->
+<div id="hdr">
+  <div class="logo">VIVI<span> EL FUTBOL</span> EN VIVO</div>
+  <div class="icon-btn" id="btn-srch-toggle">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#74ACDF" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+  </div>
+  <div class="avatar" id="user-badge">?</div>
+</div>
+
+
+
+<!-- Search bar -->
+<div id="srch-bar" style="display:none;">
+  <div class="srch-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="srch-input" placeholder="Buscar canales, países...">
+  </div>
+</div>
+
+<!-- Nav tabs -->
+<div id="nav-tabs">
+  <div class="ntab a" onclick="cambiarTab('tv',this)">📺 TV EN VIVO</div>
+  <div class="ntab" onclick="cambiarTab('mundial',this)">🌍 MUNDIAL</div>
+  <div class="ntab" onclick="cambiarTab('conmebol',this)">🏆 CONMEBOL</div>
+  <div class="ntab" onclick="cambiarTab('eventos',this)">⚽ EVENTOS</div>
+  <!--<div class="ntab" onclick="cambiarTab('chat',this)">💬 TRIBUNA</div>-->
+</div>
+
+
+<!--  PROPAGANDA -->
+
+
+<!-- Main scrollable area -->
+<div id="main">
+
+
+
+  <!-- ══ TV EN VIVO ══ -->
+  <div id="sec-tv" class="section a">
+
+    <!-- Player hero -->
+    <div id="player-hero">
+      <video id="video-el" controls autoplay playsinline></video>
+      <iframe id="iframe-el" allowfullscreen allow="autoplay;encrypted-media"></iframe>
+      <div id="hero-overlay">
+        <div id="hero-badge" style="display:none;">EN VIVO</div>
+        <div id="hero-info" style="display:none;">
+          <div id="hero-canal">—</div>
+          <div id="hero-sub">Seleccioná un canal</div>
+        </div>
+        <div id="hero-btns">
+          <div class="hero-btn" id="btn-fs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#74ACDF" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div>
+          <div class="hero-btn" id="btn-rep-c"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#74ACDF" stroke-width="2"><path d="m10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div>
+        </div>
+        <div id="hero-quality"></div>
+        <div id="hero-spinner"><div class="spin"></div></div>
+        <div id="hero-err">
+          <span style="font-size:32px;">📡</span>
+          <p>No se pudo cargar la señal.</p>
+          <button id="btn-retry">🔄 Reintentar</button>
+        </div>
+<!-- inicio Capa publicidad -->
+      <div id="capa-pub">
+        <h5>📺 Cargando transmisión...</h5>
+        <p>Apoyá el proyecto mirando el anuncio</p>
+        <div id="ad-box-300">
+<!-- inicio SCRIPT -->
+          
+
+
+<!-- fin SCRIPT -->
+
+        </div>
+        <span id="contador-ad">Esperá <span id="seg-ad">5</span>s...</span>
+        <button id="btn-continuar" onclick="cerrarPublicidad()">Continuar al video ✕</button>
+      </div>
+<!-- fin Capa publicidad -->
+        <div id="hero-placeholder">
+          <span style="font-size:40px;">📺</span>
+          <p>Seleccioná un canal para comenzar</p>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- Category strip -->
+    <div id="cat-strip">
+      <div class="cat-pill all" onclick="filtrarCat('TODO',this)">▶ TODOS</div>
+      <div class="cat-pill not" onclick="filtrarCat('NOTICIAS',this)">⚽ OPCION1</div>
+     <div class="cat-pill int" onclick="filtrarCat('INTERNACIONAL',this)">⚽ OPCION2</div>
+      <div class="cat-pill int" onclick="filtrarCat('MUSICA',this)">⚽ OPCION3</div>
+    </div>
+
+    <!-- TV body (carruseles) -->
+    <div id="tv-body"></div>
+
+  </div>
+
+  <!-- ══ MUNDIAL ══ -->
+  <div id="sec-mundial" class="section">
+    <div class="msec-wrap">
+      <div class="sub-tabs">
+        <div class="stab a" onclick="cambiarSub('mun','grupos',this)">🏆 Grupos</div>
+        <div class="stab" onclick="cambiarSub('mun','fixture',this)">📅 Fixture</div>
+        <div class="stab" onclick="cambiarSub('mun','posiciones',this)">📊 Posiciones</div>
+      </div>
+      <div id="mun-grupos" class="msec a"></div>
+      <div id="mun-fixture" class="msec">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;padding:10px 0 8px;">
+          <button class="stab a" onclick="filtrarFixture('mun','todos',this)">Todos</button>
+          <button class="stab" onclick="filtrarFixture('mun','ARG',this)">🇦🇷 Argentina</button>
+          <button class="stab" onclick="filtrarFixture('mun','live',this)">🔴 En Vivo</button>
+          <button class="stab" onclick="filtrarFixture('mun','hoy',this)">📅 Hoy</button>
+        </div>
+        <div id="mun-fixture-list"></div>
+      </div>
+      <div id="mun-posiciones" class="msec"></div>
+    </div>
+  </div>
+
+  <!-- ══ CONMEBOL ══ -->
+  <div id="sec-conmebol" class="section">
+    <div class="msec-wrap">
+      <div class="sub-tabs">
+        <div class="stab a" onclick="cambiarConmebol('lib',this)">🏆 Libertadores</div>
+        <div class="stab" onclick="cambiarConmebol('sud',this)">🟠 Sudamericana</div>
+        <div class="stab" onclick="cambiarConmebol('recopa',this)">⭐ Recopa</div>
+      </div>
+      <div id="con-lib" class="msec a">
+        <div class="sub-tabs" style="padding:8px 0;">
+          <div class="stab a" onclick="cambiarSub('lib','grupos',this)">Grupos</div>
+          <div class="stab" onclick="cambiarSub('lib','fixture',this)">Fixture</div>
+          <div class="stab" onclick="cambiarSub('lib','pos',this)">Posiciones</div>
+        </div>
+        <div id="lib-grupos" class="msec a"></div>
+        <div id="lib-fixture" class="msec"><div id="lib-fixture-list"></div></div>
+        <div id="lib-pos" class="msec"></div>
+      </div>
+      <div id="con-sud" class="msec">
+        <div class="sub-tabs" style="padding:8px 0;">
+          <div class="stab a" onclick="cambiarSub('sud','grupos',this)">Grupos</div>
+          <div class="stab" onclick="cambiarSub('sud','fixture',this)">Fixture</div>
+          <div class="stab" onclick="cambiarSub('sud','pos',this)">Posiciones</div>
+        </div>
+        <div id="sud-grupos" class="msec a"></div>
+        <div id="sud-fixture" class="msec"><div id="sud-fixture-list"></div></div>
+        <div id="sud-pos" class="msec"></div>
+      </div>
+      <div id="con-recopa" class="msec">
+        <div style="background:var(--card);border:1px solid rgba(116,172,223,0.15);border-radius:var(--rad);padding:20px;margin-top:12px;text-align:center;">
+          <div style="font-size:32px;margin-bottom:10px;">⭐</div>
+          <div style="font-size:15px;font-weight:700;color:var(--dor);margin-bottom:8px;">Recopa Sudamericana 2027</div>
+          <p style="font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;">Se disputará entre el campeón de la Libertadores 2026 y el campeón de la Sudamericana 2026.<br><br>
+          🏆 Final Libertadores: <strong style="color:var(--txt);">28 Nov 2026</strong><br>
+          🟠 Final Sudamericana: <strong style="color:var(--txt);">21 Nov 2026</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ EVENTOS ══ -->
+<div id="sec-eventos" class="section">
+  <div id="ev-ts" class="ev-ts"></div>
+  <input type="text" class="ev-search" id="ev-search" placeholder="🔍 Buscar evento o deporte..." oninput="renderEventos()">
+  <div id="ev-body"><div class="ev-empty">⏳ Cargando eventos...</div></div>
+</div>
+
+<!-- ══ CHAT ══ -->
+  <div id="sec-chat" class="section" style="display:flex;flex-direction:column;height:calc(50vh -195px);">
+    <div id="chat-msgs"></div>
+    <div id="chat-form">
+      <input type="text" id="chat-in" placeholder="Escribí tu mensaje..." maxlength="200" autocomplete="off">
+      <button id="chat-btn">ENVIAR</button>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- inicio Adsterra Banner 728x90 -->
+<div id="ad-banner-top" style="display:flex;justify-content:center;background:#000;padding:4px 0;flex-shrink:0;overflow:hidden;max-height:100px;">
+  
+</div>
+<!--fin Adsterra Banner 728x90 -->
+
+<!-- Bottom nav -->
+<div id="bnav">
+  <div class="bi" onclick="cambiarTab('tv',null);setNavActive(0)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" id="bnav-icon-0"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <div class="bl a" id="bnav-lbl-0">Inicio</div>
+  </div>
+  <div class="bi" onclick="abrirBusqueda()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-1"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <div class="bl" id="bnav-lbl-1">Buscar</div>
+  </div>
+  <div class="bi" onclick="cambiarTab('tv',null);filtrarCat('FAV',null);setNavActive(2)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <div class="bl" id="bnav-lbl-2">Favoritos</div>
+  </div>
+  <div class="bi" onclick="abrirFiltrosPais()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-3"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <div class="bl" id="bnav-lbl-3">Eventos</div>
+  </div>
+  <div class="bi" onclick="cambiarTab('chat',null);setNavActive(4)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#6b7fa0" stroke-width="2" id="bnav-icon-4"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <div class="bl" id="bnav-lbl-4">Tribuna</div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<a id="btn-instalar" href="/apk/MundialEnVivo.apk" download="MundialEnVivo.apk">📲 Descargar APK</a>
+<div id="ios-banner">
+  <button id="ios-close">✕</button>
+  <p>Para instalar: tocá <strong>Compartir</strong> → <strong>Agregar a pantalla de inicio</strong></p>
+</div>
+
+<script>
+// ── Firebase ──────────────────────────────────────────────────────────────
+firebase.initializeApp({ databaseURL: "https://mundialenvivo-ar-default-rtdb.firebaseio.com/" });
+const db = firebase.database();
+
+// ── Estado ────────────────────────────────────────────────────────────────
+let miNick       = localStorage.getItem("mnv_nick") || "";
+let todosCanales = [];
+let favoritos    = JSON.parse(localStorage.getItem("mnv_favs") || "[]");
+let historial    = JSON.parse(localStorage.getItem("mnv_hist") || "[]");
+let hlsInstance  = null;
+let canalActivo  = null;
+let urlActual    = "";
+let fbActual     = [];
+let catActual    = "TODO";
+let mundialData  = [];
+let filtMundial  = "todos";
+const LOGO_DEF   = "https://cdn-icons-png.flaticon.com/512/716/716429.png";
+
+// ── Toast ─────────────────────────────────────────────────────────────────
+function toast(msg, t=2800) {
+  const el = document.getElementById("toast");
+  el.textContent = msg; el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), t);
+}
+
+// ── Modal apodo ───────────────────────────────────────────────────────────
+if (miNick) {
+  document.getElementById("modal-nick").style.display = "none";
+  document.getElementById("user-badge").textContent = miNick.slice(0,2).toUpperCase();
+}
+// Detectar TV Box / Android TV
+const esTVBox = /Android/i.test(navigator.userAgent) && window.innerWidth >= 900 && !('ontouchstart' in window);
+
+if (esTVBox && !miNick) {
+  // En TV Box asignar nick automático y saltear modal
+  const autoNick = "Viewer" + Math.floor(Math.random()*9000+1000);
+  localStorage.setItem("mnv_nick", autoNick); miNick = autoNick;
+  document.getElementById("modal-nick").style.display = "none";
+  document.getElementById("user-badge").textContent = "TV";
+  registrarPresencia(autoNick);
+} else {
+  // Auto-skip si no escribe en 30 segundos
+  let autoSkipTimer = setTimeout(() => {
+    const input = document.getElementById("nick-in");
+    if (input && !miNick) {
+      const autoNick = "Invitado" + Math.floor(Math.random()*9000+1000);
+      localStorage.setItem("mnv_nick", autoNick); miNick = autoNick;
+      document.getElementById("modal-nick").style.display = "none";
+      document.getElementById("user-badge").textContent = "IV";
+      registrarPresencia(autoNick);
+    }
+  }, 30000);
+
+  document.getElementById("nick-btn").onclick = () => {
+    clearTimeout(autoSkipTimer);
+    let n = document.getElementById("nick-in").value.trim();
+    if (!n) n = "Invitado" + Math.floor(Math.random()*9000+1000);
+    localStorage.setItem("mnv_nick", n); miNick = n;
+    document.getElementById("modal-nick").style.display = "none";
+    document.getElementById("user-badge").textContent = n.slice(0,2).toUpperCase();
+    toast("¡Bienvenido " + n + "! ⚽");
+    registrarPresencia(n);
+  };
+  document.getElementById("nick-in").addEventListener("keydown", e => { if(e.key==="Enter") document.getElementById("nick-btn").click(); });
+}
+document.getElementById("user-badge").onclick = () => { if(confirm("¿Cambiar apodo?")) { localStorage.removeItem("mnv_nick"); location.reload(); } };
+
+// ── Tabs ──────────────────────────────────────────────────────────────────
+function cambiarTab(tab, btn) {
+  document.querySelectorAll(".section").forEach(s => s.classList.remove("a"));
+  document.querySelectorAll(".ntab").forEach(b => b.classList.remove("a"));
+  document.getElementById("sec-" + tab).classList.add("a");
+  if (tab === "eventos") cargarEventos();
+  if (btn) btn.classList.add("a");
+  else {
+    const idx = {tv:0,mundial:1,conmebol:2,chat:3}[tab];
+    if (idx !== undefined) document.querySelectorAll(".ntab")[idx]?.classList.add("a");
+  }
+  if (tab === "chat") {
+    document.getElementById("main").style.overflow = "hidden";
+    document.getElementById("sec-chat").style.height = "calc(100vh - 170px)";
+  } else {
+    document.getElementById("main").style.overflow = "auto";
+  }
+}
+
+function cambiarSub(prefix, sec, btn) {
+  const parent = btn?.closest(".msec-wrap") || document.getElementById("sec-" + (prefix==="mun"?"mundial":"conmebol"));
+  if (!parent) return;
+  const zone = prefix === "mun" ? parent : btn?.closest(".msec")?.parentElement || parent;
+  zone.querySelectorAll(":scope > .msec").forEach(s => s.classList.remove("a"));
+  zone.querySelectorAll(":scope > .sub-tabs .stab, :scope > div > .sub-tabs .stab").forEach(b => b.classList.remove("a"));
+  const el = document.getElementById(prefix + "-" + sec);
+  if (el) el.classList.add("a");
+  if (btn) btn.classList.add("a");
+}
+
+function cambiarConmebol(torneo, btn) {
+  document.querySelectorAll("#sec-conmebol .msec-wrap > .msec").forEach(s => s.classList.remove("a"));
+  document.querySelectorAll("#sec-conmebol .msec-wrap > .sub-tabs .stab").forEach(b => b.classList.remove("a"));
+  document.getElementById("con-" + torneo)?.classList.add("a");
+  if (btn) btn.classList.add("a");
+}
+
+function setNavActive(idx) {
+  for (let i=0; i<5; i++) {
+    const lbl = document.getElementById("bnav-lbl-" + i);
+    const ico = document.getElementById("bnav-icon-" + i);
+    if (lbl) lbl.classList.toggle("a", i === idx);
+    if (ico) ico.setAttribute("stroke", i === idx ? "#C5A059" : "#6b7fa0");
+  }
+}
+
+// ── Search ────────────────────────────────────────────────────────────────
+document.getElementById("btn-srch-toggle").onclick = abrirBusqueda;
+function abrirBusqueda() {
+  const bar = document.getElementById("srch-bar");
+  bar.style.display = bar.style.display === "none" ? "block" : "none";
+  if (bar.style.display === "block") {
+    document.getElementById("srch-input").focus();
+    setNavActive(1);
+  }
+}
+document.getElementById("srch-input").addEventListener("input", function() {
+  const q = this.value.trim().toLowerCase();
+  if (!q) { renderTV(); return; }
+  const res = todosCanales.filter(c => c.nombre.toLowerCase().includes(q));
+  renderSearchResults(res);
+});
+
+function renderSearchResults(lista) {
+  const body = document.getElementById("tv-body");
+  body.innerHTML = "";
+  if (!lista.length) { body.innerHTML = '<p style="color:var(--muted);text-align:center;padding:30px;">Sin resultados</p>'; return; }
+  const wrap = document.createElement("div");
+  wrap.id = "srch-results";
+  lista.forEach(c => {
+    const item = document.createElement("div");
+    item.className = "srch-item";
+    item.innerHTML = `<div class="srch-thumb"><img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}"></div><div class="srch-info"><div class="srch-name">${c.nombre}</div><div class="srch-cat">${c.categoria||""}</div></div><div class="srch-play"><div class="ptri"></div></div>`;
+    item.onclick = () => reproducir(c.url, c.nombre, c.fallbacks||[]);
+    wrap.appendChild(item);
+  });
+  body.appendChild(wrap);
+}
+
+// ── Player ────────────────────────────────────────────────────────────────
+const videoEl   = document.getElementById("video-el");
+const iframeEl  = document.getElementById("iframe-el");
+const spinner   = document.getElementById("hero-spinner");
+const playerErr = document.getElementById("hero-err");
+const placeholder = document.getElementById("hero-placeholder");
+const heroBadge = document.getElementById("hero-badge");
+const heroInfo  = document.getElementById("hero-info");
+const heroCanal = document.getElementById("hero-canal");
+const heroSub   = document.getElementById("hero-sub");
+const qualityEl = document.getElementById("hero-quality");
+
+function mostrarSpinner(v) { spinner.style.display = v ? "flex" : "none"; }
+function mostrarError(v)   { playerErr.style.display = v ? "flex" : "none"; }
+
+function reproducir(url, nombre, fallbacks=[]) {
+  if (!url) { toast("⚠️ Sin señal disponible"); return; }
+  canalActivo = nombre; urlActual = url; fbActual = fallbacks;
+  placeholder.style.display = "none";
+  heroBadge.style.display = "block";
+  heroInfo.style.display = "block";
+  heroCanal.textContent = nombre;
+  heroSub.textContent = "Cargando...";
+  agregarHistorial(nombre, url, fallbacks);
+  document.getElementById("player-hero").scrollIntoView({ behavior: "smooth", block: "start" });
+  intentarPlay([url, ...fallbacks.filter(u => u !== url)], 0, nombre);
+}
+
+function intentarPlay(urls, idx, nombre) {
+  if (idx >= urls.length) { mostrarSpinner(false); mostrarError(true); toast("❌ Sin señal para " + nombre); return; }
+  const url = urls[idx];
+  mostrarError(false); mostrarSpinner(true);
+  qualityEl.innerHTML = ""; qualityEl.style.display = "none";
+  heroSub.textContent = idx > 0 ? "Probando fuente " + (idx+1) + "..." : "En vivo";
+  if (idx > 0) toast("🔄 Probando fuente " + (idx+1) + "...");
+
+  if (url.includes("youtube") || url.includes("nocookie") || url.includes("embed") || url.includes(".php") || url.includes("bolaloca")) {
+    videoEl.style.display = "none"; iframeEl.style.display = "block"; iframeEl.src = url;
+    mostrarSpinner(false); heroSub.textContent = "En vivo"; return;
+  }
+
+  videoEl.style.display = "block"; iframeEl.style.display = "none"; iframeEl.src = "";
+  if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
+
+  if (Hls.isSupported()) {
+    const hls = new Hls({ enableWorker: true, lowLatencyMode: true, maxBufferLength: 20 });
+    hlsInstance = hls; hls.loadSource(url); hls.attachMedia(videoEl);
+    hls.on(Hls.Events.MANIFEST_PARSED, (e, data) => {
+      mostrarSpinner(false); heroSub.textContent = "En vivo"; videoEl.play().catch(()=>{});
+      if (data.levels && data.levels.length > 1) {
+        qualityEl.style.display = "flex";
+        const btnA = document.createElement("div"); btnA.className = "q-btn a"; btnA.textContent = "Auto";
+        btnA.onclick = () => { hls.currentLevel = -1; qualityEl.querySelectorAll(".q-btn").forEach(b=>b.classList.remove("a")); btnA.classList.add("a"); };
+        qualityEl.appendChild(btnA);
+        data.levels.forEach((lv, i) => {
+          const btn = document.createElement("div"); btn.className = "q-btn";
+          btn.textContent = lv.height ? lv.height + "p" : "Nivel " + i;
+          btn.onclick = () => { hls.currentLevel = i; qualityEl.querySelectorAll(".q-btn").forEach(b=>b.classList.remove("a")); btn.classList.add("a"); };
+          qualityEl.appendChild(btn);
+        });
+      }
+    });
+    hls.on(Hls.Events.ERROR, (e, data) => { if(data.fatal) { hls.destroy(); hlsInstance = null; setTimeout(()=>intentarPlay(urls,idx+1,nombre),800); } });
+    videoEl.addEventListener("waiting", () => mostrarSpinner(true), { once: false });
+    videoEl.addEventListener("playing", () => mostrarSpinner(false), { once: false });
+  } else if (videoEl.canPlayType("application/vnd.apple.mpegurl")) {
+    videoEl.src = url;
+    videoEl.addEventListener("loadedmetadata", () => { mostrarSpinner(false); videoEl.play().catch(()=>{}); }, { once: true });
+    videoEl.addEventListener("error", () => { setTimeout(()=>intentarPlay(urls,idx+1,nombre),800); }, { once: true });
+  } else { mostrarSpinner(false); mostrarError(true); }
+}
+
+document.getElementById("btn-retry").onclick = () => { if(urlActual && canalActivo) reproducir(urlActual, canalActivo, fbActual); };
+document.getElementById("btn-fs").onclick = () => {
+  const box = document.getElementById("player-hero");
+  if (!document.fullscreenElement) box.requestFullscreen?.().catch(()=>{});
+  else document.exitFullscreen?.();
+};
+document.getElementById("btn-rep-c").onclick = () => {
+  if (!canalActivo) { toast("⚠️ Primero seleccioná un canal"); return; }
+  db.ref("reportes").push({ canal: canalActivo, usuario: miNick || "anónimo", fecha: firebase.database.ServerValue.TIMESTAMP });
+  toast("✅ Reporte enviado");
+};
+
+// ── Favoritos ────────────────────────────────────────────────────────────
+function esFavorito(nombre) { return favoritos.includes(nombre); }
+function toggleFav(nombre) {
+  if (esFavorito(nombre)) { favoritos = favoritos.filter(f => f !== nombre); toast("⭐ Quitado de favoritos"); }
+  else { favoritos.unshift(nombre); if(favoritos.length > 20) favoritos.pop(); toast("⭐ Agregado a favoritos"); }
+  localStorage.setItem("mnv_favs", JSON.stringify(favoritos));
+  renderTV();
+}
+
+// ── Historial ─────────────────────────────────────────────────────────────
+function agregarHistorial(nombre, url, fallbacks) {
+  historial = historial.filter(h => h.nombre !== nombre);
+  historial.unshift({ nombre, url, fallbacks, ts: Date.now() });
+  if (historial.length > 10) historial.pop();
+  localStorage.setItem("mnv_hist", JSON.stringify(historial));
+}
+
+function tiempoRelativo(ts) {
+  const m = Math.floor((Date.now() - ts) / 60000);
+  if (m < 1) return "Hace un momento";
+  if (m < 60) return "Hace " + m + " min";
+  const h = Math.floor(m / 60);
+  if (h < 24) return "Hace " + h + "h";
+  return "Ayer";
+}
+
+// ── Canales desde Firebase ────────────────────────────────────────────────
+db.ref("canales").on("value", snap => {
+  const data = snap.val(); if (!data) return;
+  const raw = data.canales ? data.canales : data;
+  todosCanales = Object.keys(raw).map(id => ({ id, ...raw[id] }));
+  renderTV();
+});
+
+// ── Filtrar por categoría ─────────────────────────────────────────────────
+function filtrarCat(cat, btn) {
+  catActual = cat;
+  document.querySelectorAll(".cat-pill").forEach(p => {
+    const cls = p.classList[1];
+    const map = { all:"TODO", dep:"DEPORTES", not:"NOTICIAS", aire:"AIRE", mus:"MUSICA", inf:"INFANTIL", int:"INTERNACIONAL" };
+    p.classList.toggle("active-pill", map[cls] === cat);
+  });
+  renderTV();
+}
+
+// ── Render TV ─────────────────────────────────────────────────────────────
+function renderTV() {
+  const body = document.getElementById("tv-body");
+  body.innerHTML = "";
+
+  let lista = todosCanales;
+  if (catActual !== "TODO") {
+    if (catActual === "FAV") lista = todosCanales.filter(c => esFavorito(c.nombre));
+    else lista = todosCanales.filter(c => (c.categoria||"").toUpperCase() === catActual);
+  }
+
+  if (catActual !== "TODO") {
+    // Vista de grilla al filtrar por categoría
+    renderGrillaCanales(body, lista, catActual);
+    return;
+  }
+
+  // Vista principal — carruseles por sección
+
+  // Favoritos
+  const favsList = todosCanales.filter(c => esFavorito(c.nombre));
+  if (favsList.length > 0) {
+    const sec = crearSeccion("⭐ Mis favoritos", null, favsList.length, "FAV");
+    const strip = document.createElement("div"); strip.className = "fav-strip";
+    favsList.forEach(c => {
+      const pill = document.createElement("div"); pill.className = "fav-pill" + (canalActivo===c.nombre?" a":"");
+      pill.innerHTML = `<div class="fdot"></div><div class="fname">${c.nombre}</div>`;
+      pill.onclick = () => reproducir(c.url, c.nombre, c.fallbacks||[]);
+      strip.appendChild(pill);
+    });
+    const addPill = document.createElement("div"); addPill.className = "fav-pill add"; addPill.textContent = "+ Agregar";
+    addPill.onclick = () => { filtrarCat("TODO", null); toast("Tocá ❤️ en cualquier canal para agregar"); };
+    strip.appendChild(addPill);
+    sec.appendChild(strip); body.appendChild(sec);
+  }
+
+  
+
+  // OPCION 1 — carrusel grande
+  const nots = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "NOTICIAS");
+  if (nots.length) {
+    const sec = crearSeccion("🌐 OPCION 1", "var(--cel)", nots.length, "NOTICIAS");
+    sec.appendChild(crearCarruselLg(nots));
+    body.appendChild(sec);
+  }
+
+  
+  // OPCION 2 — carrusel grande
+  const intl = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "INTERNACIONAL");
+  if (intl.length) {
+    const sec = crearSeccion("🌐 OPCION 2", "var(--int)", intl.length, "INTERNACIONAL");
+    sec.appendChild(crearCarruselLg(intl));
+    body.appendChild(sec);
+  }
+  // DOPCION 3 — carrusel pequeño
+  const deps = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
+  if (deps.length) {
+    const sec = crearSeccion("⚽ OPCION 3", "var(--dep)", deps.length, "MUSICA");
+    sec.appendChild(crearCarruselSm(deps));
+    body.appendChild(sec);
+  }
+
+  // Infantil + Música — grid 2 col
+  const inf = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "INFANTIL");
+  const mus = todosCanales.filter(c => (c.categoria||"").toUpperCase() === "MUSICA");
+  if (inf.length || mus.length) {
+    const grid = document.createElement("div"); grid.className = "grid2";
+    if (inf.length) { const col = crearGrid2Col("👦 Infantil", "var(--inf)", inf.slice(0,5)); grid.appendChild(col); }
+    if (mus.length) { const col = crearGrid2Col("OPCION 3", "var(--mus)", mus.slice(0,5)); grid.appendChild(col); }
+    body.appendChild(grid);
+  }
+
+  // Historial
+  if (historial.length > 0) {
+    const sec = crearSeccion("🕐 Visto recientemente", null, null, null);
+    historial.slice(0, 5).forEach(h => {
+      const row = document.createElement("div"); row.className = "hist-row";
+      const canal = todosCanales.find(c => c.nombre === h.nombre);
+      const logo = canal?.logo || LOGO_DEF;
+      row.innerHTML = `<div class="h-thumb"><img src="${logo}" onerror="this.src='${LOGO_DEF}'" alt="${h.nombre}"></div><div class="h-info"><div class="h-name">${h.nombre}</div><div class="h-time">${tiempoRelativo(h.ts)}</div></div><div class="h-play"><div class="ptri"></div></div>`;
+      row.onclick = () => reproducir(h.url, h.nombre, h.fallbacks||[]);
+      sec.appendChild(row);
+    });
+    body.appendChild(sec);
+  }
+
+  // Padding bottom
+  const pad = document.createElement("div"); pad.style.height = "20px";
+  body.appendChild(pad);
+}
+
+function crearSeccion(titulo, color, count, cat) {
+  const sec = document.createElement("div"); sec.className = "row-sec";
+  const hdr = document.createElement("div"); hdr.className = "row-hdr";
+  const t = document.createElement("div"); t.className = "row-title";
+  if (color) t.style.color = color;
+  t.textContent = titulo + (count ? "" : "");
+  hdr.appendChild(t);
+  if (cat && count) {
+    const ver = document.createElement("div"); ver.className = "row-ver";
+    ver.textContent = "Ver todos (" + count + ")";
+    ver.onclick = () => filtrarCat(cat, null);
+    hdr.appendChild(ver);
+  }
+  sec.appendChild(hdr);
+  return sec;
+}
+
+function crearCarruselSm(lista) {
+  const car = document.createElement("div"); car.className = "car-sm";
+  lista.slice(0, 20).forEach(c => {
+    const item = document.createElement("div"); item.className = "ch-sm";
+    const logo = document.createElement("div"); logo.className = "ch-sm-logo" + (canalActivo===c.nombre?" a":"");
+    logo.innerHTML = `<img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}"><div class="ldot"></div>`;
+    const name = document.createElement("div"); name.className = "ch-sm-name"; name.textContent = c.nombre;
+    item.appendChild(logo); item.appendChild(name);
+    item.onclick = () => { reproducir(c.url, c.nombre, c.fallbacks||[]); renderTV(); };
+    car.appendChild(item);
+  });
+  return car;
+}
+
+function crearCarruselLg(lista) {
+  const car = document.createElement("div"); car.className = "car-lg";
+  lista.slice(0, 15).forEach(c => {
+    const item = document.createElement("div"); item.className = "ch-lg" + (canalActivo===c.nombre?" a":"");
+    item.innerHTML = `
+      <div class="ch-lg-img">
+        <img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}">
+        <div class="ch-lg-live">EN VIVO</div>
+      </div>
+      <div class="ch-lg-info">
+        <div class="ch-lg-name">${c.nombre}</div>
+        <div class="ch-lg-cat">${c.categoria||""}</div>
+      </div>`;
+    item.onclick = () => { reproducir(c.url, c.nombre, c.fallbacks||[]); renderTV(); };
+    car.appendChild(item);
+  });
+  return car;
+}
+
+function crearGrid2Col(titulo, color, lista) {
+  const col = document.createElement("div"); col.className = "grid2-col";
+  const t = document.createElement("div"); t.className = "grid2-title"; t.style.color = color; t.textContent = titulo;
+  col.appendChild(t);
+  lista.forEach(c => {
+    const row = document.createElement("div"); row.className = "grid2-row";
+    row.innerHTML = `<div class="grid2-thumb"><img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}"></div><div class="grid2-name">${c.nombre}</div>`;
+    row.onclick = () => reproducir(c.url, c.nombre, c.fallbacks||[]);
+    col.appendChild(row);
+  });
+  return col;
+}
+
+function renderGrillaCanales(container, lista, cat) {
+  if (!lista.length) { container.innerHTML = '<p style="color:var(--muted);text-align:center;padding:30px;">No hay canales en esta categoría</p>'; return; }
+  const wrap = document.createElement("div"); wrap.style.cssText = "display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:10px;padding:10px 14px 80px;";
+  lista.forEach(c => {
+    const card = document.createElement("div");
+    card.style.cssText = "background:var(--card);border-radius:var(--rad);padding:10px 6px;text-align:center;cursor:pointer;border:1.5px solid " + (canalActivo===c.nombre?"var(--dor)":"rgba(116,172,223,0.15)") + ";display:flex;flex-direction:column;align-items:center;gap:5px;";
+    card.innerHTML = `<div class="ldot" style="position:static;"></div><img src="${c.logo||LOGO_DEF}" onerror="this.src='${LOGO_DEF}'" alt="${c.nombre}" style="width:44px;height:44px;object-fit:contain;border-radius:6px;"><div style="font-size:10px;font-weight:600;line-height:1.2;">${c.nombre}</div>`;
+    card.onclick = () => { reproducir(c.url, c.nombre, c.fallbacks||[]); renderGrillaCanales(container, lista, cat); };
+    wrap.appendChild(card);
+  });
+  container.appendChild(wrap);
+}
+
+// ── Filtro país ───────────────────────────────────────────────────────────
+function abrirFiltrosPais() {
+  const paises = [...new Set(todosCanales.map(c => c.pais).filter(Boolean))].sort();
+  if (!paises.length) { toast("ℹ️ Próximamente filtro por país"); return; }
+  // Simple toast por ahora
+  toast("🌐 " + paises.slice(0,5).join(", ") + "...");
+}
+
+// ── Mundial ───────────────────────────────────────────────────────────────
+db.ref("partidos").on("value", snap => {
+  const data = snap.val(); if (!data) return;
+  mundialData = Object.entries(data).map(([id,p]) => ({id,...p}));
+  renderMundialGrupos();
+  renderFixture("mun", mundialData, filtMundial);
+  renderPosicionesTabla("mun-posiciones", mundialData);
+});
+
+function renderMundialGrupos() {
+  const el = document.getElementById("mun-grupos"); el.innerHTML = "";
+  const equipos = {};
+  mundialData.forEach(p => {
+    if (!p.grupo) return;
+    [p.local, p.visitante].forEach((eq,i) => {
+      if (!eq) return;
+      if (!equipos[eq]) equipos[eq] = {nombre:eq,grupo:p.grupo,pj:0,pg:0,pe:0,pp:0,gf:0,gc:0,pts:0,bandera:i===0?p.bandera_local||"🏳":p.bandera_visitante||"🏳"};
+    });
+    if (p.estado==="FIN" && p.goles_local!=null && p.goles_visitante!=null) {
+      const loc=equipos[p.local], vis=equipos[p.visitante]; if(!loc||!vis) return;
+      loc.pj++;vis.pj++;loc.gf+=p.goles_local;loc.gc+=p.goles_visitante;vis.gf+=p.goles_visitante;vis.gc+=p.goles_local;
+      if(p.goles_local>p.goles_visitante){loc.pg++;loc.pts+=3;vis.pp++;}
+      else if(p.goles_local<p.goles_visitante){vis.pg++;vis.pts+=3;loc.pp++;}
+      else{loc.pe++;vis.pe++;loc.pts++;vis.pts++;}
+    }
+  });
+  const grupos = {};
+  Object.values(equipos).forEach(eq => { if(!grupos[eq.grupo])grupos[eq.grupo]=[]; grupos[eq.grupo].push(eq); });
+  Object.values(grupos).forEach(g => g.sort((a,b) => b.pts-a.pts||(b.gf-b.gc)-(a.gf-a.gc)));
+  if (!Object.keys(grupos).length) { el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">⏳ Cargando grupos...</p>'; return; }
+  el.style.padding = "8px 0";
+  const grid = document.createElement("div"); grid.className = "grupos-grid";
+  Object.entries(grupos).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([grupo,eqs]) => {
+    const card = document.createElement("div"); card.className = "grupo-card";
+    card.innerHTML = `<div class="grupo-hdr"><div class="grupo-title">GRUPO ${grupo}</div><span style="font-size:10px;color:var(--muted)">🌍</span></div>`;
+    const body = document.createElement("div"); body.className = "grupo-body";
+    eqs.forEach((eq,i) => {
+      const row = document.createElement("div"); row.className = "grupo-eq" + (i<2?" top":"");
+      row.innerHTML = `<span>${eq.bandera}</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${eq.nombre}</span><span style="color:var(--dor);font-weight:700">${eq.pts}</span>`;
+      body.appendChild(row);
+    });
+    card.appendChild(body); grid.appendChild(card);
+  });
+  el.appendChild(grid);
+}
+
+function filtrarFixture(prefix, f, btn) {
+  if (prefix === "mun") filtMundial = f;
+  const zone = btn?.closest(".msec");
+  zone?.querySelectorAll(".stab").forEach(b=>b.classList.remove("a"));
+  if(btn) btn.classList.add("a");
+  renderFixture(prefix, prefix==="mun"?mundialData:[], f);
+}
+
+function renderFixture(prefix, partidos, filtro) {
+  const el = document.getElementById(prefix + "-fixture-list"); if(!el) return;
+  let lista = [...partidos];
+  const hoy = new Date().toISOString().slice(0,10);
+  if (filtro==="ARG") lista = lista.filter(p=>p.local==="Argentina"||p.visitante==="Argentina");
+  else if (filtro==="live") lista = lista.filter(p=>p.estado==="LIVE");
+  else if (filtro==="hoy") lista = lista.filter(p=>p.fecha?.startsWith(hoy));
+  lista.sort((a,b)=>(a.fecha||"").localeCompare(b.fecha||""));
+  if (!lista.length) { el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">No hay partidos para mostrar</p>'; return; }
+  const porFecha = {};
+  lista.forEach(p => {
+    const f = p.fecha ? new Date(p.fecha).toLocaleDateString("es-AR",{weekday:"short",day:"numeric",month:"short"}) : "Sin fecha";
+    if(!porFecha[f])porFecha[f]=[];
+    porFecha[f].push(p);
+  });
+  el.innerHTML = Object.entries(porFecha).map(([fecha,ps]) => `
+    <div class="fecha-sep">📅 ${fecha}</div>
+    ${ps.map(p => {
+      const live=p.estado==="LIVE",fin=p.estado==="FIN",nScore=p.goles_local==null||p.goles_visitante==null;
+      return `<div class="partido-row ${live?"live":""}">
+        <div><div class="p-hora">${p.hora||"--:--"}</div><div class="p-badge ${live?"live":fin?"fin":"pronto"}">${live?"LIVE":fin?"FIN":"PRÓX"}</div></div>
+        <div class="p-teams">
+          <div class="p-team"><span>${p.bandera_local||"🏳"}</span><span>${p.local||"?"}</span></div>
+          <div class="p-score${nScore?" pend":""}">${nScore?"vs":`${p.goles_local}-${p.goles_visitante}`}</div>
+          <div class="p-team r"><span>${p.visitante||"?"}</span><span>${p.bandera_visitante||"🏳"}</span></div>
+        </div>
+        <div class="p-grp">${p.grupo||""}</div>
+      </div>`;
+    }).join("")}`).join("");
+}
+
+function renderPosicionesTabla(elId, partidos) {
+  const el = document.getElementById(elId); if(!el) return;
+  const equipos={};
+  partidos.forEach(p=>{
+    [p.local,p.visitante].forEach((eq,i)=>{
+      if(!eq) return;
+      if(!equipos[eq])equipos[eq]={nombre:eq,pj:0,pg:0,pe:0,pp:0,gf:0,gc:0,pts:0,bandera:i===0?p.bandera_local||"🏳":p.bandera_visitante||"🏳",grupo:p.grupo||""};
+    });
+    if(p.estado==="FIN"&&p.goles_local!=null&&p.goles_visitante!=null){
+      const loc=equipos[p.local],vis=equipos[p.visitante];if(!loc||!vis)return;
+      loc.pj++;vis.pj++;loc.gf+=p.goles_local;loc.gc+=p.goles_visitante;vis.gf+=p.goles_visitante;vis.gc+=p.goles_local;
+      if(p.goles_local>p.goles_visitante){loc.pg++;loc.pts+=3;vis.pp++;}
+      else if(p.goles_local<p.goles_visitante){vis.pg++;vis.pts+=3;loc.pp++;}
+      else{loc.pe++;vis.pe++;loc.pts++;vis.pts++;}
+    }
+  });
+  const lista=Object.values(equipos).sort((a,b)=>b.pts-a.pts||(b.gf-b.gc)-(a.gf-a.gc));
+  if(!lista.length){el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">⏳ Sin resultados aún</p>';return;}
+  el.style.overflowX="auto";
+  el.innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:11px;margin-top:8px;">
+    <thead><tr style="background:rgba(0,51,102,0.6);">
+      <th style="padding:7px 8px;text-align:left;color:var(--muted);font-size:10px;">#</th>
+      <th style="padding:7px 4px;text-align:left;color:var(--muted);font-size:10px;">Equipo</th>
+      <th style="padding:7px 4px;text-align:center;color:var(--muted);font-size:10px;">PJ</th>
+      <th style="padding:7px 4px;text-align:center;color:var(--muted);font-size:10px;">PG</th>
+      <th style="padding:7px 4px;text-align:center;color:var(--muted);font-size:10px;">DG</th>
+      <th style="padding:7px 8px;text-align:center;color:var(--muted);font-size:10px;">PTS</th>
+    </tr></thead>
+    <tbody>${lista.map((eq,i)=>`<tr style="border-bottom:1px solid rgba(255,255,255,.04);${i<16?"border-left:3px solid rgba(46,204,113,.4)":i>=lista.length-8?"border-left:3px solid rgba(231,76,60,.4)":""}">
+      <td style="padding:7px 8px;color:var(--muted)">${i+1}</td>
+      <td style="padding:7px 4px"><div style="display:flex;align-items:center;gap:5px;"><span>${eq.bandera}</span><span style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:90px">${eq.nombre}</span></div></td>
+      <td style="padding:7px 4px;text-align:center">${eq.pj}</td>
+      <td style="padding:7px 4px;text-align:center">${eq.pg}</td>
+      <td style="padding:7px 4px;text-align:center">${eq.gf-eq.gc>0?"+":""}${eq.gf-eq.gc}</td>
+      <td style="padding:7px 8px;text-align:center;font-weight:700;color:var(--dor)">${eq.pts}</td>
+    </tr>`).join("")}</tbody>
+  </table>`;
+}
+
+// ── Libertadores / Sudamericana ───────────────────────────────────────────
+db.ref("libertadores").on("value", snap => {
+  const data = snap.val(); if(!data) return;
+  renderGruposConmebol("lib-grupos", data.grupos||{}, "🏆");
+  renderPartidosConmebol("lib-fixture-list", data.partidos||{});
+  renderPosicionesConmebol("lib-pos", data.partidos||{});
+});
+db.ref("sudamericana").on("value", snap => {
+  const data = snap.val(); if(!data) return;
+  renderGruposConmebol("sud-grupos", data.grupos||{}, "🟠");
+  renderPartidosConmebol("sud-fixture-list", data.partidos||{});
+  renderPosicionesConmebol("sud-pos", data.partidos||{});
+});
+
+function renderGruposConmebol(elId, grupos, icon) {
+  const el = document.getElementById(elId); if(!el) return;
+  el.style.padding="8px 0";
+  if(!Object.keys(grupos).length){el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">⏳ Cargando grupos...</p>';return;}
+  const grid=document.createElement("div");grid.className="grupos-grid";
+  Object.entries(grupos).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([grupo,data])=>{
+    const eqs=data.equipos||[];
+    const card=document.createElement("div");card.className="grupo-card";
+    card.innerHTML=`<div class="grupo-hdr"><div class="grupo-title">GRUPO ${grupo}</div><span>${icon}</span></div>`;
+    const body=document.createElement("div");body.className="grupo-body";
+    eqs.forEach((eq,i)=>{
+      const row=document.createElement("div");row.className="grupo-eq"+(i<2?" top":"");
+      row.innerHTML=`<span>${eq.bandera||"🏳"}</span><span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px">${eq.nombre}</span><span style="font-size:10px;color:var(--muted)">${eq.pais||""}</span>`;
+      body.appendChild(row);
+    });
+    card.appendChild(body);grid.appendChild(card);
+  });
+  el.appendChild(grid);
+}
+
+function renderPartidosConmebol(elId, partidos) {
+  const el=document.getElementById(elId);if(!el)return;
+  const lista=Object.values(partidos||{}).sort((a,b)=>(a.fecha||"").localeCompare(b.fecha||""));
+  if(!lista.length){el.innerHTML='<p style="color:var(--muted);text-align:center;padding:30px;">📅 Partidos próximamente</p>';return;}
+  renderFixture("_tmp", lista, "todos");
+}
+
+function renderPosicionesConmebol(elId, partidos) {
+  renderPosicionesTabla(elId, Object.values(partidos||{}));
+}
+
+// ── Chat ──────────────────────────────────────────────────────────────────
+db.ref("chat").orderByChild("fecha").limitToLast(60).on("child_added", snap => {
+  const m=snap.val();if(!m||!m.usuario||!m.texto)return;
+  const div=document.createElement("div");div.className="msg";
+  div.innerHTML=`<span class="msg-nick">${m.usuario.replace(/</g,"&lt;")}:</span><span class="msg-txt">${m.texto.replace(/</g,"&lt;")}</span>`;
+  const msgs=document.getElementById("chat-msgs");msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
+});
+
+function enviarMensaje(){
+  const input=document.getElementById("chat-in"),t=input.value.trim();
+  if(!miNick){toast("⚠️ Primero ingresá tu apodo");return;}if(!t)return;
+  db.ref("chat").push({usuario:miNick,texto:t,fecha:firebase.database.ServerValue.TIMESTAMP});
+  input.value="";
+}
+document.getElementById("chat-btn").onclick=enviarMensaje;
+document.getElementById("chat-in").addEventListener("keydown",e=>{if(e.key==="Enter")enviarMensaje();});
+
+// ── Descarga APK ──────────────────────────────────────────────────────────
+// El botón ya está visible (display:flex en CSS)
+// Solo muestra el banner de iOS si corresponde
+const esIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const enSafari=/safari/i.test(navigator.userAgent)&&!/chrome/i.test(navigator.userAgent);
+if(esIOS&&enSafari&&!window.matchMedia("(display-mode:standalone)").matches&&!localStorage.getItem("ios_cerrado")){
+  setTimeout(()=>document.getElementById("ios-banner").style.display="block",5000);
+}
+document.getElementById("ios-close").onclick=()=>{document.getElementById("ios-banner").style.display="none";localStorage.setItem("ios_cerrado","1");};
+if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+
+// ── Presencia y blacklist ─────────────────────────────────────────────────
+function registrarPresencia(nick) {
+  // Verificar blacklist primero
+  db.ref("blacklist/" + nick).once("value", snap => {
+    if (snap.exists() && snap.val() === true) {
+      // Usuario baneado
+      document.body.innerHTML = `
+        <div style="position:fixed;inset:0;background:#0a1628;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#e8edf5;">
+          <div style="font-size:60px;">🚫</div>
+          <h1 style="color:#e74c3c;font-size:24px;">Acceso bloqueado</h1>
+          <p style="color:#6b7fa0;font-size:14px;">Tu usuario ha sido baneado de MundialEnVivo AR.</p>
+          <p style="color:#6b7fa0;font-size:12px;">Si creés que es un error, contactá al administrador.</p>
+        </div>`;
+      return;
+    }
+    // Registrar presencia online
+    const statusRef = db.ref("status/" + nick);
+    statusRef.set({ online: true, ts: firebase.database.ServerValue.TIMESTAMP });
+    statusRef.onDisconnect().remove();
+    // Incrementar visitas
+    db.ref("stats/visitas_totales").transaction(v => (v || 0) + 1);
+  });
+}
+
+// Si ya tiene nick registrado, verificar blacklist al cargar
+if (miNick) {
+  db.ref("blacklist/" + miNick).once("value", snap => {
+    if (snap.exists() && snap.val() === true) {
+      document.body.innerHTML = `
+        <div style="position:fixed;inset:0;background:#0a1628;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;color:#e8edf5;">
+          <div style="font-size:60px;">🚫</div>
+          <h1 style="color:#e74c3c;font-size:24px;">Acceso bloqueado</h1>
+          <p style="color:#6b7fa0;font-size:14px;">Tu usuario ha sido baneado de MundialEnVivo AR.</p>
+        </div>`;
+      return;
+    }
+    // Registrar presencia
+    const statusRef = db.ref("status/" + miNick);
+    statusRef.set({ online: true, ts: firebase.database.ServerValue.TIMESTAMP });
+    statusRef.onDisconnect().remove();
+    // Incrementar visitas
+    db.ref("stats/visitas_totales").transaction(v => (v || 0) + 1);
+  });
+}
+
+
+// ── EVENTOS DEPORTIVOS ────────────────────────────────────────────────────
+let eventosData = [];
+
+function cargarEventos() {
+  db.ref("eventos_dia").once("value", snap => {
+    const data = snap.val();
+    if (!data || !data.eventos || !data.eventos.length) {
+      document.getElementById("ev-body").innerHTML =
+        '<div class="ev-empty">📡 Sin eventos para hoy.<br><small>El scraper actualizará cada 2 horas.</small></div>';
+      return;
+    }
+    eventosData = data.eventos;
+    if (data.actualizadoEn) {
+      const d = new Date(data.actualizadoEn);
+      document.getElementById("ev-ts").textContent =
+        "Actualizado: " + d.toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"}) +
+        " · " + eventosData.length + " eventos";
+    }
+    renderEventos();
+  });
+}
+
+function renderEventos() {
+  const q = (document.getElementById("ev-search")?.value || "").toLowerCase().trim();
+  const body = document.getElementById("ev-body");
+  if (!body) return;
+  if (!eventosData.length) {
+    body.innerHTML = '<div class="ev-empty">Sin eventos para hoy.</div>';
+    return;
+  }
+  let lista = q
+    ? eventosData.filter(e =>
+        e.titulo.toLowerCase().includes(q) ||
+        (e.categoria||"").toLowerCase().includes(q))
+    : eventosData;
+
+  if (!lista.length) {
+    body.innerHTML = '<div class="ev-empty">Sin resultados para "' + q + '"</div>';
+    return;
+  }
+
+  // Agrupar por categoría
+  const grupos = {};
+  lista.forEach(e => {
+    const cat = e.categoria || "Otros";
+    if (!grupos[cat]) grupos[cat] = [];
+    grupos[cat].push(e);
+  });
+
+  body.innerHTML = Object.entries(grupos).map(([cat, evs]) => {
+    const items = evs.map(e => {
+      const linkSafe = (e.link||"").replace(/'/g, "\'");
+      const tituloSafe = (e.titulo||"").replace(/'/g, "\'");
+      return `<div class="ev-card">
+        <span class="ev-hora">${e.hora || "--:--"}</span>
+        <div style="flex:1;min-width:0;">
+          <div class="ev-titulo">${e.titulo}</div>
+          ${e.idioma ? `<div class="ev-cat">${e.idioma}</div>` : ""}
+        </div>
+        ${e.enVivo ? '<div class="ev-live"><div class="ev-live-dot"></div>EN VIVO</div>' : ""}
+        ${e.link ? `<button class="ev-btn" onclick="reproducir('${linkSafe}','${tituloSafe}',[]);cambiarTab('tv',document.querySelector('.ntab'))">▶ Ver</button>` : ""}
+      </div>`;
+    }).join("");
+    return `<div class="ev-group-title">${cat} (${evs.length})</div>${items}`;
+  }).join("");
+}
+
+function saltearModal() {
+  const autoNick = "Invitado" + Math.floor(Math.random()*9000+1000);
+  localStorage.setItem("mnv_nick", autoNick); miNick = autoNick;
+  document.getElementById("modal-nick").style.display = "none";
+  document.getElementById("user-badge").textContent = "IV";
+  registrarPresencia(autoNick);
+}
+
+</script>
+
+
+
+<!-- Monetag publicidad 
+
+
+<script>(function(s){s.dataset.zone='10842483',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<script src="https://quge5.com/88/tag.min.js" data-zone="227196" async data-cfasync="false"></script>
+
+<script>(function(s){s.dataset.zone='10842456',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+-->
+<!-- Monetag Popunder incluido arriba -->
+
+<script>
+  // ── Publicidad player ─────────────────────────────────────────────────────
+  let adTimerStarted = false;
+
+  function mostrarCapaPublicidad() {
+    const capa = document.getElementById("capa-pub");
+    if (!capa || adTimerStarted) return;
+    capa.style.display = "flex";
+    adTimerStarted = true;
+    let segs = 5;
+    const segEl  = document.getElementById("seg-ad");
+    const contEl = document.getElementById("contador-ad");
+    const btnEl  = document.getElementById("btn-continuar");
+    const timer  = setInterval(() => {
+      segs--;
+      if (segEl) segEl.textContent = segs;
+      if (segs <= 0) {
+        clearInterval(timer);
+        if (contEl) contEl.style.display = "none";
+        if (btnEl)  btnEl.classList.add("show");
+
+        // 🔥 CLAVE: desactivar clicks del iframe
+          const iframe = document.querySelector("#ad-box-300 iframe");
+          if (iframe) iframe.style.pointerEvents = "none";
+      }
+    }, 1000);
+  }
+
+  function cerrarPublicidad() {
+    const capa = document.getElementById("capa-pub");
+    if (capa) capa.style.display = "none";
+  }
+
+  // Mostrar publicidad la primera vez que el usuario toca un canal
+  const _reproducirOriginal = reproducir;
+  let primerCanal = true;
+  reproducir = function(url, nombre, fallbacks) {
+    if (primerCanal) {
+      primerCanal = false;
+      mostrarCapaPublicidad();
+      setTimeout(() => _reproducirOriginal(url, nombre, fallbacks), 100);
+    } else {
+      _reproducirOriginal(url, nombre, fallbacks);
+    }
+  };
+</script>
+
+<script>
+function openSXSidebar() {
+  document.getElementById('sx-sidebar').style.transform = 'translateX(0)';
+  document.getElementById('sx-overlay').style.display = 'block';
+}
+function closeSXSidebar() {
+  document.getElementById('sx-sidebar').style.transform = 'translateX(-100%)';
+  document.getElementById('sx-overlay').style.display = 'none';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeSXSidebar();
+});
+</script>
+
+    </div><!-- fin contenido MundialEnVivo -->
+  </div><!-- fin sx-main -->
+</div><!-- fin flex layout -->
+
+</body>
+</html>

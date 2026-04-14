@@ -1,0 +1,13 @@
+{
+  "name": "mundialenvivo-scraper-eventos",
+  "version": "1.0.0",
+  "description": "Scraper de eventos deportivos para MundialEnVivo AR",
+  "main": "scraper_eventos.js",
+  "scripts": {
+    "scrape": "node scraper_eventos.js"
+ },
+  "dependencies": {
+    "puppeteer": "^24.0.0",
+    "firebase-admin": "^13.0.0"
+  }
+}
