@@ -448,31 +448,411 @@ CANALES_FIJOS = [
         "url":"https://bolaloca.my/player/1/92",
         "logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png",
         "fallbacks":[]},
+
       # canales capoplay──────────────────
-    {"id":"cap01",
-        "nombre":"canal1",
-        "categoria":"MUSICA",
-        "url":"https://www.capoplay.net/canal1.php",
-        "logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png",
-        "fallbacks":[]},
-    {"id":"cap02",
-        "nombre":"canal2",
-        "categoria":"MUSICA",
-        "url":"https://www.capoplay.net/canal2.php",
-        "logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png",
-        "fallbacks":[]},
-    {"id":"cap03",
-        "nombre":"canal3",
-        "categoria":"MUSICA",
-        "url":"https://www.capoplay.net/canal3.php",
-        "logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png",
-        "fallbacks":[]},
-    {"id":"cap04",
-        "nombre":"canal4",
-        "categoria":"MUSICA",
-        "url":"https://www.capoplay.net/canal1.php",
-        "logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png",
-        "fallbacks":[]},    
+
+      {
+        "id": "cap01",
+        "nombre": "canal1",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal1.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap02",
+        "nombre": "canal2",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal2.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap03",
+        "nombre": "canal3",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal3.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap04",
+        "nombre": "canal4",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal4.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap05",
+        "nombre": "canal5",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal5.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap06",
+        "nombre": "canal6",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal6.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap07",
+        "nombre": "canal7",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal7.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap08",
+        "nombre": "canal8",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal8.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap09",
+        "nombre": "canal9",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal9.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap10",
+        "nombre": "canal10",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal10.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap11",
+        "nombre": "canal11",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal11.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap12",
+        "nombre": "canal12",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal12.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap13",
+        "nombre": "canal13",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal13.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap14",
+        "nombre": "canal14",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal14.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap15",
+        "nombre": "canal15",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal15.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap16",
+        "nombre": "canal16",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal16.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap17",
+        "nombre": "canal17",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal17.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap18",
+        "nombre": "canal18",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal18.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap19",
+        "nombre": "canal19",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal19.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap20",
+        "nombre": "canal20",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal20.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap21",
+        "nombre": "canal21",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal21.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap22",
+        "nombre": "canal22",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal22.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap23",
+        "nombre": "canal23",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal23.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap24",
+        "nombre": "canal24",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal24.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap25",
+        "nombre": "canal25",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal25.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap26",
+        "nombre": "canal26",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal26.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap27",
+        "nombre": "canal27",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal27.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap28",
+        "nombre": "canal28",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal28.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap29",
+        "nombre": "canal29",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal29.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap30",
+        "nombre": "canal30",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal30.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap31",
+        "nombre": "canal31",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal31.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap32",
+        "nombre": "canal32",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal32.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap33",
+        "nombre": "canal33",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal33.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap34",
+        "nombre": "canal34",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal34.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap35",
+        "nombre": "canal35",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal35.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap36",
+        "nombre": "canal36",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal36.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap37",
+        "nombre": "canal37",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal37.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap38",
+        "nombre": "canal38",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal38.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap39",
+        "nombre": "canal39",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal39.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap40",
+        "nombre": "canal40",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal40.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap41",
+        "nombre": "canal41",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal41.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap42",
+        "nombre": "canal42",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal42.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap43",
+        "nombre": "canal43",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal43.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap44",
+        "nombre": "canal44",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal44.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap45",
+        "nombre": "canal45",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal45.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap46",
+        "nombre": "canal46",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal46.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap47",
+        "nombre": "canal47",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal47.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap48",
+        "nombre": "canal48",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal48.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap49",
+        "nombre": "canal49",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal49.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      },
+      {
+        "id": "cap50",
+        "nombre": "canal50",
+        "categoria": "MUSICA",
+        "url": "https://www.capoplay.net/canal50.php",
+        "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
+        "fallbacks": []
+      }
+
+          
 ]
 TDT_CANALES = [
     
