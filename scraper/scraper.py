@@ -44,7 +44,7 @@ CANALES_FIJOS = [
     # ── StreamTP (canales premium sin proxy) ────────────────────────────
     [
     
-    ── DISNEY 
+    #── DISNEY 
     {"id":"stp45","nombre":"Disney","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
     {"id":"stp46","nombre":"Disney 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney1","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
     {"id":"stp47","nombre":"Disney 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney2","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
