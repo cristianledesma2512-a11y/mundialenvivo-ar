@@ -42,7 +42,7 @@ def conectar_firebase():
 CANALES_FIJOS = [
     
     # ── StreamTP (canales premium sin proxy) ────────────────────────────
-    [
+    
     
     #── DISNEY 
     {"id":"stp45","nombre":"Disney","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
@@ -161,7 +161,7 @@ CANALES_FIJOS = [
     {"id":"stp17","nombre":"TNT Sports","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tntsports","logo":"https://images.seeklogo.com/logo-png/51/1/tnt-sports-logo-png_seeklogo-519540.png","fallbacks":[]},
     {"id":"stp43","nombre":"Telefe","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=telefe","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
     {"id":"stp44","nombre":"TV Pública","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tv_publica","logo":"https://images.seeklogo.com/logo-png/18/1/tv-publica-logo-png_seeklogo-180741.png","fallbacks":[]}
-]
+
 
     # ── Bolaloca via proxy Railway ────────────────────────────────────
 
