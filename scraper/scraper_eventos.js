@@ -36,7 +36,13 @@ function httpRequest(url, method, body = null) {
         const req = https.request(options, res => {
             let data = '';
             res.on('data', chunk => data += chunk);
-            res.on('end', () => resolve({ status: res.statusCode, data: data ? JSON.parse(data) : null }));
+            res.on('end', () => {
+                try {
+                    resolve({ status: res.statusCode, data: data ? JSON.parse(data) : null });
+                } catch (e) {
+                    resolve({ status: res.statusCode, data: null });
+                }
+            });
         });
         req.on('error', reject);
         if (body) req.write(body);
@@ -47,7 +53,7 @@ function httpRequest(url, method, body = null) {
 async function scrapearEventos() {
     let browser;
     try {
-        console.log('🚀 Iniciando scraper persistente para Mundial en Vivo...');
+        console.log('🚀 Iniciando scraper persistente...');
         browser = await puppeteer.launch({
             headless: 'new',
             args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage', '--disable-gpu'],
@@ -98,16 +104,21 @@ async function scrapearEventos() {
             const token = await admin.app().options.credential.getAccessToken();
             const dbUrl = `https://mundialenvivo-ar-default-rtdb.firebaseio.com/eventos_dia.json?access_token=${token.access_token}`;
 
-            // 1. Obtener lo que ya está en Firebase
             console.log('📥 Obteniendo datos actuales de Firebase...');
             const response = await httpRequest(dbUrl, 'GET');
             let listaPersistente = (response.data && response.data.eventos) ? response.data.eventos : [];
 
-            // 2. Mezclar datos: Actualizar existentes o agregar nuevos
             if (eventosNuevos.length > 0) {
                 eventosNuevos.forEach(nuevo => {
                     const idx = listaPersistente.findIndex(e => e.titulo === nuevo.titulo);
                     if (idx !== -1) {
-                        // Actualizar link y estado, mantener el resto
                         listaPersistente[idx] = { ...listaPersistente[idx], ...nuevo };
+                    } else {
+                        listaPersistente.unshift(nuevo);
                     }
+                });
+
+                const unDiaAtras = new Date(Date.now() - 24 * 60 * 60 * 1000);
+                listaPersistente = listaPersistente.filter(e => new Date(e.lastSeen) > unDiaAtras);
+
+                const datosFinales = {
