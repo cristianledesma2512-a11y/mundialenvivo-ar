@@ -2,7 +2,8 @@ name: Scraper Eventos Deportivos
 
 on:
   schedule:
-    - cron: '*/10 * * * *'   # Cada 10 min
+     - cron: '*/3 * * * *'   # Cambiado de 10 a 3 minutos
+    
   workflow_dispatch:          # Manual también
 
 jobs:
