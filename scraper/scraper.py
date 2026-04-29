@@ -162,6 +162,7 @@ CANALES_FIJOS = [
     {"id":"stp43","nombre":"Telefe F","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=telefe","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
     {"id":"stp44","nombre":"TV Pública","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tv_publica","logo":"https://images.seeklogo.com/logo-png/18/1/tv-publica-logo-png_seeklogo-180741.png","fallbacks":[]},
     {"id":"stp45","nombre":"Telefe EN VIVO","categoria":"NOTICIAS","url":"http://201.217.246.42:44310/Live/3fcb6e26785fd8d415571b26dc3cf5d3/telefe.playlist.m3u8","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
+    {"id":"stp46","nombre":"TN noticias","categoria":"NOTICIAS","url":"https://www.youtube.com/watch?v=cb12KmMMDJA","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
     
 
     # ── Bolaloca via proxy Railway ────────────────────────────────────
