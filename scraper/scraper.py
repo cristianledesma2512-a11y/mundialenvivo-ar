@@ -159,9 +159,10 @@ CANALES_FIJOS = [
     {"id":"stp11","nombre":"Fox Sports 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fox2ar","logo":"https://images.seeklogo.com/logo-png/31/1/fox-sports-logo-png_seeklogo-315883.png","fallbacks":[]},
     {"id":"stp12","nombre":"Fox Sports 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fox3ar","logo":"https://images.seeklogo.com/logo-png/31/1/fox-sports-logo-png_seeklogo-315883.png","fallbacks":[]},
     {"id":"stp17","nombre":"TNT Sports","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tntsports","logo":"https://images.seeklogo.com/logo-png/51/1/tnt-sports-logo-png_seeklogo-519540.png","fallbacks":[]},
-    {"id":"stp43","nombre":"Telefe","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=telefe","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
+    {"id":"stp43","nombre":"Telefe F","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=telefe","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
     {"id":"stp44","nombre":"TV Pública","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tv_publica","logo":"https://images.seeklogo.com/logo-png/18/1/tv-publica-logo-png_seeklogo-180741.png","fallbacks":[]},
-
+    {"id":"stp45","nombre":"Telefe EN VIVO","categoria":"NOTICIAS","url":"http://201.217.246.42:44310/Live/3fcb6e26785fd8d415571b26dc3cf5d3/telefe.playlist.m3u8","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
+    
 
     # ── Bolaloca via proxy Railway ────────────────────────────────────
 
