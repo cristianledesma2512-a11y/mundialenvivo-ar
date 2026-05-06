@@ -40,131 +40,187 @@ def conectar_firebase():
 #  CANALES DE TV
 # ══════════════════════════════════════════════════════════════════════════
 CANALES_FIJOS = [
-    
-    # ── StreamTP (canales premium sin proxy) ────────────────────────────
-    
-    
     #── DISNEY 
-    {"id":"stp45","nombre":"Disney","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp46","nombre":"Disney 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney1","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp47","nombre":"Disney 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney2","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp48","nombre":"Disney 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney3","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp49","nombre":"Disney 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney4","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp50","nombre":"Disney 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney5","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp51","nombre":"Disney 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney6","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp52","nombre":"Disney 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney7","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp53","nombre":"Disney 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney8","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp54","nombre":"Disney 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney9","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp55","nombre":"Disney 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney10","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp56","nombre":"Disney 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney11","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp57","nombre":"Disney 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney12","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp58","nombre":"Disney 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney13","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp59","nombre":"Disney 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney14","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    {"id":"stp60","nombre":"Disney 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney15","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp01","nombre":"Disney","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp02","nombre":"Disney 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney1","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp03","nombre":"Disney 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney2","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp04","nombre":"Disney 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney3","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp05","nombre":"Disney 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney4","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp06","nombre":"Disney 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney5","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp07","nombre":"Disney 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney6","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp08","nombre":"Disney 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney7","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp09","nombre":"Disney 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney8","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp10","nombre":"Disney 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney9","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp11","nombre":"Disney 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney10","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp12","nombre":"Disney 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney11","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp13","nombre":"Disney 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney12","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp14","nombre":"Disney 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney13","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp15","nombre":"Disney 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney14","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
+    {"id":"stp16","nombre":"Disney 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=disney15","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
 
     # ── FANATIZ 
-    {"id":"stp61","nombre":"Fanatiz","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp62","nombre":"Fanatiz 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz1","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp63","nombre":"Fanatiz 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz2","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp64","nombre":"Fanatiz 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz3","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp65","nombre":"Fanatiz 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz4","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp66","nombre":"Fanatiz 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz5","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp67","nombre":"Fanatiz 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz6","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp68","nombre":"Fanatiz 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz7","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp69","nombre":"Fanatiz 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz8","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp70","nombre":"Fanatiz 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz9","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp71","nombre":"Fanatiz 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz10","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp72","nombre":"Fanatiz 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz11","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp73","nombre":"Fanatiz 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz12","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp74","nombre":"Fanatiz 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz13","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp75","nombre":"Fanatiz 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz14","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp76","nombre":"Fanatiz 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz15","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"stp17","nombre":"Fanatiz","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp18","nombre":"Fanatiz 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz1","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp19","nombre":"Fanatiz 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz2","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp20","nombre":"Fanatiz 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz3","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp21","nombre":"Fanatiz 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz4","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp22","nombre":"Fanatiz 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz5","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp23","nombre":"Fanatiz 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz6","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp24","nombre":"Fanatiz 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz7","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp25","nombre":"Fanatiz 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz8","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp26","nombre":"Fanatiz 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz9","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp27","nombre":"Fanatiz 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz10","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp28","nombre":"Fanatiz 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz11","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp29","nombre":"Fanatiz 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz12","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp30","nombre":"Fanatiz 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz13","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp31","nombre":"Fanatiz 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz14","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+    {"id":"stp32","nombre":"Fanatiz 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fanatiz15","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
+
 
     #  ESPN  
-    {"id":"stp02","nombre":"ESPN","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp77","nombre":"ESPN 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn1","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp03","nombre":"ESPN 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn2","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp04","nombre":"ESPN 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn3","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp05","nombre":"ESPN 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn4","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp06","nombre":"ESPN 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn5","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp07","nombre":"ESPN 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn6","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp08","nombre":"ESPN 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn7","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp78","nombre":"ESPN 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn8","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp79","nombre":"ESPN 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn9","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp80","nombre":"ESPN 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn10","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp81","nombre":"ESPN 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn11","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp82","nombre":"ESPN 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn12","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp83","nombre":"ESPN 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn13","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp84","nombre":"ESPN 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn14","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp85","nombre":"ESPN 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn15","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp33","nombre":"ESPN","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp34","nombre":"ESPN 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn1","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp35","nombre":"ESPN 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn2","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp36","nombre":"ESPN 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn3","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp37","nombre":"ESPN 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn4","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp38","nombre":"ESPN 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn5","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp39","nombre":"ESPN 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn6","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp40","nombre":"ESPN 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn7","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp41","nombre":"ESPN 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn8","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp42","nombre":"ESPN 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn9","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp43","nombre":"ESPN 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn10","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp44","nombre":"ESPN 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn11","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp45","nombre":"ESPN 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn12","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp46","nombre":"ESPN 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn13","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp47","nombre":"ESPN 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn14","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp48","nombre":"ESPN 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn15","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+
 
     #  DSPORTS 
-    {"id":"stp13","nombre":"DSports","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp86","nombre":"DSports 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports1","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp14","nombre":"DSports 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports2","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp87","nombre":"DSports 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports3","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp88","nombre":"DSports 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports4","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp89","nombre":"DSports 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports5","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp90","nombre":"DSports 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports6","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp91","nombre":"DSports 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports7","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp92","nombre":"DSports 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports8","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp93","nombre":"DSports 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports9","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp94","nombre":"DSports 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports10","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp95","nombre":"DSports 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports11","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp96","nombre":"DSports 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports12","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp97","nombre":"DSports 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports13","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp98","nombre":"DSports 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports14","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    {"id":"stp99","nombre":"DSports 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports15","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp49","nombre":"DSports","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp50","nombre":"DSports 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports1","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp51","nombre":"DSports 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports2","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp52","nombre":"DSports 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports3","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp53","nombre":"DSports 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports4","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp54","nombre":"DSports 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports5","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp55","nombre":"DSports 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports6","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp56","nombre":"DSports 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports7","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp57","nombre":"DSports 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports8","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp58","nombre":"DSports 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports9","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp59","nombre":"DSports 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports10","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp60","nombre":"DSports 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports11","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp61","nombre":"DSports 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports12","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp62","nombre":"DSports 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports13","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp63","nombre":"DSports 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports14","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
+    {"id":"stp64","nombre":"DSports 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsports15","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
 
     #  TUDN USA 
-    {"id":"stp31","nombre":"TUDN USA","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp100","nombre":"TUDN USA 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa1","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp101","nombre":"TUDN USA 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa2","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp102","nombre":"TUDN USA 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa3","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp103","nombre":"TUDN USA 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa4","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp104","nombre":"TUDN USA 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa5","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp105","nombre":"TUDN USA 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa6","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp106","nombre":"TUDN USA 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa7","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp107","nombre":"TUDN USA 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa8","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp108","nombre":"TUDN USA 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa9","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp109","nombre":"TUDN USA 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa10","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp110","nombre":"TUDN USA 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa11","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp111","nombre":"TUDN USA 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa12","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp112","nombre":"TUDN USA 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa13","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp113","nombre":"TUDN USA 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa14","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp114","nombre":"TUDN USA 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa15","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"stp65","nombre":"TUDN USA","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp66","nombre":"TUDN USA 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa1","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp67","nombre":"TUDN USA 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa2","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp68","nombre":"TUDN USA 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa3","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp69","nombre":"TUDN USA 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa4","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp70","nombre":"TUDN USA 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa5","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp71","nombre":"TUDN USA 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa6","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp72","nombre":"TUDN USA 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa7","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp73","nombre":"TUDN USA 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa8","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp74","nombre":"TUDN USA 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa9","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp75","nombre":"TUDN USA 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa10","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp76","nombre":"TUDN USA 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa11","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp77","nombre":"TUDN USA 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa12","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp78","nombre":"TUDN USA 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa13","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp79","nombre":"TUDN USA 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa14","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
+    {"id":"stp80","nombre":"TUDN USA 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tudn_usa15","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
 
     #  MAX 
-    {"id":"stp115","nombre":"Max","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp18","nombre":"Max 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max1","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp116","nombre":"Max 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max2","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp117","nombre":"Max 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max3","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp118","nombre":"Max 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max4","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp119","nombre":"Max 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max5","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp120","nombre":"Max 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max6","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp121","nombre":"Max 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max7","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp122","nombre":"Max 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max8","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp123","nombre":"Max 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max9","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp124","nombre":"Max 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max10","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp125","nombre":"Max 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max11","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp126","nombre":"Max 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max12","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp127","nombre":"Max 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max13","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp128","nombre":"Max 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max14","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
-    {"id":"stp129","nombre":"Max 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max15","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    {"id":"stp81","nombre":"Max","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp82","nombre":"Max 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max1","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp83","nombre":"Max 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max2","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp84","nombre":"Max 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max3","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp85","nombre":"Max 4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max4","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp86","nombre":"Max 5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max5","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp87","nombre":"Max 6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max6","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp88","nombre":"Max 7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max7","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp89","nombre":"Max 8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max8","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp90","nombre":"Max 9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max9","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp91","nombre":"Max 10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max10","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp92","nombre":"Max 11","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max11","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp93","nombre":"Max 12","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max12","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp94","nombre":"Max 13","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max13","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp85","nombre":"Max 14","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max14","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
+    {"id":"stp96","nombre":"Max 15","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=max15","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
 
-    #  OTROS CANALES INDIVIDUALES 
-    {"id":"stp01","nombre":"ESPN Premium","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espnpremium","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp09","nombre":"TyC Sports","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tycsports","logo":"https://images.seeklogo.com/logo-png/34/1/tyc-sports-logo-png_seeklogo-340604.png","fallbacks":[]},
-    {"id":"stp10","nombre":"Fox Sports 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fox1ar","logo":"https://images.seeklogo.com/logo-png/31/1/fox-sports-logo-png_seeklogo-315883.png","fallbacks":[]},
-    {"id":"stp11","nombre":"Fox Sports 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fox2ar","logo":"https://images.seeklogo.com/logo-png/31/1/fox-sports-logo-png_seeklogo-315883.png","fallbacks":[]},
-    {"id":"stp12","nombre":"Fox Sports 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fox3ar","logo":"https://images.seeklogo.com/logo-png/31/1/fox-sports-logo-png_seeklogo-315883.png","fallbacks":[]},
-    {"id":"stp17","nombre":"TNT Sports","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tntsports","logo":"https://images.seeklogo.com/logo-png/51/1/tnt-sports-logo-png_seeklogo-519540.png","fallbacks":[]},
-    {"id":"stp43","nombre":"Telefe F","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=telefe","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
-    {"id":"stp44","nombre":"TV Pública","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tv_publica","logo":"https://images.seeklogo.com/logo-png/18/1/tv-publica-logo-png_seeklogo-180741.png","fallbacks":[]},
-    {"id":"stp45","nombre":"Telefe EN VIVO","categoria":"NOTICIAS","url":"http://201.217.246.42:44310/Live/3fcb6e26785fd8d415571b26dc3cf5d3/telefe.playlist.m3u8","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
-    {"id":"stp46","nombre":"TN noticias","categoria":"NOTICIAS","url":"https://www.youtube.com/watch?v=cb12KmMMDJA","logo":"https://cdn-icons-png.flaticon.com/512/53/53283.png","fallbacks":[]},
+    
+    
+    #   TyC sport
+    {"id":"stp97","nombre":"TyC Sports","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tycsports","logo":"https://images.seeklogo.com/logo-png/34/1/tyc-sports-logo-png_seeklogo-340604.png","fallbacks":[]},
+    {"id":"stp125","nombre":"TyC Sports Inter","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tycinternacional","logo":"https://images.seeklogo.com/logo-png/34/1/tyc-sports-logo-png_seeklogo-340604.png","fallbacks":[]},
+
+
     
 
+
+    #  paramount
+    {"id":"stp98","nombre":"paramount1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=paramount1","logo":"https://images.seeklogo.com/logo-png/10/1/paramount-logo-png_seeklogo-106080.png","fallbacks":[]},
+    {"id":"stp99","nombre":"paramount2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=paramount2","logo":"https://images.seeklogo.com/logo-png/10/1/paramount-logo-png_seeklogo-106080.png","fallbacks":[]},
+    {"id":"stp100","nombre":"paramount3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=paramount3","logo":"https://images.seeklogo.com/logo-png/10/1/paramount-logo-png_seeklogo-106080.png","fallbacks":[]},
+    {"id":"stp101","nombre":"paramount4","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=paramount4","logo":"https://images.seeklogo.com/logo-png/10/1/paramount-logo-png_seeklogo-106080.png","fallbacks":[]},
+    {"id":"stp102","nombre":"paramount5","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=paramount5","logo":"https://images.seeklogo.com/logo-png/10/1/paramount-logo-png_seeklogo-106080.png","fallbacks":[]},
+    {"id":"stp103","nombre":"paramount6","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=paramount6","logo":"https://images.seeklogo.com/logo-png/10/1/paramount-logo-png_seeklogo-106080.png","fallbacks":[]},
+    {"id":"stp104","nombre":"paramount7","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=paramount7","logo":"https://images.seeklogo.com/logo-png/10/1/paramount-logo-png_seeklogo-106080.png","fallbacks":[]},
+    {"id":"stp105","nombre":"paramount8","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=paramount8","logo":"https://images.seeklogo.com/logo-png/10/1/paramount-logo-png_seeklogo-106080.png","fallbacks":[]},
+
+    {"id":"stp106","nombre":"paramount9","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=paramount9","logo":"https://images.seeklogo.com/logo-png/10/1/paramount-logo-png_seeklogo-106080.png","fallbacks":[]},
+
+    {"id":"stp107","nombre":"paramount10","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=paramount10","logo":"https://images.seeklogo.com/logo-png/10/1/paramount-logo-png_seeklogo-106080.png","fallbacks":[]},
+
+    
+    
+
+    #  espn mx
+    {"id":"stp108","nombre":"espn mx","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espnmx","logo":"https://1000logos.net/wp-content/uploads/2017/01/espn-symbol.jpg","fallbacks":[]},     
+    {"id":"stp109","nombre":"espn 2mx","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn2mx","logo":"https://1000logos.net/wp-content/uploads/2017/01/espn-symbol.jpg","fallbacks":[]}, 	
+    {"id":"stp110","nombre":"espn 3mx","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espn3mx","logo":"https://1000logos.net/wp-content/uploads/2017/01/espn-symbol.jpg","fallbacks":[]},
+
+
+    #  fox sport
+    {"id":"stp111","nombre":"Fox Sports 1","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fox1ar","logo":"https://images.seeklogo.com/logo-png/31/1/fox-sports-logo-png_seeklogo-315883.png","fallbacks":[]},
+    {"id":"stp112","nombre":"Fox Sports 2","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fox2ar","logo":"https://images.seeklogo.com/logo-png/31/1/fox-sports-logo-png_seeklogo-315883.png","fallbacks":[]},
+    {"id":"stp113","nombre":"Fox Sports 3","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=fox3ar","logo":"https://images.seeklogo.com/logo-png/31/1/fox-sports-logo-png_seeklogo-315883.png","fallbacks":[]},
+    
+
+    #   TNT GB
+    {"id":"stp114","nombre":"TNT 1 gb","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tnt_1_gb","logo":"https://www.freepnglogos.com/uploads/tnt-logo-png-9.jpg","fallbacks":[]},
+
+    {"id":"stp115","nombre":"TNT 2 gb","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tnt_2_gb","logo":"https://www.freepnglogos.com/uploads/tnt-logo-png-9.jpg","fallbacks":[]},
+
+    {"id":"stp116","nombre":"TNT 3 gb","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tnt_3_gb","logo":"https://www.freepnglogos.com/uploads/tnt-logo-png-9.jpg","fallbacks":[]},
+
+    {"id":"stp117","nombre":"TNT 4 gb","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tnt_4_gb","logo":"https://www.freepnglogos.com/uploads/tnt-logo-png-9.jpg","fallbacks":[]},
+
+    #   Aire
+    {"id":"stp118","nombre":"Telefe F","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=telefe","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
+
+    {"id":"stp119","nombre":"Telefe EN VIVO","categoria":"NOTICIAS","url":"http://201.217.246.42:44310/Live/3fcb6e26785fd8d415571b26dc3cf5d3/telefe.playlist.m3u8","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
+
+    
+    {"id":"stp120","nombre":"TN noticias","categoria":"NOTICIAS","url":"https://www.youtube.com/watch?v=cb12KmMMDJA","logo":"https://images.seeklogo.com/logo-png/46/1/todo-noticias-logo-png_seeklogo-462511.png","fallbacks":[]},
+    
+
+    #   ESPN Premium
+    {"id":"stp121","nombre":"ESPN Premium","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espnpremium","logo":"https://librefutbol.com.ar/wp-content/uploads/2025/03/espn-premium-logo.png","fallbacks":[]},
+
+    #   ESPN deportes
+    {"id":"stp122","nombre":"ESPN deportes","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=espndeportes","logo":"https://2.bp.blogspot.com/-RG0tX1-q0VM/UZ5RRl910eI/AAAAAAAAAKg/RasxwojGhHo/s1600/espndeportes.jpg","fallbacks":[]},
+
+    #   DSPORT PLUS
+    {"id":"stp123","nombre":"DSPORT Plus","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=dsportsplus","logo":"https://i0.wp.com/trucosonline.com/wp-content/uploads/2022/11/613.png","fallbacks":[]},
+
+
+    #   TNT sport
+    {"id":"stp124","nombre":"TNT Sports","categoria":"NOTICIAS","url":"https://streamtpnew.com/global1.php?stream=tntsports","logo":"https://images.seeklogo.com/logo-png/51/1/tnt-sports-logo-png_seeklogo-519540.png","fallbacks":[]},
+  
+  
     # ── Bolaloca via proxy Railway ────────────────────────────────────
 
     {"id":"bol01",
