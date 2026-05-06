@@ -317,7 +317,7 @@ CANALES_FIJOS = [
         "nombre":"LAS",
         "categoria":"INTERNACIONAL",
         "url":"https://bolaloca.my/player/2/74",
-        "logo":"https://www.laliganacional.com.ar/imgs/logos/logo-nombre-laliga.svg",
+        "logo":"https://i0.wp.com/laligatoronto.ca/wp-content/uploads/2022/11/Logo_La-Liga-Sports-Complex_verde.png",
         "fallbacks":[]},
     {"id":"bol17",
         "nombre":"FOXSPORT",
