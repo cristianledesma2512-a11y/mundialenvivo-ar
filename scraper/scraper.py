@@ -225,13 +225,13 @@ CANALES_FIJOS = [
 
     {"id":"bol01",
         "nombre":"TYC SPORT",
-        "categoria":"OPCION2",
+        "categoria":"DEPORTES",
         "url":"https://bolaloca.my/player/2/77",
         "logo":"https://images.seeklogo.com/logo-png/34/1/tyc-sports-logo-png_seeklogo-340604.png",
         "fallbacks":[]},
     {"id":"bol02",
         "nombre":"ESPN PREMIUM",
-        "categoria":"OPCION2",
+        "categoria":"DEPORTES",
         "url":"https://bolaloca.my/player/2/76",
         "logo":"https://images.seeklogo.com/logo-png/4/1/espn-logo-png_seeklogo-49194.png",
         "fallbacks":[]},
@@ -391,7 +391,7 @@ CANALES_FIJOS = [
       {
         "id": "cap01",
         "nombre": "canal1",
-        "categoria": "OPCION3",
+        "categoria": "DEPORTES",
         "url": "https://www.capoplay.net/canal1.php",
         "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
         "fallbacks": []
@@ -399,7 +399,7 @@ CANALES_FIJOS = [
       {
         "id": "cap02",
         "nombre": "canal2",
-        "categoria": "OPCION3",
+        "categoria": "DEPORTES",
         "url": "https://www.capoplay.net/canal2.php",
         "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
         "fallbacks": []
@@ -1506,12 +1506,6 @@ def buscar_canales_m3u(max_por_fuente=5000, max_total=10800):
                     cat = "INFANTIL"
                 elif any(x in (grp + n) for x in ["XXX", "ADULT", "PLAYBOY", "PENTHOUSE", "VENUS", "SEX"]):
                     cat = "ADULTOS"
-                elif any(x in (grp + n) for x in ["OPCION1"]):
-                    cat = "OPCION1"
-                elif any(x in (grp + n) for x in ["OPCION2"]):
-                    cat = "OPCION2"
-                elif any(x in (grp + n) for x in ["OPCION3"]):
-                    cat = "OPCION3"
                 else:
                     cat = "INTERNACIONAL"
 
