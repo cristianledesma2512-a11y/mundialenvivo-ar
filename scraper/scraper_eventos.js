@@ -3,7 +3,7 @@ const admin     = require('firebase-admin');
 const fs        = require('fs');
 const https     = require('https');
 
-const FUENTE_URL = 'https://streamtpnew.com/eventos.html';
+const FUENTE_URL = 'https://streamtp-abc.net/eventos.html';
 
 if (!admin.apps.length) {
     let serviceAccount;
