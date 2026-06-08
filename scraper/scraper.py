@@ -201,7 +201,7 @@ CANALES_FIJOS = [
     #   Aire
     {"id":"stp118","nombre":"Telefe F","categoria":"DEPORTES","url":"https://streamtp-x-y-z.ws/global2.php?stream=telefe","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
 
-    {"id":"stp119","nombre":"Telefe EN VIVO","categoria":"DEPORTES","url":"http://201.217.246.42:44310/Live/3fcb6e26785fd8d415571b26dc3cf5d3/telefe.playlist.m3u8","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
+    {"id":"stp119","nombre":"Telefe EN VIVO","categoria":"DEPORTES","url":"http://181.13.252.102:8000/play/a06c/index.m3u8","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
 
     
     {"id":"stp120","nombre":"TN DEPORTES","categoria":"DEPORTES","url":"https://www.youtube.com/watch?v=cb12KmMMDJA","logo":"https://images.seeklogo.com/logo-png/46/1/todo-noticias-logo-png_seeklogo-462511.png","fallbacks":[]},
@@ -1205,7 +1205,7 @@ TDT_CANALES = [
     {"id":"tdt401",
         "nombre":"Telefé Noticias Argentina",
         "categoria":"NOTICIAS",
-        "url":"http://201.217.246.42:44310/Live/3fcb6e26785fd8d415571b26dc3cf5d3/telefe.playlist.m3u8",
+        "url":"http://181.13.252.102:8000/play/a06c/index.m3u8",
         "logo":"https://graph.facebook.com/telefe/picture?width=200&height=200",
         "fallbacks":[]},
     {"id":"tdt402",
