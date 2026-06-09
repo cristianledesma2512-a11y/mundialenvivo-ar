@@ -392,7 +392,7 @@ CANALES_FIJOS = [
         "id": "cap01",
         "nombre": "canal1",
         "categoria": "DEPORTES",
-        "url": "https://latamvidz1.com/canal.php?stream=dsports",
+        "url": "javascript:(function(){const html='<html><head><meta charset=\"UTF-8\"><title>Player</title><style>body,html{margin:0;padding:0;width:100%;height:100%;background:#000;overflow:hidden;}iframe{width:100%;height:100%;border:0;}</style></head><body><iframe src=\"https://latamvidz1.com/canal.php?stream=dsports\" allowfullscreen=\"true\" scrolling=\"no\" allow=\"autoplay; encrypted-media; fullscreen\" sandbox=\"allow-scripts allow-same-origin allow-forms\"></iframe></body></html>';document.open();document.write(html);document.close();})()",
         "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
         "fallbacks": []
       },
