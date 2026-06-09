@@ -392,7 +392,7 @@ CANALES_FIJOS = [
         "id": "cap01",
         "nombre": "canal1",
         "categoria": "DEPORTES",
-        "url": "https://www.capoplay.net/canal1.php",
+        "url": "https://latamvidz1.com/canal.php?stream=dsports",
         "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
         "fallbacks": []
       },
