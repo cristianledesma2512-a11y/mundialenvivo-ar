@@ -392,7 +392,7 @@ CANALES_FIJOS = [
         "id": "cap01",
         "nombre": "canal1",
         "categoria": "DEPORTES",
-        "url": "javascript:(function(){const html='<html><head><meta charset=\"UTF-8\"><title>Player</title><style>body,html{margin:0;padding:0;width:100%;height:100%;background:#000;overflow:hidden;}iframe{width:100%;height:100%;border:0;}</style></head><body><iframe src=\"https://latamvidz1.com/canal.php?stream=dsports\" allowfullscreen=\"true\" scrolling=\"no\" allow=\"autoplay; encrypted-media; fullscreen\" sandbox=\"allow-scripts allow-same-origin allow-forms\"></iframe></body></html>';document.open();document.write(html);document.close();})()",
+        "url": "javascript:(function(){const b=document.body;b.innerHTML='';b.style.margin='0';b.style.background='#000';b.style.overflow='hidden';b.style.width='100vw';b.style.height='100vh';const d=document.createElement('div');d.style.width='100%';d.style.height='100%';d.style.position='relative';d.style.overflow='hidden';const f=document.createElement('iframe');f.src='https://futbol-libres.su/directv-sports/';f.style.position='absolute';f.style.top='-140px';f.style.left='0';f.style.width='100%';f.style.height='calc(100% + 140px)';f.style.border='0';f.scrolling='no';f.setAttribute('allowfullscreen','true');f.setAttribute('allow','autoplay; encrypted-media; fullscreen');f.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms');d.appendChild(f);b.appendChild(d);})()",
         "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
         "fallbacks": []
       },
