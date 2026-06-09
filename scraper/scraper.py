@@ -392,7 +392,7 @@ CANALES_FIJOS = [
         "id": "cap01",
         "nombre": "canal1",
         "categoria": "DEPORTES",
-        "url": "https://futbol-libres.su/directv-sports/",
+        "url": "https://futbol-libres.su/canal.php?stream=dsports",
         "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
         "fallbacks": []
       },
