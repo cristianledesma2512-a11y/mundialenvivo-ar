@@ -1,144 +1,100 @@
-/**
- * @file scraper.js
- * @description Scraper de alta disponibilidad para Mundial en Vivo - TECNOCOM
- * @version 1.0.3
- */
-
 const puppeteer = require('puppeteer');
-const admin = require('firebase-admin');
-const fs = require('fs');
+const admin     = require('firebase-admin');
+const fs        = require('fs');
+const https     = require('https');
 
-const FUENTE_URL = process.env.FUENTE_URL || 'https://streamtpday1.xyz/eventos.html';
-const DB_URL = process.env.FIREBASE_DATABASE_URL || 'https://mundialenvivo-ar-default-rtdb.firebaseio.com';
+const FUENTE_URL = 'https://streamtpnew.com/eventos.html';
 
-// Inicialización del SDK de Firebase
 if (!admin.apps.length) {
-    let serviceAccount = null;
+    let serviceAccount;
     if (process.env.FIREBASE_SERVICE_ACCOUNT) {
-        try {
-            serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
-        } catch (e) {
-            console.error('❌ Error al parsear FIREBASE_SERVICE_ACCOUNT:', e.message);
-        }
+        serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
     } else if (fs.existsSync('./firebase-adminsdk.json')) {
         serviceAccount = require('./firebase-adminsdk.json');
     }
-
     if (serviceAccount) {
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
-            databaseURL: DB_URL
+            databaseURL: 'https://mundialenvivo-ar-default-rtdb.firebaseio.com'
         });
-        console.log('🚀 Firebase Admin SDK conectado.');
-    } else {
-        console.error('❌ Error crítico: No se encontraron credenciales de Firebase.');
-        process.exit(1);
     }
 }
 
-const db = admin.database();
-
-/**
- * Sanitiza cadenas de texto para evitar caracteres de control.
- * @param {string} text 
- * @returns {string}
- */
-function sanitizeString(text) {
-    if (!text) return '';
-    return text.replace(/[\r\n\t]+/g, ' ').trim();
+function httpRequest(url, method, body = null) {
+    return new Promise((resolve, reject) => {
+        const urlObj = new URL(url);
+        const options = {
+            hostname: urlObj.hostname,
+            path: urlObj.pathname + urlObj.search,
+            method: method,
+            headers: { 'Content-Type': 'application/json' }
+        };
+        if (body) options.headers['Content-Length'] = Buffer.byteLength(body);
+        const req = https.request(options, res => {
+            let data = '';
+            res.on('data', chunk => { data += chunk; });
+            res.on('end', () => {
+                try { resolve({ status: res.statusCode, data: data ? JSON.parse(data) : null }); }
+                catch (e) { resolve({ status: res.statusCode, data: null }); }
+            });
+        });
+        req.on('error', reject);
+        if (body) req.write(body);
+        req.end();
+    });
 }
 
-async function ejecutarScraper() {
-    let browser = null;
+async function scrapearEventos() {
+    let browser;
     try {
-        console.log(`⏱️ Inicio de ciclo: ${new Date().toISOString()}`);
-        
+        console.log('🚀 Iniciando...');
         browser = await puppeteer.launch({
             headless: 'new',
-            args: [
-                '--no-sandbox', 
-                '--disable-setuid-sandbox', 
-                '--disable-dev-shm-usage',
-                '--disable-gpu'
-            ],
+            args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
         });
-
         const page = await browser.newPage();
-        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36');
-        await page.setDefaultNavigationTimeout(45000);
-
-        console.log(`🔗 Navegando a: ${FUENTE_URL}`);
-        await page.goto(FUENTE_URL, { waitUntil: 'networkidle2' });
-
-        console.log('⏳ Esperando renderizado de la estructura .event...');
-        await page.waitForSelector('.event', { timeout: 20000 });
-
-        // Forzar delay de 3.5 segundos para garantizar la carga completa de elementos asíncronos en el DOM
-        await new Promise(resolve => setTimeout(resolve, 3500));
-
-        // Extracción directa utilizando selectores específicos validados por DevTools
-        const eventosExtraidos = await page.evaluate(() => {
-            const resultados = [];
-            const bloques = document.querySelectorAll('.event');
-            
-            bloques.forEach(div => {
+        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+        await page.goto(FUENTE_URL, { waitUntil: 'networkidle2', timeout: 30000 });
+        await page.waitForSelector('.event', { timeout: 10000 }).catch(() => {});
+        
+        const eventosNuevos = await page.evaluate(() => {
+            const results = [];
+            document.querySelectorAll('.event').forEach(div => {
                 const nameEl = div.querySelector('.event-name');
-                const inputEl = div.querySelector('input.iframe-link');
-                
-                if (nameEl && inputEl) {
-                    const titulo = nameEl.textContent.trim();
-                    const url = inputEl.value.trim();
-                    if (url) {
-                        resultados.push({ titulo, url });
-                    }
-                }
+                const linkEl = div.querySelector('.iframe-link');
+                if (!nameEl) return;
+                const titulo = nameEl.textContent.trim();
+                const link = linkEl ? (linkEl.value || '').trim() : '';
+                results.push({ titulo, link, lastSeen: new Date().toISOString() });
             });
-            return resultados;
+            return results;
         });
 
         await browser.close();
-        console.log(`📊 Total de eventos capturados: ${eventosExtraidos.length}`);
+        console.log(`✅ Web: ${eventosNuevos.length} eventos.`);
 
-        const timestampActual = new Date().toISOString();
-        const actualizaciones = {};
+        if (admin.apps.length && eventosNuevos.length > 0) {
+            const token = await admin.app().options.credential.getAccessToken();
+            const dbUrl = `https://mundialenvivo-ar-default-rtdb.firebaseio.com/eventos_dia.json?access_token=${token.access_token}`;
+            const response = await httpRequest(dbUrl, 'GET');
+            let lista = (response.data && response.data.eventos) ? response.data.eventos : [];
 
-        // 1. Mapeo secuencial estricto a las claves cheventoXX bajo el nodo /canales
-        eventosExtraidos.forEach((evento, idx) => {
-            const idCanal = `chevento${String(idx + 1).padStart(2, '0')}`;
-            
-            actualizaciones[`canales/${idCanal}`] = {
-                activo: true,
-                actualizado: timestampActual,
-                categoria: "DEPORTES",
-                fijo: false,
-                logo: "https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png",
-                nombre: sanitizeString(evento.titulo),
-                url: sanitizeString(evento.url)
-            };
-        });
+            eventosNuevos.forEach(n => {
+                const i = lista.findIndex(e => e.titulo === n.titulo);
+                if (i !== -1) { lista[i] = { ...lista[i], ...n }; }
+                else { lista.unshift(n); }
+            });
 
-        // 2. Actualización explícita del nodo /eventos_dia requerido por la UI de la app
-        actualizaciones['eventos_dia'] = {
-            actualizadoEn: timestampActual,
-            total: eventosExtraidos.length
-        };
+            const limite = new Date(Date.now() - 24 * 60 * 60 * 1000);
+            lista = lista.filter(e => new Date(e.lastSeen) > limite);
 
-        console.log(`🔄 Sincronizando actualizaciones en Firebase (Canales y Eventos del Día)...`);
-        
-        // Se ejecuta update desde la raíz '/' de forma atómica para impactar múltiples nodos simultáneamente
-        await db.ref().update(actualizaciones);
-        
-        console.log('🔥 Firebase Realtime Database actualizada exitosamente.');
-
-    } catch (error) {
-        console.error('❌ Error en ejecución del scraper:', error.stack);
+            await httpRequest(dbUrl, 'PUT', JSON.stringify({ actualizadoEn: new Date().toISOString(), eventos: lista }));
+            console.log('🔥 Firebase actualizado.');
+        }
+    } catch (err) {
+        console.error('❌ Error:', err.message);
         if (browser) await browser.close().catch(() => {});
     }
 }
 
-ejecutarScraper().then(() => {
-    process.exit(0);
-}).catch(err => {
-    console.error('💥 Fallo catastrófico:', err);
-    process.exit(1);
-});
+scrapearEventos().then(() => { process.exit(0); }).catch(() => { process.exit(1); });
