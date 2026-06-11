@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
-const admin     = require('firebase-admin');
-const fs        = require('fs');
-const https     = require('https');
+const admin      = require('firebase-admin');
+const fs         = require('fs');
+const https      = require('https');
 
 const FUENTE_URL = 'https://streamtpday1.xyz/eventos.html';
 
@@ -55,7 +55,13 @@ async function scrapearEventos() {
         const page = await browser.newPage();
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
         await page.goto(FUENTE_URL, { waitUntil: 'networkidle2', timeout: 30000 });
+        
+        console.log('⏳ Esperando estructura base...');
         await page.waitForSelector('.event', { timeout: 10000 }).catch(() => {});
+        
+        // Retraso de 3.5 segundos para garantizar la carga completa de elementos dinámicos
+        console.log('⏳ Esperando renderizado de la totalidad de los eventos...');
+        await new Promise(resolve => setTimeout(resolve, 3500));
         
         const eventosNuevos = await page.evaluate(() => {
             const results = [];
@@ -75,8 +81,13 @@ async function scrapearEventos() {
 
         if (admin.apps.length && eventosNuevos.length > 0) {
             const token = await admin.app().options.credential.getAccessToken();
-            const dbUrl = `https://mundialenvivo-ar-default-rtdb.firebaseio.com/eventos_dia.json?access_token=${token.access_token}`;
-            const response = await httpRequest(dbUrl, 'GET');
+            const timestampActual = new Date().toISOString();
+
+            // ==========================================
+            // LOGICA ORIGINAL: Actualizar eventos_dia
+            // ==========================================
+            const dbUrlEventos = `https://mundialenvivo-ar-default-rtdb.firebaseio.com/eventos_dia.json?access_token=${token.access_token}`;
+            const response = await httpRequest(dbUrlEventos, 'GET');
             let lista = (response.data && response.data.eventos) ? response.data.eventos : [];
 
             eventosNuevos.forEach(n => {
@@ -88,8 +99,31 @@ async function scrapearEventos() {
             const limite = new Date(Date.now() - 24 * 60 * 60 * 1000);
             lista = lista.filter(e => new Date(e.lastSeen) > limite);
 
-            await httpRequest(dbUrl, 'PUT', JSON.stringify({ actualizadoEn: new Date().toISOString(), eventos: lista }));
-            console.log('🔥 Firebase actualizado.');
+            await httpRequest(dbUrlEventos, 'PUT', JSON.stringify({ actualizadoEn: timestampActual, eventos: lista }));
+            console.log('🔥 Firebase: eventos_dia actualizado.');
+
+            // ==========================================
+            // LOGICA NUEVA: Actualizar /canales/cheventoXX
+            // ==========================================
+            const dbUrlCanales = `https://mundialenvivo-ar-default-rtdb.firebaseio.com/canales.json?access_token=${token.access_token}`;
+            const mapeoCanales = {};
+
+            eventosNuevos.forEach((evento, idx) => {
+                const idCanal = `chevento${String(idx + 1).padStart(2, '0')}`;
+                mapeoCanales[idCanal] = {
+                    activo: true,
+                    actualizado: timestampActual,
+                    categoria: "DEPORTES",
+                    fijo: false,
+                    logo: "https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png",
+                    nombre: evento.titulo,
+                    url: evento.link
+                };
+            });
+
+            // Se utiliza PATCH para fusionar/pisar los cheventoXX sin borrar los canales fijos existentes (ej: bol01, stp49)
+            await httpRequest(dbUrlCanales, 'PATCH', JSON.stringify(mapeoCanales));
+            console.log('🔥 Firebase: Nodos /canales actualizados de manera atómica.');
         }
     } catch (err) {
         console.error('❌ Error:', err.message);
