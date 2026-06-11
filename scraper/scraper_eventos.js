@@ -1,7 +1,7 @@
 /**
  * @file scraper.js
  * @description Scraper de alta disponibilidad para Mundial en Vivo - TECNOCOM
- * @version 1.0.2
+ * @version 1.0.3
  */
 
 const puppeteer = require('puppeteer');
@@ -99,32 +99,35 @@ async function ejecutarScraper() {
         await browser.close();
         console.log(`📊 Total de eventos capturados: ${eventosExtraidos.length}`);
 
-        if (eventosExtraidos.length === 0) {
-            console.log('⚠️ No se encontraron eventos válidos en este ciclo.');
-            return;
-        }
-
-        const canalesRef = db.ref('canales');
         const timestampActual = new Date().toISOString();
         const actualizaciones = {};
 
-        // Mapeo secuencial estricto a claves cheventoXX
+        // 1. Mapeo secuencial estricto a las claves cheventoXX bajo el nodo /canales
         eventosExtraidos.forEach((evento, idx) => {
             const idCanal = `chevento${String(idx + 1).padStart(2, '0')}`;
             
-            actualizaciones[idCanal] = {
+            actualizaciones[`canales/${idCanal}`] = {
                 activo: true,
                 actualizado: timestampActual,
                 categoria: "DEPORTES",
                 fijo: false,
-                logo: "https://streamtpday1.xyz/stp.png",
+                logo: "https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png",
                 nombre: sanitizeString(evento.titulo),
                 url: sanitizeString(evento.url)
             };
         });
 
-        console.log(`🔄 Sincronizando actualizaciones en /canales...`);
-        await canalesRef.update(actualizaciones);
+        // 2. Actualización explícita del nodo /eventos_dia requerido por la UI de la app
+        actualizaciones['eventos_dia'] = {
+            actualizadoEn: timestampActual,
+            total: eventosExtraidos.length
+        };
+
+        console.log(`🔄 Sincronizando actualizaciones en Firebase (Canales y Eventos del Día)...`);
+        
+        // Se ejecuta update desde la raíz '/' de forma atómica para impactar múltiples nodos simultáneamente
+        await db.ref().update(actualizaciones);
+        
         console.log('🔥 Firebase Realtime Database actualizada exitosamente.');
 
     } catch (error) {
