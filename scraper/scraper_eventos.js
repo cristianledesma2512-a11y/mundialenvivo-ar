@@ -1,100 +1,116 @@
 const puppeteer = require('puppeteer');
-const admin     = require('firebase-admin');
-const fs        = require('fs');
-const https     = require('https');
+const admin = require('firebase-admin');
+const fs = require('fs');
 
 const FUENTE_URL = 'https://streamtpday1.xyz/eventos.html';
+const DB_URL = 'https://mundialenvivo-ar-default-rtdb.firebaseio.com';
 
+// 1. Inicialización limpia y segura de Firebase Admin SDK
 if (!admin.apps.length) {
-    let serviceAccount;
+    let serviceAccount = null;
     if (process.env.FIREBASE_SERVICE_ACCOUNT) {
         serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
     } else if (fs.existsSync('./firebase-adminsdk.json')) {
         serviceAccount = require('./firebase-adminsdk.json');
     }
+
     if (serviceAccount) {
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
-            databaseURL: 'https://mundialenvivo-ar-default-rtdb.firebaseio.com'
+            databaseURL: DB_URL
         });
+        console.log('🚀 Firebase conectado correctamente utilizando el SDK Oficial.');
+    } else {
+        console.error('❌ Error: No se encontraron credenciales de Firebase (archivo o variable de entorno).');
+        process.exit(1);
     }
 }
 
-function httpRequest(url, method, body = null) {
-    return new Promise((resolve, reject) => {
-        const urlObj = new URL(url);
-        const options = {
-            hostname: urlObj.hostname,
-            path: urlObj.pathname + urlObj.search,
-            method: method,
-            headers: { 'Content-Type': 'application/json' }
-        };
-        if (body) options.headers['Content-Length'] = Buffer.byteLength(body);
-        const req = https.request(options, res => {
-            let data = '';
-            res.on('data', chunk => { data += chunk; });
-            res.on('end', () => {
-                try { resolve({ status: res.statusCode, data: data ? JSON.parse(data) : null }); }
-                catch (e) { resolve({ status: res.statusCode, data: null }); }
-            });
-        });
-        req.on('error', reject);
-        if (body) req.write(body);
-        req.end();
-    });
-}
+const db = admin.database();
 
-async function scrapearEventos() {
+async function scrapearYActualizarCanales() {
     let browser;
     try {
-        console.log('🚀 Iniciando...');
+        console.log('⏳ Iniciando proceso de scraping...');
+        
         browser = await puppeteer.launch({
             headless: 'new',
             args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
         });
+        
         const page = await browser.newPage();
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
-        await page.goto(FUENTE_URL, { waitUntil: 'networkidle2', timeout: 30000 });
-        await page.waitForSelector('.event', { timeout: 10000 }).catch(() => {});
         
-        const eventosNuevos = await page.evaluate(() => {
-            const results = [];
-            document.querySelectorAll('.event').forEach(div => {
+        // Navegación con tiempo de espera prudencial
+        await page.goto(FUENTE_URL, { waitUntil: 'networkidle2', timeout: 45000 });
+        
+        // Esperamos explícitamente a que aparezca al menos un evento en el DOM
+        await page.waitForSelector('.event', { timeout: 15000 });
+
+        // 2. Extracción de datos usando los selectores exactos de tu DevTools
+        const eventosScrapeados = await page.evaluate(() => {
+            const resultados = [];
+            const bloques = document.querySelectorAll('.event');
+            
+            bloques.forEach(div => {
                 const nameEl = div.querySelector('.event-name');
-                const linkEl = div.querySelector('.iframe-link');
-                if (!nameEl) return;
-                const titulo = nameEl.textContent.trim();
-                const link = linkEl ? (linkEl.value || '').trim() : '';
-                results.push({ titulo, link, lastSeen: new Date().toISOString() });
+                const inputEl = div.querySelector('input.iframe-link');
+                
+                if (nameEl && inputEl) {
+                    const titulo = nameEl.textContent.replace(/[\r\n\t]+/g, ' ').trim();
+                    const url = inputEl.value.trim();
+                    
+                    if (url) {
+                        resultados.push({ titulo, url });
+                    }
+                }
             });
-            return results;
+            return resultados;
         });
 
         await browser.close();
-        console.log(`✅ Web: ${eventosNuevos.length} eventos.`);
+        console.log(`✅ Se extrajeron exitosamente ${eventosScrapeados.length} enlaces de la web.`);
 
-        if (admin.apps.length && eventosNuevos.length > 0) {
-            const token = await admin.app().options.credential.getAccessToken();
-            const dbUrl = `https://mundialenvivo-ar-default-rtdb.firebaseio.com/eventos_dia.json?access_token=${token.access_token}`;
-            const response = await httpRequest(dbUrl, 'GET');
-            let lista = (response.data && response.data.eventos) ? response.data.eventos : [];
-
-            eventosNuevos.forEach(n => {
-                const i = lista.findIndex(e => e.titulo === n.titulo);
-                if (i !== -1) { lista[i] = { ...lista[i], ...n }; }
-                else { lista.unshift(n); }
-            });
-
-            const limite = new Date(Date.now() - 24 * 60 * 60 * 1000);
-            lista = lista.filter(e => new Date(e.lastSeen) > limite);
-
-            await httpRequest(dbUrl, 'PUT', JSON.stringify({ actualizadoEn: new Date().toISOString(), eventos: lista }));
-            console.log('🔥 Firebase actualizado.');
+        if (eventosScrapeados.length === 0) {
+            console.log('⚠️ No se encontraron eventos válidos para procesar.');
+            return;
         }
-    } catch (err) {
-        console.error('❌ Error:', err.message);
+
+        // 3. Preparación de la estructura para el nodo /canales
+        const canalesRef = db.ref('canales');
+        const timestampActual = new Date().toISOString();
+        const nuevasActualizaciones = {};
+
+        eventosScrapeados.forEach((evento, index) => {
+            // Genera claves secuenciales: chevento01, chevento02, etc.
+            const idCanal = `chevento${String(index + 1).padStart(2, '0')}`;
+            
+            nuevasActualizaciones[idCanal] = {
+                activo: true,
+                actualizado: timestampActual,
+                categoria: "DEPORTES",
+                fijo: false, // Falso porque son eventos dinámicos que rotan
+                logo: "https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png", // Logo genérico o de DSports como pasaste en el ejemplo
+                nombre: evento.titulo,
+                url: evento.url
+            };
+        });
+
+        // 4. Actualización Atómica en Firebase (reemplaza o pisa solo los cheventoXX generados)
+        console.log('🔄 Sincronizando datos con Realtime Database...');
+        await canalesRef.update(nuevasActualizaciones);
+        console.log('🔥 ¡Nodo /canales actualizado en Firebase con éxito!');
+
+    } catch (error) {
+        console.error('❌ Ocurrió un error en el flujo:', error.message);
         if (browser) await browser.close().catch(() => {});
     }
 }
 
-scrapearEventos().then(() => { process.exit(0); }).catch(() => { process.exit(1); });
+// Ejecución del script
+scrapearYActualizarCanales().then(() => {
+    process.exit(0);
+}).catch(err => {
+    console.error('💥 Error catastrófico:', err);
+    process.exit(1);
+});
