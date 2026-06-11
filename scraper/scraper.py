@@ -78,7 +78,7 @@ CANALES_FIJOS = [
 
 
     #  ESPN  
-    {"id":"stp33","nombre":"ESPN","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espn","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
+    {"id":"stp33","nombre":"ESPN","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global1.php?stream=espn","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
     {"id":"stp34","nombre":"ESPN 1","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espn1","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
     {"id":"stp35","nombre":"ESPN 2","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espn2","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
     {"id":"stp36","nombre":"ESPN 3","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espn3","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
