@@ -117,7 +117,7 @@ async function ejecutarScraper() {
                 actualizado: timestampActual,
                 categoria: "DEPORTES",
                 fijo: false,
-                logo: "https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png",
+                logo: "https://streamtpday1.xyz/stp.png",
                 nombre: sanitizeString(evento.titulo),
                 url: sanitizeString(evento.url)
             };
