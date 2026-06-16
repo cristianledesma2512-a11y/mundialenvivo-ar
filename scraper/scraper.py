@@ -201,7 +201,7 @@ CANALES_FIJOS = [
     #   Aire
     {"id":"stp118","nombre":"Telefe F","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=telefe","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
 
-    {"id":"stp119","nombre":"Telefe EN VIVO","categoria":"DEPORTES","url":"http://181.13.252.102:8000/play/a06c/index.m3u8","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
+    {"id":"stp119","nombre":"Telefe EN VIVO","categoria":"DEPORTES","url":"https://full-online.xyz/proxy/ssl/?url=http://45.225.40.206:12080/Live/4107b24939e8872f74a7a57a545d71ee/telefe.playlist.m3u8","logo":"https://images.seeklogo.com/logo-png/45/1/telefe-tv-logo-png_seeklogo-451860.png","fallbacks":[]},
 
     
     {"id":"stp120","nombre":"TN DEPORTES","categoria":"DEPORTES","url":"https://www.youtube.com/watch?v=cb12KmMMDJA","logo":"https://images.seeklogo.com/logo-png/46/1/todo-noticias-logo-png_seeklogo-462511.png","fallbacks":[]},
