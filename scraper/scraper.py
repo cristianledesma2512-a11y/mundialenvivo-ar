@@ -666,6 +666,32 @@ FUENTES_M3U = [
     {"nombre": "IPTV Deportes", "url": "https://iptv-org.github.io/iptv/categories/sports.m3u"},
     {"nombre": "IPTV Películas / Cine", "url": "https://iptv-org.github.io/iptv/categories/movies.m3u"},
     {"nombre": "IPTV Documentales", "url": "https://iptv-org.github.io/iptv/categories/documentary.m3u"},
+   # --- Fuentes adicionales altamente estables ---
+    
+    # Repositorio alternativo y muy bien curado (enfoque global y Latam)
+    {"nombre": "LuanHrt IPTV (Latam/Estables)", "url": "https://raw.githubusercontent.com/luanhrt/iptv/master/channels/co.m3u"},
+    
+    # Canales emitidos de forma abierta por plataformas de TV abierta oficiales (TDT)
+    {"nombre": "TDTChannels Eventos (Muy útil para deportes temporales)", "url": "https://www.tdtchannels.com/lists/events.m3u8"},
+    
+    # Proyecto Fluxus TV (Tiene secciones de canales públicos muy estables)
+    {"nombre": "Fluxus TV Cine", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/movies.m3u"},
+    {"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u"},
+    
+    # Listas oficiales de canales públicos / gubernamentales internacionales (0% riesgo de caída por derechos)
+    {"nombre": "IPTV-Org Legislativos / Públicos", "url": "https://iptv-org.github.io/iptv/categories/legislative.m3u"},
+    {"nombre": "IPTV-Org Canales Infantiles (Kids)", "url": "https://iptv-org.github.io/iptv/categories/kids.m3u"},
+
+  # --- Fuentes Oficiales de TDTChannels ---
+    
+    # Lista de TV recomendada (puedes mantener la m3u8 o procesar esta si tu script la soporta)
+    {"nombre": "TDTChannels TV Oficial", "url": "https://www.tdtchannels.com/lists/tv.m3u8"},
+    
+    # Lista de Radio (Por si quieres añadir una sección de Radio a tu app de streaming)
+    {"nombre": "TDTChannels Radio Oficial", "url": "https://www.tdtchannels.com/lists/radio.m3u8"},
+    
+    # NOTA: Guarda el link del EPG para tu lógica de programación (no para la lista de canales)
+    # URL_EPG = "https://www.tdtchannels.com/epg/TV.xml.gz
    
 ]
 
