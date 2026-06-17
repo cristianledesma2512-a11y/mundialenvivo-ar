@@ -692,6 +692,16 @@ FUENTES_M3U = [
     
     # NOTA: Guarda el link del EPG para tu lógica de programación (no para la lista de canales)
     # URL_EPG = "https://www.tdtchannels.com/epg/TV.xml.gz
+  # --- Categorías Contenido Adultos (XXX) ---
+    
+    # Lista global enfocada en contenido para adultos de IPTV-Org
+    {"nombre": "IPTV Adultos Global", "url": "https://iptv-org.github.io/iptv/categories/xxx.m3u"},
+    
+    # Alternativa comunitaria externa (mantenida de forma independiente y muy estable)
+    {"nombre": "Fluxus TV Adultos", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/xxx.m3u"},
+    
+    # Lista complementaria de respaldo para canales NS_FW
+    {"nombre": "IPTV-Org NSFW Backup", "url": "https://iptv-org.github.io/iptv/channels/nsfw.m3u"},
    
 ]
 
