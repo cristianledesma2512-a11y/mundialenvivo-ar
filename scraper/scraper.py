@@ -709,8 +709,8 @@ TDT_CANALES = [
 FUENTES_M3U = [
   
     {"nombre": "IPTV XXX", "url": "https://iptv-org.github.io/iptv/categories/xxx.m3u"},
-    {"nombre": "IPTV Undefined", "url": "https://iptv-org.github.io/iptv/categories/undefined.m3u"},
-    {"nombre": "IPTV global", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8"},
+   # {"nombre": "IPTV Undefined", "url": "https://iptv-org.github.io/iptv/categories/undefined.m3u"},
+   # {"nombre": "IPTV global", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8"},
     {"nombre": "IPTV global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u"},
 
     {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/"},
