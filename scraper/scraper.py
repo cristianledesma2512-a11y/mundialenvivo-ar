@@ -800,12 +800,12 @@ FUENTES_M3U = [
   
     {"nombre": "IPTV XXX", "url": "https://iptv-org.github.io/iptv/categories/xxx.m3u"},
    # {"nombre": "IPTV Undefined", "url": "https://iptv-org.github.io/iptv/categories/undefined.m3u"},
-   # {"nombre": "IPTV global", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8"},
-    {"nombre": "IPTV global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u"},
+    {"nombre": "IPTV global", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8"},
+    #{"nombre": "IPTV global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u"},
 
     {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/"},
-    {"nombre": "TDTChannels TV (España/Global)", "url": "https://www.tdtchannels.com/lists/tv.m3u8"},
-    {"nombre": "IPTV Spanish Language", "url": "https://iptv-org.github.io/iptv/languages/spa.m3u"},
+   # {"nombre": "TDTChannels TV (España/Global)", "url": "https://www.tdtchannels.com/lists/tv.m3u8"},
+    #{"nombre": "IPTV Spanish Language", "url": "https://iptv-org.github.io/iptv/languages/spa.m3u"},
     
     # Países clave para tu audiencia (Latinoamérica)
     {"nombre": "IPTV Argentina", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u"},
@@ -827,11 +827,11 @@ FUENTES_M3U = [
     {"nombre": "TDTChannels Eventos (Muy útil para deportes temporales)", "url": "https://www.tdtchannels.com/lists/events.m3u8"},
     
     # Proyecto Fluxus TV (Tiene secciones de canales públicos muy estables)
-    {"nombre": "Fluxus TV Cine", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/movies.m3u"},
-    {"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u"},
+    #{"nombre": "Fluxus TV Cine", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/movies.m3u"},
+    #{"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u"},
     
     # Listas oficiales de canales públicos / gubernamentales internacionales (0% riesgo de caída por derechos)
-    {"nombre": "IPTV-Org Legislativos / Públicos", "url": "https://iptv-org.github.io/iptv/categories/legislative.m3u"},
+    #{"nombre": "IPTV-Org Legislativos / Públicos", "url": "https://iptv-org.github.io/iptv/categories/legislative.m3u"},
     {"nombre": "IPTV-Org Canales Infantiles (Kids)", "url": "https://iptv-org.github.io/iptv/categories/kids.m3u"},
 
   # --- Fuentes Oficiales de TDTChannels ---
