@@ -714,8 +714,7 @@ CANALES_FIJOS = [
           
 ]
 TDT_CANALES = [
-    {"nombre": "TDTChannels TV Oficial", "url": "https://www.tdtchannels.com/lists/tv.m3u8"},
-    {"nombre": "TDTChannels Eventos (Muy útil para deportes temporales)", "url": "https://www.tdtchannels.com/lists/events.m3u8"},
+   
       ]
 
 
@@ -727,7 +726,7 @@ FUENTES_M3U = [
     #{"nombre": "IPTV global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u"},
 
     {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/"},
-   # {"nombre": "TDTChannels TV (España/Global)", "url": "https://www.tdtchannels.com/lists/tv.m3u8"},
+  
     #{"nombre": "IPTV Spanish Language", "url": "https://iptv-org.github.io/iptv/languages/spa.m3u"},
     
     # Países clave para tu audiencia (Latinoamérica)
