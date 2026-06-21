@@ -720,63 +720,6 @@ TDT_CANALES = [
 
 FUENTES_M3U = [
   
-    {"nombre": "IPTV XXX", "url": "https://iptv-org.github.io/iptv/categories/xxx.m3u"},
-   # {"nombre": "IPTV Undefined", "url": "https://iptv-org.github.io/iptv/categories/undefined.m3u"},
-   # {"nombre": "IPTV global", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8"},
-    #{"nombre": "IPTV global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u"},
-
-    {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/"},
-  
-    #{"nombre": "IPTV Spanish Language", "url": "https://iptv-org.github.io/iptv/languages/spa.m3u"},
-    
-    # Países clave para tu audiencia (Latinoamérica)
-    #{"nombre": "IPTV Argentina", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u"},
-    #{"nombre": "IPTV México", "url": "https://iptv-org.github.io/iptv/countries/mx.m3u"},
-   # {"nombre": "IPTV Colombia", "url": "https://iptv-org.github.io/iptv/countries/co.m3u"},
-   # {"nombre": "IPTV Chile", "url": "https://iptv-org.github.io/iptv/countries/cl.m3u"},
-   # {"nombre": "IPTV Estados Unidos (Canales Hispanos)", "url": "https://iptv-org.github.io/iptv/countries/us.m3u"},
-    
-    # Categorías Temáticas
-   # {"nombre": "IPTV Deportes", "url": "https://iptv-org.github.io/iptv/categories/sports.m3u"},
-   # {"nombre": "IPTV Películas / Cine", "url": "https://iptv-org.github.io/iptv/categories/movies.m3u"},
-    #{"nombre": "IPTV Documentales", "url": "https://iptv-org.github.io/iptv/categories/documentary.m3u"},
-   # --- Fuentes adicionales altamente estables ---
-    
-    # Repositorio alternativo y muy bien curado (enfoque global y Latam)
-    #{"nombre": "LuanHrt IPTV (Latam/Estables)", "url": "https://raw.githubusercontent.com/luanhrt/iptv/master/channels/co.m3u"},
-    
-    # Canales emitidos de forma abierta por plataformas de TV abierta oficiales (TDT)
-    #{"nombre": "TDTChannels Eventos (Muy útil para deportes temporales)", "url": "https://www.tdtchannels.com/lists/events.m3u8"},
-    
-    # Proyecto Fluxus TV (Tiene secciones de canales públicos muy estables)
-    #{"nombre": "Fluxus TV Cine", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/movies.m3u"},
-    #{"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u"},
-    
-    # Listas oficiales de canales públicos / gubernamentales internacionales (0% riesgo de caída por derechos)
-    #{"nombre": "IPTV-Org Legislativos / Públicos", "url": "https://iptv-org.github.io/iptv/categories/legislative.m3u"},
-    #{"nombre": "IPTV-Org Canales Infantiles (Kids)", "url": "https://iptv-org.github.io/iptv/categories/kids.m3u"},
-
-  # --- Fuentes Oficiales de TDTChannels ---
-    
-    # Lista de TV recomendada (puedes mantener la m3u8 o procesar esta si tu script la soporta)
-   # {"nombre": "TDTChannels TV Oficial", "url": "https://www.tdtchannels.com/lists/tv.m3u8"},
-    
-    # Lista de Radio (Por si quieres añadir una sección de Radio a tu app de streaming)
-   # {"nombre": "TDTChannels Radio Oficial", "url": "https://www.tdtchannels.com/lists/radio.m3u8"},
-    
-    # NOTA: Guarda el link del EPG para tu lógica de programación (no para la lista de canales)
-    # URL_EPG = "https://www.tdtchannels.com/epg/TV.xml.gz
-  # --- Categorías Contenido Adultos (XXX) ---
-    
-    # Lista global enfocada en contenido para adultos de IPTV-Org
-    {"nombre": "IPTV Adultos Global", "url": "https://iptv-org.github.io/iptv/categories/xxx.m3u"},
-    
-    # Alternativa comunitaria externa (mantenida de forma independiente y muy estable)
-    {"nombre": "Fluxus TV Adultos", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/xxx.m3u"},
-    
-    # Lista complementaria de respaldo para canales NS_FW
-   #{"nombre": "IPTV-Org NSFW Backup", "url": "https://iptv-org.github.io/iptv/channels/nsfw.m3u"},
-    {"nombre": "IPTV Adultos Global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_XXX.m3u"},
    
 ]
 
