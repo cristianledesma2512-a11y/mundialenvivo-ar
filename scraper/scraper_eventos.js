@@ -44,15 +44,13 @@ function httpRequest(url, method, body = null) {
     });
 }
 
-// Función auxiliar para formatear la hora sumando 2 horas (Convertir a Hora de Argentina)
 function ajustarHoraArgentina(horaTexto) {
     if (!horaTexto || !horaTexto.includes(':')) return '';
     try {
         const [horas, minutos] = horaTexto.split(':').map(Number);
         const fecha = new Date();
-        fecha.setHours(horas + 2); // Sumamos las 2 horas de diferencia
+        fecha.setHours(horas + 2); // Diferencia horaria (+2 horas)
         fecha.setMinutes(minutos);
-        
         return fecha.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false });
     } catch (e) {
         return horaTexto;
@@ -69,25 +67,17 @@ async function scrapearEventos() {
         });
         const page = await browser.newPage();
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
-        await page.setViewport({ width: 1280, height: 800 });
         
         await page.goto(FUENTE_URL, { waitUntil: 'networkidle2', timeout: 30000 });
         
-        console.log('⏳ Esperando renderizado de la totalidad de los eventos...');
-        // Esperamos un selector genérico de contenedor de eventos o filas
+        console.log('⏳ Esperando renderizado de la página...');
         await page.waitForSelector('body', { timeout: 10000 });
         await new Promise(resolve => setTimeout(resolve, 4000));
         
         const eventosNuevos = await page.evaluate(() => {
             const results = [];
-            
-            // Adaptar estos selectores según los nombres de clase reales de la web inspeccionada
-            // Asumimos una estructura común de listas o tablas para este clon de agendas deportivas
-            const bloquesEventos = document.querySelectorAll('.event, tr.evento, div.item-evento'); 
-            
-            // Si la estructura usa filas globales, recorremos las filas que contienen los partidos y opciones
-            document.querySelectorAll('table tr, div.row-event, .evento-bloque').forEach(row => {
-                // Cambia estos selectores tras inspeccionar el código fuente exacto (F12) de la web
+            // Selectores adaptados para buscar las opciones/filas
+            document.querySelectorAll('table tr, div.row-event, .evento-bloque, .event').forEach(row => {
                 const nameEl = row.querySelector('.event-name, td strong, .titulo-evento');
                 const timeEl = row.querySelector('.event-time, .hora, td:first-child');
                 const linkEl = row.querySelector('input.iframe-link, .link-stream, a.btn-opcion');
@@ -103,62 +93,80 @@ async function scrapearEventos() {
                 }
                 link = link.trim();
 
-                if (tituloOriginal) {
+                if (tituloOriginal && link) {
                     results.push({
                         titulo: tituloOriginal,
                         horaOriginal: horaOriginal,
-                        link: link,
-                        lastSeen: new Date().toISOString()
+                        link: link
                     });
                 }
             });
-            
             return results;
         });
 
         await browser.close();
-        console.log(`✅ Web: Procesados ${eventosNuevos.length} enlaces de opciones.`);
 
-        if (admin.apps.length && eventosNuevos.length > 0) {
+        // 🚨 CAMBIO CRÍTICO: Si la página no devolvió nada, cancelamos para no vaciar la BD
+        if (eventosNuevos.length === 0) {
+            console.log('⚠️ La web devolvió 0 eventos (posible recarga o caída). Manteniendo datos anteriores de Firebase para evitar pantalla vacía.');
+            process.exit(0);
+        }
+
+        console.log(`✅ Web exitosa: Se encontraron ${eventosNuevos.length} enlaces activos.`);
+
+        if (admin.apps.length) {
             const token = await admin.app().options.credential.getAccessToken();
             const timestampActual = new Date().toISOString();
 
-            // Mapeamos los eventos y corregimos los horarios antes de enviarlos a Firebase
+            // Formatear los nuevos eventos con la hora local de Argentina
             const eventosProcesados = eventosNuevos.map(ev => {
                 const horaArg = ajustarHoraArgentina(ev.horaOriginal);
                 return {
                     titulo: ev.horaOriginal ? `[${horaArg}] ${ev.titulo}` : ev.titulo,
                     link: ev.link,
-                    lastSeen: ev.lastSeen
+                    lastSeen: timestampActual
                 };
             });
 
-            // ==========================================
-            // LOGICA: Actualizar eventos_dia
-            // ==========================================
+            // ==========================================================
+            // LOGICA MEJORADA: Obtener y fusionar manteniendo el historial
+            // ==========================================================
             const dbUrlEventos = `https://mundialenvivo-ar-default-rtdb.firebaseio.com/eventos_dia.json?access_token=${token.access_token}`;
             const response = await httpRequest(dbUrlEventos, 'GET');
-            let lista = (response.data && response.data.eventos) ? response.data.eventos : [];
+            let listaAnterior = (response.data && response.data.eventos) ? response.data.eventos : [];
 
-            eventosProcesados.forEach(n => {
-                const i = lista.findIndex(e => e.titulo === n.titulo && e.link === n.link);
-                if (i !== -1) { lista[i] = { ...lista[i], ...n }; }
-                else { lista.unshift(n); }
+            // Combinar: Si ya existe por título y link, actualiza su 'lastSeen'. Si es nuevo, lo agrega.
+            eventosProcesados.forEach(nuevo => {
+                const index = listaAnterior.findIndex(prev => prev.titulo === nuevo.titulo && prev.link === nuevo.link);
+                if (index !== -1) {
+                    listaAnterior[index].lastSeen = timestampActual; // Sigue vivo
+                } else {
+                    listaAnterior.unshift(nuevo); // Es un evento nuevo detectado
+                }
             });
 
-            const limite = new Date(Date.now() - 24 * 60 * 60 * 1000);
-            lista = lista.filter(e => new Date(e.lastSeen) > limite);
+            // Limpieza por tiempo: Solo borrar eventos que lleven más de 5 horas sin ser vistos en la web
+            const HORAS_PERSISTENCIA = 5;
+            const limiteTiempo = new Date(Date.now() - HORAS_PERSISTENCIA * 60 * 60 * 1000);
+            
+            let listaFiltrada = listaAnterior.filter(e => {
+                // Si por alguna razón no tiene lastSeen, le ponemos la actual para que no se borre
+                const ultimaVezVisto = e.lastSeen ? new Date(e.lastSeen) : new Date();
+                return ultimaVezVisto > limiteTiempo;
+            });
 
-            await httpRequest(dbUrlEventos, 'PUT', JSON.stringify({ actualizadoEn: timestampActual, eventos: lista }));
-            console.log('🔥 Firebase: eventos_dia actualizado con horario de Argentina.');
+            // Guardar lista limpia en eventos_dia
+            await httpRequest(dbUrlEventos, 'PUT', JSON.stringify({ actualizadoEn: timestampActual, eventos: listaFiltrada }));
+            console.log('🔥 Firebase: eventos_dia actualizado de forma segura.');
 
-            // ==========================================
-            // LOGICA: Actualizar /canales/cheventoXX
-            // ==========================================
+            // ==========================================================
+            // LOGICA MEJORADA: Canales Dinámicos (cheventoXX)
+            // ==========================================================
             const dbUrlCanales = `https://mundialenvivo-ar-default-rtdb.firebaseio.com/canales.json?access_token=${token.access_token}`;
             const mapeoCanales = {};
 
-            eventosProcesados.slice(0, 80).forEach((evento, idx) => {
+            // Mapeamos los canales usando la lista filtrada activa (máximo 80 canales para no saturar)
+            listaFiltrada.slice(0, 80).forEach((evento, idx) => {
                 const idCanal = `chevento${String(idx + 1).padStart(2, '0')}`;
                 mapeoCanales[idCanal] = {
                     activo: true,
@@ -167,15 +175,16 @@ async function scrapearEventos() {
                     fijo: false,
                     logo: "https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png",
                     nombre: evento.titulo,
-                    url: evento.url || evento.link
+                    url: evento.link
                 };
             });
 
+            // Enviamos el bloque usando PATCH (no borra canales manuales estables de tu app)
             await httpRequest(dbUrlCanales, 'PATCH', JSON.stringify(mapeoCanales));
-            console.log('🔥 Firebase: Nodos /canales actualizados.');
+            console.log('🔥 Firebase: Nodos /canales actualizados con persistencia.');
         }
     } catch (err) {
-        console.error('❌ Error:', err.message);
+        console.error('❌ Error general en la ejecución:', err.message);
         if (browser) await browser.close().catch(() => {});
     }
 }
