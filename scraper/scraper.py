@@ -719,7 +719,7 @@ TDT_CANALES = [
 
 
 FUENTES_M3U = [
-  
+  {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/"},
    
 ]
 
