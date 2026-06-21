@@ -720,7 +720,7 @@ TDT_CANALES = [
 
 FUENTES_M3U = [
   {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/"},
-   {"nombre": "TDTChannels TV Oficial", "url": "https://www.tdtchannels.com/lists/tv.m3u8"},
+{"nombre": "IPTV global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u"},
    
 ]
 
