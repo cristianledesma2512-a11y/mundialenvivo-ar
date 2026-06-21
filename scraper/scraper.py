@@ -720,8 +720,19 @@ TDT_CANALES = [
 
 FUENTES_M3U = [
   {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/"},
-{"nombre": "IPTV global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u"},
-   
+#{"nombre": "IPTV global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u"},
+  {"nombre": "IPTV global", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8"},
+
+      # Proyecto Fluxus TV (Tiene secciones de canales públicos muy estables)
+    {"nombre": "Fluxus TV Cine", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/movies.m3u"},
+    {"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u"},
+
+   # Lista global enfocada en contenido para adultos de IPTV-Org
+    {"nombre": "IPTV Adultos Global", "url": "https://iptv-org.github.io/iptv/categories/xxx.m3u"},
+    
+    # Alternativa comunitaria externa (mantenida de forma independiente y muy estable)
+    {"nombre": "Fluxus TV Adultos", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/xxx.m3u"},
+    {"nombre": "IPTV Adultos Global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_XXX.m3u"},
 ]
 
 FUENTES_SIN_FILTRO = []
