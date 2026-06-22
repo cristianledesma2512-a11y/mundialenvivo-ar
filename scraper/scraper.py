@@ -610,7 +610,7 @@ CANALES_FIJOS = [
         "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
         "fallbacks":[]},
 {"id":"xxx09",
-        "nombre":"LATINAS",
+        "nombre":"COL",
         "categoria":"ADULTOS",
         "url":"https://live.adultiptv.net/latina.m3u8",
         "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
