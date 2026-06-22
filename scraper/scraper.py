@@ -140,6 +140,8 @@ CANALES_FIJOS = [
 
     #   TNT sport
     {"id":"stp124","nombre":"TNT Sports","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=tntsports","logo":"https://images.seeklogo.com/logo-png/51/1/tnt-sports-logo-png_seeklogo-519540.png","fallbacks":[]},
+    # TEKEMUNDO
+  {"id":"stp125","nombre":"Telemundo usa","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=telemundousa","logo":"https://images.seeklogo.com/logo-png/24/1/telemundo-logo-png_seeklogo-247570.png","fallbacks":[]},
   
   
     # ── Bolaloca via proxy Railway ────────────────────────────────────
