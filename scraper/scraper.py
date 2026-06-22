@@ -727,6 +727,15 @@ FUENTES_M3U = [
     {"nombre": "Fluxus TV Cine", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/movies.m3u"},
     {"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u"},
 
+   # Categorías Temáticas
+    {"nombre": "IPTV Deportes", "url": "https://iptv-org.github.io/iptv/categories/sports.m3u"},
+    {"nombre": "IPTV Películas / Cine", "url": "https://iptv-org.github.io/iptv/categories/movies.m3u"},
+    {"nombre": "IPTV Documentales", "url": "https://iptv-org.github.io/iptv/categories/documentary.m3u"},
+  {"nombre": "TDTChannels Eventos (Muy útil para deportes temporales)", "url": "https://www.tdtchannels.com/lists/events.m3u8"},
+
+ {"nombre": "Fluxus TV Cine", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/movies.m3u"},
+    {"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u"},
+
    # Lista global enfocada en contenido para adultos de IPTV-Org
     {"nombre": "IPTV Adultos Global", "url": "https://iptv-org.github.io/iptv/categories/xxx.m3u"},
     
