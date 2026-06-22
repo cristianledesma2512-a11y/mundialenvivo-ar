@@ -726,6 +726,7 @@ FUENTES_M3U = [
       # Proyecto Fluxus TV (Tiene secciones de canales públicos muy estables)
     {"nombre": "Fluxus TV Cine", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/movies.m3u"},
     {"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u"},
+  {"nombre": "IPTV-Org Canales Infantiles (Kids)", "url": "https://iptv-org.github.io/iptv/categories/kids.m3u"},
 
    # Categorías Temáticas
     {"nombre": "IPTV Deportes", "url": "https://iptv-org.github.io/iptv/categories/sports.m3u"},
