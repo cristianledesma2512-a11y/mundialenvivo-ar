@@ -283,18 +283,18 @@ FUENTES_M3U = [
     {"nombre": "Pastebin Raw 1", "url": "https://pastebin.com/raw/ze9LRSJJ", "categoria": "DEPORTES", "confianza": "alta"},
     {"nombre": "Pastebin Raw 2", "url": "https://pastebin.com/raw/x9xSPugA", "categoria": "DEPORTES", "confianza": "alta"},
   
-   {"nombre": "TecnoTV Lista Principal", "url": "https://tecnotv.club/tusw/lista.m3u", "categoria": "OTROS", "confianza": "media"},
+   #{"nombre": "TecnoTV Lista Principal", "url": "https://tecnotv.club/tusw/lista.m3u", "categoria": "OTROS", "confianza": "media"},
     {"nombre": "TecnoTV Deportes", "url": "https://tecnotv.club/tusw/deportes.m3u", "categoria": "DEPORTES", "confianza": "media"},
-    {"nombre": "TecnoTV Lista 1", "url": "https://tecnotv.club/tusw/lista1.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV Lista 2", "url": "https://tecnotv.club/tusw/lista2.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV Lista 3", "url": "https://tecnotv.club/tusw/lista3.m3u", "categoria": "OTROS", "confianza": "media"},
+   # {"nombre": "TecnoTV Lista 1", "url": "https://tecnotv.club/tusw/lista1.m3u", "categoria": "OTROS", "confianza": "media"},
+   # {"nombre": "TecnoTV Lista 2", "url": "https://tecnotv.club/tusw/lista2.m3u", "categoria": "OTROS", "confianza": "media"},
+   # {"nombre": "TecnoTV Lista 3", "url": "https://tecnotv.club/tusw/lista3.m3u", "categoria": "OTROS", "confianza": "media"},
     {"nombre": "TecnoTV Lista 4", "url": "https://tecnotv.club/tusw/lista4.m3u", "categoria": "OTROS", "confianza": "media"},
     {"nombre": "TecnoTV Android Core", "url": "https://tecnotv.club/tusw/android.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV Android 1", "url": "https://tecnotv.club/tusw/android1.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV Android 2", "url": "https://tecnotv.club/tusw/android2.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV Android 3", "url": "https://tecnotv.club/tusw/android3.m3u", "categoria": "OTROS", "confianza": "media"},
+   # {"nombre": "TecnoTV Android 1", "url": "https://tecnotv.club/tusw/android1.m3u", "categoria": "OTROS", "confianza": "media"},
+   # {"nombre": "TecnoTV Android 2", "url": "https://tecnotv.club/tusw/android2.m3u", "categoria": "OTROS", "confianza": "media"},
+    #{"nombre": "TecnoTV Android 3", "url": "https://tecnotv.club/tusw/android3.m3u", "categoria": "OTROS", "confianza": "media"},
     {"nombre": "TecnoTV GeoMex", "url": "https://tecnotv.club/tusw/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
-    #{"nombre": "TecnoTV Películas", "url": "https://tecnotv.club/tusw/peliculas.m3u", "categoria": "CINE", "confianza": "media"},
+    
   
     #{"nombre": "GitHub Melendez Raw Bridge", "url": "https://raw.githubusercontent.com/dmelendez11/lista-canales-m3u/main/lista_especial_con_respaldos.m3u", "categoria": "DEPORTES", "confianza": "baja"},
   
