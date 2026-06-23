@@ -49,11 +49,6 @@ CANALES_FIJOS = [
 
     #  ESPN  
     {"id":"stp33","nombre":"ESPN","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global1.php?stream=espn","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp34","nombre":"ESPN 1","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espn1","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp35","nombre":"ESPN 2","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espn2","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp36","nombre":"ESPN 3","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espn3","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp37","nombre":"ESPN 4","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espn4","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    {"id":"stp38","nombre":"ESPN 5","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espn5","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
     
 
     #  DSPORTS 
@@ -120,39 +115,9 @@ CANALES_FIJOS = [
     "logo": "https://images.seeklogo.com/logo-png/48/1/bein-sports-1-logo-png_seeklogo-481583.png",
     "fallbacks": []
   },
-  {
-    "id": "bol02",
-    "nombre": "BEIN SPORT 2 (B)",
-    "categoria": "DEPORTES",
-    "url": "https://bolaloca.my/player/2/02",
-    "logo": "https://images.seeklogo.com/logo-png/48/1/bein-sports-2-logo-png_seeklogo-481584.png",
-    "fallbacks": []
-  },
-  {
-    "id": "bol03",
-    "nombre": "BEIN SPORT 3 (B)",
-    "categoria": "DEPORTES",
-    "url": "https://bolaloca.my/player/2/03",
-    "logo": "https://images.seeklogo.com/logo-png/48/1/bein-sports-3-logo-png_seeklogo-481585.png",
-    "fallbacks": []
-  },
-  {
-    "id": "bol04",
-    "nombre": "BEIN SPORT 4 (B)",
-    "categoria": "DEPORTES",
-    "url": "https://bolaloca.my/player/2/04",
-    "logo": "https://images.seeklogo.com/logo-png/36/1/bein-sports-logo-png_seeklogo-367812.png",
-    "fallbacks": []
-  },
   
-  {
-    "id": "bol14",
-    "nombre": "FOOT (B)",
-    "categoria": "DEPORTES",
-    "url": "https://bolaloca.my/player/2/14",
-    "logo": "https://thumb.canalplus.pro/bran/unsafe/%7BresolutionXY%7D/image/630c886aa7ce0/uploads/media/LOGO-CANAL-FOOT-TALL.png",
-    "fallbacks": []
-  },
+  
+
   {
     "id": "bol15",
     "nombre": "EUROSPORT 1 (B)",
@@ -169,14 +134,7 @@ CANALES_FIJOS = [
     "logo": "https://images.seeklogo.com/logo-png/27/1/eurosport-2-logo-png_seeklogo-270285.png",
     "fallbacks": []
   },
-  {
-    "id": "bol19",
-    "nombre": "LEQUIPE (B)",
-    "categoria": "DEPORTES",
-    "url": "https://bolaloca.my/player/2/19",
-    "logo": "https://images.seeklogo.com/logo-png/24/1/lequipe-logo-png_seeklogo-245702.png",
-    "fallbacks": []
-  },
+ 
   
   {
     "id": "bol24",
@@ -186,31 +144,10 @@ CANALES_FIJOS = [
     "logo": "https://images.seeklogo.com/logo-png/16/1/tf1-logo-png_seeklogo-169793.png",
     "fallbacks": []
   },
-  {
-    "id": "bol25",
-    "nombre": "TCM (B)",
-    "categoria": "CINE",
-    "url": "https://bolaloca.my/player/2/25",
-    "logo": "https://images.seeklogo.com/logo-png/13/1/tcm-logo-png_seeklogo-136143.png",
-    "fallbacks": []
-  },
   
-  {
-    "id": "bol27",
-    "nombre": "W9 (B)",
-    "categoria": "CINE",
-    "url": "https://bolaloca.my/player/2/27",
-    "logo": "https://images.seeklogo.com/logo-png/25/1/w9-logo-png_seeklogo-252476.png",
-    "fallbacks": []
-  },
-  {
-    "id": "bol28",
-    "nombre": "FRANCE TV (B)",
-    "categoria": "DEPORTES",
-    "url": "https://bolaloca.my/player/2/28",
-    "logo": "https://images.seeklogo.com/logo-png/52/1/france-tv-2022-logo-png_seeklogo-521449.png",
-    "fallbacks": []
-  },
+  
+
+ 
   
   
   {
@@ -221,22 +158,8 @@ CANALES_FIJOS = [
     "logo": "https://images.seeklogo.com/logo-png/61/1/la-liga-logo-png_seeklogo-614181.png",
     "fallbacks": []
   },
-  {
-    "id": "bol68",
-    "nombre": "TUDN (B)",
-    "categoria": "DEPORTES",
-    "url": "https://bolaloca.my/player/2/68",
-    "logo": "https://images.seeklogo.com/logo-png/36/1/tudn-logo-png_seeklogo-367833.png",
-    "fallbacks": []
-  },
-  {
-    "id": "bol69",
-    "nombre": "canal 69 (B)",
-    "categoria": "DEPORTES",
-    "url": "https://bolaloca.my/player/2/69",
-    "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
-    "fallbacks": []
-  },
+ 
+  
   {
     "id": "bol70",
     "nombre": "FOX SPORT ES (B)",
@@ -246,14 +169,7 @@ CANALES_FIJOS = [
     "fallbacks": []
   },
   
-  {
-    "id": "bol72",
-    "nombre": "NBC (B)",
-    "categoria": "DEPORTES",
-    "url": "https://bolaloca.my/player/2/72",
-    "logo": "https://images.seeklogo.com/logo-png/26/1/nbc-universo-logo-png_seeklogo-261153.png",
-    "fallbacks": []
-  },
+  
   {
     "id": "bol73",
     "nombre": "TELEMUNDO (B)",
@@ -351,14 +267,7 @@ CANALES_FIJOS = [
     "logo": "https://images.seeklogo.com/logo-png/32/1/chilevision-2018-present-logo-png_seeklogo-326993.png",
     "fallbacks": []
   },
-  {
-    "id": "bol86",
-    "nombre": "canal 86 (B)",
-    "categoria": "DEPORTES",
-    "url": "https://bolaloca.my/player/2/86",
-    "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
-    "fallbacks": []
-  },
+ 
   {
     "id": "bol87",
     "nombre": "ESPN (B)",
@@ -431,14 +340,7 @@ CANALES_FIJOS = [
     "logo": "https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png",
     "fallbacks": []
   },
-  {
-    "id": "bol96",
-    "nombre": "canal 96",
-    "categoria": "DEPORTES",
-    "url": "https://bolaloca.my/player/2/96",
-    "logo": "https://cdn-icons-png.flaticon.com/512/53/53283.png",
-    "fallbacks": []
-  },
+  
   {
     "id": "bol97",
     "nombre": "ESPN 8 (B)",
@@ -665,10 +567,10 @@ TDT_CANALES = [
 
 
 FUENTES_M3U = [
-  {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
+  #{"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     {"nombre": "IPTV Argentina Oficial", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "TDTChannels Eventos Globales", "url": "https://www.tdtchannels.com/lists/events.m3u8", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
-    {"nombre": "Free-TV IPTV Master", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8", "categoria": "OTROS", "confianza": "alta", "adultos": False},
+    #{"nombre": "Free-TV IPTV Master", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8", "categoria": "OTROS", "confianza": "alta", "adultos": False},
     #{"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u", "categoria": "DEPORTES", "confianza": "media", "adultos": False},
    # {"nombre": "Fluxus TV Cine", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/movies.m3u", "categoria": "CINE", "confianza": "media", "adultos": False},
     #{"nombre": "IPTV Global Open List", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u", "categoria": "OTROS", "confianza": "baja", "adultos": False},
@@ -680,15 +582,15 @@ FUENTES_M3U = [
    # {"nombre": "Repo Usuario Canales", "url": "https://raw.githubusercontent.com/TU_USUARIO/TU_REPOSITORIO/main/canales.m3u", "categoria": "DEPORTES", "confianza": "alta"},
    # {"nombre": "TecnoTV Lista Principal", "url": "https://tecnotv.club/tusw/lista.m3u", "categoria": "OTROS", "confianza": "media"},
     #{"nombre": "TecnoTV Deportes", "url": "https://tecnotv.club/tusw/deportes.m3u", "categoria": "DEPORTES", "confianza": "media"},
-    {"nombre": "TecnoTV Lista 1", "url": "https://tecnotv.club/tusw/lista1.m3u", "categoria": "OTROS", "confianza": "media"},
+    #{"nombre": "TecnoTV Lista 1", "url": "https://tecnotv.club/tusw/lista1.m3u", "categoria": "OTROS", "confianza": "media"},
     {"nombre": "TecnoTV Lista 2", "url": "https://tecnotv.club/tusw/lista2.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV Lista 3", "url": "https://tecnotv.club/tusw/lista3.m3u", "categoria": "OTROS", "confianza": "media"},
+    #{"nombre": "TecnoTV Lista 3", "url": "https://tecnotv.club/tusw/lista3.m3u", "categoria": "OTROS", "confianza": "media"},
     {"nombre": "TecnoTV Lista 4", "url": "https://tecnotv.club/tusw/lista4.m3u", "categoria": "OTROS", "confianza": "media"},
     {"nombre": "TecnoTV Android Core", "url": "https://tecnotv.club/tusw/android.m3u", "categoria": "OTROS", "confianza": "media"},
     #{"nombre": "TecnoTV Android 1", "url": "https://tecnotv.club/tusw/android1.m3u", "categoria": "OTROS", "confianza": "media"},
     #{"nombre": "TecnoTV Android 2", "url": "https://tecnotv.club/tusw/android2.m3u", "categoria": "OTROS", "confianza": "media"},
     #{"nombre": "TecnoTV Android 3", "url": "https://tecnotv.club/tusw/android3.m3u", "categoria": "OTROS", "confianza": "media"},
-    #{"nombre": "TecnoTV GeoMex", "url": "https://tecnotv.club/tusw/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
+    {"nombre": "TecnoTV GeoMex", "url": "https://tecnotv.club/tusw/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
     #{"nombre": "TecnoTV Películas", "url": "https://tecnotv.club/tusw/peliculas.m3u", "categoria": "CINE", "confianza": "media"},
   
     #{"nombre": "GitHub Melendez Raw Bridge", "url": "https://raw.githubusercontent.com/dmelendez11/lista-canales-m3u/main/lista_especial_con_respaldos.m3u", "categoria": "DEPORTES", "confianza": "baja"},
