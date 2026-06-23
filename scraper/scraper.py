@@ -297,7 +297,7 @@ FUENTES_M3U = [
     
   
     #{"nombre": "GitHub Melendez Raw Bridge", "url": "https://raw.githubusercontent.com/dmelendez11/lista-canales-m3u/main/lista_especial_con_respaldos.m3u", "categoria": "DEPORTES", "confianza": "baja"},
-   {"nombre": "crisled Lista 1", "url": "https://github.com/cristianledesma2512-a11y/mundialenvivo-ar/blob/main/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
+   {"nombre": "crisled Lista 1", "url": "https://github.com/cristianledesma2512-a11y/iptvled/blob/main/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
   
 
   
