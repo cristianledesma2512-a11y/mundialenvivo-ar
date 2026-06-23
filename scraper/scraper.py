@@ -733,7 +733,7 @@ FUENTES_M3U = [
   {"nombre": "IPTV-Org Canales Infantiles (Kids)", "url": "https://iptv-org.github.io/iptv/categories/kids.m3u"},
 
    # Categorías Temáticas
-    {"nombre": "IPTV Deportes", "url": "https://iptv-org.github.io/iptv/categories/sports.m3u"},
+    {"nombre": "IPTV categorias", "url": "https://iptv-org.github.io/iptv/index.category.m3u"},
     {"nombre": "IPTV Películas / Cine", "url": "https://iptv-org.github.io/iptv/categories/movies.m3u"},
     {"nombre": "IPTV Documentales", "url": "https://iptv-org.github.io/iptv/categories/documentary.m3u"},
   {"nombre": "TDTChannels Eventos (Muy útil para deportes temporales)", "url": "https://www.tdtchannels.com/lists/events.m3u8"},
