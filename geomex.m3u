@@ -1,0 +1,741 @@
+#EXTM3U
+#EXTINF:-1 tvg-logo="https://imgur.com/5TKzHnS.png" group-title="INFO",Telegram: @tecnotvChat
+http://stream.zeno.fm/qvq7sm8mymzuv
+#EXTINF:-1 tvg-logo="https://imgur.com/oyRIk5f.png" group-title="Radio",TecnoRadio
+https://stream.zeno.fm/qvq7sm8mymzuv.m3u
+#EXTINF:-1 tvg-logo="https://imgur.com/LH6DOKs.png" group-title="MÉXICO",ESTRELLA TV
+https://estrellatv-roku.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://imgur.com/LPcaNgw.png" group-title="MÉXICO",ADN40
+https://mdstrm.com/live-stream-playlist/60b578b060947317de7b57ac.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/642_8_NTV.png" group-title="MÉXICO",8 NTV
+https://60417ddeaf0d9.streamlock.net:443/ntv/videontv/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/658_ADN_40.png" group-title="MÉXICO",ADN 40
+https://mdstrm.com/live-stream-playlist/60b578b060947317de7b57ac.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/660_Canal_10_Chiapas.png" group-title="MÉXICO",Canal 10 Chiapas
+https://5ca9af4645e15.streamlock.net:443/chiapas/videochiapas/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/652_Mexiquense_TV.png" group-title="MÉXICO",Mexiquense TV
+https://5ca3e84a76d30.streamlock.net:443/mexiquense/videomexiquense/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/676_RTQ_Queretaro.png" group-title="MÉXICO",RTQ Queretaro
+https://59d39900ebfb8.streamlock.net/rytqrolive/rytqrolive/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/646_SIZART_Canal_24_Zacatecas.png" group-title="MÉXICO",SIZART Canal 24 Zacatecas
+https://5ca9af4645e15.streamlock.net:443/zacatecas/videozacatecas/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/656_TV4_MÉXICO.png" group-title="MÉXICO",TV4 MÉXICO
+https://5ca3e84a76d30.streamlock.net/tv4/smil:tv4.smil/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/651_TVP_Culiacan.png" group-title="MÉXICO",TVP Culiacan
+https://5ca3e84a76d30.streamlock.net:443/gpacifico1/smil:gpculiacan.smil/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/648_TVP_Los_Mochis.png" group-title="MÉXICO",TVP Los Mochis
+https://5ca3e84a76d30.streamlock.net:443/gpacifico2/smil:mochis.smil/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/649_TVP_Mazatlan.png" group-title="MÉXICO",TVP Mazatlan
+https://5ca3e84a76d30.streamlock.net:443/gpacifico4/smil:mazatlan.smil/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/650_TVP_Obregon.png" group-title="MÉXICO",TVP Obregon
+https://5ca3e84a76d30.streamlock.net:443/gpacifico3/smil:obregon.smil/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/641_UMTV.png" group-title="MÉXICO",UMTV
+https://60417ddeaf0d9.streamlock.net:443/montemorelos/videomontemorelos/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/1042_AMX_MÉXICO.png" group-title="MÉXICO",AMX MÉXICO
+https://5e50264bd6766.streamlock.net/mexiquense2/videomexiquense2/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/865_Alcance_TV.png" group-title="MÉXICO",Alcance TV
+https://5bf8041cb3fed.streamlock.net:443/AlcanceTV/AlcanceTV/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://imgur.com/BT1f1ER.png" group-title="ENTRETENIMIENTO",Kanade TV
+https://static.kanade.cl/hls/kanade.m3u8
+#EXTINF:-1 tvg-logo="https://imgur.com/IHVHNE4.png" group-title="ENTRETENIMIENTO",DreikoTV
+https://rtv.fullhd-streaming.com:19360/dreikotv/dreikotv.m3u8
+#EXTINF:-1 tvg-logo="https://imgur.com/3GDuhMn.png" group-title="ENTRETENIMIENTO",XFT TV
+http://tecnotv.club/tusw/phpcode/distro.php?c=xfc-tv
+#EXTINF:-1 tvg-logo="https://imgur.com/s2l6SqL.png" group-title="ENTRETENIMIENTO",Romance
+http://tecnotv.club/tusw/phpcode/distro.php?c=romance-channel
+#EXTINF:-1 tvg-logo="https://imgur.com/Q7kuIdC.png" group-title="CINE Y SERIES",CINDIE
+http://tecnotv.club/tusw/phpcode/distro.php?c=cindie-tv
+#EXTINF:-1 tvg-logo="https://imgur.com/lt9iw7r.png" group-title="CINE Y SERIES",Mi Miedo Canal
+http://tecnotv.club/tusw/phpcode/distro.php?c=mi-miedo-canal
+#EXTINF:-1 tvg-logo="https://imgur.com/pn5bxez.png" group-title="ENTRETENIMIENTO",MI Raza
+http://tecnotv.club/tusw/phpcode/distro.php?c=mi-raza-canal
+#EXTINF:-1 tvg-logo="https://imgur.com/Gmnvh9I.png",RunTime
+http://tecnotv.club/tusw/phpcode/runtime.php?c=2154
+#EXTINF:-1 tvg-logo="https://imgur.com/LhYX209.png",Accion
+http://tecnotv.club/tusw/phpcode/runtime.php?c=2550
+#EXTINF:-1 tvg-logo="https://imgur.com/uRMHvKV.png",Comedia
+http://tecnotv.club/tusw/phpcode/runtime.php?c=2551
+#EXTINF:-1 tvg-logo="https://imgur.com/vZu909y.png",Crimen
+http://tecnotv.club/tusw/phpcode/runtime.php?c=3533
+#EXTINF:-1 tvg-logo="https://imgur.com/H3YgS6y.png",Cine Espanto
+http://tecnotv.club/tusw/phpcode/runtime.php?c=6126
+#EXTINF:-1 tvg-logo="https://imgur.com/nx7oVpZ.png",Cinema
+http://tecnotv.club/tusw/phpcode/runtime.php?c=2550
+#EXTINF:-1 tvg-logo="https://imgur.com/yFEU3yG.png" group-title="ENTRETENIMIENTO",Clic
+http://tecnotv.club/tusw/phpcode/runtime.php?c=4827
+#EXTINF:-1 tvg-logo="https://imgur.com/NGeikk3.png" group-title="ENTRETENIMIENTO",Corazon
+http://tecnotv.club/tusw/phpcode/runtime.php?c=4826
+#EXTINF:-1 tvg-logo="https://imgur.com/5cNpgAO.png" group-title="ENTRETENIMIENTO",Romance
+http://tecnotv.club/tusw/phpcode/runtime.php?c=6119
+#EXTINF:-1 tvg-logo="https://imgur.com/S3qCgKW.png",Familia
+http://tecnotv.club/tusw/phpcode/runtime.php?c=3528
+#EXTINF:-1 tvg-logo="https://imgur.com/bHhRRom.png" group-title="DEPORTES",AYM
+http://tecnotv.club/tusw/phpcode/runtime.php?c=5106
+#EXTINF:-1 tvg-logo="https://imgur.com/2VSHowT.png" group-title="NOTICIAS",Imagen TV
+http://tecnotv.club/tusw/phpcode/runtime.php?c=6149
+#EXTINF:-1 tvg-logo="https://imgur.com/6vMJBXl.png" group-title="ENTRETENIMIENTO",Sangre Fría
+http://tecnotv.club/tusw/phpcode/runtime.php?c=6130
+#EXTINF:-1 group-title="TV PREMIUM",A&E
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bv&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",A3 SERIES
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0b0&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",ARTS
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bc&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",AXN
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a08w&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",BABY TV
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0b9&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",BOOMERAN
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0c1&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",C
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0cq&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",DICOVERY CHANNEL
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ep&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",DISCOVERY TURBO
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0c4&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",DISNEY JR
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bz&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",ESPN
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a091&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",ESPN 3
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0c3&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",E¡
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0by&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",FORMULA NOTICIAS
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0be&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",FX
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a08x&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",H&H
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bw&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",HBO
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0c5&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",HBO +
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0cv&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",IMAGEN
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0d5&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",ISAT
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0b2&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",MC
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0co&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",NATGEO LA
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0cl&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",SEX XTREME
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a09c&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",STUDIO UNIVERSAL
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bh&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",TLR
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0em&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",TNT SERIES
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0da&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",VENUS
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a09b&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",VIDEO ROLA
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0b5&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",history 2
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0dj&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",hola tv
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0db&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",milenio
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0dm&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",once
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bq&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",12661 CANAL 14
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ax&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",12661 CNN
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bd&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",12661 JUSTICIA TV
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bg&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",12661 NOTICIAS DEL CONGRESO
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0az&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",12661 TV UNAM
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ay&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",12661 TVC
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bf&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",13 realities
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0nj&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",13 teleseries
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ni&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",ADN 40 HD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ne&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",AMC
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0k8&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",AYM
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0km&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",AYM SPORT HD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0mk&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",AZTECA 7
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0fm&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",AZTECA 7 HD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0la&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",AZTECA INTER HD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0n7&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",AZTECA UNO
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0cc&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",BABY FIRST
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kb&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",CANAL 22
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0d7&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",CANAL 5
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0fl&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",CANAL 5 HD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0n6&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",CANAL INFANTIL SD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ot&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",CARTOON NETWORK
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0c0&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",CINE LATINO
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0lq&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",CINEMAX
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a093&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",CLARO SPORT
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0cm&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",CLICK HD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0mh&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",CNN
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0dl&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",COMEDY CENTRAL
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0b3&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",Canal del Congreso 45.1
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0nt&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",Cartonito
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kc&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",D pelicula
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0nn&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",DISCOVERY ID
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ch&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",DISTRITO COMEDIA
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ou&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",DreamWorks TV Latin America
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0no&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",EL 6
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bp&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",ESPN 2
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a092&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",ESTRELLAS
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0d4&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",ESTRELLAS HD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0le&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",EXA TV
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0lr&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",FAST AND FUN BOX
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ks&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",FAST FUN HD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0mi&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",FIGTH BOX
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kr&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",FILM  &  ARTS
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0k9&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",GAME TOON
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kv&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",GINX
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kx&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",GOLF CHANNEL
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kz&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",HBO 2
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ct&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",HBO FAMILY
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0cu&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",HBO MUNDI
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0jj&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",HBO SIGNATURE
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ji&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",HBO XTREME
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a096&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",HTV
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0b7&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",Justicia TV (Mexico)
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ns&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",LAMEJOR TV
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ls&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",LIFE TIME
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ci&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",MULTI PREMIER
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0cp&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",MULTICANAL
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0lo&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",MULTIPREMIER
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0lp&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",NBA
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kj&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",NFL
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kk&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",NICK JR
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ck&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",OUTDOOR
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kt&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",Once niñas y niños
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0nr&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",PLAY BOY
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a09a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",PX SPORTS
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ku&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",RT
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0nk&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",SPACE
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0cg&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",SYFY
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0b1&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",TELEMUNDO INTER HD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0mg&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",TLC
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bx&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",TLN Telenovelas. SD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0oy&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",TRACE
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ky&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",TVC DEPORTES
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0mj&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",TVCD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kl&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",TyC SPORTS
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kw&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",UNICABLE
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ov&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",UNIVERSAL
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bt&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",WARNER
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0cf&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",canal 22.2
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0nu&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",dw espa
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0nl&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",el9nueve SD
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ow&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",espn extra
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0kf&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",fox channel
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a08v&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",france 24
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0nm&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",letra a
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0bu&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",teleplay
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0ng&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 group-title="TV PREMIUM",tnt novelas
+http://tecnotv.club/tusw/phpcode/geomex.php?c=a0m2&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5e793a7cfbdf780007f7eb75/colorLogoPNG.png" group-title="Pluto TV",Descubriendo Pluto TV
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5e793a7cfbdf780007f7eb75&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcde437229eff00091b6c30/colorLogoPNG.png" group-title="Películas",Pluto TV Cine Estelar
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcde437229eff00091b6c30&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcb62e63d4d8f0009f36881/colorLogoPNG.png" group-title="Películas",Pluto TV Cine Acción
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcb62e63d4d8f0009f36881&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5e972a21ad709d00074195ba/colorLogoPNG.png" group-title="Películas",Estrellas de Acción
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5e972a21ad709d00074195ba&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/61b793ccf571b80007b7a610/colorLogoPNG.png" group-title="Películas",Pluto TV Adrenalina Freezone
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=61b793ccf571b80007b7a610&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcdde78f080d900098550e4/colorLogoPNG.png" group-title="Películas",Pluto TV Cine Comedia
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcdde78f080d900098550e4&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcddfcb229eff00091b6bdf/colorLogoPNG.png" group-title="Películas",Pluto TV Cine Drama
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcddfcb229eff00091b6bdf&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd7ea2aeab5230009986735/colorLogoPNG.png" group-title="Películas",Pluto TV Cine Romance
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd7ea2aeab5230009986735&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ddc4e8bcbb9010009b4e84f/colorLogoPNG.png" group-title="Películas",Pluto TV Cine Suspenso
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ddc4e8bcbb9010009b4e84f&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/624af40c004f8000079b784d/colorLogoPNG.png" group-title="Películas",Pluto TV Cine Crimen
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=624af40c004f8000079b784d&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcddf1ed95e740009fef7ab/colorLogoPNG.png" group-title="Películas",Pluto TV Cine Terror
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcddf1ed95e740009fef7ab&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f2817d3d7573a00080f9175/colorLogoPNG.png" group-title="Películas",Pluto TV Sci-Fi
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f2817d3d7573a00080f9175&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/62c5d80dc6de440007e033eb/colorLogoPNG.png" group-title="Películas",Runtime
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=62c5d80dc6de440007e033eb&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5defde6d6c07b50009cf0757/colorLogoPNG.png" group-title="Películas",Pluto TV  Nuestro Cine
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5defde6d6c07b50009cf0757&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dfcde52d28b09000a42d7a2/colorLogoPNG.png" group-title="Películas",Pluto TV A La Mexicana
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dfcde52d28b09000a42d7a2&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/609059dc63be6e0007b4eca6/colorLogoPNG.png" group-title="Películas",Pluto TV Cine Clásico
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=609059dc63be6e0007b4eca6&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd6ddb30a1d8a000908ed4c/colorLogoPNG.png" group-title="Películas",Pluto TV Cine Familia
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd6ddb30a1d8a000908ed4c&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd6ed41526c77000941411c/colorLogoPNG.png" group-title="Películas",Pluto TV Pre-Navidad
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd6ed41526c77000941411c&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/655f62ff954b020008c91ec6/colorLogoPNG.png" group-title="Series",Pluto TV Series de Crimen
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=655f62ff954b020008c91ec6&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/63eb9255c111bc0008fe6ec4/colorLogoPNG.png" group-title="Series",CSI: Miami
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=63eb9255c111bc0008fe6ec4&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/63eb947c4e83e70008ab877b/colorLogoPNG.png" group-title="Series",NCIS
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=63eb947c4e83e70008ab877b&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6479ff1c17f5e10008ad2797/colorLogoPNG.png" group-title="Series",Pluto TV Series de Acción
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6479ff1c17f5e10008ad2797&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/64ff270f30ab3300084e259c/colorLogoPNG.png" group-title="Series",Rookie Blue: Policías Novatos
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=64ff270f30ab3300084e259c&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/64ff26233efb5100082eeb2e/colorLogoPNG.png" group-title="Series",Infierno Sobre Ruedas
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=64ff26233efb5100082eeb2e&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcde1317578340009b751d0/colorLogoPNG.png" group-title="Series",Pluto TV Series
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcde1317578340009b751d0&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/655f636d954b020008c93299/colorLogoPNG.png" group-title="Series",Pluto TV Series de Drama
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=655f636d954b020008c93299&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/619d56d9fa3070000709e3f7/colorLogoPNG.png" group-title="Series",Younger
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=619d56d9fa3070000709e3f7&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6185a9a88b2ce30007de5128/colorLogoPNG.png" group-title="Series",Pluto TV Dramas Coreanos
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6185a9a88b2ce30007de5128&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6661d5424b10960008599fa3/colorLogoPNG.png" group-title="Series",Pluto TV Dramas Coreanos Teen
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6661d5424b10960008599fa3&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/639751f81a36b400072b8f5a/colorLogoPNG.png" group-title="Series",Vive Kanal D Drama
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=639751f81a36b400072b8f5a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ffe17e3d765170007c3a4fe/colorLogoPNG.png" group-title="Series",Pluto TV España
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ffe17e3d765170007c3a4fe&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd837642c6e9300098ad484/colorLogoPNG.png" group-title="Series",Pluto TV Series Latinas
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd837642c6e9300098ad484&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/66aa6e03fe11e500086038ed/colorLogoPNG.png" group-title="Series",Al Fondo Hay Sitio
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=66aa6e03fe11e500086038ed&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5de802659167b10009e7deba/colorLogoPNG.png" group-title="Retro",Pluto TV Series Retro
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5de802659167b10009e7deba&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/63eb95baa99571000898a078/colorLogoPNG.png" group-title="Retro",MacGyver
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=63eb95baa99571000898a078&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/66a26a7846762a0008258d4e/colorLogoPNG.png" group-title="Retro",Baywatch
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=66a26a7846762a0008258d4e&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/60142258a54aeb0007751c15/colorLogoPNG.png" group-title="Retro",Pluto TV Retro Cartoons
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=60142258a54aeb0007751c15&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcde0cc2efd2700090b7ff4/colorLogoPNG.png" group-title="Novelas",Pluto TV Novelas
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcde0cc2efd2700090b7ff4&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6474a7958e3c0a0008b97cae/colorLogoPNG.png" group-title="Novelas",Pluto TV Novelas de Mexico
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6474a7958e3c0a0008b97cae&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/646ccdd0939a5900088a1980/colorLogoPNG.png" group-title="Novelas",Corazón
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=646ccdd0939a5900088a1980&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6474a7e7f77b6100080a89e7/colorLogoPNG.png" group-title="Novelas",Pluto TV Novelas de Colombia
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6474a7e7f77b6100080a89e7&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/604bdf4e6d0abc0007ba77ad/colorLogoPNG.png" group-title="Novelas",Sin Tetas No Hay Paraíso
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=604bdf4e6d0abc0007ba77ad&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/63211ba9cad976000794f988/colorLogoPNG.png" group-title="Novelas",La Selección
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=63211ba9cad976000794f988&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6474a86917f5e100089a0c1c/colorLogoPNG.png" group-title="Novelas",Pluto TV Novelas de Venezuela
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6474a86917f5e100089a0c1c&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/665fb022f78a8500095965a9/colorLogoPNG.png" group-title="Reality",La Academia
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=665fb022f78a8500095965a9&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcde197f6591d0009839e04/colorLogoPNG.png" group-title="Reality",Pluto TV Reality
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcde197f6591d0009839e04&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/64510d3ad3fdde00080951f2/colorLogoPNG.png" group-title="Reality",MTV Drag
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=64510d3ad3fdde00080951f2&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5fab088b3279760007d4e4fd/colorLogoPNG.png" group-title="Reality",MTV Pluto TV
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5fab088b3279760007d4e4fd&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5de91b7ea86ee60009d89e75/colorLogoPNG.png" group-title="Reality",MTV Reality
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5de91b7ea86ee60009d89e75&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/61a52615cbef2500072876e2/colorLogoPNG.png" group-title="Reality",MTV Shore
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=61a52615cbef2500072876e2&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/638693db857364000781b471/colorLogoPNG.png" group-title="Reality",MTV Con Mi Ex
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=638693db857364000781b471&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5e98a911c881310007d7aae2/colorLogoPNG.png" group-title="Reality",MTV Ridiculousness
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5e98a911c881310007d7aae2&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/620fd9f4afb9a80007a9c6d5/colorLogoPNG.png" group-title="Reality",MTV Teen Mom
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=620fd9f4afb9a80007a9c6d5&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/625461ef01f27a0007976ad1/colorLogoPNG.png" group-title="Reality",MTV Catfish
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=625461ef01f27a0007976ad1&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd6d935d000120009bc1132/colorLogoPNG.png" group-title="Competencia",Pluto TV  Competencias
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd6d935d000120009bc1132&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/615b9855c6b58b000724477f/colorLogoPNG.png" group-title="Competencia",Iron Chef
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=615b9855c6b58b000724477f&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5e3ddbd27091820009f86dd9/colorLogoPNG.png" group-title="Competencia",MasterChef
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5e3ddbd27091820009f86dd9&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/64bed7005dc16600089b84e9/colorLogoPNG.png" group-title="Competencia",MasterChef Junior
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=64bed7005dc16600089b84e9&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6095ad97351eb0000754c1e6/colorLogoPNG.png" group-title="Competencia",Hells Kitchen
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6095ad97351eb0000754c1e6&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5e46e64dc73db400094b5f0b/colorLogoPNG.png" group-title="Competencia",Minuto Para Ganar
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5e46e64dc73db400094b5f0b&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6099600015e88c0007ecda25/colorLogoPNG.png" group-title="Competencia",Boom
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6099600015e88c0007ecda25&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ed6828192e8b3000743ef61/colorLogoPNG.png" group-title="Competencia",Wipe Out
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ed6828192e8b3000743ef61&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6495af324c014a000842e923/colorLogoPNG.png" group-title="Competencia",Desafío Super Humanos
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6495af324c014a000842e923&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd85eac039bba0009e86d1d/colorLogoPNG.png" group-title="Curiosidad",Pluto TV Naturaleza
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd85eac039bba0009e86d1d&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f4fed840a2764000720d966/colorLogoPNG.png" group-title="Curiosidad",Paisajes por Stingray
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f4fed840a2764000720d966&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd834c66fe2ca0009303b8d/colorLogoPNG.png" group-title="Curiosidad",Pluto TV Animales
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd834c66fe2ca0009303b8d&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/61099f2b40d0640007fc5aa2/colorLogoPNG.png" group-title="Curiosidad",El Encantador de Perros
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=61099f2b40d0640007fc5aa2&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ddc266f80e3550009136843/colorLogoPNG.png" group-title="Curiosidad",Pluto TV Aventura
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ddc266f80e3550009136843&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/62154548a2be360007cb02f0/colorLogoPNG.png" group-title="Curiosidad",Ice Pilots
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=62154548a2be360007cb02f0&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd6dc7480e3550009133d4a/colorLogoPNG.png" group-title="Curiosidad",Pluto TV Velocidad
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd6dc7480e3550009133d4a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/656e465b9d5ac400083d2db9/colorLogoPNG.png" group-title="Curiosidad",Franky Mostro
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=656e465b9d5ac400083d2db9&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/64025592953da40008bf9238/colorLogoPNG.png" group-title="Curiosidad",Obsesión por los Autos
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=64025592953da40008bf9238&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/656e2536fbc15b00084ae29d/colorLogoPNG.png" group-title="Curiosidad",Mi Coche Clásico
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=656e2536fbc15b00084ae29d&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/60e5ea9a9bb4200008376f76/colorLogoPNG.png" group-title="Curiosidad",Motorvision TV
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=60e5ea9a9bb4200008376f76&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5df265697ec3510009df1ef0/colorLogoPNG.png" group-title="Curiosidad",Pluto TV Vida Real
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5df265697ec3510009df1ef0&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6419ab7c9189ce000865a469/colorLogoPNG.png" group-title="Curiosidad",COPS
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6419ab7c9189ce000865a469&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f9992c685a2a80007fa414a/colorLogoPNG.png" group-title="Curiosidad",Dog el cazarrecompensas
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f9992c685a2a80007fa414a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f23102d5e239d00074b092a/colorLogoPNG.png" group-title="Curiosidad",Empeños a lo bestia
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f23102d5e239d00074b092a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6109ab25b84d6a0007504886/colorLogoPNG.png" group-title="Curiosidad",Pluto TV Mi Obsesión Favorita
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6109ab25b84d6a0007504886&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f230e416b68ff00075b0139/colorLogoPNG.png" group-title="Curiosidad",Misterios Medicos
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f230e416b68ff00075b0139&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcde2f53449c50009b2b4dc/colorLogoPNG.png" group-title="Curiosidad",Pluto TV Misterios
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcde2f53449c50009b2b4dc&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f4d3696d938c900072679fd/colorLogoPNG.png" group-title="Curiosidad",Historias de Ultratumba
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f4d3696d938c900072679fd&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/645d1abbe1979c0008779d5a/colorLogoPNG.png" group-title="Curiosidad",Archivos Extraterrestres
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=645d1abbe1979c0008779d5a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/63a084934734f30007457b2c/colorLogoPNG.png" group-title="Curiosidad",Smithsonian Channel Pluto TV
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=63a084934734f30007457b2c&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5de5758e1a30dc00094fcd6c/colorLogoPNG.png" group-title="Curiosidad",Pluto TV Historia
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5de5758e1a30dc00094fcd6c&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd8364ea1d6780009929902/colorLogoPNG.png" group-title="Curiosidad",Pluto TV Ciencia
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd8364ea1d6780009929902&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcde27ffae9520009c0c75a/colorLogoPNG.png" group-title="Investigación",Pluto TV Investiga
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcde27ffae9520009c0c75a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6109a9f5531b840007a4a187/colorLogoPNG.png" group-title="Investigación",Cazador de Homicidas
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6109a9f5531b840007a4a187&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5e67d41b93312100076f3fca/colorLogoPNG.png" group-title="Investigación",Los archivos del FBI
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5e67d41b93312100076f3fca&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5efb8c19b2678b000780d032/colorLogoPNG.png" group-title="Investigación",Archivos Forenses
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5efb8c19b2678b000780d032&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ea71d48af1d0b0007d837f4/colorLogoPNG.png" group-title="Investigación",The New Detectives
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ea71d48af1d0b0007d837f4&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f610042272f68000867685b/colorLogoPNG.png" group-title="Investigación",Misterios sin Resolver
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f610042272f68000867685b&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/62310d5a5dc9550007c6f580/colorLogoPNG.png" group-title="Noticias",CBS News
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=62310d5a5dc9550007c6f580&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/619d59b7cbef25000728221c/colorLogoPNG.png" group-title="Noticias",Euronews Español
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=619d59b7cbef25000728221c&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/646ccd3681844c000974d6f4/colorLogoPNG.png" group-title="Noticias",ADN40
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=646ccd3681844c000974d6f4&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/63d2c140c111bc0008cb890b/colorLogoPNG.png" group-title="Noticias",TeleFórmula
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=63d2c140c111bc0008cb890b&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/652e922db4b047000825f975/colorLogoPNG.png" group-title="Noticias",Milenio Televisión
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=652e922db4b047000825f975&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcde07af1c85b0009b18651/colorLogoPNG.png" group-title="Deportes",Pluto TV Deportes
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcde07af1c85b0009b18651&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/65cf60d166eec80008724e6f/colorLogoPNG.png" group-title="Deportes",Azteca Deportes Premium
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=65cf60d166eec80008724e6f&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6320d2755e54db000783fd87/colorLogoPNG.png" group-title="Deportes",Claro Sports Mexico
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6320d2755e54db000783fd87&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/63f7e3f9dff38e00082a57af/colorLogoPNG.png" group-title="Deportes",ITV Deportes
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=63f7e3f9dff38e00082a57af&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5e98b0447665f200078caded/colorLogoPNG.png" group-title="Deportes",Pluto TV Peleas
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5e98b0447665f200078caded&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f99a772c54853000797bf18/colorLogoPNG.png" group-title="Deportes",Lucha Libre AAA
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f99a772c54853000797bf18&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/64df7a9a44fe100009b6ac5a/colorLogoPNG.png" group-title="Deportes",DAZN Combat
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=64df7a9a44fe100009b6ac5a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/64f6163a30ab3300083d870e/colorLogoPNG.png" group-title="Deportes",PFL MMA
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=64f6163a30ab3300083d870e&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/64b02bbd7d93410008fdae60/colorLogoPNG.png" group-title="Deportes",DAZN Women's Football
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=64b02bbd7d93410008fdae60&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6650bf1a3d173b00081c8279/colorLogoPNG.png" group-title="South Park",South Park: Celebrities
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6650bf1a3d173b00081c8279&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/65df731cec9fda0008b7aa8d/colorLogoPNG.png" group-title="South Park",South Park: Colección Cartman
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=65df731cec9fda0008b7aa8d&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/65df7272ec9fda0008b7a970/colorLogoPNG.png" group-title="South Park",South Park: Colección Kenny
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=65df7272ec9fda0008b7a970&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/65df73520d4561000817c29b/colorLogoPNG.png" group-title="South Park",South Park: Colección Kyle
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=65df73520d4561000817c29b&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/65df72db18036500081a8292/colorLogoPNG.png" group-title="South Park",South Park: Colección Stan
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=65df72db18036500081a8292&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/609ae5cd48d3200007b0a98e/colorLogoPNG.png" group-title="South Park",Comedy Central South Park
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=609ae5cd48d3200007b0a98e&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/62d0895ebe7a970008785244/colorLogoPNG.png" group-title="Comedia",Daria
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=62d0895ebe7a970008785244&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/62d08af527ce19000731eaa0/colorLogoPNG.png" group-title="Comedia",La Familia del Barrio
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=62d08af527ce19000731eaa0&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5e8397936791b30007ebb5a7/colorLogoPNG.png" group-title="Comedia",Pluto TV Humor
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5e8397936791b30007ebb5a7&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ffcc21a432945000762d06b/colorLogoPNG.png" group-title="Comedia",Comedy Central Pluto TV
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ffcc21a432945000762d06b&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/633dc8684bf50b00074a46b1/colorLogoPNG.png" group-title="Comedia",Backdoor
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=633dc8684bf50b00074a46b1&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ebaccf1734aaf0007142c86/colorLogoPNG.png" group-title="Comedia",FailArmy
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ebaccf1734aaf0007142c86&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ebacbcae43a6d000787b88e/colorLogoPNG.png" group-title="Comedia",The Pet Collective
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ebacbcae43a6d000787b88e&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6643b8c42eafd40008daab8b/colorLogoPNG.png" group-title="Entretenimiento",PRIDEtv
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6643b8c42eafd40008daab8b&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/63ceb6ff60bc8f00088dc625/colorLogoPNG.png" group-title="Entretenimiento",Teatrix
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=63ceb6ff60bc8f00088dc625&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5de91cf02fc07c0009910465/colorLogoPNG.png" group-title="Entretenimiento",Telefe Hits
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5de91cf02fc07c0009910465&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/646ccc7a2858cb0008127367/colorLogoPNG.png" group-title="Entretenimiento",Azteca UNO -1 hora
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=646ccc7a2858cb0008127367&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/646cce4d1593940008a33f09/colorLogoPNG.png" group-title="Entretenimiento",Azteca Internacional
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=646cce4d1593940008a33f09&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/64e35aff6b1fdb0008ea8441/colorLogoPNG.png" group-title="Entretenimiento",Imagen TV+
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=64e35aff6b1fdb0008ea8441&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/652e91fd6208700008dcaf7b/colorLogoPNG.png" group-title="Entretenimiento",Canal 6 CdMX
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=652e91fd6208700008dcaf7b&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcddfbdb7cf0e0009ae09ea/colorLogoPNG.png" group-title="Estilo de Vida",Pluto TV Viajes
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcddfbdb7cf0e0009ae09ea&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd6ab8056beb000091fc6b6/colorLogoPNG.png" group-title="Estilo de Vida",Pluto TV Hogar
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd6ab8056beb000091fc6b6&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcde0657444a40009cd2422/colorLogoPNG.png" group-title="Estilo de Vida",Pluto TV Cocina
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcde0657444a40009cd2422&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/609062295c2b8f0007199e7a/colorLogoPNG.png" group-title="Estilo de Vida",Pluto TV Recetas
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=609062295c2b8f0007199e7a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f998c1fc54853000797bacd/colorLogoPNG.png" group-title="Estilo de Vida",Tastemade
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f998c1fc54853000797bacd&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcde17bf6591d0009839e02/colorLogoPNG.png" group-title="Anime & Gaming",Pluto TV Anime
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcde17bf6591d0009839e02&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5e6a4d875d7ccf0007cc2cf1/colorLogoPNG.png" group-title="Anime & Gaming",Pluto TV Animé Acción
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5e6a4d875d7ccf0007cc2cf1&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ee92e72fb286e0007285fec/colorLogoPNG.png" group-title="Anime & Gaming",Naruto
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ee92e72fb286e0007285fec&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/64c92fea3c3344000869e8a9/colorLogoPNG.png" group-title="Anime & Gaming",Naruto Shippuden
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=64c92fea3c3344000869e8a9&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/656f37f257fe4a000884dfee/colorLogoPNG.png" group-title="Anime & Gaming",Boruto: Naruto Next Generations
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=656f37f257fe4a000884dfee&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/65d916a2f7f0af0008b6540d/colorLogoPNG.png" group-title="Anime & Gaming",Hunter x Hunter
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=65d916a2f7f0af0008b6540d&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/626c2ed933a2890007e91422/colorLogoPNG.png" group-title="Anime & Gaming",Death Note
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=626c2ed933a2890007e91422&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5fceaab478f2af00080ff51f/colorLogoPNG.png" group-title="Anime & Gaming",Yu-Gi-Oh
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5fceaab478f2af00080ff51f&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/64666345f3f5b1000882bfb4/colorLogoPNG.png" group-title="Anime & Gaming",Captain Tsubasa
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=64666345f3f5b1000882bfb4&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/632119a92c3b880007d3f5dc/colorLogoPNG.png" group-title="Anime & Gaming",Beyblade
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=632119a92c3b880007d3f5dc&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/66b26665d512590008c507b7/colorLogoPNG.png" group-title="Anime & Gaming",Inuyasha
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=66b26665d512590008c507b7&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ff4b9ccf938f8000779eb99/colorLogoPNG-1663941540755.png" group-title="Anime & Gaming",One Piece
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ff4b9ccf938f8000779eb99&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ff608e60e2996000768c366/colorLogoPNG.png" group-title="Anime & Gaming",Tokusato
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ff608e60e2996000768c366&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ff3934600d4c7000733ff49/colorLogoPNG.png" group-title="Anime & Gaming",Pluto TV E-Sports
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ff3934600d4c7000733ff49&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5fab09a8749b1a00077d35d2/colorLogoPNG-1662394157103.png" group-title="Teen",Nick Teen
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5fab09a8749b1a00077d35d2&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/620ff0a01f9e8700076c6f9d/colorLogoPNG.png" group-title="Teen",Nickelodeon iCarly
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=620ff0a01f9e8700076c6f9d&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5fcea93ffcf94500071c4b2f/colorLogoPNG.png" group-title="Teen",Kenan y Kel
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5fcea93ffcf94500071c4b2f&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd6de52b9914200091f047a/colorLogoPNG.png" group-title="Teen",Pluto TV Teen
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd6de52b9914200091f047a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6495c6ad115d060008bf6b52/colorLogoPNG.png" group-title="Kids",PAW Patrol Patrulla de Cachorros
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6495c6ad115d060008bf6b52&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ddd7cb2cbb9010009b4fe32/colorLogoPNG.png" group-title="Kids",Nick Jr. Club
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ddd7cb2cbb9010009b4fe32&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/656e28a2954b020008ed133a/colorLogoPNG.png" group-title="Kids",La Exploradora
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=656e28a2954b020008ed133a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f9996533c9de3000759ccb5/colorLogoPNG.png" group-title="Kids",Las Pistas de Blue
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f9996533c9de3000759ccb5&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/619d5e6a093e7c0007489211/colorLogoPNG.png" group-title="Kids",Baby Shark TV
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=619d5e6a093e7c0007489211&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ebac49ce4dc8b00078b23bc/colorLogoPNG.png" group-title="Kids",Babyfirst
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ebac49ce4dc8b00078b23bc&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dcde2ac4bc6c500094ab45b/colorLogoPNG.png" group-title="Kids",Pluto TV Junior
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dcde2ac4bc6c500094ab45b&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f29ada4bdaebd000708d49d/colorLogoPNG.png" group-title="Kids",Barney
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f29ada4bdaebd000708d49d&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f4d3d10my60d8000781fce8/colorLogoPNG.png" group-title="Kids",El Reino Infantil
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f4d3d10my60d8000781fce8&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ddd7c348520b40009c347e2/colorLogoPNG.png" group-title="Kids",Nickelodeon Clásico
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ddd7c348520b40009c347e2&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5ea7215005d66d0007e8128a/colorLogoPNG.png" group-title="Kids",Rugrats
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5ea7215005d66d0007e8128a&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6202ab549654c800076ee13f/colorLogoPNG.png" group-title="Kids",Nickelodeon Rocket Power
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6202ab549654c800076ee13f&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/645952687cb4b100084ed52e/colorLogoPNG.png" group-title="Kids",Nickelodeon Pluto TV
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=645952687cb4b100084ed52e&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6254598f5083f800076d8563/colorLogoPNG.png" group-title="Kids",Bob Esponja Pantalones Cuadrados
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6254598f5083f800076d8563&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6322099c822bbc00074857db/colorLogoPNG-1667576393608.png" group-title="Kids",Los Padrinos Mágicos
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6322099c822bbc00074857db&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/63dd5d7a4e83e700088fbca8/colorLogoPNG.png" group-title="Kids",Las Tortugas Ninja
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=63dd5d7a4e83e700088fbca8&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5dd6dae8ce788b0009eaf77b/colorLogoPNG.png" group-title="Kids",Pluto TV Kids
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5dd6dae8ce788b0009eaf77b&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/636e83511fa9600007e5ae19/colorLogoPNG.png" group-title="Kids",Pluto TV Anime Kids
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=636e83511fa9600007e5ae19&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6047fabfce6e8e00070bcc9f/colorLogoPNG.png" group-title="Música",MTV Biggest Pop
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6047fabfce6e8e00070bcc9f&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/66a11a21a79dea0008aa90ca/colorLogoPNG.png" group-title="Música",MTV Classic
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=66a11a21a79dea0008aa90ca&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/66a01b52a4ee27000808ea36/colorLogoPNG.png" group-title="Música",MTV Rocks
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=66a01b52a4ee27000808ea36&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/6047fd723b5bd00007de7092/colorLogoPNG.png" group-title="Música",MTV Spankin' New
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=6047fd723b5bd00007de7092&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/62b218fc511d4b00070ddc0c/colorLogoPNG.png" group-title="Música",MTV Flow Latino
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=62b218fc511d4b00070ddc0c&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/66a01adf46762a00081ee3dc/colorLogoPNG.png" group-title="Música",Yo! MTV
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=66a01adf46762a00081ee3dc&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f85ca40eda1b10007b967cd/colorLogoPNG.png" group-title="Música",Conciertos por Stingray
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f85ca40eda1b10007b967cd&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://images.pluto.tv/channels/5f85cf621d6d2200079f1de0/colorLogoPNG.png" group-title="Música",Karaoke por Stingray
+http://tecnotv.club/tusw/phpcode/plutotv.php?c=5f85cf621d6d2200079f1de0&token=tecnotokenplustv230516F&f=.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/GY750xh.jpg" group-title="MUSICA",98.1 Pearl FM (720p)
+https://live2.tensila.com/pearl-v-1.pearlfm/hls/live/mystream.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/y4kNV3Q.png" group-title="MUSICA",70-80 TV (1080P)
+https://585b674743bbb.streamlock.net/9050/9050/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/gNWg9tl.png" group-title="MUSICA",30A Music Channel
+https://30a-tv.com/feeds/ceftech/30atvmusic.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/hTUe0Pw.png" group-title="MUSICA",13 Festival (1080p)
+https://origin.dpsgo.com/ssai/event/Nftd0fM2SXasfDlRphvUsg/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/FBgu8yB.png" group-title="MUSICA",Stingray Classic Rock
+https://lotus.stingray.com/manifest/ose-101ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/nh1k5RC.png" group-title="MUSICA",Stingray Classica
+https://lotus.stingray.com/manifest/classica-cla008-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/3UppN5P.png" group-title="MUSICA",Stingray CMusic
+https://lotus.stingray.com/manifest/cmusic-cme004-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Stingray_Djazz.png/512px-Stingray_Djazz.png" group-title="MUSICA",Stingray DJAZZ
+https://lotus.stingray.com/manifest/djazz-djaads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Stingray_Music_logo.svg/512px-Stingray_Music_logo.svg.png" group-title="MUSICA",Stingray Easy Listening
+https://lotus.stingray.com/manifest/ose-137ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/jf5C9QF.png" group-title="MUSICA",Stingray Flashback 70s
+https://lotus.stingray.com/manifest/ose-115ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/lgpIwId.png" group-title="MUSICA",Stingray Hit List
+https://lotus.stingray.com/manifest/ose-107ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/4xVVKH8.png" group-title="MUSICA",Stingray Holiday Hits
+https://lotus.stingray.com/manifest/ose-155ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/PZhxyIT.png" group-title="MUSICA",Stingray Hot Country
+https://lotus.stingray.com/manifest/ose-108ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/9TLTLS3.png" group-title="MUSICA",Stingray Karaoke
+https://lotus.stingray.com/manifest/karaoke-kar000-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/882kd90.png" group-title="MUSICA",Stingray Naturescape
+https://lotus.stingray.com/manifest/naturescape-a003-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Tq3I0po.png" group-title="MUSICA",Stingray Nothin' But 90s
+https://lotus.stingray.com/manifest/ose-142ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/H2ugC9L.png" group-title="MUSICA",Stingray Pop Adult
+https://lotus.stingray.com/manifest/ose-104ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/6E3wYrb.png" group-title="MUSICA",Stingray Remember the 80s
+https://lotus.stingray.com/manifest/ose-128ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/mt8ulVX.png" group-title="MUSICA",Stingray Rock Alternative
+https://lotus.stingray.com/manifest/ose-102ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Stingray_Music_logo.svg/512px-Stingray_Music_logo.svg.png" group-title="MUSICA",Stingray Romance Latino
+https://lotus.stingray.com/manifest/ose-202ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/h1DsOzH.png" group-title="MUSICA",Stingray Smooth Jazz
+https://lotus.stingray.com/manifest/ose-140ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/dU1KC3f.png" group-title="MUSICA",Stingray Soul Storm
+https://lotus.stingray.com/manifest/ose-134ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ywAN923.png" group-title="MUSICA",Stingray The Spa
+https://lotus.stingray.com/manifest/ose-122ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/mMbntB5.png" group-title="MUSICA",Stingray Today's KPOP
+https://lotus.stingray.com/manifest/ose-317ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Os3kRRP.png" group-title="MUSICA",Stingray Today's Latin Pop
+https://lotus.stingray.com/manifest/ose-190ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://i.imgur.com/Os3kRRP.png" group-title="MUSICA",Stingray Urban Beat
+https://lotus.stingray.com/manifest/ose-133ads-montreal/samsungtvplus/master.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/5_Retro_Plus_TV_Senal_2.png" group-title="MUSICA",Retro Plus TV Señal 2
+https://tls-cl.cdnz.cl/retroplustvdos/live/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/1062_Canal_VM_Latino.png" group-title="MUSICA",Canal VM Latino
+https://59ef525c24caa.streamlock.net/vmtv/vmlatino/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/1127_Carolina_TV_2.png" group-title="MUSICA",Carolina TV 2
+https://jireh-1-hls-video-cl-isp.dps.live/hls-video/ey6283je82983je9823je8jowowiekldk9838274/carolinatv2/carolinatv2.smil/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/1277_Flash___Freetv_com.png" group-title="MUSICA",Flash - Freetv.com
+https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg01024-olympusat-flash-ono/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/1426_Los_Heat_TV.png" group-title="MUSICA",Los Heat TV
+https://mdstrm.com/video/631f6f0fe4eba7082bc551ad.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/1271_MMC___Freetv_com.png" group-title="MUSICA",MMC - Freetv.com
+https://cdn-uw2-prod.tsv2.amagi.tv/linear/amg01024-olympusat-mmcfreetv-ono/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/1014_PlanetaTV.png" group-title="MUSICA",PlanetaTV
+https://tls-cl.cdnz.cl/planetatv/live/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/1128_Solobailalo_TV.png" group-title="MUSICA",Solobailalo TV
+https://5ff3d9babae13.streamlock.net:443/8000/8000/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/1064_Soy_Plancha_TV.png" group-title="MUSICA",Soy Plancha TV
+https://59ef525c24caa.streamlock.net/vmtv/soyplancha/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/1234_Urbano_TV.png" group-title="MUSICA",Urbano TV
+https://59ef525c24caa.streamlock.net/tvurbano/tvurbano/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/22_Video_Tour_Channel.png" group-title="MUSICA",Video Tour Channel
+http://k4.usastreams.com/videotour/videotour/playlist.m3u8
+#EXTINF:-1 tvg-logo="https://cdn.m3u.cl/logo/1063_Vintage_Music.png" group-title="MUSICA",Vintage Music
+https://59ef525c24caa.streamlock.net/vmtv/tvvintage/playlist.m3u8
