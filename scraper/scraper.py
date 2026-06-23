@@ -754,7 +754,7 @@ FUENTES_SIN_FILTRO = []
 # ══════════════════════════════════════════════════════════════════════════
 #  PROCESAMIENTO Y AGRUPACIÓN DE FUENTES M3U/M3U8
 # ══════════════════════════════════════════════════════════════════════════
-def buscar_canales_m3u(max_por_fuente: int = 150, max_total: int = 500) -> list[dict]:
+def buscar_canales_m3u(max_por_fuente: int = 10000, max_total: int = 20000) -> list[dict]:
     """
     Descarga, parsea y agrupa los canales provenientes de listas M3U y M3U8
     evitando duplicados y categorizando dinámicamente.
