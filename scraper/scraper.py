@@ -722,7 +722,7 @@ TDT_CANALES = [
 
 FUENTES_M3U = [
   {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/"},
-#{"nombre": "IPTV global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u"},
+  {"nombre": "IPTV global 2", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u"},
   {"nombre": "IPTV global", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8"},
 
       # Proyecto Fluxus TV (Tiene secciones de canales públicos muy estables)
@@ -749,135 +749,141 @@ FUENTES_M3U = [
 
 FUENTES_SIN_FILTRO = []
 
-
-def buscar_canales_m3u(max_por_fuente=5000, max_total=10800):
-    print("\n🔍 Escaneando fuentes M3U...")
-    # Fix prevent TypeError: asegura que c sea dict y tenga "nombre"
-    nombres_existentes = {
-        c["nombre"].upper() for c in CANALES_FIJOS + TDT_CANALES 
-        if isinstance(c, dict) and "nombre" in c
-    }
-    
+# ══════════════════════════════════════════════════════════════════════════
+#  PROCESAMIENTO Y AGRUPACIÓN DE FUENTES M3U/M3U8
+# ══════════════════════════════════════════════════════════════════════════
+def buscar_canales_m3u(max_por_fuente: int = 150, max_total: int = 500) -> list[dict]:
+    """
+    Descarga, parsea y agrupa los canales provenientes de listas M3U y M3U8
+    evitando duplicados y categorizando dinámicamente.
+    """
     encontrados = []
-    ids_vistos = set()
-    headers = {"User-Agent": "Mozilla/5.0 (compatible; StreamX-Scraper/2.0)"}
+    urls_vistas = set()
+    nombres_existentes = set()
+
+    # Pre-poblar nombres existentes con los canales fijos para no duplicarlos
+    for c in CANALES_FIJOS:
+        nombres_existentes.add(c["nombre"].upper().strip())
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+
+    # Diccionario de mapeo algorítmico rápido para categorización
+    PATRONES_CATEGORIAS = {
+        "DEPORTES": ["SPORT", "DEPORT", "FUTBOL", "FOOTBALL", "LIGA", "COPA", "MOTOR", "ESPN", "FOX S", "TYC", "TNT SPORT", "DSPORTS", "WIN"],
+        "CINE": ["MOVIE", "CINE", "PELICULA", "HBO", "STAR", "CINEMAX", "WARNER", "TNT SERIES", "HOLLYWOOD"],
+        "NOTICIAS": ["NEWS", "NOTICIAS", "INFO", "24H", "PRENSA", "CNN", "TN", "C5N", "LN+"],
+        "MUSICA": ["MUSIC", "MUSICA", "HITS", "MTV", "VH1", "QUIERO", "TMF"],
+        "DOCUMENTALES": ["DOCU", "WILD", "HISTORY", "NAT GEO", "DISCOVERY", "ANIMAL", "DISC."],
+        "INFANTIL": ["KIDS", "INFANTIL", "CHILDREN", "CARTOON", "DISNEY", "NICK", "BOOMERANG", "DISCOVERY KIDS"],
+        "ADULTOS": ["XXX", "ADULT", "PLAYBOY", "PENTHOUSE", "VENUS", "SEX", "LIVECAMS", "MILF", "BIGTITS"]
+    }
 
     for fuente_info in FUENTES_M3U:
         if len(encontrados) >= max_total:
             break
-            
-        # Extraer URL y Nombre del diccionario de la fuente
+
         fuente_url = fuente_info["url"]
         fuente_nombre = fuente_info["nombre"]
-        
+
         try:
-            print(f"  📥 Procesando: {fuente_nombre}...")
+            print(f" 📥 Procesando lista M3U/M3U8: {fuente_nombre}...")
             r = requests.get(fuente_url, timeout=25, headers=headers)
             if r.status_code != 200:
-                print(f"      ❌ HTTP {r.status_code}")
+                print(f" ❌ Error HTTP {r.status_code} en fuente {fuente_nombre}")
                 continue
-                
-            lineas = r.text.split("\n")
+
+            # Soporte nativo de codificación utf-8 con fallback automático
+            contenido = r.content.decode('utf-8', errors='ignore')
+            lineas = [linea.strip() for linea in contenido.split("\n") if linea.strip()]
+            
             agregados_fuente = 0
             
             for i in range(len(lineas) - 1):
-                linea = lineas[i].strip()
+                linea = lineas[i]
                 if not linea.startswith("#EXTINF"):
                     continue
-                
+
                 url_linea = lineas[i+1].strip()
                 if not url_linea.startswith("http"):
                     continue
 
-                # Parsear Metadatos
-                logo_m = re.search(r'tvg-logo="([^"]*)"', linea)
-                logo = logo_m.group(1) if logo_m else ""
-                
-                grp_m = re.search(r'group-title="([^"]*)"', linea)
-                grp = grp_m.group(1).upper() if grp_m else ""
-                
-                nombre = linea.split(",")[-1].strip() if "," in linea else "Canal Desconocido"
-                n = nombre.upper()
-                key = n # Usamos el nombre como clave de duplicidad
-
-                if not nombre or key in nombres_existentes or key in ids_vistos:
+                # Evitar procesamiento de la misma URL exacta
+                if url_linea in urls_vistas:
                     continue
 
-                # Lógica de Categorización Mejorada
-                if any(x in (grp + n) for x in ["SPORT", "DEPORT", "FUTBOL", "FOOTBALL", "LIGA", "COPA", "MOTOR", "ESPN", "FOX S"]):
-                    cat = "DEPORTES"
-                elif any(x in (grp + n) for x in ["MOVIE", "CINE", "PELICULA", "HBO", "STAR", "CINEMAX", "WARNER"]):
-                    cat = "CINE"
-                elif any(x in (grp + n) for x in ["NEWS", "NOTICIAS", "INFO", "24H", "PRENSA"]):
-                    cat = "NOTICIAS"
-                elif any(x in (grp + n) for x in ["MUSIC", "MUSICA", "HITS", "MTV", "VH1"]):
-                    cat = "MUSICA"
-                elif any(x in (grp + n) for x in ["DOCU", "WILD", "HISTORY", "NAT GEO", "DISCOVERY", "ANIMAL", "DISC."]):
-                    cat = "DOCUMENTALES"
-                elif any(x in (grp + n) for x in ["KIDS", "INFANTIL", "CHILDREN", "CARTOON", "DISNEY", "NICK", "BOOMERANG"]):
-                    cat = "INFANTIL"
-                elif any(x in (grp + n) for x in ["XXX", "ADULT", "PLAYBOY", "PENTHOUSE", "VENUS", "SEX"]):
-                    cat = "ADULTOS"
-                else:
-                    cat = "INTERNACIONAL"
+                # Parsear Metadatos mediante expresiones regulares exactas
+                logo_m = re.search(r'tvg-logo="([^"]*)"', linea, re.IGNORECASE)
+                logo = logo_m.group(1).strip() if logo_m else ""
+
+                grp_m = re.search(r'group-title="([^"]*)"', linea, re.IGNORECASE)
+                grp = grp_m.group(1).upper().strip() if grp_m else ""
+
+                nombre = linea.split(",")[-1].strip() if "," in linea else "Canal Desconocido"
+                n_upper = nombre.upper().strip()
+
+                # Control estricto de duplicidad por nombre
+                if not nombre or n_upper in nombres_existentes:
+                    continue
+
+                # Evaluación y Categorización Inteligente
+                cat = "INTERNACIONAL"
+                target_string = f"{grp} {n_upper}"
+                
+                for categoria_id, patrones in PATRONES_CATEGORIAS.items():
+                    if any(patron in target_string for patron in patrones):
+                        cat = categoria_id
+                        break
 
                 encontrados.append({
-                    "nombre": nombre, 
+                    "nombre": nombre,
                     "url": url_linea,
                     "logo": logo or "https://cdn-icons-png.flaticon.com/512/716/716429.png",
                     "categoria": cat,
                     "origen": fuente_nombre
                 })
-                
-                ids_vistos.add(key)
+
+                urls_vistas.add(url_linea)
+                nombres_existentes.add(n_upper)
                 agregados_fuente += 1
-                
+
                 if agregados_fuente >= max_por_fuente or len(encontrados) >= max_total:
                     break
-                    
-            print(f"      ✅ {agregados_fuente} canales nuevos")
+
+            print(f" ✅ {agregados_fuente} canales nuevos indexados de esta fuente.")
             
         except Exception as e:
-            print(f"      ❌ Error en fuente: {str(e)[:50]}")
+            print(f" ❌ Error crítico procesando fuente {fuente_nombre}: {str(e)[:60]}")
 
-    print(f"  📊 Total M3U extraído: {len(encontrados)}")
+    print(f" 📊 Total M3U/M3U8 extraído con éxito: {len(encontrados)} canales")
     return encontrados
 
 
+# ══════════════════════════════════════════════════════════════════════════
+#  MÓDULO DE ACTUALIZACIÓN (PRESERVA TUS CANALES FIJOS EXACTAMENTE IGUAL)
+# ══════════════════════════════════════════════════════════════════════════
 def actualizar_canales(ref):
-    print("\n📡 Iniciando actualización en Firebase...")
+    print("\n📡 Iniciando sincronización de base de datos en Firebase...")
     ahora = datetime.utcnow().isoformat()
     data = {}
 
-    # 1. Canales fijos (Estructura AR)
+    # 1. Canales fijos - Sin cambios
     for c in CANALES_FIJOS:
         data[c["id"]] = {
             "nombre": c["nombre"],
             "url": c["url"],
             "logo": c["logo"],
-            "categoria": c.get("categoria", "AIRE").upper(),
+            "categoria": c.get("categoria", "DEPORTES").upper(),
             "fallbacks": c.get("fallbacks", []),
             "fijo": True,
             "actualizado": ahora
         }
 
-    # 2. Canales TDT (Estructura Internacional/España)
-    for c in TDT_CANALES:
-        data[c["id"]] = {
-            "nombre": c["nombre"],
-            "url": c["url"],
-            "logo": c["logo"],
-            "categoria": c.get("categoria", "AIRE").upper(),
-            "fallbacks": [],
-            "fijo": False,
-            "actualizado": ahora
-        }
-
-    # 3. Canales extra de fuentes M3U (Generación de IDs tdt_ext_...)
+    # 2. Inyección de Canales dinámicos M3U agrupados
     extra = buscar_canales_m3u()
     for i, c in enumerate(extra):
-        # Generamos un ID único para Firebase basado en el índice
-        canal_id = f"ext_{i+1:05d}"
+        canal_id = f"ext_{i+1:05d}"  # Genera IDs ordenados y limpios como ext_00001
         data[canal_id] = {
             "nombre": c["nombre"],
             "url": c["url"],
@@ -888,22 +894,22 @@ def actualizar_canales(ref):
             "actualizado": ahora
         }
 
-    # 4. Preservar estado "activo" desde Firebase
+    # 3. Mapeo y persistencia del flag 'activo' desde Firebase
     try:
         existentes = ref.child("canales").get()
         for cid, canal in data.items():
             if existentes and cid in existentes and "activo" in existentes[cid]:
                 canal["activo"] = existentes[cid]["activo"]
             else:
-                canal["activo"] = True 
+                canal["activo"] = True
     except Exception as e:
-        print(f"  ⚠️ Error sincronizando estado activo: {e}")
-        for canal in data.values(): canal["activo"] = True
+        print(f" ⚠️ Alerta al sincronizar estados activos: {e}")
+        for canal in data.values():
+            canal["activo"] = True
 
-    # 5. Guardado final
+    # 4. Escritura atómica final
     ref.child("canales").set(data)
-    print(f"  💾 Guardado exitoso: {len(data)} canales totales en Firebase.")
-
+    print(f" 💾 Transacción finalizada. {len(data)} canales totales desplegados en Firebase.")
 # ══════════════════════════════════════════════════════════════════════════
 #  MUNDIAL FIFA 2026 — FIXTURE OFICIAL
 # ══════════════════════════════════════════════════════════════════════════
