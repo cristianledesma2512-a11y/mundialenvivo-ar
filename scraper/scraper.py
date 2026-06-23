@@ -270,34 +270,34 @@ TDT_CANALES = [
 
 
 FUENTES_M3U = [
-    {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
-    {"nombre": "IPTV Argentina Oficial", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
+    #{"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
+    #{"nombre": "IPTV Argentina Oficial", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "TDTChannels Eventos Globales", "url": "https://www.tdtchannels.com/lists/events.m3u8", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "Free-TV IPTV Master", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8", "categoria": "OTROS", "confianza": "alta", "adultos": False},
     #{"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u", "categoria": "DEPORTES", "confianza": "media", "adultos": False},
    # {"nombre": "Fluxus TV Cine", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/movies.m3u", "categoria": "CINE", "confianza": "media", "adultos": False},
     #{"nombre": "IPTV Global Open List", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u", "categoria": "OTROS", "confianza": "baja", "adultos": False},
     #{"nombre": "IPTV Adultos Global Premium", "url": "https://iptv-org.github.io/iptv/categories/xxx.m3u", "categoria": "ADULTOS", "confianza": "alta", "adultos": True},
-    {"nombre": "Fluxus TV Adultos Core", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/xxx.m3u", "categoria": "ADULTOS", "confianza": "media", "adultos": True},
-    {"nombre": "lista hot", "url": "https://tecnotv.club/tusw/listahot.m3u", "categoria": "ADULTOS", "confianza": "media", "adultos": True},
-    {"nombre": "Pastebin Raw 1", "url": "https://pastebin.com/raw/ze9LRSJJ", "categoria": "DEPORTES", "confianza": "alta"},
-    {"nombre": "Pastebin Raw 2", "url": "https://pastebin.com/raw/x9xSPugA", "categoria": "DEPORTES", "confianza": "alta"},
+   # {"nombre": "Fluxus TV Adultos Core", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/xxx.m3u", "categoria": "ADULTOS", "confianza": "media", "adultos": True},
+   # {"nombre": "lista hot", "url": "https://tecnotv.club/tusw/listahot.m3u", "categoria": "ADULTOS", "confianza": "media", "adultos": True},
+   # {"nombre": "Pastebin Raw 1", "url": "https://pastebin.com/raw/ze9LRSJJ", "categoria": "DEPORTES", "confianza": "alta"},
+   # {"nombre": "Pastebin Raw 2", "url": "https://pastebin.com/raw/x9xSPugA", "categoria": "DEPORTES", "confianza": "alta"},
   
    #{"nombre": "TecnoTV Lista Principal", "url": "https://tecnotv.club/tusw/lista.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV Deportes", "url": "https://tecnotv.club/tusw/deportes.m3u", "categoria": "DEPORTES", "confianza": "media"},
+   # {"nombre": "TecnoTV Deportes", "url": "https://tecnotv.club/tusw/deportes.m3u", "categoria": "DEPORTES", "confianza": "media"},
    # {"nombre": "TecnoTV Lista 1", "url": "https://tecnotv.club/tusw/lista1.m3u", "categoria": "OTROS", "confianza": "media"},
    # {"nombre": "TecnoTV Lista 2", "url": "https://tecnotv.club/tusw/lista2.m3u", "categoria": "OTROS", "confianza": "media"},
    # {"nombre": "TecnoTV Lista 3", "url": "https://tecnotv.club/tusw/lista3.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV Lista 4", "url": "https://tecnotv.club/tusw/lista4.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV Android Core", "url": "https://tecnotv.club/tusw/android.m3u", "categoria": "OTROS", "confianza": "media"},
+   # {"nombre": "TecnoTV Lista 4", "url": "https://tecnotv.club/tusw/lista4.m3u", "categoria": "OTROS", "confianza": "media"},
+    #{"nombre": "TecnoTV Android Core", "url": "https://tecnotv.club/tusw/android.m3u", "categoria": "OTROS", "confianza": "media"},
    # {"nombre": "TecnoTV Android 1", "url": "https://tecnotv.club/tusw/android1.m3u", "categoria": "OTROS", "confianza": "media"},
    # {"nombre": "TecnoTV Android 2", "url": "https://tecnotv.club/tusw/android2.m3u", "categoria": "OTROS", "confianza": "media"},
     #{"nombre": "TecnoTV Android 3", "url": "https://tecnotv.club/tusw/android3.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV GeoMex", "url": "https://tecnotv.club/tusw/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
+  #  {"nombre": "TecnoTV GeoMex", "url": "https://tecnotv.club/tusw/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
     
   
     #{"nombre": "GitHub Melendez Raw Bridge", "url": "https://raw.githubusercontent.com/dmelendez11/lista-canales-m3u/main/lista_especial_con_respaldos.m3u", "categoria": "DEPORTES", "confianza": "baja"},
-  
+   {"nombre": "crisled Lista 1", "url": "https://github.com/cristianledesma2512-a11y/mundialenvivo-ar/blob/main/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
   
 
   
