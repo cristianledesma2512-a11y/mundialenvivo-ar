@@ -279,7 +279,7 @@ FUENTES_M3U = [
     #{"nombre": "IPTV Global Open List", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u", "categoria": "OTROS", "confianza": "baja", "adultos": False},
     #{"nombre": "IPTV Adultos Global Premium", "url": "https://iptv-org.github.io/iptv/categories/xxx.m3u", "categoria": "ADULTOS", "confianza": "alta", "adultos": True},
    # {"nombre": "Fluxus TV Adultos Core", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/xxx.m3u", "categoria": "ADULTOS", "confianza": "media", "adultos": True},
-   # {"nombre": "lista hot", "url": "https://tecnotv.club/tusw/listahot.m3u", "categoria": "ADULTOS", "confianza": "media", "adultos": True},
+   {"nombre": "lista hot", "url": "https://tecnotv.club/tusw/listahot.m3u", "categoria": "ADULTOS", "confianza": "media", "adultos": True},
    # {"nombre": "Pastebin Raw 1", "url": "https://pastebin.com/raw/ze9LRSJJ", "categoria": "DEPORTES", "confianza": "alta"},
    # {"nombre": "Pastebin Raw 2", "url": "https://pastebin.com/raw/x9xSPugA", "categoria": "DEPORTES", "confianza": "alta"},
   
@@ -297,9 +297,15 @@ FUENTES_M3U = [
     
   
     #{"nombre": "GitHub Melendez Raw Bridge", "url": "https://raw.githubusercontent.com/dmelendez11/lista-canales-m3u/main/lista_especial_con_respaldos.m3u", "categoria": "DEPORTES", "confianza": "baja"},
-   {"nombre": "crisled Lista 1", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
-   {"nombre": "crisled Lista 2", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista1.m3u", "categoria": "OTROS", "confianza": "media"},
-   {"nombre": "crisled Lista 3", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista2.m3u", "categoria": "OTROS", "confianza": "media"},
+  # {"nombre": "crisled Lista 1", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
+  # {"nombre": "crisled Lista 2", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista1.m3u", "categoria": "OTROS", "confianza": "media"},
+   #{"nombre": "crisled Lista 3", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista2.m3u", "categoria": "OTROS", "confianza": "media"},
+  # {"nombre": "crisled Lista 4", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista4.m3u", "categoria": "OTROS", "confianza": "media"},
+   #{"nombre": "crisled Lista 5", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista5.m3u", "categoria": "OTROS", "confianza": "media"},
+  
+   {"nombre": "crisled Lista completa", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista-completa.m3u", "categoria": "OTROS", "confianza": "media"},
+   {"nombre": "crisled Lista android", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista-android.m3u", "categoria": "OTROS", "confianza": "media"},
+  
    {"nombre": "crisled argentina1", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/argentina.m3u", "categoria": "OTROS", "confianza": "media"},
    {"nombre": "crisled argentina2", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/argentina2.m3u", "categoria": "OTROS", "confianza": "media"},
   
