@@ -40,229 +40,7 @@ def conectar_firebase():
 #  CANALES DE TV
 # ══════════════════════════════════════════════════════════════════════════
 CANALES_FIJOS = [
-    #── DISNEY 
-    {"id":"stp01","nombre":"Disney","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=disney","logo":"https://images.seeklogo.com/logo-png/4/1/disney-logo-png_seeklogo-41972.png","fallbacks":[]},
-    
-    # ── FANATIZ 
-    {"id":"stp17","nombre":"Fanatiz","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=fanatiz","logo":"https://nextjs.fanatiz.com/fanatiz/strapi/production/Fanatiz_new_92171dc64b.png","fallbacks":[]},
-      
-
-    #  ESPN  
-    {"id":"stp33","nombre":"ESPN","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global1.php?stream=espn","logo":"https://images.seeklogo.com/logo-png/28/1/espn-logo-png_seeklogo-283139.png","fallbacks":[]},
-    
-
-    #  DSPORTS 
-    {"id":"stp49","nombre":"DSports","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=dsports","logo":"https://images.seeklogo.com/logo-png/62/1/dsports-logo-png_seeklogo-626310.png","fallbacks":[]},
-    
-  #  TUDN USA 
-    {"id":"stp65","nombre":"TUDN USA","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=tudn_usa","logo":"https://images.seeklogo.com/logo-png/38/1/tudn-positivo-logo-png_seeklogo-387423.png","fallbacks":[]},
    
-    #  MAX 
-    {"id":"stp81","nombre":"Max","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=max","logo":"https://images.seeklogo.com/logo-png/2/1/canal-logo-png_seeklogo-25587.png","fallbacks":[]},
-   
-    
-    
-    #   TyC sport
-    {"id":"stp97","nombre":"TyC Sports","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=tycsports","logo":"https://images.seeklogo.com/logo-png/34/1/tyc-sports-logo-png_seeklogo-340604.png","fallbacks":[]},
-    {"id":"stp125","nombre":"TyC Sports Inter","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=tycinternacional","logo":"https://images.seeklogo.com/logo-png/34/1/tyc-sports-logo-png_seeklogo-340604.png","fallbacks":[]},
-
-
-    
-
-
-    #  paramount
-    {"id":"stp98","nombre":"paramount1","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=paramount1","logo":"https://images.seeklogo.com/logo-png/10/1/paramount-logo-png_seeklogo-106080.png","fallbacks":[]},
-      
-    
-
-    #  espn mx
-    {"id":"stp108","nombre":"espn mx","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espnmx","logo":"https://1000logos.net/wp-content/uploads/2017/01/espn-symbol.jpg","fallbacks":[]},     
-    {"id":"stp109","nombre":"espn 2mx","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espn2mx","logo":"https://1000logos.net/wp-content/uploads/2017/01/espn-symbol.jpg","fallbacks":[]}, 	
-    {"id":"stp110","nombre":"espn 3mx","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espn3mx","logo":"https://1000logos.net/wp-content/uploads/2017/01/espn-symbol.jpg","fallbacks":[]},
-
-
-    #  fox sport
-    {"id":"stp111","nombre":"Fox Sports 1","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=fox1ar","logo":"https://images.seeklogo.com/logo-png/31/1/fox-sports-logo-png_seeklogo-315883.png","fallbacks":[]},
-    
-
-    
-   
-    
-    
-    #   ESPN Premium
-    {"id":"stp121","nombre":"ESPN Premium","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espnpremium","logo":"https://librefutbol.com.ar/wp-content/uploads/2025/03/espn-premium-logo.png","fallbacks":[]},
-
-    #   ESPN deportes
-    {"id":"stp122","nombre":"ESPN deportes","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=espndeportes","logo":"https://2.bp.blogspot.com/-RG0tX1-q0VM/UZ5RRl910eI/AAAAAAAAAKg/RasxwojGhHo/s1600/espndeportes.jpg","fallbacks":[]},
-
-    #   DSPORT PLUS
-    {"id":"stp123","nombre":"DSPORT Plus","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=dsportsplus","logo":"https://i0.wp.com/trucosonline.com/wp-content/uploads/2022/11/613.png","fallbacks":[]},
-
-
-    #   TNT sport
-    {"id":"stp124","nombre":"TNT Sports","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=tntsports","logo":"https://images.seeklogo.com/logo-png/51/1/tnt-sports-logo-png_seeklogo-519540.png","fallbacks":[]},
-    # TEKEMUNDO
-  {"id":"stp125","nombre":"Telemundo usa","categoria":"DEPORTES","url":"https://streamtpday1.xyz/global2.php?stream=telemundousa","logo":"https://images.seeklogo.com/logo-png/24/1/telemundo-logo-png_seeklogo-247570.png","fallbacks":[]},
-  
-  
-    # ── Bolaloca via proxy Railway ────────────────────────────────────
-
-    
-      # canales XXX──────────────────
-{"id":"xxx01",
-        "nombre":"LIVECAMS",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/livecams.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-
-{"id":"xxx02",
-        "nombre":"MILF",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/milf.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx03",
-        "nombre":"BIGDICK",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/bigdick.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx04",
-        "nombre":"BIGTITS",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/bigtits.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx05",
-        "nombre":"FETISH",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/fetish.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx06",
-        "nombre":"PORNSTAR",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/pornstar.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx07",
-        "nombre":"BIGASS",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/bigass.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx08",
-        "nombre":"INTERRACIAL",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/interracial.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx09",
-        "nombre":"COL",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/latina.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx10",
-        "nombre":"POV",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/pov.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx11",
-        "nombre":"BLOWJOB",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/blowjob.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx12",
-        "nombre":"TEENS",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/teen.m3u88",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx13",
-        "nombre":"HARDCORE",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/hardcore.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx14",
-        "nombre":"CUCKOLD",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/cuckold.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx15",
-        "nombre":"THREESOME",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/threesome.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx16",
-        "nombre":"RUSSIAN",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/russian.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx17",
-        "nombre":"LESBIAN",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/lesbian.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx18",
-        "nombre":"ROUGH",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/rough.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx19",
-        "nombre":"GANGBANG",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/gangbang.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx20",
-        "nombre":"ANAL",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/anal.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx21",
-        "nombre":"COMPILATION",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/compilation.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx21",
-        "nombre":"BRUNETTE",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/brunette.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx22",
-        "nombre":"BLONDE",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/blonde.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx23",
-        "nombre":"GAY",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/gay.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-{"id":"xxx24",
-        "nombre":"ASIAN",
-        "categoria":"ADULTOS",
-        "url":"https://live.adultiptv.net/asian.m3u8",
-        "logo":"https://images.seeklogo.com/logo-png/15/1/xxx-logo-png_seeklogo-154781.png",
-        "fallbacks":[]},
-      
-      
-          
 ]
 TDT_CANALES = [
    
@@ -271,7 +49,7 @@ TDT_CANALES = [
 
 FUENTES_M3U = [
     {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
-    {"nombre": "IPTV Argentina Oficial", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
+    #{"nombre": "IPTV Argentina Oficial", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "TDTChannels Eventos Globales", "url": "https://www.tdtchannels.com/lists/events.m3u8", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "Free-TV IPTV Master", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8", "categoria": "OTROS", "confianza": "alta", "adultos": False},
     #{"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u", "categoria": "DEPORTES", "confianza": "media", "adultos": False},
@@ -283,17 +61,17 @@ FUENTES_M3U = [
    # {"nombre": "Pastebin Raw 1", "url": "https://pastebin.com/raw/ze9LRSJJ", "categoria": "DEPORTES", "confianza": "alta"},
    # {"nombre": "Pastebin Raw 2", "url": "https://pastebin.com/raw/x9xSPugA", "categoria": "DEPORTES", "confianza": "alta"},
   
-   {"nombre": "TecnoTV Lista Principal", "url": "https://tecnotv.club/tusw/lista.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV Deportes", "url": "https://tecnotv.club/tusw/deportes.m3u", "categoria": "DEPORTES", "confianza": "media"},
+  # {"nombre": "TecnoTV Lista Principal", "url": "https://tecnotv.club/tusw/lista.m3u", "categoria": "OTROS", "confianza": "media"},
+    #{"nombre": "TecnoTV Deportes", "url": "https://tecnotv.club/tusw/deportes.m3u", "categoria": "DEPORTES", "confianza": "media"},
    # {"nombre": "TecnoTV Lista 1", "url": "https://tecnotv.club/tusw/lista1.m3u", "categoria": "OTROS", "confianza": "media"},
    # {"nombre": "TecnoTV Lista 2", "url": "https://tecnotv.club/tusw/lista2.m3u", "categoria": "OTROS", "confianza": "media"},
    # {"nombre": "TecnoTV Lista 3", "url": "https://tecnotv.club/tusw/lista3.m3u", "categoria": "OTROS", "confianza": "media"},
-    {"nombre": "TecnoTV Lista 4", "url": "https://tecnotv.club/tusw/lista4.m3u", "categoria": "OTROS", "confianza": "media"},
+    #{"nombre": "TecnoTV Lista 4", "url": "https://tecnotv.club/tusw/lista4.m3u", "categoria": "OTROS", "confianza": "media"},
     #{"nombre": "TecnoTV Android Core", "url": "https://tecnotv.club/tusw/android.m3u", "categoria": "OTROS", "confianza": "media"},
    # {"nombre": "TecnoTV Android 1", "url": "https://tecnotv.club/tusw/android1.m3u", "categoria": "OTROS", "confianza": "media"},
    # {"nombre": "TecnoTV Android 2", "url": "https://tecnotv.club/tusw/android2.m3u", "categoria": "OTROS", "confianza": "media"},
     #{"nombre": "TecnoTV Android 3", "url": "https://tecnotv.club/tusw/android3.m3u", "categoria": "OTROS", "confianza": "media"},
-   {"nombre": "TecnoTV GeoMex", "url": "https://tecnotv.club/tusw/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
+   #{"nombre": "TecnoTV GeoMex", "url": "https://tecnotv.club/tusw/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
     
   
     #{"nombre": "GitHub Melendez Raw Bridge", "url": "https://raw.githubusercontent.com/dmelendez11/lista-canales-m3u/main/lista_especial_con_respaldos.m3u", "categoria": "DEPORTES", "confianza": "baja"},
