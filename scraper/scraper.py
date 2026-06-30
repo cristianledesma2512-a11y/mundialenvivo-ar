@@ -48,16 +48,16 @@ TDT_CANALES = [
 
 
 FUENTES_M3U = [
-    {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
-    {"nombre": "IPTV Argentina Oficial", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
+    #{"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
+    #{"nombre": "IPTV Argentina Oficial", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "TDTChannels Eventos Globales", "url": "https://www.tdtchannels.com/lists/events.m3u8", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "Free-TV IPTV Master", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8", "categoria": "OTROS", "confianza": "alta", "adultos": False},
     #{"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u", "categoria": "DEPORTES", "confianza": "media", "adultos": False},
    # {"nombre": "Fluxus TV Cine", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/movies.m3u", "categoria": "CINE", "confianza": "media", "adultos": False},
     #{"nombre": "IPTV Global Open List", "url": "https://raw.githubusercontent.com/dzh0ni/iPTV-FREE-LIST/master/iPTV-Free-List_TV.m3u", "categoria": "OTROS", "confianza": "baja", "adultos": False},
-    {"nombre": "IPTV Adultos Global Premium", "url": "https://iptv-org.github.io/iptv/categories/xxx.m3u", "categoria": "ADULTOS", "confianza": "alta", "adultos": True},
+    #{"nombre": "IPTV Adultos Global Premium", "url": "https://iptv-org.github.io/iptv/categories/xxx.m3u", "categoria": "ADULTOS", "confianza": "alta", "adultos": True},
    # {"nombre": "Fluxus TV Adultos Core", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/xxx.m3u", "categoria": "ADULTOS", "confianza": "media", "adultos": True},
-  {"nombre": "lista hot", "url": "https://tecnotv.club/tusw/listahot.m3u", "categoria": "ADULTOS", "confianza": "media", "adultos": True},
+  #{"nombre": "lista hot", "url": "https://tecnotv.club/tusw/listahot.m3u", "categoria": "ADULTOS", "confianza": "media", "adultos": True},
    # {"nombre": "Pastebin Raw 1", "url": "https://pastebin.com/raw/ze9LRSJJ", "categoria": "DEPORTES", "confianza": "alta"},
    # {"nombre": "Pastebin Raw 2", "url": "https://pastebin.com/raw/x9xSPugA", "categoria": "DEPORTES", "confianza": "alta"},
   
@@ -88,10 +88,10 @@ FUENTES_M3U = [
    #{"nombre": "crisled argentina1", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/argentina.m3u", "categoria": "OTROS", "confianza": "media"},
   # {"nombre": "crisled argentina2", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/argentina2.m3u", "categoria": "OTROS", "confianza": "media"},
   
- {"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/tevix_playlist.m3u", "categoria": "OTROS", "confianza": "media"},
+# {"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/tevix_playlist.m3u", "categoria": "OTROS", "confianza": "media"},
  #{"nombre": "crisled pelis1", "url": " https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/peliculas1.m3u", "categoria": "PELICULAS", "confianza": "media"},
   
-  {"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/dsport.m3u", "categoria": "DEPORTES", "confianza": "media"},
+  #{"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/dsport.m3u", "categoria": "DEPORTES", "confianza": "media"},
 ]
 
 FUENTES_SIN_FILTRO = []
