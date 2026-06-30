@@ -88,7 +88,7 @@ FUENTES_M3U = [
    #{"nombre": "crisled argentina1", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/argentina.m3u", "categoria": "OTROS", "confianza": "media"},
   # {"nombre": "crisled argentina2", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/argentina2.m3u", "categoria": "OTROS", "confianza": "media"},
   
- {"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/tevix_playlist.m3u", "categoria": "OTROS", "confianza": "media"},
+ #{"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/tevix_playlist.m3u", "categoria": "OTROS", "confianza": "media"},
  #{"nombre": "crisled pelis1", "url": " https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/peliculas1.m3u", "categoria": "PELICULAS", "confianza": "media"},
 
  
