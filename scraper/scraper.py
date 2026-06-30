@@ -48,7 +48,7 @@ TDT_CANALES = [
 
 
 FUENTES_M3U = [
-    #{"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
+    {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "IPTV Argentina Oficial", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "TDTChannels Eventos Globales", "url": "https://www.tdtchannels.com/lists/events.m3u8", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "Free-TV IPTV Master", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8", "categoria": "OTROS", "confianza": "alta", "adultos": False},
