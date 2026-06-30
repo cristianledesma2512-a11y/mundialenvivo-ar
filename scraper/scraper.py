@@ -91,7 +91,7 @@ FUENTES_M3U = [
  #{"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/tevix_playlist.m3u", "categoria": "OTROS", "confianza": "media"},
  #{"nombre": "crisled pelis1", "url": " https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/peliculas1.m3u", "categoria": "PELICULAS", "confianza": "media"},
   
-  {"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/dsport%20lista.m3u", "categoria": "OTROS", "confianza": "media"},
+  {"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/dsport.m3u", "categoria": "DEPORTES", "confianza": "media"},
 ]
 
 FUENTES_SIN_FILTRO = []
