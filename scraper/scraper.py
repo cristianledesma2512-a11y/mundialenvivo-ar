@@ -82,7 +82,7 @@ FUENTES_M3U = [
    #{"nombre": "crisled Lista 5", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista5.m3u", "categoria": "OTROS", "confianza": "media"},
   
   #{"nombre": "crisled Lista completa", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista-completa.m3u", "categoria": "OTROS", "confianza": "media"},
-   #{"nombre": "crisled Lista android", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista-android.m3u", "categoria": "OTROS", "confianza": "media"},
+   {"nombre": "crisled Lista android", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista-android.m3u", "categoria": "OTROS", "confianza": "media"},
   
    #{"nombre": "crisled global1", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/global1.m3u", "categoria": "OTROS", "confianza": "media"},
    #{"nombre": "crisled argentina1", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/argentina.m3u", "categoria": "OTROS", "confianza": "media"},
