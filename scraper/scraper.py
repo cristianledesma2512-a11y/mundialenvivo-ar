@@ -48,8 +48,8 @@ TDT_CANALES = [
 
 
 FUENTES_M3U = [
-    #{"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
-    #{"nombre": "IPTV Argentina Oficial", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
+    {"nombre": "Gist Canales Personalizados", "url": "https://gist.githubusercontent.com/frantdse/f6989518c73826ade6734c63c367af4c/raw/", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
+    {"nombre": "IPTV Argentina Oficial", "url": "https://iptv-org.github.io/iptv/countries/ar.m3u", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "TDTChannels Eventos Globales", "url": "https://www.tdtchannels.com/lists/events.m3u8", "categoria": "DEPORTES", "confianza": "alta", "adultos": False},
     #{"nombre": "Free-TV IPTV Master", "url": "https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8", "categoria": "OTROS", "confianza": "alta", "adultos": False},
     #{"nombre": "Fluxus TV Deportes", "url": "https://raw.githubusercontent.com/fluxustv/IPTV/main/sports.m3u", "categoria": "DEPORTES", "confianza": "media", "adultos": False},
@@ -78,7 +78,7 @@ FUENTES_M3U = [
   # {"nombre": "crisled Lista 1", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/geomex.m3u", "categoria": "OTROS", "confianza": "media"},
   # {"nombre": "crisled Lista 2", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista1.m3u", "categoria": "OTROS", "confianza": "media"},
    #{"nombre": "crisled Lista 3", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista2.m3u", "categoria": "OTROS", "confianza": "media"},
-  # {"nombre": "crisled Lista 4", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista4.m3u", "categoria": "OTROS", "confianza": "media"},
+  {"nombre": "crisled Lista 4", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista4.m3u", "categoria": "OTROS", "confianza": "media"},
    #{"nombre": "crisled Lista 5", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista5.m3u", "categoria": "OTROS", "confianza": "media"},
   
   #{"nombre": "crisled Lista completa", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista-completa.m3u", "categoria": "OTROS", "confianza": "media"},
@@ -91,7 +91,7 @@ FUENTES_M3U = [
 # {"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/tevix_playlist.m3u", "categoria": "OTROS", "confianza": "media"},
  #{"nombre": "crisled pelis1", "url": " https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/peliculas1.m3u", "categoria": "PELICULAS", "confianza": "media"},
   
-  #{"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/dsport.m3u", "categoria": "DEPORTES", "confianza": "media"},
+  {"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/dsport.m3u", "categoria": "DEPORTES", "confianza": "media"},
 ]
 
 FUENTES_SIN_FILTRO = []
