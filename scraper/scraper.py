@@ -82,16 +82,16 @@ FUENTES_M3U = [
    #{"nombre": "crisled Lista 5", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista5.m3u", "categoria": "OTROS", "confianza": "media"},
   
   #{"nombre": "crisled Lista completa", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista-completa.m3u", "categoria": "OTROS", "confianza": "media"},
-   {"nombre": "crisled Lista android", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista-android.m3u", "categoria": "OTROS", "confianza": "media"},
+  # {"nombre": "crisled Lista android", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/lista-android.m3u", "categoria": "OTROS", "confianza": "media"},
   
    #{"nombre": "crisled global1", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/global1.m3u", "categoria": "OTROS", "confianza": "media"},
    #{"nombre": "crisled argentina1", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/argentina.m3u", "categoria": "OTROS", "confianza": "media"},
   # {"nombre": "crisled argentina2", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/argentina2.m3u", "categoria": "OTROS", "confianza": "media"},
   
-# {"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/tevix_playlist.m3u", "categoria": "OTROS", "confianza": "media"},
+{"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/tevix_playlist.m3u", "categoria": "OTROS", "confianza": "media"},
  #{"nombre": "crisled pelis1", "url": " https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/peliculas1.m3u", "categoria": "PELICULAS", "confianza": "media"},
   
-  {"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/dsport.m3u", "categoria": "DEPORTES", "confianza": "media"},
+  #{"nombre": "crisled lista alt", "url": "https://raw.githubusercontent.com/cristianledesma2512-a11y/iptvled/refs/heads/main/dsport.m3u", "categoria": "DEPORTES", "confianza": "media"},
 ]
 
 FUENTES_SIN_FILTRO = []
